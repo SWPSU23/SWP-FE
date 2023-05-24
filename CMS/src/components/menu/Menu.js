@@ -1,10 +1,14 @@
 import React, {useState} from 'react';
 import './Menu.css';
+import {useNavigate} from 'react-router-dom';
 
 const Menu = () => {
+	const navigate = useNavigate();
 	const [isClicked, setIsClicked] = useState(false);
+
 	const handleClick = () => {
 		setIsClicked(!isClicked);
+		navigate('/users');
 		console.log(isClicked);
 	};
 	return (
