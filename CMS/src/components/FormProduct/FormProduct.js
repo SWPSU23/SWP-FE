@@ -1,12 +1,17 @@
 import React, {useRef, useState} from 'react';
 import './FormProduct.css';
+import PropTypes from 'prop-types';
 
-export const FormProduct = () => {
+export const FormProduct = ({handleToggleForm}) => {
 	const [imagePreview, setImagePreview] = useState('');
 	const fileInputRef = useRef(null);
 
 	const handleImageClick = () => {
 		fileInputRef.current.click();
+	};
+
+	FormProduct.propTypes = {
+		handleToggleForm: PropTypes.func.isRequired,
 	};
 
 	const handleImageUpload = (event) => {
@@ -23,6 +28,9 @@ export const FormProduct = () => {
 			setImagePreview('');
 		}
 	};
+
+	// close form
+
 	return (
 		<div className="formProduct">
 			<div className="formContainer">
@@ -30,7 +38,11 @@ export const FormProduct = () => {
 					<div className="inputImageContainer" onClick={handleImageClick}>
 						<div className="inputImage">
 							{imagePreview ? (
-								<img src={imagePreview} alt="Image Preview" />
+								<img
+									className="imagePreview"
+									src={imagePreview}
+									alt="Image Preview"
+								/>
 							) : (
 								<img
 									src="https://th.bing.com/th/id/R.d90a006b299492ac099fb038a15c7e55?rik=MbpQJohLOYQCpQ&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2f9i4%2fedX%2f9i4edX7GT.png&ehk=XFTwQUyWNs2AErIJu4V2zfAHUBz12gOgV3IY92SabvE%3d&risl=&pid=ImgRaw&r=0"
@@ -85,7 +97,14 @@ export const FormProduct = () => {
 				</div>
 
 				<div className="formContainerButton">
-					<button className="btn btnClose">Close</button>
+					<button
+						onClick={() => {
+							handleToggleForm();
+						}}
+						className="btn btnClose"
+					>
+						Close
+					</button>
 
 					<button className="btn btnSave">Save</button>
 				</div>

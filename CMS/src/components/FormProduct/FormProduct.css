@@ -12,6 +12,12 @@
     border-radius: 5px;
 }
 
+.formContainerTop {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
 .inputImageContainer {
     height: 154px;
     width: 145px;
@@ -25,15 +31,19 @@
 
 }
 
-.formContainerTop {
-    padding-top: 20px;
-    display: flex;
-    justify-content: center;
-}
-
 .inputImage {
     height: 90px;
     width: 100px;
+    position: relative;
+}
+
+
+.inputImage .imagePreview {
+    height: 154px;
+    width: 145px;
+    position: absolute;
+    left: -21px;
+    top: -31px;
 }
 
 .inputImage img {
