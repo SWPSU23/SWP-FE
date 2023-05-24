@@ -1,15 +1,14 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route, useNavigate} from 'react-router-dom';
 import './App.css';
-import Menu from './components/menu/Menu';
 
 import {Product} from './pages/Product/Product';
 import {User} from './pages/User/User';
 import {Home} from './pages/Home/Home';
+import Menu from './components/menu/Menu';
 
 function App() {
 	return (
-		<div className="app">
 		<div className="App">
 			<BrowserRouter>
 				<Routes>

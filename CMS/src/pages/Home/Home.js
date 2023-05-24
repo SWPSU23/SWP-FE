@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {FormProduct} from '../../components/FormProduct/FormProduct';
 import './Home.css';
+import Menu from '../../components/menu/Menu';
 
 export const Home = () => {
 	const navigate = useNavigate();
@@ -15,6 +16,7 @@ export const Home = () => {
 	return (
 		<div className="home">
 			Home
+			<Menu />
 			{openForm ? <FormProduct handleToggleForm={handleToggleForm} /> : <div></div>}
 			<button onClick={handleToggleForm}>Form</button>
 			{/* <button
