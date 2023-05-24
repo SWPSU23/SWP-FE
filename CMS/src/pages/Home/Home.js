@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import {FormProduct} from '../../components/FormProduct/FormProduct';
 import Menu from '../../components/menu/Menu';
 import './Home.css';
+import Menu from '../../components/menu/Menu';
 
 export const Home = () => {
 	const navigate = useNavigate();
