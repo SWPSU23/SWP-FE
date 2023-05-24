@@ -1,13 +1,16 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
+import {FormProduct} from '../../components/FormProduct/FormProduct';
+import './Home.css';
 
 export const Home = () => {
 	const navigate = useNavigate();
 
 	return (
-		<div>
+		<div className="home">
 			Home
-			<button
+			<FormProduct />
+			{/* <button
 				onClick={() => {
 					navigate('/products');
 				}}
@@ -20,7 +23,7 @@ export const Home = () => {
 				}}
 			>
 				Users
-			</button>
+			</button> */}
 		</div>
 	);
 };
