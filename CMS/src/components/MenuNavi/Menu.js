@@ -1,85 +1,49 @@
 import React, {useState} from 'react';
 import './Menu.css';
 import {useNavigate} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {actClick} from '../../redux/action';
 
 export const Menu = () => {
+	// get item active from redux
+	const itemClick = useSelector((state) => state.interact.activeItem);
+
 	const navigate = useNavigate();
-	const [isClicked, setIsClicked] = useState(false);
-	const [activeItem, setActiveItem] = useState('');
+	const dispatch = useDispatch();
+	const [activeItem, setActiveItem] = useState(itemClick);
 
 	const handleClick = (item) => {
 		setActiveItem(item);
-		setIsClicked(!isClicked);
-		navigate('/users');
-		console.log(isClicked);
+		// save item active to reducx
+		dispatch(actClick(item));
+		navigate('/' + item);
 	};
+
+	const menu = [
+		{title: 'Dashboard', slug: 'dashboard'},
+		{title: 'Product', slug: 'products'},
+		{title: 'User', slug: 'users'},
+		{title: 'Employee', slug: 'employees'},
+		{title: 'Revenue', slug: 'revenue'},
+		{title: 'Salary', slug: 'Salarys'},
+		{title: 'Worksheet', slug: 'worksheet'},
+	];
 	return (
 		<div className="menu">
 			<nav>
 				<ul>
-					<li>
-						<a
-							href="Dashboard"
-							className={activeItem === 'Dashboard' ? 'active' : ''}
-							onClick={() => handleClick('Dashboard')}
-						>
-							Dashboard
-						</a>
-					</li>
-					<li>
-						<a
-							href="Product"
-							className={activeItem === 'Product' ? 'active' : ''}
-							onClick={() => handleClick('Product')}
-						>
-							Product
-						</a>
-					</li>
-					<li>
-						<a
-							href="<User/>"
-							className={activeItem === 'User' ? 'active' : ''}
-							onClick={() => handleClick('User')}
-						>
-							User
-						</a>
-					</li>
-					<li>
-						<a
-							href="Sale"
-							className={activeItem === 'Sale' ? 'active' : ''}
-							onClick={() => handleClick('Sale')}
-						>
-							Sale
-						</a>
-					</li>
-					<li>
-						<a
-							href="Revenue"
-							className={activeItem === 'Revenue' ? 'active' : ''}
-							onClick={() => handleClick('Revenue')}
-						>
-							Revenue
-						</a>
-					</li>
-					<li>
-						<a
-							href="Salary"
-							className={activeItem === 'Salary' ? 'active' : ''}
-							onClick={() => handleClick('Salary')}
-						>
-							Salary
-						</a>
-					</li>
-					<li>
-						<a
-							href="Worksheet"
-							className={activeItem === 'Worksheet' ? 'active' : ''}
-							onClick={() => handleClick('Worksheet')}
-						>
-							Worksheet
-						</a>
-					</li>
+					{menu.map((item, index) => {
+						return (
+							<li key={index}>
+								<a
+									className={activeItem === item.slug ? 'active' : ''}
+									onClick={() => handleClick(item.slug)}
+								>
+									{item.title}
+								</a>
+							</li>
+						);
+					})}
 				</ul>
 			</nav>
 			<div>
