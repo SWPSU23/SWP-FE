@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {FormProduct} from '../../components/FormProduct/FormProduct';
-import {Menu} from '../../components/Menu/Menu';
+import {Menu} from '../../components/MenuNavi/Menu';
 import './Home.css';
 
 export const Home = () => {
