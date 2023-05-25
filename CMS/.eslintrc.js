@@ -20,6 +20,8 @@ module.exports = {
 		requireConfigFile: false,
 		ecmaFeatures: {
 			jsx: true,
+			flow: true,
+			typescript: true,
 		},
 		ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
 		sourceType: 'module', // Allows for the use of imports
