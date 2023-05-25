@@ -8,7 +8,6 @@ export const Home = () => {
 
 	return (
 		<div className="home">
-			Home
 			<Menu />
 			{/* <button
 				onClick={() => {

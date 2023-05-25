@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './Menu.css';
-import {useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 import {actClick} from '../../redux/action';
 
 export const Menu = () => {
@@ -20,12 +20,12 @@ export const Menu = () => {
 	};
 
 	const menu = [
-		{title: 'Dashboard', slug: 'dashboard'},
+		{title: 'Dashboard', slug: ''},
 		{title: 'Product', slug: 'products'},
 		{title: 'User', slug: 'users'},
 		{title: 'Employee', slug: 'employees'},
 		{title: 'Revenue', slug: 'revenue'},
-		{title: 'Salary', slug: 'Salarys'},
+		{title: 'Salary', slug: 'salary'},
 		{title: 'Worksheet', slug: 'worksheet'},
 	];
 	return (

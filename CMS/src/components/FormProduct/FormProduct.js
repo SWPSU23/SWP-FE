@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React, {useRef, useState} from 'react';
 import './FormProduct.css';
-import PropTypes from 'prop-types';
 
 export const FormProduct = ({handleToggleForm}) => {
 	const [imagePreview, setImagePreview] = useState('');
@@ -34,6 +34,7 @@ export const FormProduct = ({handleToggleForm}) => {
 	return (
 		<div className="formProduct">
 			<div className="formContainer">
+				<h1>Product</h1>
 				<div className="formContainerTop">
 					<div className="inputImageContainer" onClick={handleImageClick}>
 						<div className="inputImage">
