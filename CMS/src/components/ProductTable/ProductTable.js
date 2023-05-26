@@ -33,7 +33,7 @@ function ProductTable() {
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Image</th>	
+						<th>Image</th>
 						<th>Name</th>
 						<th>Unit</th>
 						<th>Unit Price(USD)</th>
