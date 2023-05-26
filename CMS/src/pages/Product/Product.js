@@ -6,8 +6,8 @@ import {Menu} from '../../components/MenuNavi/Menu';
 export const Product = () => {
 	return (
 		<div>
-			<ProductTable />
 			<Menu />
+			<ProductTable />
 		</div>
 	);
 };
