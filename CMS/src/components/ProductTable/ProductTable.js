@@ -9,10 +9,7 @@ function ProductTable() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		console.log('callEffect');
 		dispatch(fetchProductList());
-		setProductList(fetchProductList);
-		console.log('productList', productList);
 	}, []);
 
 	const products = useSelector((state) => state.product);

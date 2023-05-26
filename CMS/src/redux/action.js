@@ -10,7 +10,6 @@ export const actClick = (payload) => {
 };
 
 export const fetchProductList = () => {
-	console.log('fetched product list');
 	return {
 		type: INIT_PRODUCT_LIST,
 		payload: ListOfProduct,
