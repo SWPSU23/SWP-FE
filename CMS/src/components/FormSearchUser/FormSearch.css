@@ -1,0 +1,34 @@
+button {
+	cursor: pointer;
+}
+
+.form-input {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 40px;
+	border: none;
+	border-radius: 8px;
+	width: 15vw;
+	height: 50px;
+	padding: 0 20px;
+	transition: 0.25s ease;
+	outline: none;
+	background-color: #eaeaea;
+	font-family: 'Inter';
+	font-weight: 600;
+	font-size: 15px;
+}
+
+.form-field {
+	position: relative;
+}
+.btn {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 0px;
+	margin: 0;
+	color: black;
+	background-color: #eaeaea;
+}
