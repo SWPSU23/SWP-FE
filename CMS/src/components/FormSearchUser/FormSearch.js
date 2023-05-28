@@ -8,7 +8,7 @@ import {faSearch} from '@fortawesome/free-solid-svg-icons';
 const FormSearch = () => {
 	const searchQuery = useSelector((state) => state.user.searchQuery);
 	const dispatch = useDispatch();
-	const [inputValue, setInputValue] = useState(searchQuery);
+	const [inputValue, setInputValue] = useState('');
 
 	const handleChange = (e) => {
 		setInputValue(e.target.value);
@@ -19,7 +19,6 @@ const FormSearch = () => {
 		dispatch(setSearchQuery(inputValue));
 		setInputValue('');
 		// Perform search action
-		console.log(inputValue);
 	};
 
 	return (
@@ -33,7 +32,7 @@ const FormSearch = () => {
 					placeholder="Search..."
 				/>
 				<button className="btn" type="submit">
-					<FontAwesomeIcon icon={faSearch} />
+					<FontAwesomeIcon icon={faSearch} className="search-icon" />
 				</button>
 			</div>
 		</form>
