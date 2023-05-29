@@ -11,7 +11,9 @@ ul {
 	justify-content: center;
 	align-items: center;
 }
-
+nav {
+	margin-top: 17px;
+}
 a {
 	width: 101px;
 	height: 50px;
@@ -50,7 +52,6 @@ a:hover {
 	--color-primer-border-active: #68d29b;
 	color: black;
 	transition: 0.5s;
-
 }
 
 .active::after {
@@ -64,5 +65,4 @@ a:hover {
 	width: 100%;
 	z-index: 1;
 	transition: 0.5s;
-
 }

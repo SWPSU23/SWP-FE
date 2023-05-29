@@ -1,37 +1,35 @@
-button {
-	cursor: pointer;
-}
-
-.form-input {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	right: 40px;
-	border: none;
-	border-radius: 8px;
-	width: 15vw;
-	height: 50px;
-	padding: 0 20px;
-	transition: 0.25s ease;
-	outline: none;
-	background-color: #eaeaea;
-	font-family: 'Inter';
-	font-weight: 600;
-	font-size: 15px;
-}
-
-.form-field {
-	position: relative;
-}
-.btn {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	right: 0px;
+* {
 	margin: 0;
-	color: rgba(0, 0, 0, 0.552);
-	background-color: #eaeaea;
+	padding: 0;
 }
-.search-icon {
-	color: rgba(0, 0, 0, 0.552);
+
+* {
+	margin: 0;
+	padding: 0;
+}
+.actionBar {
+	width: 80%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: flex-end;
+}
+.actionBar .searchWrapper input,
+.actionBar .searchWrapper .searchBtn {
+	padding: 12px 10px;
+	background-color: #eaeaea;
+	border: none;
+	color: #9b9fa5;
+	font-weight: bold;
+	font-size: 14px;
+	outline: none;
+}
+
+.actionBar .searchWrapper input {
+	border-top-left-radius: 7px;
+	border-bottom-left-radius: 7px;
+}
+
+.actionBar .searchWrapper .searchBtn {
+	border-top-right-radius: 7px;
+	border-bottom-right-radius: 7px;
 }

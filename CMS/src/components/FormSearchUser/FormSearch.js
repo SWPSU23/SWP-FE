@@ -1,41 +1,22 @@
-import React, {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {setSearchQuery} from '../../redux/action';
-import './FormSearch.css';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
-
+import React from 'react';
+import {CaretDownOutlined, SearchOutlined} from '@ant-design/icons';
 const FormSearch = () => {
-	const searchQuery = useSelector((state) => state.user.searchQuery);
-	const dispatch = useDispatch();
-	const [inputValue, setInputValue] = useState('');
-
-	const handleChange = (e) => {
-		setInputValue(e.target.value);
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		dispatch(setSearchQuery(inputValue));
-		setInputValue('');
-		// Perform search action
-	};
-
 	return (
-		<form className="form-field" onSubmit={handleSubmit}>
-			<div>
-				<input
-					className="form-input"
-					type="text"
-					value={inputValue}
-					onChange={handleChange}
-					placeholder="Search..."
-				/>
-				<button className="btn" type="submit">
-					<FontAwesomeIcon icon={faSearch} className="search-icon" />
-				</button>
+		<div className="actionBar">
+			<div className="actionWrapper">
+				<button className="NewProductBtn">New User</button>
+				<div className="filterWrapper">
+					<span>Filter by</span>
+					<CaretDownOutlined />
+				</div>
+				<div className="searchWrapper">
+					<input type="text" placeholder="Search..." />
+					<button className="searchBtn">
+						<SearchOutlined />
+					</button>
+				</div>
 			</div>
-		</form>
+		</div>
 	);
 };
 
