@@ -11,7 +11,6 @@ export const User = () => {
 	const handleToggleForm = () => {
 		setOpenForm(!openForm);
 	};
-
 	return (
 		<div>
 			<Menu />
