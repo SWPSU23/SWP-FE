@@ -1,15 +1,14 @@
 .menu {
 	position: relative;
 	display: flex;
-	justify-content: center;
+	justify-content: space-evenly;
 	margin-bottom: 100px;
 }
 
 ul {
 	list-style: none;
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	padding-bottom: 30px;
 }
 nav {
 	margin-top: 17px;
@@ -40,11 +39,9 @@ a:hover {
 }
 
 .menu-icon {
-	position: absolute;
 	width: 25px;
 	height: 25px;
-	right: 50px;
-	top: 28px;
+	margin-top: 30px;
 }
 
 .active {
