@@ -6,7 +6,7 @@ import {ActionBar} from '../../components/ActionBar/ActionBar';
 
 export const Product = () => {
 	return (
-		<div>
+		<div className="productPage">
 			<Menu />
 			<ActionBar title="New product" />
 			<ProductTable />
