@@ -6,12 +6,12 @@ import {FormProduct} from '../../components/FormProduct/FormProduct';
 import {fetchProductList} from '../../redux/action';
 
 function ProductTable() {
-	const dispatch = useDispatch();
-
 	useEffect(() => {
+		console.log('call API');
 		dispatch(fetchProductList());
 	}, []);
 
+	const dispatch = useDispatch();
 	const products = useSelector((state) => state.product);
 	const [productList, setProductList] = useState(products);
 	useEffect(() => {
@@ -52,10 +52,10 @@ function ProductTable() {
 							</td>
 							<td>{product.name}</td>
 							<td>{product.unit}</td>
-							<td>{product.unitPrice}</td>
+							<td>{product.unit_price}</td>
 							<td>{product.stock}</td>
 							<td>{product.status}</td>
-							<td>{product.expiredAt}</td>
+							<td>{product.expired_at}</td>
 							<td>
 								<p className="productDescription">{product.description}</p>
 							</td>
