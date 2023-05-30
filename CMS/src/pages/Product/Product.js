@@ -8,7 +8,7 @@ export const Product = () => {
 	return (
 		<div>
 			<Menu />
-			<ActionBar />
+			<ActionBar title="New product" />
 			<ProductTable />
 		</div>
 	);

@@ -39,7 +39,7 @@
 	margin-right: 20px;
 }
 
-.actionBar .actionWrapper .searchWrapper input,
+.actionBar .actionWrapper .searchWrapper .input,
 .actionBar .actionWrapper .searchWrapper .searchBtn {
 	padding: 12px 10px;
 	background-color: #eaeaea;
@@ -50,7 +50,7 @@
 	outline: none;
 }
 
-.actionBar .actionWrapper .searchWrapper input {
+.actionBar .actionWrapper .searchWrapper .input {
 	border-top-left-radius: 7px;
 	border-bottom-left-radius: 7px;
 }
