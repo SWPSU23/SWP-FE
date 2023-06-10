@@ -1,12 +1,15 @@
+import PropTypes from 'prop-types';
 import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import './ProductTable.css';
 import {Tooltip as ReactTooltip} from 'react-tooltip';
-import {FormProduct} from '../../components/FormProduct/FormProduct';
 import {fetchProductList} from '../../redux/action';
 
-function ProductTable() {
+function ProductTable({handleToggleForm}) {
+	ProductTable.propTypes = {
+		handleToggleForm: PropTypes.func.isRequired,
+	};
 	const maxDescriptionLength = 50;
 
 	useEffect(() => {
@@ -21,14 +24,8 @@ function ProductTable() {
 		setProductList(products);
 	}, [products]);
 
-	const [openForm, setOpenForm] = useState(false);
-	// toggle form
-	const handleToggleForm = () => {
-		setOpenForm(!openForm);
-	};
 	return (
 		<div className="tableWrapper">
-			{openForm ? <FormProduct handleToggleForm={handleToggleForm} /> : <div></div>}
 			<table className="productTable">
 				<thead>
 					<tr>
