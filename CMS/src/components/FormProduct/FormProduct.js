@@ -3,15 +3,16 @@ import React, {useRef, useState} from 'react';
 import './FormProduct.css';
 
 export const FormProduct = ({handleToggleForm}) => {
+	FormProduct.propTypes = {
+		handleToggleForm: PropTypes.func.isRequired,
+	};
+
+	// HANDLE UPLOAD IMAGE
 	const [imagePreview, setImagePreview] = useState('');
 	const fileInputRef = useRef(null);
 
 	const handleImageClick = () => {
 		fileInputRef.current.click();
-	};
-
-	FormProduct.propTypes = {
-		handleToggleForm: PropTypes.func.isRequired,
 	};
 
 	const handleImageUpload = (event) => {
@@ -28,8 +29,6 @@ export const FormProduct = ({handleToggleForm}) => {
 			setImagePreview('');
 		}
 	};
-
-	// close form
 
 	return (
 		<div className="formProduct">
