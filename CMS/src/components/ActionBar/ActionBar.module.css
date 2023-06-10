@@ -38,6 +38,38 @@
 	font-weight: bold;
 	font-size: 14px;
 	margin-right: 20px;
+	cursor: pointer;
+	position: relative;
+}
+
+.actionBar .actionWrapper .filterWrapper .filterOptionArea {
+	position: absolute;
+	width: 200%;
+	bottom: -100px;
+	left: 0;
+	background-color: #eaeaea;
+	text-align: left;
+	border-radius: 5px;
+	padding: 10px;
+	padding-top: 20px;
+	transition: all ease 0.5s;
+}
+
+.actionBar .actionWrapper .filterWrapper .filterOptionArea p {
+	width: 90%;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+.actionBar .actionWrapper .filterWrapper .filterOptionArea p:hover {
+	color: #4e4e4e;
+}
+
+.actionBar .actionWrapper .searchWrapper {
+	display: flex;
+	justify-content: center;
 }
 
 .actionBar .actionWrapper .searchWrapper .input,

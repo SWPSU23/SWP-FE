@@ -5,12 +5,14 @@
 
 .tableWrapper {
 	width: 100%;
+	overflow-x: auto;
 	/* margin: 0 auto; */
 }
 
 .productTable {
 	border-collapse: collapse;
 	width: 100%;
+	min-width: 1000px;
 	margin-top: 40px;
 	margin-bottom: 40px;
 }
@@ -18,7 +20,7 @@
 .productTable th,
 .productTable td {
 	border: 1px solid #ccc;
-	padding: 8px;
+	padding: 5px;
 }
 
 .productTable th {
@@ -41,7 +43,7 @@
 	width: 100%;
 	margin: 0 auto;
 	max-width: 200px;
-	text-align: center;
+	text-align: left;
 }
 
 .productTable td > .btnArea {

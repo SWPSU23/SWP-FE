@@ -6,10 +6,10 @@ const initialState = [
 		image: '../../../assets/image/coca.jpg',
 		name: 'Coca',
 		unit: 'Can',
-		unitPrice: 10,
+		unit_price: 10,
 		stock: 200,
 		status: 'Available',
-		expiredAt: '15/06/2024',
+		expired_at: '15/06/2024',
 		description:
 			'Nước Giải Khát Có Gas Coca-Cola với lượng gas lớn sẽ giúp bạn xua tan mọi cảm giác mệt mỏi',
 	},
