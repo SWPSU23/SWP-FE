@@ -2,10 +2,13 @@ import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import './ProductTable.css';
+import {Tooltip as ReactTooltip} from 'react-tooltip';
 import {FormProduct} from '../../components/FormProduct/FormProduct';
 import {fetchProductList} from '../../redux/action';
 
 function ProductTable() {
+	const maxDescriptionLength = 50;
+
 	useEffect(() => {
 		console.log('call API');
 		dispatch(fetchProductList());
@@ -57,7 +60,18 @@ function ProductTable() {
 							<td>{product.status}</td>
 							<td>{product.expired_at}</td>
 							<td>
-								<p className="productDescription">{product.description}</p>
+								{product.description.length <= maxDescriptionLength ? (
+									<p className="productDescription">{product.description}</p>
+								) : (
+									<p className="productDescription">
+										{product.description.substring(0, maxDescriptionLength)}...
+										<ReactTooltip
+											anchorSelect=".productDescription"
+											place="bottom"
+											content={product.description}
+										/>
+									</p>
+								)}
 							</td>
 							<td>
 								<div className="btnArea">
@@ -71,66 +85,6 @@ function ProductTable() {
 							</td>
 						</tr>
 					))}
-					{/* <tr>
-						<td>125A123199</td>
-						<td>
-							<div className="imageWrapper">
-								<img src="https://nutritionfacts.org/app/uploads/2019/03/Red-bull.jpg" />
-							</div>
-						</td>
-						<td>Redbull</td>
-						<td>Can</td>
-						<td>10</td>
-						<td>200</td>
-						<td>Available</td>
-						<td>15/06/2024</td>
-						<td>
-							<p className="productDescription">
-								Nước tăng lực RedBull (Red Bull, Bò Húc, Bò Cụng) 250ml là loại nước
-								tăng lực nổi tiếng
-							</p>
-						</td>
-						<td>
-							<div className="btnArea">
-								<button className="btn" onClick={handleToggleForm}>
-									<EditOutlined />
-								</button>
-								<button className="btn">
-									<DeleteOutlined />
-								</button>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>125A123199</td>
-						<td>
-							<div className="imageWrapper">
-								<img src="https://nutritionfacts.org/app/uploads/2019/03/Red-bull.jpg" />
-							</div>
-						</td>
-						<td>Redbull</td>
-						<td>Can</td>
-						<td>10</td>
-						<td>200</td>
-						<td>Available</td>
-						<td>15/06/2024</td>
-						<td>
-							<p className="productDescription">
-								Nước tăng lực RedBull (Red Bull, Bò Húc, Bò Cụng) 250ml là loại nước
-								tăng lực nổi tiếng
-							</p>
-						</td>
-						<td>
-							<div className="btnArea">
-								<button className="btn" onClick={handleToggleForm}>
-									<EditOutlined />
-								</button>
-								<button className="btn">
-									<DeleteOutlined />
-								</button>
-							</div>
-						</td>
-					</tr> */}
 				</tbody>
 			</table>
 		</div>
