@@ -34,7 +34,12 @@ export const Product = () => {
 	return (
 		<div className="productPage">
 			<Menu />
-			<ActionBar title="New product" handleToggleForm={handleToggleForm} />
+			<ActionBar
+				img="../assets/image/product.jpg"
+				h2="Product"
+				title="New product"
+				handleToggleForm={handleToggleForm}
+			/>
 			{openForm ? <FormProduct handleToggleForm={handleToggleForm} /> : <div></div>}
 			{loading ? <Loading /> : <ProductTable handleToggleForm={handleToggleForm} />}
 			<Pagination

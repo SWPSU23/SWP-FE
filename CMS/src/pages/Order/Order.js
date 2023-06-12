@@ -1,14 +1,21 @@
 import React, {useState} from 'react';
-import './Salary.css';
+import './Order.css';
 import {Menu} from '../../components/MenuNavi/Menu';
-import PayRollTable from '../../components/PayRollTable/PayRollTable';
+import OrderTable from '../../components/OrderTable/OrderTable';
+import Loading from '../../components/Loading/Loading';
 import {ActionBar} from '../../components/ActionBar/ActionBar';
 import Pagination from '../../components/Pagination/Pagination';
-import Loading from '../../components/Loading/Loading';
 
-export const Salary = () => {
+export const Order = () => {
 	// HANDLE LOADING
 	const [loading, setLoading] = useState(false);
+
+	// HANDLE TOGGLE FORM
+	const [openForm, setOpenForm] = useState(false);
+
+	const handleToggleForm = () => {
+		setOpenForm(!openForm);
+	};
 
 	// HANDLE PAGINATION
 	const [currentPage, setCurrentPage] = useState(1);
@@ -22,12 +29,12 @@ export const Salary = () => {
 			setLoading(false);
 		}, 1000);
 	};
-
 	return (
-		<div className="salaryPage">
+		<div className="orderPage">
 			<Menu />
-			<ActionBar img="../assets/image/salary.jpg" h2="PayRoll" title="Calculate salary" />
-			{loading ? <Loading /> : <PayRollTable />}
+			<ActionBar img="../assets/image/order.jpg" h2="Order" title="New order" />
+			{openForm ? <OrderTable handleToggleForm={handleToggleForm} /> : <div></div>}
+			{loading ? <Loading /> : <OrderTable />}
 			<Pagination
 				currentPage={currentPage}
 				totalPages={totalPages}

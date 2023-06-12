@@ -33,7 +33,12 @@ export const Employee = () => {
 	return (
 		<div className="employeePage">
 			<Menu />
-			<ActionBar title="New employee" handleToggleForm={handleToggleForm} />
+			<ActionBar
+				img="../assets/image/employee.jpg"
+				h2="Employee"
+				title="New employee"
+				handleToggleForm={handleToggleForm}
+			/>
 			{openForm ? <FormEmployee handleToggleForm={handleToggleForm} /> : <div></div>}
 			{loading ? <Loading /> : <ProductTable handleToggleForm={handleToggleForm} />}
 			<Pagination
