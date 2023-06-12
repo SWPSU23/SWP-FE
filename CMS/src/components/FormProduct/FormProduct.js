@@ -62,36 +62,44 @@ export const FormProduct = ({handleToggleForm}) => {
 
 				<div className="formContainerCenter">
 					<div className="formInput">
+						<h2 className="labelInput">Id: </h2>
 						<input placeholder="id ..." />
 					</div>
 
 					<div className="formInput">
+						<h2 className="labelInput">Name: </h2>
 						<input placeholder="name ..." />
 					</div>
 
 					<div className="formInput">
+						<h2 className="labelInput">Unit: </h2>
 						<input placeholder="unit ..." />
 					</div>
 
 					<div className="formInput">
+						<h2 className="labelInput">Unit price: </h2>
 						<input placeholder="unit price ..." />
 					</div>
 
 					<div className="formInput">
+						<h2 className="labelInput">Stock: </h2>
 						<input placeholder="stock ..." />
 					</div>
 
 					<div className="formInput">
+						<h2 className="labelInput">Status: </h2>
 						<input placeholder="status ..." />
 					</div>
 
 					<div className="formInput">
+						<h2 className="labelInput">Expired at: </h2>
 						<input placeholder="expired at ..." />
 					</div>
 				</div>
 
 				<div className="formContainerBottom ">
 					<div className="formInput inputDesc">
+						<h2 className="labelInput">Description: </h2>
 						<input placeholder="description ..." />
 					</div>
 				</div>

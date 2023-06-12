@@ -76,6 +76,12 @@
     width: 50%;
 }
 
+.formInput .labelInput {
+    text-align: left;
+    padding-left: 11%;
+    font-size: 16px;
+}
+
 .formInput input {
     margin-bottom: 20px;
     border-radius: 5px;

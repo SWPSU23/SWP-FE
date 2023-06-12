@@ -20,7 +20,7 @@ function PayRollTable() {
 						<th>Sheet 3S</th>
 						<th>Violate</th>
 						<th>Total</th>
-						<th>Action</th>
+						{/* <th>Action</th> */}
 					</tr>
 				</thead>
 				<tbody>
@@ -39,7 +39,7 @@ function PayRollTable() {
 							<td>{payroll.violate}</td>
 							<td>{payroll.total}</td>
 
-							<td>
+							{/* <td>
 								<div className="btnForm">
 									<button className="btn">
 										<EditOutlined />
@@ -48,7 +48,7 @@ function PayRollTable() {
 										<DeleteOutlined />
 									</button>
 								</div>
-							</td>
+							</td> */}
 						</tr>
 					))}
 				</tbody>
