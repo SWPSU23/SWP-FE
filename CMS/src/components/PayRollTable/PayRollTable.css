@@ -1,0 +1,41 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.tableWrapper {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.payrollTable {
+	border-collapse: collapse;
+	width: 100%;
+	min-width: 1000px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.payrollTable th,
+.payrollTable td {
+	border: 1px solid #ccc;
+	padding: 8px;
+}
+
+.payrollTable th {
+	background-color: #4e4e4e;
+	color: white;
+}
+
+.payrollTable td > .btnForm {
+	width: 100%;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.payrollTable td > .btnForm .btn {
+	color: black;
+	border: 1px solid black;
+	margin: 0;
+	width: 30px;
+}
