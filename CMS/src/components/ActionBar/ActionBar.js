@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import styles from './ActionBar.module.css';
 import {CaretDownOutlined, SearchOutlined} from '@ant-design/icons';
 
-export const ActionBar = ({title, handleToggleForm}) => {
+export const ActionBar = ({img, h2, title, handleToggleForm}) => {
 	ActionBar.propTypes = {
 		title: PropTypes.func.isRequired,
 		handleToggleForm: PropTypes.func.isRequired,
+		img: PropTypes.string.isRequired,
+		h2: PropTypes.string.isRequired,
 	};
 
 	const [isOpenFilterOption, setIsOpenFilterOption] = useState(false);
@@ -20,26 +22,34 @@ export const ActionBar = ({title, handleToggleForm}) => {
 	};
 
 	return (
-		<div className={styles.actionBar}>
-			<div className={styles.actionWrapper}>
-				<button onClick={handleAdd} className={styles.NewProductBtn}>
-					{title}
-				</button>
-				<div className={styles.filterWrapper} onClick={toogleFilterOption}>
-					<span>Filter by</span>
-					<CaretDownOutlined />
-					{isOpenFilterOption && (
-						<div className={styles.filterOptionArea}>
-							<p>Filter by name</p>
-							<p>Filter by id</p>
-						</div>
-					)}
+		<div>
+			<div className={styles.actionIcon}>
+				<div className={styles.imgIcon}>
+					<img src={img} />
 				</div>
-				<div className={styles.searchWrapper}>
-					<input className={styles.input} type="text" placeholder="Search..." />
-					<button className={styles.searchBtn}>
-						<SearchOutlined />
+				<div className={styles.nameIcon}>{h2}</div>
+			</div>
+			<div className={styles.actionBar}>
+				<div className={styles.actionWrapper}>
+					<button onClick={handleAdd} className={styles.NewProductBtn}>
+						{title}
 					</button>
+					<div className={styles.filterWrapper} onClick={toogleFilterOption}>
+						<span>Filter by</span>
+						<CaretDownOutlined />
+						{isOpenFilterOption && (
+							<div className={styles.filterOptionArea}>
+								<p>Filter by name</p>
+								<p>Filter by id</p>
+							</div>
+						)}
+					</div>
+					<div className={styles.searchWrapper}>
+						<input className={styles.input} type="text" placeholder="Search..." />
+						<button className={styles.searchBtn}>
+							<SearchOutlined />
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>

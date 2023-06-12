@@ -22,7 +22,7 @@ export const Menu = () => {
 	const menu = [
 		{title: 'Dashboard', slug: ''},
 		{title: 'Product', slug: 'products'},
-		{title: 'User', slug: 'users'},
+		{title: 'Order', slug: 'orders'},
 		{title: 'Employee', slug: 'employees'},
 		{title: 'Revenue', slug: 'revenue'},
 		{title: 'Salary', slug: 'salary'},
