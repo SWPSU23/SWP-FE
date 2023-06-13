@@ -40,7 +40,7 @@ export const Employee = () => {
 				handleToggleForm={handleToggleForm}
 			/>
 			{openForm ? <FormEmployee handleToggleForm={handleToggleForm} /> : <div></div>}
-			{loading ? <Loading /> : <EmployeeTable handleToggleForm={handleToggleForm} />}
+			{/* {loading ? <Loading /> : <ProductTable handleToggleForm={handleToggleForm} />} */}
 			<Pagination
 				currentPage={currentPage}
 				totalPages={totalPages}

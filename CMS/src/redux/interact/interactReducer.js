@@ -1,4 +1,4 @@
-import {CLICKED} from '../action';
+import {CLICKED} from '../product/action';
 
 const initialState = {
 	activeItem: '',

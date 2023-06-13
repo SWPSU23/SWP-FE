@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './Menu.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
-import {actClick} from '../../redux/action';
+import {actClick} from '../../redux/product/action';
 
 export const Menu = () => {
 	// get item active from redux
