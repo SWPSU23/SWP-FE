@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import './ProductTable.css';
+import style from './ProductTable.module.css';
 import {Tooltip as ReactTooltip} from 'react-tooltip';
 import {fetchProductList} from '../../redux/action';
 
@@ -25,8 +25,8 @@ function ProductTable({handleToggleForm}) {
 	}, [products]);
 
 	return (
-		<div className="tableWrapper">
-			<table className="productTable">
+		<div className={style.tableWrapper}>
+			<table className={style.productTable}>
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -46,7 +46,7 @@ function ProductTable({handleToggleForm}) {
 						<tr key={index}>
 							<td>{product.id}</td>
 							<td>
-								<div className="imageWrapper">
+								<div className={style.imageWrapper}>
 									<img src={product.image} alt={product.name} />
 								</div>
 							</td>
@@ -71,11 +71,11 @@ function ProductTable({handleToggleForm}) {
 								)}
 							</td>
 							<td>
-								<div className="btnArea">
-									<button className="btn" onClick={handleToggleForm}>
+								<div className={style.btnArea}>
+									<button className={style.btn} onClick={handleToggleForm}>
 										<EditOutlined />
 									</button>
-									<button className="btn">
+									<button className={style.btn}>
 										<DeleteOutlined />
 									</button>
 								</div>
