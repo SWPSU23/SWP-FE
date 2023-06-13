@@ -3,9 +3,9 @@ import './Employee.css';
 import {FormEmployee} from '../../components/FormEmployee/FormEmployee';
 import {Menu} from '../../components/MenuNavi/Menu';
 import {ActionBar} from '../../components/ActionBar/ActionBar';
-import ProductTable from '../../components/ProductTable/ProductTable';
 import Loading from '../../components/Loading/Loading';
 import Pagination from '../../components/Pagination/Pagination';
+import {EmployeeTable} from '../../components/EmployeeTable/EmployeeTable';
 
 export const Employee = () => {
 	// HANDLE LOADING

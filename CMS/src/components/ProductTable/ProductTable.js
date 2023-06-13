@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import './ProductTable.css';
+import style from './ProductTable.module.css';
 import {Tooltip as ReactTooltip} from 'react-tooltip';
 import {formatDate} from '../../helper';
 
@@ -15,8 +15,8 @@ const ProductTable = ({handleToggleFormUpdate, productList}) => {
 	const maxDescriptionLength = 50;
 
 	return (
-		<div className="tableWrapper">
-			<table className="productTable">
+		<div className={style.tableWrapper}>
+			<table className={style.productTable}>
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -36,7 +36,7 @@ const ProductTable = ({handleToggleFormUpdate, productList}) => {
 						<tr key={index}>
 							<td>{product.id}</td>
 							<td>
-								<div className="imageWrapper">
+								<div className={style.imageWrapper}>
 									<img src={product.image} alt={product.name} />
 								</div>
 							</td>
@@ -68,7 +68,7 @@ const ProductTable = ({handleToggleFormUpdate, productList}) => {
 									>
 										<EditOutlined />
 									</button>
-									<button className="btn">
+									<button className={style.btn}>
 										<DeleteOutlined />
 									</button>
 								</div>
