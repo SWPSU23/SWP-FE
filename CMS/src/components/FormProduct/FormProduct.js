@@ -1,14 +1,41 @@
 import PropTypes from 'prop-types';
-import React, {useRef, useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import './FormProduct.css';
+import {formatDate} from '../../helper';
 
-export const FormProduct = ({handleToggleForm}) => {
+export const FormProduct = ({handleToggleForm, productDetail}) => {
 	FormProduct.propTypes = {
 		handleToggleForm: PropTypes.func.isRequired,
+		productDetail: PropTypes.array.isRequired,
 	};
+	console.log(productDetail);
 
-	// HANDLE UPLOAD IMAGE
 	const [imagePreview, setImagePreview] = useState('');
+	const [id, setId] = useState('');
+	const [name, setName] = useState('');
+	const [unit, setUnit] = useState('');
+	const [unitPrice, setUnitPrice] = useState('');
+	const [stock, setStock] = useState('');
+	const [status, setStatus] = useState('');
+	const [expiredAt, setExpiredAt] = useState('');
+	const [description, setDescription] = useState('');
+
+	useEffect(() => {
+		if (productDetail && productDetail.length > 0 && productDetail[0].expired_at) {
+			const product = productDetail[0];
+			const date = formatDate(product.expired_at);
+			setId(product.id ? product.id.toString() : '');
+			setName(product.name || '');
+			setUnit(product.unit || '');
+			setUnitPrice(product.unit_price ? product.unit_price.toString() : '');
+			setStock(product.stock ? product.stock.toString() : '');
+			setStatus(product.status && product.status.data[0] ? product.status.data[0] : '');
+			setExpiredAt(product.expired_at || '');
+			setDescription(product.description || '');
+			setImagePreview(product.image || '');
+		}
+	}, [productDetail]);
+
 	const fileInputRef = useRef(null);
 
 	const handleImageClick = () => {
@@ -28,6 +55,30 @@ export const FormProduct = ({handleToggleForm}) => {
 		} else {
 			setImagePreview('');
 		}
+	};
+
+	const handleSubmit = () => {
+		const formData = {
+			id,
+			name,
+			unit,
+			unitPrice,
+			stock,
+			status,
+			expiredAt,
+			description,
+		};
+		console.log(formData);
+
+		// Clear the form fields after submission
+		setId('');
+		setName('');
+		setUnit('');
+		setUnitPrice('');
+		setStock('');
+		setStatus('');
+		setExpiredAt('');
+		setDescription('');
 	};
 
 	return (
@@ -63,58 +114,87 @@ export const FormProduct = ({handleToggleForm}) => {
 				<div className="formContainerCenter">
 					<div className="formInput">
 						<h2 className="labelInput">Id: </h2>
-						<input placeholder="id ..." />
+						<input
+							placeholder="id ..."
+							value={id}
+							onChange={(e) => setId(e.target.value)}
+						/>
 					</div>
 
 					<div className="formInput">
 						<h2 className="labelInput">Name: </h2>
-						<input placeholder="name ..." />
+						<input
+							placeholder="name ..."
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+						/>
 					</div>
 
 					<div className="formInput">
 						<h2 className="labelInput">Unit: </h2>
-						<input placeholder="unit ..." />
+						<input
+							placeholder="unit ..."
+							value={unit}
+							onChange={(e) => setUnit(e.target.value)}
+						/>
 					</div>
 
 					<div className="formInput">
 						<h2 className="labelInput">Unit price: </h2>
-						<input placeholder="unit price ..." />
+						<input
+							placeholder="unit price ..."
+							value={unitPrice}
+							onChange={(e) => setUnitPrice(e.target.value)}
+						/>
 					</div>
 
 					<div className="formInput">
 						<h2 className="labelInput">Stock: </h2>
-						<input placeholder="stock ..." />
+						<input
+							placeholder="stock ..."
+							value={stock}
+							onChange={(e) => setStock(e.target.value)}
+						/>
 					</div>
 
 					<div className="formInput">
 						<h2 className="labelInput">Status: </h2>
-						<input placeholder="status ..." />
+						<input
+							placeholder="status ..."
+							value={status}
+							onChange={(e) => setStatus(e.target.value)}
+						/>
 					</div>
 
 					<div className="formInput">
 						<h2 className="labelInput">Expired at: </h2>
-						<input placeholder="expired at ..." />
+						<input
+							placeholder="expired at ..."
+							value={expiredAt}
+							onChange={(e) => setExpiredAt(e.target.value)}
+						/>
 					</div>
 				</div>
 
 				<div className="formContainerBottom ">
 					<div className="formInput inputDesc">
 						<h2 className="labelInput">Description: </h2>
-						<input placeholder="description ..." />
+						<input
+							placeholder="description ..."
+							value={description}
+							onChange={(e) => setDescription(e.target.value)}
+						/>
 					</div>
 				</div>
 
 				<div className="formContainerButton">
-					<button
-						onClick={() => {
-							handleToggleForm();
-						}}
-						className="btn btnClose"
-					>
+					<button onClick={handleToggleForm} className="btn btnClose">
 						Close
 					</button>
 
-					<button className="btn btnSave">Save</button>
+					<button onClick={handleSubmit} className="btn btnSave">
+						Save
+					</button>
 				</div>
 			</div>
 		</div>

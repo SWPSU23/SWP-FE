@@ -4,25 +4,15 @@ import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import './ProductTable.css';
 import {Tooltip as ReactTooltip} from 'react-tooltip';
-import {fetchProductList} from '../../redux/action';
+import {formatDate} from '../../helper';
 
-function ProductTable({handleToggleForm}) {
+const ProductTable = ({handleToggleFormUpdate, productList}) => {
 	ProductTable.propTypes = {
-		handleToggleForm: PropTypes.func.isRequired,
+		handleToggleFormUpdate: PropTypes.func.isRequired,
+		productList: PropTypes.array.isRequired,
 	};
+
 	const maxDescriptionLength = 50;
-
-	useEffect(() => {
-		console.log('call API');
-		dispatch(fetchProductList());
-	}, []);
-
-	const dispatch = useDispatch();
-	const products = useSelector((state) => state.product);
-	const [productList, setProductList] = useState(products);
-	useEffect(() => {
-		setProductList(products);
-	}, [products]);
 
 	return (
 		<div className="tableWrapper">
@@ -54,8 +44,8 @@ function ProductTable({handleToggleForm}) {
 							<td>{product.unit}</td>
 							<td>{product.unit_price}</td>
 							<td>{product.stock}</td>
-							<td>{product.status}</td>
-							<td>{product.expired_at}</td>
+							<td>{product.status.type}</td>
+							<td>{formatDate(product.expired_at)}</td>
 							<td>
 								{product.description.length <= maxDescriptionLength ? (
 									<p className="productDescription">{product.description}</p>
@@ -72,7 +62,10 @@ function ProductTable({handleToggleForm}) {
 							</td>
 							<td>
 								<div className="btnArea">
-									<button className="btn" onClick={handleToggleForm}>
+									<button
+										className="btn"
+										onClick={() => handleToggleFormUpdate(product.id)}
+									>
 										<EditOutlined />
 									</button>
 									<button className="btn">
@@ -86,6 +79,6 @@ function ProductTable({handleToggleForm}) {
 			</table>
 		</div>
 	);
-}
+};
 
 export default ProductTable;
