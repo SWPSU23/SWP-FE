@@ -26,11 +26,11 @@ const OrderTable = () => {
 							<td>{order.total}</td>
 							<td>{order.date}</td>
 							<td>
-								<div className="btnForm">
-									<button className="btn">
+								<div className={style.btnForm}>
+									<button className={style.btn}>
 										<EditOutlined />
 									</button>
-									<button className="btn">
+									<button className={style.btn}>
 										<DeleteOutlined />
 									</button>
 								</div>

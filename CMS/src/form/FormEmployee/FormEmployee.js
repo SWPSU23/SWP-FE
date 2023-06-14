@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import './FormEmployee.css';
+import styles from './FormEmployee.module.css';
 
 export const FormEmployee = ({handleToggleForm}) => {
 	FormEmployee.propTypes = {
@@ -8,52 +8,52 @@ export const FormEmployee = ({handleToggleForm}) => {
 	};
 
 	return (
-		<div className="formEmployee">
-			<div className="formContainer">
+		<div className={styles.formEmployee}>
+			<div className={styles.formContainer}>
 				<h1>Employee details</h1>
-				<div className="formContainerCenter">
-					<div className="formInput">
-						<h2 className="labelInput">Id: </h2>
+				<div className={styles.formContainerCenter}>
+					<div className={styles.formInput}>
+						<h2 className={styles.labelInput}>Id: </h2>
 						<input placeholder="id ..." />
 					</div>
 
-					<div className="formInput">
-						<h2 className="labelInput">Name: </h2>
+					<div className={styles.formInput}>
+						<h2 className={styles.labelInput}>Name: </h2>
 						<input placeholder="name ..." />
 					</div>
 
-					<div className="formInput">
-						<h2 className="labelInput">Age: </h2>
+					<div className={styles.formInput}>
+						<h2 className={styles.labelInput}>Age: </h2>
 						<input placeholder="age ..." />
 					</div>
 
-					<div className="formInput">
-						<h2 className="labelInput">Email: </h2>
+					<div className={styles.formInput}>
+						<h2 className={styles.labelInput}>Email: </h2>
 						<input placeholder="email ..." />
 					</div>
 
-					<div className="formInput">
-						<h2 className="labelInput">Role: </h2>
+					<div className={styles.formInput}>
+						<h2 className={styles.labelInput}>Role: </h2>
 						<input placeholder="role ..." />
 					</div>
 
-					<div className="formInput">
-						<h2 className="labelInput">Salary: </h2>
+					<div className={styles.formInput}>
+						<h2 className={styles.labelInput}>Salary: </h2>
 						<input placeholder="salary ..." />
 					</div>
 				</div>
 
-				<div className="formContainerButton">
+				<div className={styles.formContainerButton}>
 					<button
 						onClick={() => {
 							handleToggleForm();
 						}}
-						className="btn btnClose"
+						className={`${styles['btn']} ${styles.btnClose}`}
 					>
 						Close
 					</button>
 
-					<button className="btn btnSave">Save</button>
+					<button className={`${styles['btn']} ${styles.btnSave}`}>Save</button>
 				</div>
 			</div>
 		</div>

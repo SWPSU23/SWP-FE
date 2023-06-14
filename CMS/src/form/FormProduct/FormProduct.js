@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, {useState, useRef, useEffect} from 'react';
-import './FormProduct.css';
+import styles from './FormProduct.module.css';
 import {formatDate} from '../../helper';
 
 export const FormProduct = ({handleToggleForm, productDetail}) => {
@@ -82,15 +82,15 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 	};
 
 	return (
-		<div className="formProduct">
-			<div className="formContainer">
+		<div className={styles.formProduct}>
+			<div className={styles.formContainer}>
 				<h1>Product</h1>
-				<div className="formContainerTop">
-					<div className="inputImageContainer" onClick={handleImageClick}>
-						<div className="inputImage">
+				<div className={styles.formContainerTop}>
+					<div className={styles.inputImageContainer} onClick={handleImageClick}>
+						<div className={styles.inputImage}>
 							{imagePreview ? (
 								<img
-									className="imagePreview"
+									className={styles.imagePreview}
 									src={imagePreview}
 									alt="Image Preview"
 								/>
@@ -111,9 +111,9 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 					</div>
 				</div>
 
-				<div className="formContainerCenter">
-					<div className="formInput">
-						<h2 className="labelInput">Id: </h2>
+				<div className={styles.formContainerCenter}>
+					<div className={styles.formInput}>
+						<h2 className={styles.labelInput}>Id: </h2>
 						<input
 							placeholder="id ..."
 							value={id}
@@ -121,8 +121,8 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 						/>
 					</div>
 
-					<div className="formInput">
-						<h2 className="labelInput">Name: </h2>
+					<div className={styles.formInput}>
+						<h2 className={styles.labelInput}>Name: </h2>
 						<input
 							placeholder="name ..."
 							value={name}
@@ -130,8 +130,8 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 						/>
 					</div>
 
-					<div className="formInput">
-						<h2 className="labelInput">Unit: </h2>
+					<div className={styles.formInput}>
+						<h2 className={styles.labelInput}>Unit: </h2>
 						<input
 							placeholder="unit ..."
 							value={unit}
@@ -139,8 +139,8 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 						/>
 					</div>
 
-					<div className="formInput">
-						<h2 className="labelInput">Unit price: </h2>
+					<div className={styles.formInput}>
+						<h2 className={styles.labelInput}>Unit price: </h2>
 						<input
 							placeholder="unit price ..."
 							value={unitPrice}
@@ -148,8 +148,8 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 						/>
 					</div>
 
-					<div className="formInput">
-						<h2 className="labelInput">Stock: </h2>
+					<div className={styles.formInput}>
+						<h2 className={styles.labelInput}>Stock: </h2>
 						<input
 							placeholder="stock ..."
 							value={stock}
@@ -157,8 +157,8 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 						/>
 					</div>
 
-					<div className="formInput">
-						<h2 className="labelInput">Status: </h2>
+					<div className={styles.formInput}>
+						<h2 className={styles.labelInput}>Status: </h2>
 						<input
 							placeholder="status ..."
 							value={status}
@@ -166,8 +166,8 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 						/>
 					</div>
 
-					<div className="formInput">
-						<h2 className="labelInput">Expired at: </h2>
+					<div className={styles.formInput}>
+						<h2 className={styles.labelInput}>Expired at: </h2>
 						<input
 							placeholder="expired at ..."
 							value={expiredAt}
@@ -176,9 +176,9 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 					</div>
 				</div>
 
-				<div className="formContainerBottom ">
-					<div className="formInput inputDesc">
-						<h2 className="labelInput">Description: </h2>
+				<div className={styles.formContainerBottom}>
+					<div className={`${styles['formInput']} ${styles.inputDesc}`}>
+						<h2 className={styles.labelInput}>Description: </h2>
 						<input
 							placeholder="description ..."
 							value={description}
@@ -187,12 +187,15 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 					</div>
 				</div>
 
-				<div className="formContainerButton">
-					<button onClick={handleToggleForm} className="btn btnClose">
+				<div className={styles.formContainerButton}>
+					<button
+						onClick={handleToggleForm}
+						className={`${styles['btn']} ${styles.btnClose}`}
+					>
 						Close
 					</button>
 
-					<button onClick={handleSubmit} className="btn btnSave">
+					<button onClick={handleSubmit} className={`${styles['btn']} ${styles.btnSave}`}>
 						Save
 					</button>
 				</div>
