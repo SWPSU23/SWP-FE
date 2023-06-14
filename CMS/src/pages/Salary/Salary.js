@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './Salary.css';
 import {Menu} from '../../components/MenuNavi/Menu';
-import PayRollTable from '../../components/PayRollTable/PayRollTable';
+import PayRollTable from '../../table/PayRollTable/PayRollTable';
 import {ActionBar} from '../../components/ActionBar/ActionBar';
 import Pagination from '../../components/Pagination/Pagination';
 import Loading from '../../components/Loading/Loading';

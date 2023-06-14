@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import './Product.css';
 import Pagination from '../../components/Pagination/Pagination';
-import ProductTable from '../../components/ProductTable/ProductTable';
+import ProductTable from '../../table/ProductTable/ProductTable';
 import {Menu} from '../../components/MenuNavi/Menu';
 import {ActionBar} from '../../components/ActionBar/ActionBar';
-import {FormProduct} from '../../components/FormProduct/FormProduct';
+import {FormProduct} from '../../form/FormProduct/FormProduct';
 import Loading from '../../components/Loading/Loading';
 import {
 	fetchProductDetailAsync,

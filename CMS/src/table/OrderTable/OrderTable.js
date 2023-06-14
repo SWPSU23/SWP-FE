@@ -14,7 +14,7 @@ const OrderTable = () => {
 						<th>Product Quantity</th>
 						<th>Total</th>
 						<th>Date</th>
-						{/* <th>Action</th> */}
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -25,7 +25,7 @@ const OrderTable = () => {
 							<td>{order.quantity}</td>
 							<td>{order.total}</td>
 							<td>{order.date}</td>
-							{/* <td>
+							<td>
 								<div className="btnForm">
 									<button className="btn">
 										<EditOutlined />
@@ -34,7 +34,7 @@ const OrderTable = () => {
 										<DeleteOutlined />
 									</button>
 								</div>
-							</td> */}
+							</td>
 						</tr>
 					))}
 				</tbody>
