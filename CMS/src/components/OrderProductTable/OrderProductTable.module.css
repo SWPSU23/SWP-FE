@@ -1,14 +1,16 @@
 * {
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
 
 .tableWrapper {
-	width: 100%;
+	width: 90%;
+	margin: 0 5%;
 	overflow-x: auto;
 }
 
-.orderTable {
+.orderProductTable {
 	border-collapse: collapse;
 	width: 100%;
 	min-width: 1000px;
@@ -16,24 +18,24 @@
 	margin-bottom: 40px;
 }
 
-.orderTable th,
-.orderTable td {
+.orderProductTable th,
+.orderProductTable td {
 	border: 1px solid #ccc;
 	padding: 8px;
 }
 
-.orderTable th {
+.orderProductTable th {
 	background-color: #4e4e4e;
 	color: white;
 }
 
-.orderTable td > .btnForm {
+.orderProductTable td > .btnForm {
 	width: 100%;
 	display: flex;
 	justify-content: space-evenly;
 }
 
-.orderTable td > .btnForm .btn {
+.orderProductTable td > .btnForm .btn {
 	color: black;
 	border: 1px solid black;
 	margin: 0;

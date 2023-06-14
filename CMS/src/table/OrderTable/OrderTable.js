@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {data} from '../../shared/ListOfOrder';
 import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
 import style from './OrderTable.module.css';
 
-const OrderTable = () => {
+const OrderTable = ({handleToggleForm}) => {
+	OrderTable.propTypes = {
+		handleToggleForm: PropTypes.func.isRequired,
+	};
+
 	return (
 		<div className={style.tableWrapper}>
 			<table className={style.orderTable}>

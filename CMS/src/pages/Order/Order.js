@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './Order.css';
+import style from './Order.module.css';
 import {Menu} from '../../components/MenuNavi/Menu';
 import OrderTable from '../../table/OrderTable/OrderTable';
 import Loading from '../../components/Loading/Loading';
@@ -31,7 +31,7 @@ export const Order = () => {
 		}, 1000);
 	};
 	return (
-		<div className="orderPage">
+		<div className={style.orderPage}>
 			<Menu />
 			<Header img="../assets/image/order.jpg" h2="Order" />
 			<ActionBar title="New order" />
