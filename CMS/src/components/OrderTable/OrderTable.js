@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {data} from '../../shared/ListOfOrder';
 import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
 import style from './OrderTable.module.css';
 
-const OrderTable = () => {
+const OrderTable = ({handleToggleForm}) => {
+	OrderTable.propTypes = {
+		handleToggleForm: PropTypes.func.isRequired,
+	};
+
 	return (
 		<div className={style.tableWrapper}>
 			<table className={style.orderTable}>
@@ -14,7 +19,7 @@ const OrderTable = () => {
 						<th>Product Quantity</th>
 						<th>Total</th>
 						<th>Date</th>
-						{/* <th>Action</th> */}
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -25,16 +30,16 @@ const OrderTable = () => {
 							<td>{order.quantity}</td>
 							<td>{order.total}</td>
 							<td>{order.date}</td>
-							{/* <td>
-								<div className="btnForm">
-									<button className="btn">
+							<td>
+								<div className={style.btnForm}>
+									<button className={style.btn} onClick={handleToggleForm}>
 										<EditOutlined />
 									</button>
-									<button className="btn">
+									<button className={style.btn}>
 										<DeleteOutlined />
 									</button>
 								</div>
-							</td> */}
+							</td>
 						</tr>
 					))}
 				</tbody>

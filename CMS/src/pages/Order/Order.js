@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import './Order.css';
+import style from './Order.module.css';
 import {Menu} from '../../components/MenuNavi/Menu';
 import OrderTable from '../../components/OrderTable/OrderTable';
+import {FormOrder} from '../../components/FormOrder/FormOrder';
 import Loading from '../../components/Loading/Loading';
 import {ActionBar} from '../../components/ActionBar/ActionBar';
 import Pagination from '../../components/Pagination/Pagination';
@@ -30,11 +31,16 @@ export const Order = () => {
 		}, 1000);
 	};
 	return (
-		<div className="orderPage">
+		<div className={style.orderPage}>
 			<Menu />
-			<ActionBar img="../assets/image/order.jpg" h2="Order" title="New order" />
-			{openForm ? <OrderTable handleToggleForm={handleToggleForm} /> : <div></div>}
-			{loading ? <Loading /> : <OrderTable />}
+			<ActionBar
+				img="../assets/image/order.jpg"
+				h2="Order"
+				title="New order"
+				handleToggleForm={handleToggleForm}
+			/>
+			{openForm ? <FormOrder handleToggleForm={handleToggleForm} /> : <div></div>}
+			{loading ? <Loading /> : <OrderTable handleToggleForm={handleToggleForm} />}
 			<Pagination
 				currentPage={currentPage}
 				totalPages={totalPages}

@@ -5,7 +5,7 @@ import {CaretDownOutlined, SearchOutlined} from '@ant-design/icons';
 
 export const ActionBar = ({img, h2, title, handleToggleForm}) => {
 	ActionBar.propTypes = {
-		title: PropTypes.func.isRequired,
+		title: PropTypes.string.isRequired,
 		handleToggleForm: PropTypes.func.isRequired,
 		img: PropTypes.string.isRequired,
 		h2: PropTypes.string.isRequired,
