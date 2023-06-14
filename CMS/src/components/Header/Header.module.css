@@ -1,0 +1,15 @@
+.headerIcon {
+	display: flex;
+	margin-bottom: 40px;
+	width: 30vw;
+	border-bottom: 2px solid black;
+}
+.imgIcon img {
+	height: 40px;
+	width: 40px;
+}
+.nameIcon {
+	font-size: 30px;
+	font-weight: 700;
+	padding-left: 15px;
+}

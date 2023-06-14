@@ -5,6 +5,7 @@ import {Menu} from '../../components/MenuNavi/Menu';
 import {ActionBar} from '../../components/ActionBar/ActionBar';
 import Loading from '../../components/Loading/Loading';
 import Pagination from '../../components/Pagination/Pagination';
+import {Header} from '../../components/Header/Header';
 
 export const Employee = () => {
 	// HANDLE LOADING
@@ -32,12 +33,8 @@ export const Employee = () => {
 	return (
 		<div className="employeePage">
 			<Menu />
-			<ActionBar
-				img="../assets/image/employee.jpg"
-				h2="Employee"
-				title="New employee"
-				handleToggleForm={handleToggleForm}
-			/>
+			<Header img="../assets/image/employee.jpg" h2="Employee" />
+			<ActionBar title="New employee" handleToggleForm={handleToggleForm} />
 			{openForm ? <FormEmployee handleToggleForm={handleToggleForm} /> : <div></div>}
 			{/* {loading ? <Loading /> : <ProductTable handleToggleForm={handleToggleForm} />} */}
 			<Pagination

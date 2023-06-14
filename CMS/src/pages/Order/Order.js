@@ -5,6 +5,7 @@ import OrderTable from '../../table/OrderTable/OrderTable';
 import Loading from '../../components/Loading/Loading';
 import {ActionBar} from '../../components/ActionBar/ActionBar';
 import Pagination from '../../components/Pagination/Pagination';
+import {Header} from '../../components/Header/Header';
 
 export const Order = () => {
 	// HANDLE LOADING
@@ -32,7 +33,8 @@ export const Order = () => {
 	return (
 		<div className="orderPage">
 			<Menu />
-			<ActionBar img="../assets/image/order.jpg" h2="Order" title="New order" />
+			<Header img="../assets/image/order.jpg" h2="Order" />
+			<ActionBar title="New order" />
 			{openForm ? <OrderTable handleToggleForm={handleToggleForm} /> : <div></div>}
 			{loading ? <Loading /> : <OrderTable />}
 			<Pagination

@@ -12,6 +12,7 @@ import {
 	fetchProductListSearchAsync,
 } from '../../redux/product/action';
 import {useDispatch, useSelector} from 'react-redux';
+import {Header} from '../../components/Header/Header';
 
 export const Product = () => {
 	// HANDLE LOADING
@@ -89,6 +90,7 @@ export const Product = () => {
 	return (
 		<div className="productPage">
 			<Menu />
+			<Header img="../assets/image/product.jpg" h2="Product" />
 			<ActionBar
 				handleSearch={handleSearch}
 				img="../assets/image/product.jpg"

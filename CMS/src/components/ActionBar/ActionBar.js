@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import styles from './ActionBar.module.css';
 import {CaretDownOutlined, SearchOutlined} from '@ant-design/icons';
 
-export const ActionBar = ({img, h2, title, handleToggleForm, handleSearch}) => {
+export const ActionBar = ({title, handleToggleForm, handleSearch}) => {
 	ActionBar.propTypes = {
 		handleSearch: PropTypes.func.isRequired,
 		title: PropTypes.string.isRequired,
 		handleToggleForm: PropTypes.func.isRequired,
-		img: PropTypes.string.isRequired,
-		h2: PropTypes.string.isRequired,
 	};
 
 	// HANDLE SEACH
@@ -35,12 +33,6 @@ export const ActionBar = ({img, h2, title, handleToggleForm, handleSearch}) => {
 
 	return (
 		<div>
-			<div className={styles.actionIcon}>
-				<div className={styles.imgIcon}>
-					<img src={img} />
-				</div>
-				<div className={styles.nameIcon}>{h2}</div>
-			</div>
 			<div className={styles.actionBar}>
 				<div className={styles.actionWrapper}>
 					<button onClick={handleAdd} className={styles.NewProductBtn}>
