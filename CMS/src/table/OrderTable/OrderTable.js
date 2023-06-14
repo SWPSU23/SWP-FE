@@ -32,7 +32,7 @@ const OrderTable = ({handleToggleForm}) => {
 							<td>{order.date}</td>
 							<td>
 								<div className={style.btnForm}>
-									<button className={style.btn} onClick={handleToggleForm}>
+									<button className={style.btn}>
 										<EditOutlined />
 									</button>
 									<button className={style.btn}>

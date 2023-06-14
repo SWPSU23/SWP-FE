@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import './Salary.css';
 import {Menu} from '../../components/MenuNavi/Menu';
-import PayRollTable from '../../components/PayRollTable/PayRollTable';
+import PayRollTable from '../../table/PayRollTable/PayRollTable';
 import {ActionBar} from '../../components/ActionBar/ActionBar';
 import Pagination from '../../components/Pagination/Pagination';
 import Loading from '../../components/Loading/Loading';
+import {Header} from '../../components/Header/Header';
 
 export const Salary = () => {
 	// HANDLE LOADING
@@ -26,7 +27,8 @@ export const Salary = () => {
 	return (
 		<div className="salaryPage">
 			<Menu />
-			<ActionBar img="../assets/image/salary.jpg" h2="PayRoll" title="Calculate salary" />
+			<Header img="../assets/image/salary.jpg" h2="PayRoll" />
+			<ActionBar title="Calculate salary" />
 			{loading ? <Loading /> : <PayRollTable />}
 			<Pagination
 				currentPage={currentPage}

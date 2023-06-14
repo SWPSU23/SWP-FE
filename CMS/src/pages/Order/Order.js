@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import style from './Order.module.css';
 import {Menu} from '../../components/MenuNavi/Menu';
-import OrderTable from '../../components/OrderTable/OrderTable';
-import {FormOrder} from '../../components/FormOrder/FormOrder';
+import OrderTable from '../../table/OrderTable/OrderTable';
 import Loading from '../../components/Loading/Loading';
 import {ActionBar} from '../../components/ActionBar/ActionBar';
 import Pagination from '../../components/Pagination/Pagination';
+import {Header} from '../../components/Header/Header';
 
 export const Order = () => {
 	// HANDLE LOADING
@@ -33,14 +33,10 @@ export const Order = () => {
 	return (
 		<div className={style.orderPage}>
 			<Menu />
-			<ActionBar
-				img="../assets/image/order.jpg"
-				h2="Order"
-				title="New order"
-				handleToggleForm={handleToggleForm}
-			/>
-			{openForm ? <FormOrder handleToggleForm={handleToggleForm} /> : <div></div>}
-			{loading ? <Loading /> : <OrderTable handleToggleForm={handleToggleForm} />}
+			<Header img="../assets/image/order.jpg" h2="Order" />
+			<ActionBar title="New order" />
+			{openForm ? <OrderTable handleToggleForm={handleToggleForm} /> : <div></div>}
+			{loading ? <Loading /> : <OrderTable />}
 			<Pagination
 				currentPage={currentPage}
 				totalPages={totalPages}

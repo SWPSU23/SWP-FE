@@ -1,12 +1,13 @@
 import React from 'react';
 import './Revenue.css';
 import {Menu} from '../../components/MenuNavi/Menu';
+import {Header} from '../../components/Header/Header';
 
 export const Revenue = () => {
 	return (
-		<div>
+		<div className="revenuePage">
 			<Menu />
-			Revenue
+			<Header img="../assets/image/revenue.jpg" h2="Revenue" />
 		</div>
 	);
 };
