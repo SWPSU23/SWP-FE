@@ -4,7 +4,7 @@ import {Menu} from '../../components/MenuNavi/Menu';
 
 export const Revenue = () => {
 	return (
-		<div>
+		<div className="revenuePage">
 			<Menu />
 			Revenue
 		</div>

@@ -1,3 +1,25 @@
-.home {
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.homePage {
     /* background-color: red; */
+    padding: 0px 100px;
+}
+
+.homePageContainer {}
+
+.homePageBody {
+    display: flex;
+    justify-content: space-between;
+}
+
+.homePageBodyLeft {
+    width: 50%;
+}
+
+.homePageBodyRight {
+    width: 50%;
+    background-color: aqua;
 }

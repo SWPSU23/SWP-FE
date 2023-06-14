@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './Order.css';
 import {Menu} from '../../components/MenuNavi/Menu';
-import OrderTable from '../../components/OrderTable/OrderTable';
+import OrderTable from '../../table/OrderTable/OrderTable';
 import Loading from '../../components/Loading/Loading';
 import {ActionBar} from '../../components/ActionBar/ActionBar';
 import Pagination from '../../components/Pagination/Pagination';
