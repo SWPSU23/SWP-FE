@@ -1,0 +1,25 @@
+/* worksheet.css */
+.tableContainer {
+	margin: 20px;
+	width: 80%;
+}
+
+.worksheetTable {
+	border-collapse: collapse;
+	width: 100%;
+	height: 100%;
+	border: 1px solid black;
+}
+
+.worksheetTable th {
+	border: 1px solid #ccc;
+	padding: 8px;
+	background-color: #f2f2f2;
+	font-weight: bold;
+}
+
+.worksheetTable td {
+	border: 1px solid #ccc;
+	padding: 8px;
+	text-align: center;
+}
