@@ -1,11 +1,34 @@
 import React from 'react';
-import './GuardWorkSheetTable.css';
-import FormWorksheet from '../../form/FormWorksheet/FormWorksheet';
+import styles from './GuardWorkSheetTable.module.css';
 
 export const GuardWorkSheetTable = () => {
+	const days = ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ Nhật'];
+	const sheets = ['Sheet 1', 'Sheet 2'];
+
 	return (
-		<div className="GuardWorkSheetTable">
-			<h2>GuardWorkSheetTable</h2>
+		<div className={styles.tableContainer}>
+			<table className={styles.worksheetTable}>
+				<thead>
+					<tr>
+						<th></th> {/* Ô trống ở góc trên bên trái */}
+						{days.map((day, index) => (
+							<th key={index}>{day}</th>
+						))}
+					</tr>
+				</thead>
+				<tbody>
+					{sheets.map((sheet, index) => (
+						<tr key={index}>
+							<th className="sheet-column">{sheet}</th>
+							{days.map((day, dayIndex) => (
+								<td key={dayIndex} className="sheet-column">
+									Sheet {index + 1}, Ngày {dayIndex + 2}
+								</td>
+							))}
+						</tr>
+					))}
+				</tbody>
+			</table>
 		</div>
 	);
 };
