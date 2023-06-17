@@ -1,9 +1,12 @@
 import React from 'react';
 import styles from './CashierWorkSheetTable.module.css';
+import {useSelector} from 'react-redux';
 
 export const CashierWorkSheetTable = () => {
-	const days = ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ Nhật'];
-	const sheets = ['Sheet 1', 'Sheet 2', 'Sheet 3'];
+	const tasks = useSelector((state) => state.worksheet.cashier);
+
+	const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+	const sheets = ['1', '2', '3'];
 
 	return (
 		<div className={styles.tableContainer}>
@@ -19,10 +22,15 @@ export const CashierWorkSheetTable = () => {
 				<tbody>
 					{sheets.map((sheet, index) => (
 						<tr key={index}>
-							<th className="sheet-column">{sheet}</th>
+							<th>Sheet {sheet}</th>
 							{days.map((day, dayIndex) => (
-								<td key={dayIndex} className="sheet-column">
-									Sheet {index + 1}, Ngày {dayIndex + 2}
+								<td key={dayIndex} className={styles.cell}>
+									{tasks[day]?.[sheet] &&
+										Object.entries(tasks[day][sheet]).map(([id, name]) => (
+											<div key={id} className={styles.cellContent}>
+												<div className="cellContentWrapper">{name}</div>
+											</div>
+										))}
 								</td>
 							))}
 						</tr>
