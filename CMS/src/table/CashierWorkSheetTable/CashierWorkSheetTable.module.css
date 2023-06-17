@@ -23,3 +23,22 @@
 	padding: 8px;
 	text-align: center;
 }
+.cell {
+	padding: 12px;
+	border: 1px solid #e2e2e2;
+	text-align: center;
+}
+
+.cellContent {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 5px;
+	height: 60px;
+	font-size: 20px;
+	font-weight: 700;
+	background-color: #036541;
+}
+.cellContent:not(:last-child) {
+	margin-bottom: 10px;
+}

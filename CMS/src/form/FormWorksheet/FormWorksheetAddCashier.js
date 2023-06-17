@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import styles from './FormWorksheet.module.css';
-import {addTaskGuard} from '../../redux/worksheet/action';
+import styles from './FormWorksheetAddCashier.module.css';
+import {addTaskCashier} from '../../redux/worksheet/action';
 import {useDispatch} from 'react-redux';
 
-const FormWorksheetAddGuard = () => {
+const FormWorksheetAddCashier = () => {
 	const dispatch = useDispatch();
 	const [name, setName] = useState('');
 	const [id, setId] = useState('');
@@ -26,7 +26,7 @@ const FormWorksheetAddGuard = () => {
 		setSheet(e.target.value);
 	};
 	const handleSubmit = () => {
-		dispatch(addTaskGuard(name, id, workday, sheet));
+		dispatch(addTaskCashier(name, id, workday, sheet));
 
 		const formData = {
 			name,
@@ -85,4 +85,4 @@ const FormWorksheetAddGuard = () => {
 	);
 };
 
-export default FormWorksheetAddGuard;
+export default FormWorksheetAddCashier;

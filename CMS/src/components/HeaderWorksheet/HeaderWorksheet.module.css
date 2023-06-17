@@ -1,0 +1,43 @@
+.btnContainer {
+	display: flex;
+	padding-left: 100px;
+	margin-bottom: 20px;
+}
+
+.button {
+	background-color: #d9d9d9;
+	color: #909ba6;
+	border: 1px solid black;
+	border-radius: 1rem;
+	padding: 10px 20px;
+
+	font-size: 16px;
+	cursor: pointer;
+}
+.button:not(:last-child) {
+	margin-right: 50px;
+}
+.button.active {
+	background-color: #32cbd5;
+	color: #000000;
+	font-weight: 700;
+}
+
+.button:hover {
+	background-color: #32cbd5;
+}
+.addButton {
+	background-color: #036541;
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	padding: 10px 20px;
+	font-size: 16px;
+	font-weight: 700;
+	cursor: pointer;
+	margin-left: 700px;
+}
+
+.addButton:hover {
+	background-color: #218838;
+}
