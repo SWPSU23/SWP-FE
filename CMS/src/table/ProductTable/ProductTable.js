@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
-import React, {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React from 'react';
+// import {useSelector, useDispatch} from 'react-redux';
 import style from './ProductTable.module.css';
 import {Tooltip as ReactTooltip} from 'react-tooltip';
 import {formatDate} from '../../helper';

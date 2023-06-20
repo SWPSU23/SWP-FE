@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Menu.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
@@ -12,11 +12,20 @@ export const Menu = () => {
 	const dispatch = useDispatch();
 	const [activeItem, setActiveItem] = useState(itemClick);
 
+	// Get localStorage
+	useEffect(() => {
+		const savedActiveItem = localStorage.getItem('activeItem');
+		if (savedActiveItem) {
+			setActiveItem(savedActiveItem);
+			dispatch(actClick(savedActiveItem));
+		}
+	}, [dispatch]);
 	const handleClick = (item) => {
 		setActiveItem(item);
 		// save item active to reducx
 		dispatch(actClick(item));
 		navigate('/' + item);
+		localStorage.setItem('activeItem', item);
 	};
 
 	const menu = [
