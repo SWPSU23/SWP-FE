@@ -1,0 +1,10 @@
+.bestSellingPieChart {
+	height: 500px;
+	background-color: beige;
+}
+.pieChart {
+	margin-top: 40px !important;
+	width: 400px !important;
+	height: 400px !important;
+	margin: 0 auto;
+}

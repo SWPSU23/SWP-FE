@@ -6,6 +6,7 @@ import {TodayReport} from '../../components/TodayReport/TodayReport';
 import {SalesReport} from '../../components/SalesReport/SalesReport';
 import {Transactions} from '../../components/Transactions/Transactions';
 import {BestSelling} from '../../components/BestSelling/BestSelling';
+import {BestSellingPieChart} from '../../components/BestSellingPieChart/BestSellingPieChart';
 
 export const Home = () => {
 	const navigate = useNavigate();
@@ -21,6 +22,7 @@ export const Home = () => {
 						<Transactions />
 					</div>
 					<div className="homePageBodyRight">
+						<BestSellingPieChart />
 						<BestSelling />
 					</div>
 				</div>
