@@ -1,0 +1,18 @@
+.transactions {
+	min-height: 400px;
+	width: 100%;
+	border: 1px solid #52525b;
+	border-radius: 7px;
+	margin: 20px 0 50px 0;
+	padding: 10px;
+}
+
+.transactions .title {
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+.transactions .lineChart {
+	margin-top: 100px;
+}
