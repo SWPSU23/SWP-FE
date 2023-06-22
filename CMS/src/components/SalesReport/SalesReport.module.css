@@ -1,0 +1,17 @@
+.salesReport {
+	min-height: 500px;
+	width: 100%;
+	border: 1px solid #52525b;
+	border-radius: 7px;
+	padding: 10px;
+}
+
+.salesReport .barChart {
+	margin-top: 100px;
+}
+
+.salesReport .title {
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 10px;
+}

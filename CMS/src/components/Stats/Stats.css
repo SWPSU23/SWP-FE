@@ -1,0 +1,45 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.stats {
+	background-color: white;
+	border: 1px solid #707079;
+	border-radius: 7px;
+	padding: 10px;
+	width: 20%;
+	height: 80px;
+}
+
+.stats .statsTitle {
+	color: #71717a;
+	font-size: 12px;
+	text-align: left;
+	width: 100%;
+}
+
+.stats .valueArea {
+	width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 10px;
+}
+
+.stats .valueArea .statsValue {
+	color: black;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.stats .valueArea .compareValue {
+	font-size: 14px;
+	color: #22c55e;
+}
+
+.stats .valueArea .compareValue span {
+	margin-right: 5px;
+}

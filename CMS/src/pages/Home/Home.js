@@ -1,7 +1,7 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Menu} from '../../components/MenuNavi/Menu';
-import './Home.css';
+import style from './Home.module.css';
 import {TodayReport} from '../../components/TodayReport/TodayReport';
 import {SalesReport} from '../../components/SalesReport/SalesReport';
 import {Transactions} from '../../components/Transactions/Transactions';
@@ -12,16 +12,16 @@ export const Home = () => {
 	const navigate = useNavigate();
 
 	return (
-		<div className="homePage">
+		<div className={style.homePage}>
 			<Menu />
-			<div className="homePageContainer">
+			<div className={style.homePageContainer}>
 				<TodayReport />
-				<div className="homePageBody">
-					<div className="homePageBodyLeft">
+				<div className={style.homePageBody}>
+					<div className={style.homePageBodyLeft}>
 						<SalesReport />
 						<Transactions />
 					</div>
-					<div className="homePageBodyRight">
+					<div className={style.homePageBodyRight}>
 						<BestSellingPieChart />
 						<BestSelling />
 					</div>
