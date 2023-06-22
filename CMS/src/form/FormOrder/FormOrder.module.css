@@ -1,0 +1,96 @@
+.formOrder {
+	display: flex;
+	justify-content: center;
+	padding: 20px 0;
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.21);
+}
+
+.formContainer {
+	width: 1000px;
+	min-height: 200px;
+	background-color: white;
+	padding-bottom: 20px;
+	border-radius: 5px;
+	overflow: auto;
+}
+
+.formContainer h1 {
+	margin-top: 20px;
+}
+
+.formContainerTop {
+	padding-top: 20px;
+	display: flex;
+	justify-content: center;
+}
+
+.formInputContainer {
+	padding-top: 50px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.formInput {
+	width: 50%;
+}
+
+.formInput .labelInput {
+	text-align: left;
+	padding-left: 11%;
+	font-size: 16px;
+}
+
+.formInput input {
+	margin-bottom: 20px;
+	border-radius: 5px;
+	padding-left: 20px;
+	width: 400px;
+	height: 50px;
+	border: none;
+	background-color: #eaeaea;
+	color: #5a616c;
+	text-transform: capitalize;
+	font-weight: bold;
+	outline: none;
+}
+
+/* Button */
+
+.formContainerButton {
+	margin-top: 50px;
+	width: 100%;
+	display: flex;
+	justify-content: end;
+}
+
+.btn {
+	margin-right: 40px;
+	width: 100px;
+	height: 30px;
+	border: none;
+	color: white;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: 0.3s;
+	font-weight: bold;
+}
+
+.btn:hover {
+	opacity: 0.5;
+}
+
+.btnClose {
+	background-color: #d9d9d9;
+	color: #5a616c;
+}
+
+.btnSave {
+	background-color: #28523c;
+}
