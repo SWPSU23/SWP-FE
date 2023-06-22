@@ -1,14 +1,22 @@
 import PropTypes from 'prop-types';
+const moment = require('moment');
 import React, {useState, useRef, useEffect} from 'react';
 import styles from './FormProduct.module.css';
-import {formatDate} from '../../helper';
+import {convertAndSaveImage, convertDateFormat, formatDate} from '../../helper';
+import {useDispatch} from 'react-redux';
+import {
+	addProductDetailAsync,
+	handleUploadImageAsync,
+	updateProductDetailAsync,
+} from '../../redux/product/action';
 
 export const FormProduct = ({handleToggleForm, productDetail}) => {
 	FormProduct.propTypes = {
 		handleToggleForm: PropTypes.func.isRequired,
 		productDetail: PropTypes.array.isRequired,
 	};
-	console.log(productDetail);
+
+	const dispatch = useDispatch();
 
 	const [imagePreview, setImagePreview] = useState('');
 	const [id, setId] = useState('');
@@ -29,8 +37,8 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 			setUnit(product.unit || '');
 			setUnitPrice(product.unit_price ? product.unit_price.toString() : '');
 			setStock(product.stock ? product.stock.toString() : '');
-			setStatus(product.status && product.status.data[0] ? product.status.data[0] : '');
-			setExpiredAt(product.expired_at || '');
+			setStatus(product.status ? product.status : '');
+			setExpiredAt(date || '');
 			setDescription(product.description || '');
 			setImagePreview(product.image || '');
 		}
@@ -57,7 +65,13 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 		}
 	};
 
+	// HANDLE SUBMIT FORM DATA
+
 	const handleSubmit = () => {
+		console.log('da submit');
+
+		dispatch(handleUploadImageAsync(imagePreview));
+		// const expiredAt = convertDateFormat(expiredAt);
 		const formData = {
 			id,
 			name,
@@ -68,8 +82,8 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 			expiredAt,
 			description,
 		};
-		console.log(formData);
-
+		// console.log(formData);
+		// dispatch(addProductDetailAsync(formData));
 		// Clear the form fields after submission
 		setId('');
 		setName('');
@@ -79,6 +93,40 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 		setStatus('');
 		setExpiredAt('');
 		setDescription('');
+		// handleToggleForm();
+	};
+
+	function getCurrentTime() {
+		const currentTime = moment().format('HH:mm:ss');
+		return currentTime;
+	}
+
+	const handleSubmitUpdate = () => {
+		const originalTime = getCurrentTime();
+		const expiredAtd = convertDateFormat(expiredAt, originalTime);
+		console.log(expiredAtd);
+
+		const formData = {
+			id,
+			name,
+			unit,
+			unitPrice,
+			stock,
+			status,
+			expiredAtd,
+			description,
+		};
+		dispatch(updateProductDetailAsync(formData));
+		// Clear the form fields after submission
+		setId('');
+		setName('');
+		setUnit('');
+		setUnitPrice('');
+		setStock('');
+		setStatus('');
+		setExpiredAt('');
+		setDescription('');
+		handleToggleForm();
 	};
 
 	return (
@@ -195,9 +243,21 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 						Close
 					</button>
 
-					<button onClick={handleSubmit} className={`${styles['btn']} ${styles.btnSave}`}>
-						Save
-					</button>
+					{productDetail ? (
+						<button
+							onClick={handleSubmitUpdate}
+							className={`${styles['btn']} ${styles.btnSave}`}
+						>
+							Update
+						</button>
+					) : (
+						<button
+							onClick={handleSubmit}
+							className={`${styles['btn']} ${styles.btnSave}`}
+						>
+							Save
+						</button>
+					)}
 				</div>
 			</div>
 		</div>
