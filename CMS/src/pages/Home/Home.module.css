@@ -1,0 +1,21 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.homePage {
+	padding: 0px 100px;
+}
+
+.homePageBody {
+	display: flex;
+	justify-content: space-between;
+}
+
+.homePageBodyLeft {
+	width: 57%;
+}
+
+.homePageBodyRight {
+	width: 40%;
+}

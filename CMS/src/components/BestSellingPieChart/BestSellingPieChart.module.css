@@ -1,0 +1,18 @@
+.bestSellingPieChart {
+	height: 500px;
+	border: 1px solid #52525b;
+	border-radius: 7px;
+	padding: 10px;
+}
+.bestSellingPieChart .pieChart {
+	margin-top: 70px !important;
+	width: 340px !important;
+	height: 340px !important;
+	margin: 0 auto;
+}
+
+.bestSellingPieChart .title {
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 10px;
+}
