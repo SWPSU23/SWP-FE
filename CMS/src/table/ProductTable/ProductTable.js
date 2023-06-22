@@ -44,7 +44,7 @@ const ProductTable = ({handleToggleFormUpdate, productList}) => {
 							<td>{product.unit}</td>
 							<td>{product.unit_price}</td>
 							<td>{product.stock}</td>
-							<td>{product.status.type}</td>
+							<td>{product.status}</td>
 							<td>{formatDate(product.expired_at)}</td>
 							<td>
 								{product.description.length <= maxDescriptionLength ? (
