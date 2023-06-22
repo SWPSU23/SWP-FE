@@ -1,5 +1,8 @@
+import {INIT_EMPLOYEE_LIST} from './action';
+
 const initialState = {
 	searchQuery: '',
+	employeeList: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -8,6 +11,11 @@ const userReducer = (state = initialState, action) => {
 			return {
 				...state,
 				searchQuery: action.payload,
+			};
+		case INIT_EMPLOYEE_LIST:
+			return {
+				...state,
+				employeeList: action.payload,
 			};
 		default:
 			return state;

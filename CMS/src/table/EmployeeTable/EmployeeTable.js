@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
-import {ListOfEmployee} from '../../shared/ListOfEmployee';
+// import {ListOfEmployee} from '../../shared/ListOfEmployee';
 import style from './EmployeeTable.module.css';
 
-export const EmployeeTable = ({handleToggleForm}) => {
+export const EmployeeTable = ({handleToggleForm, employeeList}) => {
 	EmployeeTable.propTypes = {
 		handleToggleForm: PropTypes.func.isRequired,
+		employeeList: PropTypes.array.isRequired,
 	};
 	return (
 		<div className={style.tableWrapper}>
@@ -25,7 +26,7 @@ export const EmployeeTable = ({handleToggleForm}) => {
 					</tr>
 				</thead>
 				<tbody>
-					{ListOfEmployee.map((employee, index) => (
+					{employeeList.map((employee, index) => (
 						<tr key={index}>
 							<td>{employee.id}</td>
 							<td>{employee.role}</td>
