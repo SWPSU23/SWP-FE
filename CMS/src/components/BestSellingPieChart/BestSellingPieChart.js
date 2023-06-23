@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import {Pie} from 'react-chartjs-2';
-import {bestSellingData} from '../../shared/BestSellingProductData';
+import {top3BestSellingProductData} from '../../shared/Top3BestSellingProductData';
 import {Chart as ChartJS} from 'chart.js/auto';
 import style from './BestSellingPieChart.module.css';
 
 export const BestSellingPieChart = () => {
 	const [chartData, setChartData] = useState({
-		labels: bestSellingData.map((data) => data.product),
+		labels: top3BestSellingProductData.map((data) => data.product),
 		datasets: [
 			{
 				label: 'Products sold',
-				data: bestSellingData.map((data) => data.sell),
+				data: top3BestSellingProductData.map((data) => data.sold),
 				backgroundColor: ['#F765A3', '#A155B9', '#165BAA', '#CCF281'],
 			},
 		],
