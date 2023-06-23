@@ -5,7 +5,7 @@ import style from './Home.module.css';
 import {TodayReport} from '../../components/TodayReport/TodayReport';
 import {SalesReport} from '../../components/SalesReport/SalesReport';
 import {Transactions} from '../../components/Transactions/Transactions';
-import {BestSelling} from '../../components/BestSelling/BestSelling';
+import {BestSellingProducts} from '../../components/BestSellingProducts/BestSellingProducts';
 import {BestSellingPieChart} from '../../components/BestSellingPieChart/BestSellingPieChart';
 
 export const Home = () => {
@@ -23,7 +23,7 @@ export const Home = () => {
 					</div>
 					<div className={style.homePageBodyRight}>
 						<BestSellingPieChart />
-						<BestSelling />
+						<BestSellingProducts />
 					</div>
 				</div>
 			</div>

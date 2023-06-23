@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Line} from 'react-chartjs-2';
-import {bestSellingData} from '../../shared/BestSellingProductData';
 import {Chart as ChartJS} from 'chart.js/auto';
 import {orderData} from '../../shared/OrderData';
 import style from './Transactions.module.css';
