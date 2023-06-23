@@ -2,14 +2,9 @@ import PropTypes from 'prop-types';
 const moment = require('moment');
 import React, {useState, useRef, useEffect} from 'react';
 import styles from './FormProduct.module.css';
-import {convertAndSaveImage, convertDateFormat, formatDate} from '../../helper';
+import {convertDateFormat, formatDate} from '../../helper';
 import {useDispatch} from 'react-redux';
-import {
-	fetchProductListAsync,
-	handlePreviewImageAsync,
-	handleUploadImageAsync,
-	updateProductDetailAsync,
-} from '../../redux/product/action';
+import {handleUploadImageAsync, updateProductDetailAsync} from '../../redux/product/action';
 import {server} from '../../shared/constant';
 
 export const FormProduct = ({handleToggleForm, productDetail}) => {
@@ -53,8 +48,6 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 	};
 
 	const handleImageUpload = (event) => {
-		// console.log(event);
-
 		const file = event.target.files[0];
 		if (file) {
 			setImageSend(file);
@@ -73,7 +66,6 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 	// HANDLE SUBMIT FORM DATA
 
 	const handleSubmit = () => {
-		console.log('da submit');
 		const formData = {
 			name,
 			unit,
@@ -83,7 +75,7 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 			expiredAt,
 			description,
 		};
-		dispatch(handleUploadImageAsync(imageSend, formData));
+		dispatch(handleUploadImageAsync(imageSend, formData, false));
 
 		// Clear the form fields after submission
 		setName('');
@@ -91,7 +83,7 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 		setUnitPrice('');
 		setStock('');
 		setStatus('');
-		setExpiredAt('');cd 
+		setExpiredAt('');
 		setDescription('');
 		handleToggleForm();
 	};
@@ -102,19 +94,16 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 	}
 
 	const handleSubmitUpdate = () => {
-		const originalTime = getCurrentTime();
-		const expiredAtd = convertDateFormat(expiredAt, originalTime);
-
 		const formData = {
+			id: productDetail.id,
 			name,
 			unit,
 			unitPrice,
 			stock,
 			status,
-			expiredAtd,
 			description,
 		};
-		dispatch(updateProductDetailAsync(formData));
+		dispatch(handleUploadImageAsync(imageSend, formData, true));
 		// Clear the form fields after submission
 		setName('');
 		setUnit('');

@@ -22,8 +22,6 @@ export const Product = () => {
 	const productData = useSelector((state) => state.product.productList);
 	const productDetail = useSelector((state) => state.product.productDetails);
 
-	console.log('productData from redux: ', productData);
-
 	const [productList, setProductList] = useState([]);
 	const dispatch = useDispatch();
 
@@ -43,7 +41,6 @@ export const Product = () => {
 	}, []);
 
 	useEffect(() => {
-		console.log('set lai');
 		setProductList(Object.values(productData));
 	}, [productData]);
 
@@ -74,7 +71,7 @@ export const Product = () => {
 		} catch (error) {
 			console.log(error);
 		}
-		setLoading(false); // Set loading to false after fetching data
+		setLoading(false);
 	};
 
 	// HANDLE PAGINATION
