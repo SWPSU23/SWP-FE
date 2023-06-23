@@ -84,7 +84,9 @@ export const fetchProductDetailAsync = (id) => {
 
 // HANDLE UPLOAD IMAGE
 
-export const handleUploadImageAsync = (img, formDataClient) => {
+export const handleUploadImageAsync = (img, formDataClient, isUpdate) => {
+	console.log(isUpdate);
+
 	const formData = new FormData();
 	formData.append('file', img);
 	return async (dispatch) => {
@@ -95,7 +97,13 @@ export const handleUploadImageAsync = (img, formDataClient) => {
 					Accept: '*/*',
 				},
 			});
-			dispatch(addProductDetailAsync(response.data.split(':')[1], formDataClient));
+			if (isUpdate) {
+				console.log('update request');
+				dispatch(updateProductDetailAsync(response.data.split(':')[1], formDataClient));
+			} else {
+				console.log('add request');
+				dispatch(addProductDetailAsync(response.data.split(':')[1], formDataClient));
+			}
 		} catch (error) {
 			// Handle error
 			console.log(error.response);
@@ -153,8 +161,12 @@ export const addProductDetailAsync = (img, formData) => {
 };
 
 // UPDATE A PRODUCT DETAILS
-export const updateProductDetailAsync = (formData) => {
+export const updateProductDetailAsync = (img, formData) => {
+	console.log('formDataClient', formData);
+	console.log('img', img);
 	const body = {
+		image: img,
+		id: formData.id,
 		name: formData.name,
 		unit: formData.unit,
 		unit_price: formData.unitPrice,
@@ -167,6 +179,7 @@ export const updateProductDetailAsync = (formData) => {
 		try {
 			const response = await axios.put(`${server}/v1/product/${formData.id}`, body);
 			dispatch(fetchProductListAsync());
+			console.log(response);
 		} catch (error) {
 			console.log(error);
 		}
