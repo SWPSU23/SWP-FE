@@ -5,6 +5,7 @@ import React from 'react';
 import style from './ProductTable.module.css';
 import {Tooltip as ReactTooltip} from 'react-tooltip';
 import {formatDate} from '../../helper';
+import {server} from '../../shared/constant';
 
 const ProductTable = ({handleToggleFormUpdate, productList}) => {
 	ProductTable.propTypes = {
@@ -37,7 +38,10 @@ const ProductTable = ({handleToggleFormUpdate, productList}) => {
 							<td>{product.id}</td>
 							<td>
 								<div className={style.imageWrapper}>
-									<img src={product.image} alt={product.name} />
+									<img
+										src={`${server}/v1/asset/product/images/${product.image}`}
+										alt={product.name}
+									/>
 								</div>
 							</td>
 							<td>{product.name}</td>
