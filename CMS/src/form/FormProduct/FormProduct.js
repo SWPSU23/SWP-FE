@@ -5,10 +5,12 @@ import styles from './FormProduct.module.css';
 import {convertAndSaveImage, convertDateFormat, formatDate} from '../../helper';
 import {useDispatch} from 'react-redux';
 import {
-	addProductDetailAsync,
+	fetchProductListAsync,
+	handlePreviewImageAsync,
 	handleUploadImageAsync,
 	updateProductDetailAsync,
 } from '../../redux/product/action';
+import {server} from '../../shared/constant';
 
 export const FormProduct = ({handleToggleForm, productDetail}) => {
 	FormProduct.propTypes = {
@@ -19,7 +21,7 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 	const dispatch = useDispatch();
 
 	const [imagePreview, setImagePreview] = useState('');
-	const [id, setId] = useState('');
+	const [imageSend, setImageSend] = useState('');
 	const [name, setName] = useState('');
 	const [unit, setUnit] = useState('');
 	const [unitPrice, setUnitPrice] = useState('');
@@ -29,10 +31,11 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 	const [description, setDescription] = useState('');
 
 	useEffect(() => {
-		if (productDetail && productDetail.length > 0 && productDetail[0].expired_at) {
-			const product = productDetail[0];
+		if (productDetail) {
+			const image = `${server}/v1/asset/product/images/${productDetail.image}`;
+			setImagePreview(image);
+			const product = productDetail;
 			const date = formatDate(product.expired_at);
-			setId(product.id ? product.id.toString() : '');
 			setName(product.name || '');
 			setUnit(product.unit || '');
 			setUnitPrice(product.unit_price ? product.unit_price.toString() : '');
@@ -40,7 +43,6 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 			setStatus(product.status ? product.status : '');
 			setExpiredAt(date || '');
 			setDescription(product.description || '');
-			setImagePreview(product.image || '');
 		}
 	}, [productDetail]);
 
@@ -51,8 +53,11 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 	};
 
 	const handleImageUpload = (event) => {
+		// console.log(event);
+
 		const file = event.target.files[0];
 		if (file) {
+			setImageSend(file);
 			const reader = new FileReader();
 
 			reader.onload = () => {
@@ -69,11 +74,7 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 
 	const handleSubmit = () => {
 		console.log('da submit');
-
-		dispatch(handleUploadImageAsync(imagePreview));
-		// const expiredAt = convertDateFormat(expiredAt);
 		const formData = {
-			id,
 			name,
 			unit,
 			unitPrice,
@@ -82,10 +83,9 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 			expiredAt,
 			description,
 		};
-		// console.log(formData);
-		// dispatch(addProductDetailAsync(formData));
+		dispatch(handleUploadImageAsync(imageSend, formData));
+
 		// Clear the form fields after submission
-		setId('');
 		setName('');
 		setUnit('');
 		setUnitPrice('');
@@ -93,7 +93,7 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 		setStatus('');
 		setExpiredAt('');
 		setDescription('');
-		// handleToggleForm();
+		handleToggleForm();
 	};
 
 	function getCurrentTime() {
@@ -104,10 +104,8 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 	const handleSubmitUpdate = () => {
 		const originalTime = getCurrentTime();
 		const expiredAtd = convertDateFormat(expiredAt, originalTime);
-		console.log(expiredAtd);
 
 		const formData = {
-			id,
 			name,
 			unit,
 			unitPrice,
@@ -118,7 +116,6 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 		};
 		dispatch(updateProductDetailAsync(formData));
 		// Clear the form fields after submission
-		setId('');
 		setName('');
 		setUnit('');
 		setUnitPrice('');
@@ -160,15 +157,6 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 				</div>
 
 				<div className={styles.formContainerCenter}>
-					<div className={styles.formInput}>
-						<h2 className={styles.labelInput}>Id: </h2>
-						<input
-							placeholder="id ..."
-							value={id}
-							onChange={(e) => setId(e.target.value)}
-						/>
-					</div>
-
 					<div className={styles.formInput}>
 						<h2 className={styles.labelInput}>Name: </h2>
 						<input

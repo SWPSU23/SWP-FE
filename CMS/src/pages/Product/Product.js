@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import './Product.css';
+import styles from './Product.module.css';
 import Pagination from '../../components/Pagination/Pagination';
 import ProductTable from '../../table/ProductTable/ProductTable';
 import {Menu} from '../../components/MenuNavi/Menu';
@@ -22,6 +22,8 @@ export const Product = () => {
 	const productData = useSelector((state) => state.product.productList);
 	const productDetail = useSelector((state) => state.product.productDetails);
 
+	console.log('productData from redux: ', productData);
+
 	const [productList, setProductList] = useState([]);
 	const dispatch = useDispatch();
 
@@ -41,6 +43,7 @@ export const Product = () => {
 	}, []);
 
 	useEffect(() => {
+		console.log('set lai');
 		setProductList(Object.values(productData));
 	}, [productData]);
 
@@ -88,7 +91,7 @@ export const Product = () => {
 	};
 
 	return (
-		<div className="productPage">
+		<div className={styles.productPage}>
 			<Menu />
 			<Header img="../assets/image/product.jpg" h2="Product" />
 			<ActionBar

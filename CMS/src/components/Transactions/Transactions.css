@@ -1,4 +1,15 @@
-.Transactions {
+.transactions {
     min-height: 400px;
-    background-color: red;
+    padding-bottom: 20px;
+}
+
+.transactionHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.transactionItem {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 }

@@ -39,6 +39,8 @@ export const fetchProductDetail = (data) => {
 
 // GET LIST PRODUCT
 export const fetchProductListAsync = () => {
+	console.log('vao fetchProductListAsync');
+
 	return async (dispatch) => {
 		try {
 			const response = await axios.get(`${server}/v1/product`);
@@ -82,11 +84,9 @@ export const fetchProductDetailAsync = (id) => {
 
 // HANDLE UPLOAD IMAGE
 
-export const handleUploadImageAsync = (img) => {
+export const handleUploadImageAsync = (img, formDataClient) => {
 	const formData = new FormData();
 	formData.append('file', img);
-	console.log('imagePreview: ' + img);
-
 	return async (dispatch) => {
 		try {
 			const response = await axios.post(`${server}/v1/asset/product/images/`, formData, {
@@ -95,8 +95,28 @@ export const handleUploadImageAsync = (img) => {
 					Accept: '*/*',
 				},
 			});
+			dispatch(addProductDetailAsync(response.data.split(':')[1], formDataClient));
+		} catch (error) {
+			// Handle error
+			console.log(error.response);
+			// You can handle the error here and display an appropriate message
+		}
+	};
+};
 
-			console.log('response', response);
+// HANDLE PREVIEW IMAGE
+
+export const handlePreviewImageAsync = (idImage) => {
+	console.log(idImage);
+
+	return async (dispatch) => {
+		try {
+			const response = await axios.get(
+				'http://localhost:8080/v1/asset/product/images/' + idImage
+			);
+			console.log('vao day');
+
+			return response;
 		} catch (error) {
 			// Handle error
 			console.log(error.response);
@@ -106,9 +126,12 @@ export const handleUploadImageAsync = (img) => {
 };
 
 // ADD A PRODUCT DETAILS
-export const addProductDetailAsync = (formData) => {
+export const addProductDetailAsync = (img, formData) => {
+	console.log('formDataClient', formData);
+	console.log('img', img);
+
 	const body = {
-		image: 'https://content.etilize.com/Original/1029886380.jpg',
+		image: img,
 		name: formData.name,
 		unit: formData.unit,
 		unit_price: formData.unitPrice,
@@ -117,10 +140,12 @@ export const addProductDetailAsync = (formData) => {
 		description: formData.description,
 		expired_at: moment(formData.expiredAt).format('YYYY-MM-DD HH:mm:ss'),
 	};
+	console.log('formData: ' + JSON.stringify(body));
+
 	return async (dispatch) => {
 		try {
 			const response = await axios.post(`${server}/v1/product`, body);
-			dispatch(response);
+			dispatch(fetchProductListAsync());
 		} catch (error) {
 			console.log(error);
 		}
