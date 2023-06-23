@@ -91,7 +91,7 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 		setUnitPrice('');
 		setStock('');
 		setStatus('');
-		setExpiredAt('');
+		setExpiredAt('');cd 
 		setDescription('');
 		handleToggleForm();
 	};
