@@ -21,7 +21,7 @@ module.exports = {
 		ecmaFeatures: {
 			jsx: true,
 			flow: true,
-			typescript: true,
+			typescript: false,
 		},
 		ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
 		sourceType: 'module', // Allows for the use of imports
