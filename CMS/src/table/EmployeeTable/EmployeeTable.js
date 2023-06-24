@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
-// import {ListOfEmployee} from '../../shared/ListOfEmployee';
 import style from './EmployeeTable.module.css';
 
-export const EmployeeTable = ({handleToggleForm, employeeList}) => {
+export const EmployeeTable = ({handleToggleFormUpdate, employeeList}) => {
 	EmployeeTable.propTypes = {
-		handleToggleForm: PropTypes.func.isRequired,
+		handleToggleFormUpdate: PropTypes.func.isRequired,
 		employeeList: PropTypes.array.isRequired,
 	};
+
 	return (
 		<div className={style.tableWrapper}>
 			<table className={style.employeeTable}>
@@ -38,7 +38,10 @@ export const EmployeeTable = ({handleToggleForm, employeeList}) => {
 							<td>{employee.base_salary}</td>
 							<td>
 								<div className={style.btnArea}>
-									<button className={style.btn} onClick={handleToggleForm}>
+									<button
+										className={style.btn}
+										onClick={() => handleToggleFormUpdate(employee.id)}
+									>
 										<EditOutlined />
 									</button>
 									<button className={style.btn}>
