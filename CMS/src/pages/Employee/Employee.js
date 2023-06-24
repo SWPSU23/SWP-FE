@@ -8,11 +8,17 @@ import Pagination from '../../components/Pagination/Pagination';
 import {Header} from '../../components/Header/Header';
 import {useDispatch, useSelector} from 'react-redux';
 import {EmployeeTable} from '../../table/EmployeeTable/EmployeeTable';
-import {fetchEmployeeListAsync} from '../../redux/employee/action';
+import {fetchEmployeeDetailAsync, fetchEmployeeListAsync} from '../../redux/employee/action';
 
 export const Employee = () => {
+	// HANDLE FETCH DATA
 	const dispatch = useDispatch();
+
 	const employeeData = useSelector((state) => state.user.employeeList);
+	const employeeDetail = useSelector((state) => state.user.employeeDetail);
+
+	console.log(employeeDetail);
+
 	const [employeeList, setEmployeeList] = useState([]);
 	// GET DATA
 	const fetchData = async () => {
@@ -35,9 +41,23 @@ export const Employee = () => {
 
 	// toggle form
 	const [openForm, setOpenForm] = useState(false);
+	const [openFormUpdate, setOpenFormUpdate] = useState(false);
 
 	const handleToggleForm = () => {
 		setOpenForm(!openForm);
+	};
+
+	// HANDLE UPDATE
+	const handleToggleFormUpdate = async (id) => {
+		setOpenFormUpdate(!openFormUpdate);
+		setLoading(true);
+		try {
+			await dispatch(fetchEmployeeDetailAsync(id));
+		} catch (error) {
+			console.log(error);
+		}
+
+		setLoading(false);
 	};
 
 	// HANDLE PAGINATION
@@ -57,8 +77,25 @@ export const Employee = () => {
 			<Menu />
 			<Header img="../assets/image/employee.jpg" h2="Employee" />
 			<ActionBar title="New employee" handleToggleForm={handleToggleForm} />
+
 			{openForm ? <FormEmployee handleToggleForm={handleToggleForm} /> : <div></div>}
-			{loading ? <Loading /> : <EmployeeTable employeeList={employeeList} />}
+
+			{openFormUpdate ? (
+				<FormEmployee
+					employeeDetail={employeeDetail}
+					handleToggleForm={handleToggleFormUpdate}
+				/>
+			) : (
+				<div></div>
+			)}
+			{loading ? (
+				<Loading />
+			) : (
+				<EmployeeTable
+					employeeList={employeeList}
+					handleToggleFormUpdate={handleToggleFormUpdate}
+				/>
+			)}
 			<Pagination
 				currentPage={currentPage}
 				totalPages={totalPages}
