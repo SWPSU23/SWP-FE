@@ -1,12 +1,12 @@
 import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
 import React from 'react';
-import './PayRollTable.css';
+import styles from './PayRollTable.module.css';
 import {data} from '../../shared/ListOfPayRoll';
 
 function PayRollTable() {
 	return (
-		<div className="tableWrapper">
-			<table className="payrollTable">
+		<div className={styles.tableWrapper}>
+			<table className={styles.payrollTable}>
 				<thead>
 					<tr>
 						<th>ID</th>

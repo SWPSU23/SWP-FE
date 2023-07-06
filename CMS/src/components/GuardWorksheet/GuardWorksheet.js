@@ -1,11 +1,11 @@
 import React from 'react';
-import './GuardWorkshhet.css';
+import style from './GuardWorksheet.module.css';
 import {GuardWorkSheetTable} from '../../table/GuardWorkSheetTable/GuardWorkSheetTable';
 import {FormWorksheetGuard} from '../../form/FormWorksheetGuard/FormWorksheetGuard';
 
 export const GuardWorksheet = () => {
 	return (
-		<div className="GuardWorkshhet">
+		<div className={style.GuardWorksheet}>
 			<GuardWorkSheetTable />
 			<FormWorksheetGuard />
 		</div>

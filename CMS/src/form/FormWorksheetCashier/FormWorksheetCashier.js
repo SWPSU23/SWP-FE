@@ -1,11 +1,11 @@
 import React from 'react';
-import './FormWorksheetCashier.css';
+import style from './FormWorksheetCashier.module.css';
 
 import FormWorksheetAddCashier from '../FormWorksheet/FormWorksheetAddCashier';
 
 export const FormWorksheetCashier = () => {
 	return (
-		<div className="FormWorksheetCashier">
+		<div className={style.FormWorksheetCashier}>
 			<FormWorksheetAddCashier />
 		</div>
 	);

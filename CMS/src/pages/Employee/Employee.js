@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import './Employee.css';
+import styles from './Employee.module.css';
 import {FormEmployee} from '../../form/FormEmployee/FormEmployee';
 import {Menu} from '../../components/MenuNavi/Menu';
 import {ActionBar} from '../../components/ActionBar/ActionBar';
@@ -73,7 +73,7 @@ export const Employee = () => {
 		}, 1000);
 	};
 	return (
-		<div className="employeePage">
+		<div className={styles.employeePage}>
 			<Menu />
 			<Header img="../assets/image/employee.jpg" h2="Employee" />
 			<ActionBar title="New employee" handleToggleForm={handleToggleForm} />

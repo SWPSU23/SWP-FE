@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './Salary.css';
+import styles from './Salary.module.css';
 import {Menu} from '../../components/MenuNavi/Menu';
 import PayRollTable from '../../table/PayRollTable/PayRollTable';
 import {ActionBar} from '../../components/ActionBar/ActionBar';
@@ -25,7 +25,7 @@ export const Salary = () => {
 	};
 
 	return (
-		<div className="salaryPage">
+		<div className={styles.salaryPage}>
 			<Menu />
 			<Header img="../assets/image/salary.jpg" h2="PayRoll" />
 			<ActionBar title="Calculate salary" />

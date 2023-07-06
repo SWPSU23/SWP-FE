@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Pie} from 'react-chartjs-2';
 import {top3BestSellingProductData} from '../../shared/Top3BestSellingProductData';
 import {Chart as ChartJS} from 'chart.js/auto';
-import style from './BestSellingPieChart.module.css';
+import styles from './BestSellingPieChart.module.css';
 
 export const BestSellingPieChart = () => {
 	const [chartData, setChartData] = useState({
@@ -16,9 +16,9 @@ export const BestSellingPieChart = () => {
 		],
 	});
 	return (
-		<div className={style.bestSellingPieChart}>
-			<p className={style.title}>Top 3 best selling products</p>
-			<Pie data={chartData} className={style.pieChart} />
+		<div className={styles.bestSellingPieChart}>
+			<p className={styles.title}>Top 3 best selling products</p>
+			<Pie data={chartData} className={styles.pieChart} />
 		</div>
 	);
 };

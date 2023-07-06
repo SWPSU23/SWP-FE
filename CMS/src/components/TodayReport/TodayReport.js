@@ -1,5 +1,5 @@
 import React from 'react';
-import './TodayReport.css';
+import styles from './TodayReport.module.css';
 import {Stats} from '../Stats/Stats';
 
 export const TodayReport = () => {
@@ -30,7 +30,7 @@ export const TodayReport = () => {
 		},
 	];
 	return (
-		<div className="TodayReport">
+		<div className={styles.TodayReport}>
 			{data.map((stats, index) => (
 				<Stats key={index} data={stats} />
 			))}
