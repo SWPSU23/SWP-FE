@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {ArrowUpOutlined} from '@ant-design/icons';
-import './Stats.css';
+import styles from './Stats.module.css';
 
 export const Stats = (props) => {
 	Stats.propTypes = {
@@ -10,11 +10,11 @@ export const Stats = (props) => {
 	const data = props.data;
 	console.log(data);
 	return (
-		<div className="stats">
-			<p className="statsTitle">{data.statsTitle}</p>
-			<div className="valueArea">
-				<span className="statsValue">${data.statsValue}</span>
-				<span className="compareValue">
+		<div className={styles.stats}>
+			<p className={styles.statsTitle}>{data.statsTitle}</p>
+			<div className={styles.valueArea}>
+				<span className={styles.statsValue}>${data.statsValue}</span>
+				<span className={styles.compareValue}>
 					<span>{data.compareValue}</span>
 					<ArrowUpOutlined />
 				</span>

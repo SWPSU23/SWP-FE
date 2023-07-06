@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import './FormUser.css';
+import styles from './FormUser.module.css';
 
 export const FormUser = ({handleToggleForm}) => {
 	FormUser.propTypes = {
@@ -8,34 +8,34 @@ export const FormUser = ({handleToggleForm}) => {
 	};
 
 	return (
-		<div className="formUser">
-			<div className="formContainer">
+		<div className={styles.formUser}>
+			<div className={styles.formContainer}>
 				<h1>User</h1>
-				<div className="formContainerCenter">
-					<div className="formInput">
+				<div className={styles.formContainerCenter}>
+					<div className={styles.formInput}>
 						<input placeholder="id ..." />
 					</div>
 
-					<div className="formInput">
+					<div className={styles.formInput}>
 						<input placeholder="name ..." />
 					</div>
 
-					<div className="formInput">
+					<div className={styles.formInput}>
 						<input placeholder="phone number ..." />
 					</div>
 				</div>
 
-				<div className="formContainerButton">
+				<div className={styles.formContainerButton}>
 					<button
 						onClick={() => {
 							handleToggleForm();
 						}}
-						className="btn btnClose"
+						className={`${styles['btn']} ${styles.btnClose}`}
 					>
 						Close
 					</button>
 
-					<button className="btn btnSave">Save</button>
+					<button className={`${styles['btn']} ${styles.btnSave}`}>Save</button>
 				</div>
 			</div>
 		</div>

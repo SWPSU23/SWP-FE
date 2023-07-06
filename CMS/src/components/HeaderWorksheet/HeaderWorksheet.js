@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {CashierWorksheet} from '../../components/CashierWorksheet/CashierWorksheet';
-import {GuardWorksheet} from '../../components/GuardWorksheet/GuardWorkshhet';
+import {GuardWorksheet} from '../GuardWorksheet/GuardWorksheet';
 import styles from './HeaderWorksheet.module.css';
 import FormWorksheet from '../../form/FormWorksheet/FormWorksheet';
 
