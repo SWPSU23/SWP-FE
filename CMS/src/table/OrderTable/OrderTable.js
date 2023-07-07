@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import {data} from '../../shared/ListOfOrder';
 import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
 import style from './OrderTable.module.css';
+import {formatDate} from '../../helper';
 
-const OrderTable = ({handleToggleForm}) => {
+const OrderTable = ({handleToggleForm, orderList}) => {
 	OrderTable.propTypes = {
 		handleToggleForm: PropTypes.func.isRequired,
+		orderList: PropTypes.array.isRequired,
 	};
 
 	return (
@@ -23,13 +25,13 @@ const OrderTable = ({handleToggleForm}) => {
 					</tr>
 				</thead>
 				<tbody>
-					{data.map((order, index) => (
+					{orderList.map((order, index) => (
 						<tr key={index}>
 							<td>{order.id}</td>
 							<td>{order.name}</td>
-							<td>{order.quantity}</td>
-							<td>{order.total}</td>
-							<td>{order.date}</td>
+							<td>{order.product_quantity}</td>
+							<td className={style.totalPrice}>{order.total_price}</td>
+							<td>{formatDate(order.create_at)}</td>
 							<td>
 								<div className={style.btnForm}>
 									<button className={style.btn}>
