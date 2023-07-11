@@ -1,0 +1,15 @@
+.headerCenter {
+    width: 25%;
+    border-right: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    align-items: first baseline;
+    justify-content: center;
+}
+
+.employeeInfo {
+    margin-bottom: 0;
+    margin-left: 20px;
+    font-size: 18px;
+    color: white;
+}
