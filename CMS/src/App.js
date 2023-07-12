@@ -8,6 +8,7 @@ import {Revenue} from './pages/Revenue/Revenue';
 import {Salary} from './pages/Salary/Salary';
 import {Worksheet} from './pages/Worksheet/Worksheet';
 import {Order} from './pages/Order/Order';
+import {Login} from './pages/Login/Login';
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 					<Route path="revenue" element={<Revenue />} />
 					<Route path="salary" element={<Salary />} />
 					<Route path="worksheet" element={<Worksheet />} />
+					<Route path="login" element={<Login />} />
 				</Routes>
 			</BrowserRouter>
 		</div>

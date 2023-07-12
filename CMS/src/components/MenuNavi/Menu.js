@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './Menu.css';
 import {useDispatch, useSelector} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {actClick} from '../../redux/product/action';
 
 export const Menu = () => {
@@ -11,6 +11,33 @@ export const Menu = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [activeItem, setActiveItem] = useState(itemClick);
+	const [showLoginForm, setShowLoginForm] = useState(false);
+
+	const handleLoginClick = () => {
+		setShowLoginForm(!showLoginForm);
+	};
+
+	useEffect(() => {
+		const handleClickOutside = (e) => {
+			const menuIcon = document.querySelector('.menu-icon');
+			const loginForm = document.querySelector('.login-form');
+
+			if (
+				menuIcon &&
+				loginForm &&
+				!menuIcon.contains(e.target) &&
+				!loginForm.contains(e.target)
+			) {
+				setShowLoginForm(false);
+			}
+		};
+
+		document.addEventListener('mousedown', handleClickOutside);
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, []);
 
 	// Get localStorage
 	useEffect(() => {
@@ -55,8 +82,16 @@ export const Menu = () => {
 					})}
 				</ul>
 			</nav>
-			<div>
-				<img className="menu-icon" src="666201.png" />
+			<div className="menu-form">
+				<img
+					className={`menu-icon ${showLoginForm ? 'active' : ''}`}
+					src="666201.png"
+					onClick={handleLoginClick}
+					alt="Menu Icon"
+				/>
+				<div className={`login-form ${showLoginForm ? 'show' : ''}`}>
+					<Link to="/login">Login</Link>
+				</div>
 			</div>
 		</div>
 	);
