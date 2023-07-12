@@ -1,6 +1,6 @@
 import React from 'react';
-import './ButtonSmall.css';
+import styles from './ButtonSmall.module.css';
 
 export const ButtonSmall = () => {
-	return <div className="button">Logout</div>;
+	return <div className={styles.button}>Logout</div>;
 };

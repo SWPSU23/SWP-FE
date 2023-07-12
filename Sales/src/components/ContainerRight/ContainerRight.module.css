@@ -1,4 +1,5 @@
 .containerRight {
-    background-color: black;
     width: 20%;
+    background-color: white;
+    border-left: 1px solid black;
 }
