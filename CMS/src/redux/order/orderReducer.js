@@ -1,4 +1,4 @@
-import {INIT_ORDER_LIST} from './action';
+import {INIT_ORDER_LIST, ACT_FETCH_ORDER_DETAILS} from './action';
 
 const initialState = {
 	orderList: [],
@@ -11,6 +11,11 @@ const orderReducer = (state = initialState, action) => {
 			return {
 				...state,
 				orderList: action.payload,
+			};
+		case ACT_FETCH_ORDER_DETAILS:
+			return {
+				...state,
+				orderDetails: action.payload,
 			};
 		default:
 			return state;
