@@ -7,7 +7,7 @@ import {ActionBar} from '../../components/ActionBar/ActionBar';
 import Pagination from '../../components/Pagination/Pagination';
 import {Header} from '../../components/Header/Header';
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchOrderListAsync} from '../../redux/order/action';
+import {fetchOrderListAsync, fetchOrderDetailAsync} from '../../redux/order/action';
 import {FormOrder} from '../../form/FormOrder/FormOrder';
 
 export const Order = () => {
@@ -55,9 +55,22 @@ export const Order = () => {
 
 	// HANDLE TOGGLE FORM
 	const [openForm, setOpenForm] = useState(false);
+	const [openFormUpdate, setopenFormUpdate] = useState(false);
 
 	const handleToggleForm = () => {
 		setOpenForm(!openForm);
+	};
+
+	const handleToggleFormUpdate = async (id) => {
+		setLoading(true); // Set loading to true before fetching data
+		try {
+			await dispatch(fetchOrderDetailAsync(id));
+		} catch (error) {
+			console.log(error);
+		}
+		setOpenForm(!openForm);
+		console.log(orderDetail);
+		setLoading(false);
 	};
 
 	// HANDLE PAGINATION
@@ -81,11 +94,15 @@ export const Order = () => {
 				title="New order"
 				handleToggleForm={handleToggleForm}
 			/>
-			{openForm ? <FormOrder handleToggleForm={handleToggleForm} /> : <div></div>}
+			{openForm ? (
+				<FormOrder orderDetail={orderDetail} handleToggleForm={handleToggleForm} />
+			) : (
+				<div></div>
+			)}
 			{loading ? (
 				<Loading />
 			) : (
-				<OrderTable handleToggleForm={handleToggleForm} orderList={orderList} />
+				<OrderTable handleToggleFormUpdate={handleToggleFormUpdate} orderList={orderList} />
 			)}
 			<Pagination
 				currentPage={currentPage}

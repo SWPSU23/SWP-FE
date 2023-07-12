@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {ListOfOrderProduct} from '../../shared/ListOfOrderProduct';
 import {DeleteOutlined} from '@ant-design/icons';
 import style from './OrderProductTable.module.css';
 
-export const OrderProductTable = () => {
+export const OrderProductTable = ({orderProducts}) => {
+	OrderProductTable.propTypes = {
+		orderProducts: PropTypes.array.isRequired,
+	};
+	console.log(orderProducts);
 	return (
 		<div className={style.tableWrapper}>
 			<table className={style.orderProductTable}>
@@ -15,30 +20,23 @@ export const OrderProductTable = () => {
 						<th>Unit Price</th>
 						<th>Quantity</th>
 						<th>Total</th>
-						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
-					{ListOfOrderProduct.map((orderProduct, index) => (
-						<tr key={index}>
-							<td>{orderProduct.order_id}</td>
-							<td>{orderProduct.name}</td>
-							<td>{orderProduct.unit}</td>
-							<td>{orderProduct.unit_price}</td>
-							<td>{orderProduct.quantity}</td>
-							<td>{orderProduct.total}</td>
-							<td>
-								<div className={style.btnForm}>
-									{/* <button className={sty
-										<EditOutlined />
-									</button> */}
-									<button className={style.btn}>
-										<DeleteOutlined />
-									</button>
-								</div>
-							</td>
-						</tr>
-					))}
+					{orderProducts ? (
+						orderProducts.map((orderProduct, index) => (
+							<tr key={index}>
+								<td>{orderProduct.id}</td>
+								<td>{orderProduct.name}</td>
+								<td>{orderProduct.unit}</td>
+								<td>{orderProduct.unit_price}</td>
+								<td>{orderProduct.quantity}</td>
+								<td>{orderProduct.total}</td>
+							</tr>
+						))
+					) : (
+						<div></div>
+					)}
 				</tbody>
 			</table>
 		</div>

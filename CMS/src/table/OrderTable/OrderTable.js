@@ -5,9 +5,9 @@ import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
 import style from './OrderTable.module.css';
 import {formatDate} from '../../helper';
 
-const OrderTable = ({handleToggleForm, orderList}) => {
+const OrderTable = ({handleToggleFormUpdate, orderList}) => {
 	OrderTable.propTypes = {
-		handleToggleForm: PropTypes.func.isRequired,
+		handleToggleFormUpdate: PropTypes.func.isRequired,
 		orderList: PropTypes.array.isRequired,
 	};
 
@@ -28,13 +28,16 @@ const OrderTable = ({handleToggleForm, orderList}) => {
 					{orderList.map((order, index) => (
 						<tr key={index}>
 							<td>{order.id}</td>
-							<td>{order.name}</td>
+							<td>{order.cashier_name}</td>
 							<td>{order.product_quantity}</td>
 							<td className={style.totalPrice}>{order.total_price}</td>
 							<td>{formatDate(order.create_at)}</td>
 							<td>
 								<div className={style.btnForm}>
-									<button className={style.btn}>
+									<button
+										className={style.btn}
+										onClick={() => handleToggleFormUpdate(order.id)}
+									>
 										<EditOutlined />
 									</button>
 									<button className={style.btn}>
