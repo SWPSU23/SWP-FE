@@ -1,13 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './Container.module.css';
 import {ContainerLeft} from '../ContainerLeft/ContainerLeft';
 import {ContainerRight} from '../ContainerRight/ContainerRight';
+import {FormCheckIn} from '../../form/FormCheckIn/FormCheckIn';
 
 export const Container = () => {
+	const [toggleForm, setToggleForm] = useState(false);
+	const handleToggleForm = () => {
+		setToggleForm(!toggleForm);
+	};
 	return (
 		<div className={styles.container}>
 			<ContainerLeft />
-			<ContainerRight />
+			<ContainerRight handleToggleForm={handleToggleForm} />
+			{toggleForm ? <FormCheckIn handleToggleForm={handleToggleForm} /> : <div></div>}
 		</div>
 	);
 };
