@@ -3,6 +3,8 @@ import './Menu.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom';
 import {actClick} from '../../redux/product/action';
+import {IoMdNotificationsOutline} from 'react-icons/io';
+import {data} from '../../shared/listOfNotify';
 
 export const Menu = () => {
 	// get item active from redux
@@ -12,6 +14,11 @@ export const Menu = () => {
 	const dispatch = useDispatch();
 	const [activeItem, setActiveItem] = useState(itemClick);
 	const [showLoginForm, setShowLoginForm] = useState(false);
+	const [showChat, setShowChat] = useState(false);
+
+	const toggleChat = () => {
+		setShowChat(!showChat);
+	};
 
 	const handleLoginClick = () => {
 		setShowLoginForm(!showLoginForm);
@@ -82,14 +89,31 @@ export const Menu = () => {
 					})}
 				</ul>
 			</nav>
-			<div className="menu-form">
+
+			<div className="menuForm">
+				<div className="bellIcon" onClick={toggleChat}>
+					<IoMdNotificationsOutline size={50} />
+					{showChat && <div className="notificationCount">99</div>}
+				</div>
+				{showChat && (
+					<div className="chatBox">
+						<div className="arrow"></div>
+						<h3>Notification</h3>
+						{data.map((notification, index) => (
+							<div key={index} className="notify">
+								<p>{notification.title}</p>
+								<div>{notification.message}</div>
+							</div>
+						))}
+					</div>
+				)}
 				<img
-					className={`menu-icon ${showLoginForm ? 'active' : ''}`}
+					className={`menuIcon ${showLoginForm ? 'active' : ''}`}
 					src="666201.png"
 					onClick={handleLoginClick}
 					alt="Menu Icon"
 				/>
-				<div className={`login-form ${showLoginForm ? 'show' : ''}`}>
+				<div className={`loginForm ${showLoginForm ? 'show' : ''}`}>
 					<Link to="/login">Login</Link>
 				</div>
 			</div>
