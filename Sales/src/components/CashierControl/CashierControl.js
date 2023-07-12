@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import './CashierControl.css';
 import {ButtonMedium} from '../../button/ButtonMedium/ButtonMedium';
@@ -29,11 +30,21 @@ const cashierFunction = [
 	},
 ];
 
-export const CashierControl = () => {
+export const CashierControl = ({handleToggleForm}) => {
+	CashierControl.propTypes = {
+		handleToggleForm: PropTypes.func.isRequired,
+	};
+
+	const handleToggleFormByCashier = () => {
+		handleToggleForm();
+	};
+
 	return (
 		<div className="cashierControl">
 			{cashierFunction.map((item) => (
-				<ButtonMedium key={item.id} content={item.content} img={item.img} />
+				<div key={item.id} onClick={handleToggleFormByCashier}>
+					<ButtonMedium content={item.content} img={item.img} />
+				</div>
 			))}
 		</div>
 	);
