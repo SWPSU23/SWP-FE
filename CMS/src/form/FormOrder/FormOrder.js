@@ -62,8 +62,6 @@ export const FormOrder = ({handleToggleForm, orderDetail}) => {
 					>
 						Close
 					</button>
-
-					<button className={`${style.btn} ${style.btnSave}`}>Save</button>
 				</div>
 			</div>
 		</div>
