@@ -1,0 +1,30 @@
+.button {
+    background-color: #F0F4F6;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+    transition: 0.3s;
+    cursor: pointer;
+    height: 120px;
+    width: 70px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+}
+
+.button:hover {
+    opacity: 0.5;
+}
+
+.button img {
+    height: 90px;
+}
+
+.button h3 {
+    margin: 0;
+}

@@ -1,0 +1,15 @@
+.paymentMethods {
+    margin-top: -10%;
+    height: 25%;
+    border-bottom: 1px solid black;
+}
+
+.paymentMethods h2 {
+    font-size: 21px;
+    margin: 0 0 10px;
+}
+
+.paymentMethodsButton {
+    display: flex;
+    justify-content: space-evenly;
+}
