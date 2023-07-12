@@ -1,0 +1,52 @@
+.priceTotal {
+	display: grid;
+	grid-template-columns: 70% 30%;
+	background-color: white;
+	/* height: 100%; */
+	/* border: 1px solid black; */
+}
+
+.inputForm {
+	max-width: 100%;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.totalForm {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.inputTotal {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 10px;
+	width: 350px;
+}
+
+.inputTotal label {
+	color: #036541;
+	font-weight: bold;
+	font-size: 20px;
+	margin-right: 10px;
+}
+
+.inputTotal input {
+	padding: 15px;
+	border: 2px solid black;
+}
+
+.totalForm p {
+	color: red;
+	font-weight: bold;
+	font-size: 25px;
+	margin: 0 0 13px 0;
+}
+
+.totalForm input {
+	padding: 20px 15px;
+	border: 2px solid black;
+}
