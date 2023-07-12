@@ -1,6 +1,15 @@
 import React from 'react';
-import styles from './ButtonSmall.module.css';
+import './ButtonSmall.css';
+import PropTypes from 'prop-types';
 
-export const ButtonSmall = () => {
-	return <div className={styles.button}>Logout</div>;
+export const ButtonSmall = ({title, style}) => {
+	ButtonSmall.propTypes = {
+		title: PropTypes.string.isRequired,
+		style: PropTypes.object.isRequired,
+	};
+	return (
+		<div style={style} className="button">
+			{title}
+		</div>
+	);
 };
