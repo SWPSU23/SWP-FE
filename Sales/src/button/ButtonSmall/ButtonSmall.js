@@ -1,5 +1,5 @@
 import React from 'react';
-import './ButtonSmall.css';
+import styles from './ButtonSmall.module.css';
 import PropTypes from 'prop-types';
 
 export const ButtonSmall = ({title, style}) => {
@@ -8,7 +8,7 @@ export const ButtonSmall = ({title, style}) => {
 		style: PropTypes.object.isRequired,
 	};
 	return (
-		<div style={style} className="button">
+		<div style={style} className={styles.button}>
 			{title}
 		</div>
 	);
