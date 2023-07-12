@@ -11,7 +11,7 @@ export const HeaderRight = () => {
 				<IoMdNotificationsOutline size={50} />
 			</div>
 			<div className="logout">
-				<ButtonSmall />
+				<ButtonSmall title="Logout" />
 			</div>
 		</div>
 	);

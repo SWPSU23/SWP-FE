@@ -1,0 +1,32 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.tableWrapper {
+	width: 100%;
+	padding: 20px;
+	overflow-x: auto;
+}
+
+.preOrderTable {
+	border-collapse: collapse;
+	width: 100%;
+	min-width: 1000px;
+}
+
+.preOrderTable th,
+.preOrderTable td {
+	border: 1px solid #ccc;
+	padding: 8px;
+}
+
+.preOrderTable th {
+	background-color: #4e4e4e;
+	color: white;
+}
+
+.preOrderTable .deleteAction {
+	width: 20px;
+}
