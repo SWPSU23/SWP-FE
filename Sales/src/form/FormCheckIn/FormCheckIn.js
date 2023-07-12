@@ -29,7 +29,13 @@ export const FormCheckIn = ({handleToggleForm}) => {
 							handleToggleForm();
 						}}
 					>
-						<ButtonSmall />
+						<ButtonSmall
+							style={{
+								backgroundColor: '#d9d9d9',
+								color: '#474C58',
+							}}
+							title="Cancel"
+						/>
 					</div>
 				</div>
 			</div>

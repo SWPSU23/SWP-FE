@@ -7,8 +7,8 @@
     color: black;
     transition: 0.3s;
     cursor: pointer;
-    height: 120px;
-    width: 70px;
+    height: 200%;
+    width: 35%;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
