@@ -3,6 +3,7 @@ import React from 'react';
 import {ButtonSmall} from '../../button/ButtonSmall/ButtonSmall';
 import worksheet from '../../assets/worksheet.png';
 import './FormWorksheet.css';
+import saleicon from '../../assets/saleimage.png';
 
 export const FormWorksheet = ({handleToggleForm}) => {
 	FormWorksheet.propTypes = {
@@ -35,7 +36,9 @@ export const FormWorksheet = ({handleToggleForm}) => {
 									<tr key={index}>
 										<th>Sheet {sheet}</th>
 										{days.map((day, dayIndex) => (
-											<td key={dayIndex} className="cell"></td>
+											<td key={dayIndex} className="cell">
+												<img src={saleicon} />
+											</td>
 										))}
 									</tr>
 								))}

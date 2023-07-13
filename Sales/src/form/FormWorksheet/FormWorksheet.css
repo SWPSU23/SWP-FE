@@ -15,7 +15,7 @@
 
 .formContainer {
 	width: 80%;
-	height: 80%;
+	height: 90%;
 	background-color: white;
 }
 
@@ -62,7 +62,7 @@
 
 .worksheetTable td {
 	border: 1px solid #ccc;
-	padding: 40px;
+	padding: 18px;
 	text-align: center;
 }
 
