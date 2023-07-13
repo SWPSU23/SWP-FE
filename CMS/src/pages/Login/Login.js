@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import styles from './Login.module.css';
 
 export const Login = () => {
-	const [isEmail, setIsEmail] = useState('');
+	const [isPhone, setIsPhone] = useState('');
 	const [isPassword, setIsPassword] = useState('');
-	const [isRemember, setIsRemember] = useState(false);
+	// const [isRemember, setIsRemember] = useState(false);
 
 	return (
 		<div className={styles.loginForm}>
@@ -16,11 +16,11 @@ export const Login = () => {
 				<div className={styles.formInput}>
 					<h2
 						className={styles.labelInput}
-						style={{top: isEmail || isEmail.length > 0 ? 0 : '50%'}}
+						style={{top: isPhone || isPhone.length > 0 ? 0 : '50%'}}
 					>
 						Email
 					</h2>
-					<input value={isEmail} onChange={(e) => setIsEmail(e.target.value)} />
+					<input value={isPhone} onChange={(e) => setIsPhone(e.target.value)} />
 				</div>
 
 				<div className={styles.formInput}>

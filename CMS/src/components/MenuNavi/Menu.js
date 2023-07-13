@@ -67,7 +67,7 @@ export const Menu = () => {
 		{title: 'Product', slug: 'products'},
 		{title: 'Order', slug: 'orders'},
 		{title: 'Employee', slug: 'employees'},
-		{title: 'Revenue', slug: 'revenue'},
+		{title: 'Leave', slug: 'leave'},
 		{title: 'Salary', slug: 'salary'},
 		{title: 'Worksheet', slug: 'worksheet'},
 	];
