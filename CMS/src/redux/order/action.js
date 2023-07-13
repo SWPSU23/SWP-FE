@@ -24,10 +24,10 @@ export const fetchOrderDetail = (data) => {
 // ASYNC
 
 //GET ORDER LIST
-export const fetchOrderListAsync = () => {
+export const fetchOrderListAsync = (pageIndex) => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.get(`${server}/v1/order?page_index=1`);
+			const response = await axios.get(`${server}/v1/order?page_index=${pageIndex}`);
 			dispatch(fetchOrderList(response.data));
 		} catch (error) {
 			console.log(error);

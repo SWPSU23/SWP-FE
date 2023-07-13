@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 const moment = require('moment');
 import React, {useState, useRef, useEffect} from 'react';
 import styles from './FormProduct.module.css';
-import {convertDateFormat, formatDate} from '../../helper';
+import {convertDateFormat, formatDate, convertDateInputFormat} from '../../helper';
 import {useDispatch} from 'react-redux';
 import {handleUploadImageAsync, updateProductDetailAsync} from '../../redux/product/action';
 import {server} from '../../shared/constant';
@@ -30,7 +30,7 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 			const image = `${server}/v1/asset/product/images/${productDetail.image}`;
 			setImagePreview(image);
 			const product = productDetail;
-			const date = formatDate(product.expired_at);
+			const date = convertDateInputFormat(product.expired_at);
 			setName(product.name || '');
 			setUnit(product.unit || '');
 			setUnitPrice(product.unit_price ? product.unit_price.toString() : '');
@@ -198,11 +198,6 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 								Unavailable
 							</option>
 						</select>
-						{/* <input
-							placeholder="status ..."
-							value={status}
-							onChange={(e) => setStatus(e.target.value)}
-						/> */}
 					</div>
 
 					<div className={styles.formInput}>
@@ -211,7 +206,10 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 							type="date"
 							placeholder="expired at ..."
 							value={expiredAt}
-							onChange={(e) => setExpiredAt(e.target.value)}
+							onChange={(e) => {
+								setExpiredAt(e.target.value);
+								console.log(e.target.value);
+							}}
 						/>
 					</div>
 				</div>
