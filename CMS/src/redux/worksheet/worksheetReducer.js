@@ -1,8 +1,15 @@
-import {ADD_TASK_CASHIER, ADD_TASK_GUARD} from './actionTypes';
+import {
+	ADD_TASK_CASHIER,
+	ADD_TASK_GUARD,
+	FETCH_CALENDER_DAY,
+	FETCH_LIST_TO_SELECT,
+} from './actionTypes';
 
 const initialState = {
 	guards: {},
 	cashier: {},
+	listDayToRender: [],
+	calenderDay: [],
 };
 
 const worksheetReducer = (state = initialState, action) => {
@@ -37,6 +44,22 @@ const worksheetReducer = (state = initialState, action) => {
 						},
 					},
 				},
+			};
+		}
+
+		// WORKSHEET
+
+		case FETCH_LIST_TO_SELECT: {
+			return {
+				...state,
+				listDayToRender: action.payload,
+			};
+		}
+
+		case FETCH_CALENDER_DAY: {
+			return {
+				...state,
+				calenderDay: action.payload,
 			};
 		}
 
