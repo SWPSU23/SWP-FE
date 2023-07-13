@@ -14,7 +14,7 @@ export const FormEmployee = ({handleToggleForm, employeeDetail}) => {
 
 	const [id, setId] = useState('');
 	const [name, setName] = useState('');
-	const [role, setRole] = useState('');
+	const [role, setRole] = useState('manager');
 	const [password, setPassword] = useState('');
 	const [age, setAge] = useState('');
 	const [email, setEmail] = useState('');
@@ -25,7 +25,7 @@ export const FormEmployee = ({handleToggleForm, employeeDetail}) => {
 		if (employeeDetail) {
 			setId(employeeDetail.id || '');
 			setName(employeeDetail.name || '');
-			setRole(employeeDetail.role || '');
+			setRole(employeeDetail.role || 'manager');
 			setPassword(employeeDetail.password ? employeeDetail.password.toString() : '');
 			setAge(employeeDetail.age ? employeeDetail.age.toString() : '');
 			setPhoneNumber(employeeDetail.phone ? employeeDetail.phone.toString() : '');
@@ -52,7 +52,7 @@ export const FormEmployee = ({handleToggleForm, employeeDetail}) => {
 		// Clear the form fields after submit
 		setId('');
 		setName('');
-		setRole('');
+		setRole('manager');
 		setPassword('');
 		setAge('');
 		setPhoneNumber('');
@@ -103,11 +103,24 @@ export const FormEmployee = ({handleToggleForm, employeeDetail}) => {
 					</div>
 					<div className={styles.formInput}>
 						<h2 className={styles.labelInput}>Role: </h2>
-						<input
-							placeholder="role ..."
+
+						<select
+							name="status"
+							id="status"
+							className={styles.statusDropdown}
 							value={role}
 							onChange={(e) => setRole(e.target.value)}
-						/>
+						>
+							<option className={styles.statusDropdownOption} value="manager">
+								Manager
+							</option>
+							<option className={styles.statusDropdownOption} value="cashier">
+								Cashier
+							</option>
+							<option className={styles.statusDropdownOption} value="guard">
+								Guard
+							</option>
+						</select>
 					</div>
 
 					<div className={styles.formInput}>

@@ -21,7 +21,7 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 	const [unit, setUnit] = useState('');
 	const [unitPrice, setUnitPrice] = useState('');
 	const [stock, setStock] = useState('');
-	const [status, setStatus] = useState('');
+	const [status, setStatus] = useState('available');
 	const [expiredAt, setExpiredAt] = useState('');
 	const [description, setDescription] = useState('');
 
@@ -35,7 +35,7 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 			setUnit(product.unit || '');
 			setUnitPrice(product.unit_price ? product.unit_price.toString() : '');
 			setStock(product.stock ? product.stock.toString() : '');
-			setStatus(product.status ? product.status : '');
+			setStatus(product.status ? product.status : 'available');
 			setExpiredAt(date || '');
 			setDescription(product.description || '');
 		}
@@ -109,7 +109,7 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 		setUnit('');
 		setUnitPrice('');
 		setStock('');
-		setStatus('');
+		setStatus('available');
 		setExpiredAt('');
 		setDescription('');
 		handleToggleForm();
@@ -184,20 +184,31 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 
 					<div className={styles.formInput}>
 						<h2 className={styles.labelInput}>Status: </h2>
-						{/* <select name="status" id="status">
-							<option value="available">Available</option>
-							<option value="unavailable">Unavailable</option>
-						</select> */}
-						<input
+						<select
+							name="status"
+							id="status"
+							className={styles.statusDropdown}
+							value={status}
+							onChange={(e) => setStatus(e.target.value)}
+						>
+							<option className={styles.statusDropdownOption} value="available">
+								Available
+							</option>
+							<option className={styles.statusDropdownOption} value="unavailable">
+								Unavailable
+							</option>
+						</select>
+						{/* <input
 							placeholder="status ..."
 							value={status}
 							onChange={(e) => setStatus(e.target.value)}
-						/>
+						/> */}
 					</div>
 
 					<div className={styles.formInput}>
 						<h2 className={styles.labelInput}>Expired at: </h2>
 						<input
+							type="date"
 							placeholder="expired at ..."
 							value={expiredAt}
 							onChange={(e) => setExpiredAt(e.target.value)}

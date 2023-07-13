@@ -19,6 +19,7 @@
 	background-color: white;
 	padding-bottom: 20px;
 	border-radius: 5px;
+	text-align: center;
 }
 
 .formContainerTop {
@@ -76,6 +77,29 @@
 	text-align: left;
 	padding-left: 11%;
 	font-size: 16px;
+}
+
+.formInput .statusDropdown {
+	border-radius: 5px;
+	width: 400px;
+	height: 50px;
+	background-color: #eaeaea;
+	color: #5a616c;
+	cursor: pointer;
+	text-transform: capitalize;
+	font-weight: bold;
+	outline: none;
+	border: none;
+	padding: 0 10px;
+}
+
+.formInput .statusDropdownOption {
+	background-color: #eaeaea;
+	color: #5a616c;
+	width: 100%;
+	height: 50px;
+	font-size: 16px;
+	cursor: pointer;
 }
 
 .formInput input {
