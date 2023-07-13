@@ -2,6 +2,7 @@ import {ACT_FETCH_PRODUCT_DETAILS, ACT_SEARCH_PRODUCT, INIT_PRODUCT_LIST} from '
 
 const initialState = {
 	productList: [],
+	totalPages: 0,
 	productDetails: null,
 };
 
@@ -10,7 +11,8 @@ const productReducer = (state = initialState, action) => {
 		case INIT_PRODUCT_LIST:
 			return {
 				...state,
-				productList: action.payload,
+				totalPages: action.payload.info.total_page,
+				productList: action.payload.product,
 			};
 
 		case ACT_SEARCH_PRODUCT:

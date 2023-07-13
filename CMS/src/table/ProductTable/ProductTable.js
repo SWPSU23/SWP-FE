@@ -15,6 +15,8 @@ const ProductTable = ({handleToggleFormUpdate, productList}) => {
 
 	const maxDescriptionLength = 50;
 
+	console.log('list product', productList);
+
 	return (
 		<div className={style.tableWrapper}>
 			<table className={style.productTable}>
@@ -46,15 +48,17 @@ const ProductTable = ({handleToggleFormUpdate, productList}) => {
 							</td>
 							<td>{product.name}</td>
 							<td>{product.unit}</td>
-							<td>{product.unit_price}</td>
+							<td>{product.cost_price}</td>
 							<td>{product.stock}</td>
 							<td>{product.status}</td>
 							<td>{formatDate(product.expired_at)}</td>
 							<td>
 								{product.description.length <= maxDescriptionLength ? (
-									<p className="productDescription">{product.description}</p>
+									<p className={style.productDescription}>
+										{product.description}
+									</p>
 								) : (
-									<p className="productDescription">
+									<p className={style.productDescription}>
 										{product.description.substring(0, maxDescriptionLength)}...
 										<ReactTooltip
 											anchorSelect=".productDescription"
@@ -65,9 +69,9 @@ const ProductTable = ({handleToggleFormUpdate, productList}) => {
 								)}
 							</td>
 							<td>
-								<div className="btnArea">
+								<div className={style.btnArea}>
 									<button
-										className="btn"
+										className={style.btn}
 										onClick={() => handleToggleFormUpdate(product.id)}
 									>
 										<EditOutlined />

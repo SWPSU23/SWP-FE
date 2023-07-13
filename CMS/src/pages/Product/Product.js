@@ -21,6 +21,7 @@ export const Product = () => {
 	//HANDLE FEATCH DATA
 	const productData = useSelector((state) => state.product.productList);
 	const productDetail = useSelector((state) => state.product.productDetails);
+	const totalPages = useSelector((state) => state.product.totalPages);
 
 	const [productList, setProductList] = useState([]);
 	const dispatch = useDispatch();
@@ -29,7 +30,7 @@ export const Product = () => {
 	const fetchData = async () => {
 		setLoading(true); // Set loading to true before fetching data
 		try {
-			await dispatch(fetchProductListAsync());
+			await dispatch(fetchProductListAsync(currentPage));
 		} catch (error) {
 			console.log(error);
 		}
@@ -76,7 +77,10 @@ export const Product = () => {
 
 	// HANDLE PAGINATION
 	const [currentPage, setCurrentPage] = useState(1);
-	const totalPages = 10; // Assuming there are 10 pages
+
+	useEffect(() => {
+		fetchData();
+	}, [currentPage]);
 
 	const handlePageChange = (page) => {
 		setLoading(true);
