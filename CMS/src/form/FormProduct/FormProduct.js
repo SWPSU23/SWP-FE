@@ -184,6 +184,10 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 
 					<div className={styles.formInput}>
 						<h2 className={styles.labelInput}>Status: </h2>
+						{/* <select name="status" id="status">
+							<option value="available">Available</option>
+							<option value="unavailable">Unavailable</option>
+						</select> */}
 						<input
 							placeholder="status ..."
 							value={status}

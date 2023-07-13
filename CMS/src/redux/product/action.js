@@ -15,6 +15,7 @@ export const actClick = (payload) => {
 };
 
 export const fetchDataSuccess = (data) => {
+	console.log('fetchProductList', data);
 	return {
 		type: INIT_PRODUCT_LIST,
 		payload: data.data,
@@ -38,12 +39,12 @@ export const fetchProductDetail = (data) => {
 // ASYNC
 
 // GET LIST PRODUCT
-export const fetchProductListAsync = () => {
+export const fetchProductListAsync = (pageIndex) => {
 	console.log('vao fetchProductListAsync');
 
 	return async (dispatch) => {
 		try {
-			const response = await axios.get(`${server}/v1/product`);
+			const response = await axios.get(`${server}/v1/product?page_index=${pageIndex}`);
 			dispatch(fetchDataSuccess(response.data));
 		} catch (error) {
 			console.log(error);
@@ -142,7 +143,9 @@ export const addProductDetailAsync = (img, formData) => {
 		image: img,
 		name: formData.name,
 		unit: formData.unit,
-		unit_price: formData.unitPrice,
+		cost_price: formData.unitPrice,
+		retail_price: 100,
+		category: 'dsads',
 		stock: formData.stock,
 		status: formData.status,
 		description: formData.description,
