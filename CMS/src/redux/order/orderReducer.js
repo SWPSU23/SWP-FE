@@ -2,6 +2,7 @@ import {INIT_ORDER_LIST, ACT_FETCH_ORDER_DETAILS} from './action';
 
 const initialState = {
 	orderList: [],
+	totalPages: 1,
 	orderDetails: null,
 };
 
@@ -10,7 +11,8 @@ const orderReducer = (state = initialState, action) => {
 		case INIT_ORDER_LIST:
 			return {
 				...state,
-				orderList: action.payload,
+				totalPages: action.payload.info.total_page,
+				orderList: action.payload.order,
 			};
 		case ACT_FETCH_ORDER_DETAILS:
 			return {

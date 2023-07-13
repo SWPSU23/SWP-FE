@@ -2,7 +2,7 @@ import {ACT_FETCH_PRODUCT_DETAILS, ACT_SEARCH_PRODUCT, INIT_PRODUCT_LIST} from '
 
 const initialState = {
 	productList: [],
-	totalPages: 0,
+	totalPages: 1,
 	productDetails: null,
 };
 

@@ -85,7 +85,6 @@ export const Product = () => {
 	const handlePageChange = (page) => {
 		setLoading(true);
 		setCurrentPage(page);
-		console.log(currentPage);
 		setTimeout(() => {
 			setLoading(false);
 		}, 1000);

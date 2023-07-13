@@ -16,6 +16,7 @@ export const Employee = () => {
 
 	const employeeData = useSelector((state) => state.user.employeeList);
 	const employeeDetail = useSelector((state) => state.user.employeeDetail);
+	const totalPages = useSelector((state) => state.product.totalPages);
 
 	console.log(employeeDetail);
 
@@ -24,7 +25,7 @@ export const Employee = () => {
 	const fetchData = async () => {
 		setLoading(true);
 		try {
-			await dispatch(fetchEmployeeListAsync());
+			await dispatch(fetchEmployeeListAsync(currentPage));
 		} catch (error) {
 			console.log(error);
 		}
@@ -62,7 +63,9 @@ export const Employee = () => {
 
 	// HANDLE PAGINATION
 	const [currentPage, setCurrentPage] = useState(1);
-	const totalPages = 10; // Assuming there are 10 pages
+	useEffect(() => {
+		fetchData();
+	}, [currentPage]);
 
 	const handlePageChange = (page) => {
 		setLoading(true);

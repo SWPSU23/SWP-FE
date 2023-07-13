@@ -18,10 +18,10 @@ export const fetchEmployeeDetail = (data) => {
 };
 // ASYNC
 
-export const fetchEmployeeListAsync = () => {
+export const fetchEmployeeListAsync = (pageIndex) => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.get(`${server}/v1/employee?page_index=1`);
+			const response = await axios.get(`${server}/v1/employee?page_index=${pageIndex}`);
 			dispatch(fetchEmployeeDataSuccess(response.data));
 		} catch (error) {
 			console.log(error);
