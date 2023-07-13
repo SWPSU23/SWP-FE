@@ -15,7 +15,7 @@ export const HeaderRight = () => {
 		<div className="headerRight">
 			<div className="bellIcon" onClick={toggleChat}>
 				<IoMdNotificationsOutline size={50} />
-				{showChat && <div className="notificationCount">99</div>}
+				{!showChat && <div className="notificationCount">99</div>}
 			</div>
 			{showChat && (
 				<div className="chatBox">
