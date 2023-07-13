@@ -4,7 +4,7 @@ import './App.css';
 import {Home} from './pages/Home/Home';
 import {Product} from './pages/Product/Product';
 import {Employee} from './pages/Employee/Employee';
-import {Revenue} from './pages/Revenue/Revenue';
+import {Leave} from './pages/Revenue/Leave';
 import {Salary} from './pages/Salary/Salary';
 import {Worksheet} from './pages/Worksheet/Worksheet';
 import {Order} from './pages/Order/Order';
@@ -19,7 +19,7 @@ function App() {
 					<Route path="products" element={<Product />} />
 					<Route path="orders" element={<Order />} />
 					<Route path="employees" element={<Employee />} />
-					<Route path="revenue" element={<Revenue />} />
+					<Route path="leave" element={<Leave />} />
 					<Route path="salary" element={<Salary />} />
 					<Route path="worksheet" element={<Worksheet />} />
 					<Route path="login" element={<Login />} />

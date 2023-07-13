@@ -1,0 +1,46 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.tableWrapper {
+	width: 100%;
+	overflow-x: auto;
+}
+
+.leaveTable {
+	border-collapse: collapse;
+	width: 100%;
+	min-width: 1000px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.leaveTable th,
+.leaveTable td {
+	border: 1px solid #ccc;
+	padding: 5px;
+}
+
+.leaveTable th {
+	background-color: #4e4e4e;
+	color: white;
+}
+
+.leaveTable td > .btnArea {
+	width: 100%;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.leaveTable td > .btnArea .btn {
+	color: black;
+	border: 1px solid black;
+	margin: 0;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: 0.3s;
+	font-weight: bold;
+}
