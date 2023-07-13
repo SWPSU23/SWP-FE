@@ -10,6 +10,7 @@ import {
 	fetchProductDetailAsync,
 	fetchProductListAsync,
 	fetchProductListSearchAsync,
+	fetchCategoryListAsync,
 } from '../../redux/product/action';
 import {useDispatch, useSelector} from 'react-redux';
 import {Header} from '../../components/Header/Header';
@@ -22,6 +23,7 @@ export const Product = () => {
 	const productData = useSelector((state) => state.product.productList);
 	const productDetail = useSelector((state) => state.product.productDetails);
 	const totalPages = useSelector((state) => state.product.totalPages);
+	const categoryList = useSelector((state) => state.product.categoryList);
 
 	const [productList, setProductList] = useState([]);
 	const dispatch = useDispatch();
@@ -31,6 +33,7 @@ export const Product = () => {
 		setLoading(true); // Set loading to true before fetching data
 		try {
 			await dispatch(fetchProductListAsync(currentPage));
+			await dispatch(fetchCategoryListAsync());
 		} catch (error) {
 			console.log(error);
 		}
@@ -90,6 +93,11 @@ export const Product = () => {
 		}, 1000);
 	};
 
+	const resetCurrentPage = () => {
+		setCurrentPage(1);
+		console.log('resetCurrentPage');
+	};
+
 	return (
 		<div className={styles.productPage}>
 			<Menu />
@@ -101,12 +109,21 @@ export const Product = () => {
 				title="New product"
 				handleToggleForm={handleToggleForm}
 			/>
-			{openForm ? <FormProduct handleToggleForm={handleToggleForm} /> : <div></div>}
+			{openForm ? (
+				<FormProduct
+					handleToggleForm={handleToggleForm}
+					resetCurrentPage={resetCurrentPage}
+					categoryList={categoryList}
+				/>
+			) : (
+				<div></div>
+			)}
 
 			{openFormUpdate ? (
 				<FormProduct
 					productDetail={productDetail}
 					handleToggleForm={handleToggleFormUpdate}
+					categoryList={categoryList}
 				/>
 			) : (
 				<div></div>

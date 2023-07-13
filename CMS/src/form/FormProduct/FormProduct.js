@@ -7,10 +7,12 @@ import {useDispatch} from 'react-redux';
 import {handleUploadImageAsync, updateProductDetailAsync} from '../../redux/product/action';
 import {server} from '../../shared/constant';
 
-export const FormProduct = ({handleToggleForm, productDetail}) => {
+export const FormProduct = ({handleToggleForm, productDetail, resetCurrentPage, categoryList}) => {
 	FormProduct.propTypes = {
 		handleToggleForm: PropTypes.func.isRequired,
 		productDetail: PropTypes.array.isRequired,
+		resetCurrentPage: PropTypes.func.isRequired,
+		categoryList: PropTypes.array.isRequired,
 	};
 
 	const dispatch = useDispatch();
@@ -19,11 +21,13 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 	const [imageSend, setImageSend] = useState('');
 	const [name, setName] = useState('');
 	const [unit, setUnit] = useState('');
-	const [unitPrice, setUnitPrice] = useState('');
+	const [costPrice, setCostPrice] = useState('');
+	const [retailPrice, setRetailPrice] = useState('');
 	const [stock, setStock] = useState('');
 	const [status, setStatus] = useState('available');
 	const [expiredAt, setExpiredAt] = useState('');
 	const [description, setDescription] = useState('');
+	const [category, setCategory] = useState('Drink');
 
 	useEffect(() => {
 		if (productDetail) {
@@ -33,11 +37,13 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 			const date = convertDateInputFormat(product.expired_at);
 			setName(product.name || '');
 			setUnit(product.unit || '');
-			setUnitPrice(product.unit_price ? product.unit_price.toString() : '');
+			setCostPrice(product.cost_price ? product.cost_price.toString() : '');
+			setRetailPrice(product.retail_price ? product.cost_price.toString() : '');
 			setStock(product.stock ? product.stock.toString() : '');
 			setStatus(product.status ? product.status : 'available');
 			setExpiredAt(date || '');
 			setDescription(product.description || '');
+			setCategory(product.category || 'Drink');
 		}
 	}, [productDetail]);
 
@@ -69,9 +75,11 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 		const formData = {
 			name,
 			unit,
-			unitPrice,
+			costPrice,
+			retailPrice,
 			stock,
 			status,
+			category,
 			expiredAt,
 			description,
 		};
@@ -80,11 +88,13 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 		// Clear the form fields after submission
 		setName('');
 		setUnit('');
-		setUnitPrice('');
+		setCostPrice('');
+		setRetailPrice('');
 		setStock('');
 		setStatus('');
 		setExpiredAt('');
 		setDescription('');
+		setCategory('Drink');
 		handleToggleForm();
 	};
 
@@ -98,7 +108,9 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 			id: productDetail.id,
 			name,
 			unit,
-			unitPrice,
+			costPrice,
+			retailPrice,
+			category,
 			stock,
 			status,
 			description,
@@ -107,12 +119,15 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 		// Clear the form fields after submission
 		setName('');
 		setUnit('');
-		setUnitPrice('');
+		setCostPrice('');
+		setRetailPrice('');
 		setStock('');
 		setStatus('available');
+		setCategory('Drink');
 		setExpiredAt('');
 		setDescription('');
 		handleToggleForm();
+		resetCurrentPage();
 	};
 
 	return (
@@ -165,11 +180,20 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 					</div>
 
 					<div className={styles.formInput}>
-						<h2 className={styles.labelInput}>Unit price: </h2>
+						<h2 className={styles.labelInput}>Cost price: </h2>
 						<input
-							placeholder="unit price ..."
-							value={unitPrice}
-							onChange={(e) => setUnitPrice(e.target.value)}
+							placeholder="cost price ..."
+							value={costPrice}
+							onChange={(e) => setCostPrice(e.target.value)}
+						/>
+					</div>
+
+					<div className={styles.formInput}>
+						<h2 className={styles.labelInput}>Retail price: </h2>
+						<input
+							placeholder="retail price ..."
+							value={retailPrice}
+							onChange={(e) => setRetailPrice(e.target.value)}
 						/>
 					</div>
 
@@ -197,6 +221,27 @@ export const FormProduct = ({handleToggleForm, productDetail}) => {
 							<option className={styles.statusDropdownOption} value="unavailable">
 								Unavailable
 							</option>
+						</select>
+					</div>
+
+					<div className={styles.formInput}>
+						<h2 className={styles.labelInput}>Status: </h2>
+						<select
+							name="category"
+							id="category"
+							className={styles.categoryDropdown}
+							value={category}
+							onChange={(e) => setStatus(e.target.value)}
+						>
+							{categoryList.map((category, index) => (
+								<option
+									key={index}
+									className={styles.categoryDropdownOption}
+									value={category}
+								>
+									{category}
+								</option>
+							))}
 						</select>
 					</div>
 

@@ -26,7 +26,7 @@ const ProductTable = ({handleToggleFormUpdate, productList}) => {
 						<th>Image</th>
 						<th>Name</th>
 						<th>Unit</th>
-						<th>Unit Price(USD)</th>
+						<th>Cost Price</th>
 						<th>Stock</th>
 						<th>Status</th>
 						<th>Expired at</th>

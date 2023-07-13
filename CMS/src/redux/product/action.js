@@ -3,6 +3,7 @@ export const CLICKED = 'CLICKED';
 export const INIT_PRODUCT_LIST = 'INIT_PRODUCT_LIST';
 export const ACT_SEARCH_PRODUCT = 'ACT_SEARCH_PRODUCT';
 export const ACT_FETCH_PRODUCT_DETAILS = 'ACT_FETCH_PRODUCT_DETAILS';
+export const ACT_FETCH_CATEGORY_LIST = 'ACT_FETCH_CATEGORY_LIST';
 
 import {server} from '../../shared/constant';
 const moment = require('moment');
@@ -18,6 +19,14 @@ export const fetchDataSuccess = (data) => {
 	console.log('fetchProductList', data);
 	return {
 		type: INIT_PRODUCT_LIST,
+		payload: data.data,
+	};
+};
+
+export const fetchCategoryList = (data) => {
+	console.log('fetchCategoryList', data);
+	return {
+		type: ACT_FETCH_CATEGORY_LIST,
 		payload: data.data,
 	};
 };
@@ -64,6 +73,18 @@ export const fetchProductListSearchAsync = (searchBy, keywords) => {
 			});
 			// Dispatch action or handle response
 			dispatch(fetchProductListSearch(response.data.data));
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+// GET CATEGORY LIST
+export const fetchCategoryListAsync = () => {
+	return async (dispatch) => {
+		try {
+			const response = await axios.get(`${server}/v1/category`);
+			dispatch(fetchCategoryList(response.data));
 		} catch (error) {
 			console.log(error);
 		}
@@ -143,11 +164,10 @@ export const addProductDetailAsync = (img, formData) => {
 		image: img,
 		name: formData.name,
 		unit: formData.unit,
-		cost_price: formData.unitPrice,
-		retail_price: 100,
-		category: 'dsads',
+		cost_price: formData.costPrice,
+		retail_price: formData.retailPrice,
+		category: formData.category,
 		stock: formData.stock,
-		status: formData.status,
 		description: formData.description,
 		expired_at: moment(formData.expiredAt).format('YYYY-MM-DD HH:mm:ss'),
 	};
@@ -156,7 +176,7 @@ export const addProductDetailAsync = (img, formData) => {
 	return async (dispatch) => {
 		try {
 			const response = await axios.post(`${server}/v1/product`, body);
-			dispatch(fetchProductListAsync());
+			// dispatch(fetchProductListAsync(1));
 		} catch (error) {
 			console.log(error);
 		}
@@ -172,7 +192,9 @@ export const updateProductDetailAsync = (img, formData) => {
 		id: formData.id,
 		name: formData.name,
 		unit: formData.unit,
-		unit_price: formData.unitPrice,
+		cost_price: formData.costPrice,
+		retail_price: formData.retailPrice,
+		category: formData.category,
 		stock: formData.stock,
 		status: formData.status,
 		description: formData.description,
