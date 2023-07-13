@@ -1,5 +1,4 @@
-.formWorksheet {
-}
+.formWorksheet {}
 
 .formContainer {
 	display: flex;
@@ -67,6 +66,7 @@
 .btn:hover {
 	opacity: 0.5;
 }
+
 .btnAdd {
 	background-color: #4832d5;
 }
@@ -74,4 +74,20 @@
 .btnUpdate,
 .btnDelete {
 	background-color: #036541;
+}
+
+
+
+.formInput {
+	margin-bottom: 20px;
+}
+
+.labelInput {
+	margin-bottom: 5px;
+}
+
+.formInput select {
+	padding: 10px;
+	font-size: 15px;
+	font-weight: bold;
 }
