@@ -7,11 +7,10 @@ import {useDispatch} from 'react-redux';
 import {handleUploadImageAsync, updateProductDetailAsync} from '../../redux/product/action';
 import {server} from '../../shared/constant';
 
-export const FormProduct = ({handleToggleForm, productDetail, resetCurrentPage, categoryList}) => {
+export const FormProduct = ({handleToggleForm, productDetail, categoryList}) => {
 	FormProduct.propTypes = {
 		handleToggleForm: PropTypes.func.isRequired,
 		productDetail: PropTypes.array.isRequired,
-		resetCurrentPage: PropTypes.func.isRequired,
 		categoryList: PropTypes.array.isRequired,
 	};
 
@@ -38,7 +37,7 @@ export const FormProduct = ({handleToggleForm, productDetail, resetCurrentPage, 
 			setName(product.name || '');
 			setUnit(product.unit || '');
 			setCostPrice(product.cost_price ? product.cost_price.toString() : '');
-			setRetailPrice(product.retail_price ? product.cost_price.toString() : '');
+			setRetailPrice(product.retail_price ? product.retail_price.toString() : '');
 			setStock(product.stock ? product.stock.toString() : '');
 			setStatus(product.status ? product.status : 'available');
 			setExpiredAt(date || '');
@@ -126,8 +125,7 @@ export const FormProduct = ({handleToggleForm, productDetail, resetCurrentPage, 
 		setCategory('Drink');
 		setExpiredAt('');
 		setDescription('');
-		handleToggleForm();
-		resetCurrentPage();
+		handleToggleForm(productDetail.id);
 	};
 
 	return (
@@ -231,7 +229,7 @@ export const FormProduct = ({handleToggleForm, productDetail, resetCurrentPage, 
 							id="category"
 							className={styles.categoryDropdown}
 							value={category}
-							onChange={(e) => setStatus(e.target.value)}
+							onChange={(e) => setCategory(e.target.value)}
 						>
 							{categoryList.map((category, index) => (
 								<option
