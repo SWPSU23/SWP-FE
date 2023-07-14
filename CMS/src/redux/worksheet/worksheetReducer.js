@@ -3,9 +3,11 @@ import {
 	ADD_TASK_GUARD,
 	FETCH_CALENDER_DAY,
 	FETCH_LIST_TO_SELECT,
+	RECORD_CHANGE,
 } from './actionTypes';
 
 const initialState = {
+	change: false,
 	guards: {},
 	cashier: {},
 	listDayToRender: [],
@@ -48,6 +50,12 @@ const worksheetReducer = (state = initialState, action) => {
 		}
 
 		// WORKSHEET
+		case RECORD_CHANGE: {
+			return {
+				...state,
+				change: action.payload,
+			};
+		}
 
 		case FETCH_LIST_TO_SELECT: {
 			return {

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, {useEffect, useState} from 'react';
 import './DropDown.css'; // Import the CSS file
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchCalenderDay, fetchListToSelectAsync} from '../../redux/worksheet/action';
+import {actChange, fetchCalenderDay, fetchListToSelectAsync} from '../../redux/worksheet/action';
 import Loading from '../Loading/Loading';
 
 export const DropDown = ({handleGetWorkSheet}) => {
@@ -33,6 +33,7 @@ export const DropDown = ({handleGetWorkSheet}) => {
 		setSelectedDate(e.target.value);
 		// Get start and end date
 		handleGetWorkSheet(e.target.value);
+		dispatch(actChange(true));
 	};
 
 	if (!listDay) {

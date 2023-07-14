@@ -28,9 +28,8 @@ const HeaderWorksheet = () => {
 		const defaultWorkSheet = '2023-07-10,2023-07-16';
 		handleGetWorkSheet(defaultWorkSheet);
 	}, []);
-	const handleGetWorkSheet = (date) => {
-		console.log('date: ' + date);
 
+	const handleGetWorkSheet = (date) => {
 		const daySelect = date.split(',');
 		const startDate = daySelect[0];
 		const endDate = daySelect[1];
@@ -61,7 +60,13 @@ const HeaderWorksheet = () => {
 					<DropDown handleGetWorkSheet={handleGetWorkSheet} />
 				</div>
 			</div>
-			<div>{isGuard ? <GuardWorksheet add={isAdd} /> : <CashierWorksheet add={isAdd} />}</div>
+			<div>
+				{isGuard ? (
+					<GuardWorksheet handleGetWorkSheet={handleGetWorkSheet} add={isAdd} />
+				) : (
+					<CashierWorksheet handleGetWorkSheet={handleGetWorkSheet} add={isAdd} />
+				)}
+			</div>
 			{/* <div>{isAdd ? <FormWorksheet /> : <div></div>}</div> */}
 		</div>
 	);

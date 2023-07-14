@@ -3,6 +3,7 @@ import {
 	ADD_TASK_GUARD,
 	FETCH_CALENDER_DAY,
 	FETCH_LIST_TO_SELECT,
+	RECORD_CHANGE,
 } from './actionTypes';
 
 export const addTaskGuard = (name, id, workday, sheet) => ({
@@ -12,6 +13,11 @@ export const addTaskGuard = (name, id, workday, sheet) => ({
 export const addTaskCashier = (name, id, workday, sheet) => ({
 	type: ADD_TASK_CASHIER,
 	payload: {name, id, workday, sheet},
+});
+
+export const actChange = (payload) => ({
+	type: RECORD_CHANGE,
+	payload: payload,
 });
 
 // WORKSHEET
@@ -44,8 +50,6 @@ export const fetchListToSelectAsync = () => {
 		try {
 			const response = await axios.get(`${server}/v1/calendar/day-of-week`);
 			dispatch(fetchListToSelect(response.data.data));
-
-			// dispatch(fetchDataSuccess(response.data));
 		} catch (error) {
 			console.log(error);
 		}
@@ -98,6 +102,8 @@ export const createNewWorksheetAsync = (formdata, role) => {
 	console.log('role: ' + role);
 	const {name, worksheet, sheet} = formdata;
 
+	console.log('formdata: ' + JSON.stringify(formdata));
+
 	const body = {
 		worksheet: {
 			employee_id: Number.parseInt(name),
@@ -113,6 +119,28 @@ export const createNewWorksheetAsync = (formdata, role) => {
 		try {
 			const response = await axios.post(`${server}/v1/worksheet`, body);
 			console.log(response);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+// GET LIST NAME BY ROLE ASYNC
+export const featchAllWorksheetByDate = (startDate, endDate, role) => {
+	console.log('role: ' + startDate);
+	console.log('role: ' + endDate);
+	console.log('role: ' + role);
+
+	return async (dispatch) => {
+		try {
+			const response = await axios.get(`${server}/v1/worksheet`, {
+				params: {
+					start_date: startDate,
+					end_date: endDate,
+					role: role,
+				},
+			});
+			return response;
 		} catch (error) {
 			console.log(error);
 		}
