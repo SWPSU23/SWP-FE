@@ -31,6 +31,7 @@ export const Product = () => {
 
 	// GET DATA
 	const fetchData = async () => {
+		console.log(currentPage);
 		setLoading(true); // Set loading to true before fetching data
 		try {
 			await dispatch(fetchProductListAsync(currentPage));
@@ -80,16 +81,25 @@ export const Product = () => {
 	const [openForm, setOpenForm] = useState(false);
 	const [openFormUpdate, setopenFormUpdate] = useState(false);
 
+	// useEffect(() => {
+	// 	if (openForm === false) {
+	// 		fetchData();
+	// 	}
+	// }, [openForm]);
+
 	const handleToggleForm = () => {
 		setOpenForm(!openForm);
 	};
 
 	const handleToggleFormUpdate = async (id) => {
+		console.log('run update toggle form', id);
 		setopenFormUpdate(!openFormUpdate);
 		setLoading(true); // Set loading to true before fetching data
 		try {
 			await dispatch(fetchProductDetailAsync(id));
-			await fetchData();
+			// console.log('run fetch data');
+			// await fetchData();
+			// console.log('done fetching data');
 		} catch (error) {
 			console.log(error);
 		}
@@ -111,11 +121,6 @@ export const Product = () => {
 		}, 1000);
 	};
 
-	const resetCurrentPage = () => {
-		setCurrentPage(1);
-		console.log('resetCurrentPage');
-	};
-
 	return (
 		<div className={styles.productPage}>
 			<Menu />
@@ -128,11 +133,7 @@ export const Product = () => {
 				handleToggleForm={handleToggleForm}
 			/>
 			{openForm ? (
-				<FormProduct
-					handleToggleForm={handleToggleForm}
-					resetCurrentPage={resetCurrentPage}
-					categoryList={categoryList}
-				/>
+				<FormProduct handleToggleForm={handleToggleForm} categoryList={categoryList} />
 			) : (
 				<div></div>
 			)}

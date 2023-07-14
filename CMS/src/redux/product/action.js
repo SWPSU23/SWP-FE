@@ -204,6 +204,7 @@ export const addProductDetailAsync = async (img, formData) => {
 // UPDATE A PRODUCT DETAILS
 export const updateProductDetailAsync = (img, formData) => {
 	console.log('formDataClient', formData);
+	console.log(formData.id);
 	console.log('img', img);
 	const body = {
 		image: img,
@@ -218,10 +219,11 @@ export const updateProductDetailAsync = (img, formData) => {
 		description: formData.description,
 		expired_at: moment(formData.expiredAt).format('YYYY-MM-DD HH:mm:ss'),
 	};
+	console.log('body', body);
 	return async (dispatch) => {
 		try {
 			const response = await axios.put(`${server}/v1/product/${formData.id}`, body);
-			dispatch(fetchProductListAsync());
+			dispatch(fetchProductListAsync(1));
 			console.log(response);
 		} catch (error) {
 			console.log(error);
