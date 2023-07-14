@@ -19,7 +19,7 @@
 	background-color: white;
 }
 
-.formTitle {
+.formTitleSalary {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -38,7 +38,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 60px;
+	max-height: 55%;
+	max-width: 100%;
 }
 
 .tableContainer {
@@ -54,7 +55,6 @@
 	padding: 8px;
 	font-weight: bold;
 	border: 1px solid black;
-	min-width: 400px;
 }
 
 .columnEnd {
@@ -65,7 +65,6 @@
 	padding: 8px;
 	font-weight: bold;
 	border: 1px solid black;
-	min-width: 400px;
 }
 .infoSalary {
 	display: flex;

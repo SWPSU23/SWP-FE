@@ -11,7 +11,7 @@ export const FormSalary = ({handleToggleForm}) => {
 	return (
 		<div className="formSalary">
 			<div className="formContainer">
-				<div className="formTitle">
+				<div className="formTitleSalary">
 					<div>
 						<img src={salary} />
 					</div>
