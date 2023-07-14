@@ -1,19 +1,41 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './GuardWorkSheetTable.module.css';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Loading from '../../components/Loading/Loading';
+import {featchAllWorksheetByDate} from '../../redux/worksheet/action';
+import {combinedArray} from '../../helper';
 
 export const GuardWorkSheetTable = () => {
+	const dispatch = useDispatch();
 	const tasks = useSelector((state) => state.worksheet.guards);
 	const calenderDay = useSelector((state) => state.worksheet.calenderDay);
+	const change = useSelector((state) => state.worksheet.change);
+	console.log(change);
 
-	console.log(calenderDay);
+	const [startDate, setStartDate] = useState();
+	const [endDate, setEndDate] = useState();
+	const [worksheet, setWorksheet] = useState();
 
-	const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-	const sheets = ['1', '2'];
-	if (!calenderDay) {
+	useEffect(() => {
+		if (calenderDay.length > 0) {
+			setStartDate(calenderDay[0].date ? calenderDay[0].date : '');
+			setEndDate(
+				calenderDay[calenderDay.length - 1].date
+					? calenderDay[calenderDay.length - 1].date
+					: ''
+			);
+			dispatch(featchAllWorksheetByDate(startDate, endDate, 'guard')).then((response) => {
+				setWorksheet(response.data.data);
+			});
+		}
+	}, [calenderDay, change]);
+
+	if (!calenderDay || !worksheet) {
 		return;
 	}
+
+	console.log(worksheet);
+
 	return (
 		<div className={styles.tableContainer}>
 			<table className={styles.worksheetTable}>
@@ -32,17 +54,14 @@ export const GuardWorkSheetTable = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{sheets.map((sheet, index) => (
+					{worksheet.map((sheet, index) => (
 						<tr key={index}>
-							<th>Sheet {sheet}</th>
-							{days.map((day, dayIndex) => (
-								<td key={dayIndex} className={styles.cell}>
-									{tasks[day]?.[sheet] &&
-										Object.entries(tasks[day][sheet]).map(([id, name]) => (
-											<div key={id} className={styles.cellContent}>
-												<div className="cellContentWrapper">{name}</div>
-											</div>
-										))}
+							<th>Sheet {index + 1}</th>
+							{Object.values(sheet)[0].map((item, idx) => (
+								<td style={{height: 200}} key={idx}>
+									{item.detail.map((item, idx) => (
+										<p key={idx}>{item.employee_name}</p>
+									))}
 								</td>
 							))}
 						</tr>
