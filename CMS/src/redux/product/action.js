@@ -1,4 +1,5 @@
 import axios from 'axios';
+axios.defaults.withCredentials = true;
 export const CLICKED = 'CLICKED';
 export const INIT_PRODUCT_LIST = 'INIT_PRODUCT_LIST';
 export const ACT_SEARCH_PRODUCT = 'ACT_SEARCH_PRODUCT';

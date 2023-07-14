@@ -1,4 +1,5 @@
 import axios from 'axios';
+axios.defaults.withCredentials = true;
 import {server} from '../../shared/constant';
 
 export const INIT_EMPLOYEE_LIST = 'INIT_EMPLOYEE_LIST';

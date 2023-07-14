@@ -2,6 +2,8 @@ export const INIT_ORDER_LIST = 'INIT_ORDER_LIST';
 export const ACT_FETCH_ORDER_DETAILS = 'ACT_FETCH_ORDER_DETAILS';
 
 import axios from 'axios';
+axios.defaults.withCredentials = true;
+
 import {server} from '../../shared/constant';
 
 //ACTION CREATORS

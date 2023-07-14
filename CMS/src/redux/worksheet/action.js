@@ -16,6 +16,8 @@ export const addTaskCashier = (name, id, workday, sheet) => ({
 
 // WORKSHEET
 import axios from 'axios';
+axios.defaults.withCredentials = true;
+
 import {server} from '../../shared/constant';
 
 // GET LIST TO SELECT
