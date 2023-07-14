@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './PopupError.module.css';
+import './PopupError.css';
 import PropTypes from 'prop-types';
 
 export const PopupError = ({handleToggleForm}) => {
@@ -7,16 +7,16 @@ export const PopupError = ({handleToggleForm}) => {
 		handleToggleForm: PropTypes.func.isRequired,
 	};
 	return (
-		<div className={styles.formError}>
-			<div className={styles.formContainer}>
-				<div className={styles.formContainerCenter}>
+		<div className="formError">
+			<div className="formContainer">
+				<div className="formContainerCenter">
 					<div>
 						<img src="../assets/image/error.jpg" />
 					</div>
 					<h2>Oops</h2>
 				</div>
-				<div className={styles.title}>Please check and try again.</div>
-				<div className={styles.btn} onClick={handleToggleForm}>
+				<div className="title">Please check and try again.</div>
+				<div className="btn" onClick={handleToggleForm}>
 					<button>OK</button>
 				</div>
 			</div>

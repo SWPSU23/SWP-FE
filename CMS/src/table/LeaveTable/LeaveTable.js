@@ -4,7 +4,7 @@ import {CheckOutlined, CloseOutlined} from '@ant-design/icons';
 import style from './LeaveTable.module.css';
 import {data} from '../../shared/ListOfLeave';
 import {PopupSuccess} from '../../form/FormPopup/PopupSuccess/PopupSuccess';
-import {PopupError} from '../../form/FormPopup/PopupError/PopupError';
+import {PopupError} from '../../form/FormPopup/Popup/PopupError';
 
 export const LeaveTable = () => {
 	const [isShowSuccess, setIsShowSuccess] = useState();
