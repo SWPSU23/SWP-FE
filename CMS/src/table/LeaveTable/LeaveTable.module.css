@@ -22,6 +22,16 @@
 	padding: 5px;
 }
 
+.leaveTable th:nth-child(5),
+.leaveTable td:nth-child(5) {
+	width: 400px;
+}
+
+.leaveTable th:nth-child(6),
+.leaveTable td:nth-child(6) {
+	width: 400px;
+}
+
 .leaveTable th {
 	background-color: #4e4e4e;
 	color: white;

@@ -4,7 +4,7 @@ import './App.css';
 import {Home} from './pages/Home/Home';
 import {Product} from './pages/Product/Product';
 import {Employee} from './pages/Employee/Employee';
-import {Leave} from './pages/Revenue/Leave';
+import {Leave} from './pages/Leave/Leave';
 import {Salary} from './pages/Salary/Salary';
 import {Worksheet} from './pages/Worksheet/Worksheet';
 import {Order} from './pages/Order/Order';
