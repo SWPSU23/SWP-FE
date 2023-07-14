@@ -7,9 +7,10 @@ import {Tooltip as ReactTooltip} from 'react-tooltip';
 import {formatDate} from '../../helper';
 import {server} from '../../shared/constant';
 
-const ProductTable = ({handleToggleFormUpdate, productList}) => {
+const ProductTable = ({handleToggleFormUpdate, productList, handleDelete}) => {
 	ProductTable.propTypes = {
 		handleToggleFormUpdate: PropTypes.func.isRequired,
+		handleDelete: PropTypes.func.isRequired,
 		productList: PropTypes.array.isRequired,
 	};
 
@@ -76,7 +77,10 @@ const ProductTable = ({handleToggleFormUpdate, productList}) => {
 									>
 										<EditOutlined />
 									</button>
-									<button className={style.btn}>
+									<button
+										className={style.btn}
+										onClick={() => handleDelete(product.id)}
+									>
 										<DeleteOutlined />
 									</button>
 								</div>
