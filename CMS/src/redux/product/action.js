@@ -3,6 +3,7 @@ export const CLICKED = 'CLICKED';
 export const INIT_PRODUCT_LIST = 'INIT_PRODUCT_LIST';
 export const ACT_SEARCH_PRODUCT = 'ACT_SEARCH_PRODUCT';
 export const ACT_FETCH_PRODUCT_DETAILS = 'ACT_FETCH_PRODUCT_DETAILS';
+export const ACT_DELETE_PRODUCT = 'ACT_DELETE_PRODUCT';
 export const ACT_FETCH_CATEGORY_LIST = 'ACT_FETCH_CATEGORY_LIST';
 
 import {server} from '../../shared/constant';
@@ -45,11 +46,18 @@ export const fetchProductDetail = (data) => {
 	};
 };
 
+export const deleteProduct = (data) => {
+	return {
+		type: ACT_FETCH_PRODUCT_DETAILS,
+		payload: data,
+	};
+};
+
 // ASYNC
 
 // GET LIST PRODUCT
 export const fetchProductListAsync = (pageIndex) => {
-	console.log('vao fetchProductListAsync');
+	console.log('vao fetchProductListAsync page', pageIndex);
 
 	return async (dispatch) => {
 		try {
@@ -104,6 +112,19 @@ export const fetchProductDetailAsync = (id) => {
 	};
 };
 
+// DELETE A PRODUCT
+export const deleteProductAsync = async (id) => {
+	console.log('delete product', id);
+	console.log(`${server}/v1/product/${id}`);
+	console.log('call delete');
+	try {
+		const response = await axios.delete(`${server}/v1/product/${id}`);
+		console.log('response', response);
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 // HANDLE UPLOAD IMAGE
 
 export const handleUploadImageAsync = (img, formDataClient, isUpdate) => {
@@ -156,7 +177,7 @@ export const handlePreviewImageAsync = (idImage) => {
 };
 
 // ADD A PRODUCT DETAILS
-export const addProductDetailAsync = (img, formData) => {
+export const addProductDetailAsync = async (img, formData) => {
 	console.log('formDataClient', formData);
 	console.log('img', img);
 
@@ -173,14 +194,11 @@ export const addProductDetailAsync = (img, formData) => {
 	};
 	console.log('formData: ' + JSON.stringify(body));
 
-	return async (dispatch) => {
-		try {
-			const response = await axios.post(`${server}/v1/product`, body);
-			// dispatch(fetchProductListAsync(1));
-		} catch (error) {
-			console.log(error);
-		}
-	};
+	try {
+		const response = await axios.post(`${server}/v1/product`, body);
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 // UPDATE A PRODUCT DETAILS

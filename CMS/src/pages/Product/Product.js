@@ -11,6 +11,7 @@ import {
 	fetchProductListAsync,
 	fetchProductListSearchAsync,
 	fetchCategoryListAsync,
+	deleteProductAsync,
 } from '../../redux/product/action';
 import {useDispatch, useSelector} from 'react-redux';
 import {Header} from '../../components/Header/Header';
@@ -59,6 +60,22 @@ export const Product = () => {
 		setLoading(false); // Set loading to false after fetching data
 	};
 
+	// HANDLE DELETE
+	const handleDelete = async (id) => {
+		const isDelete = confirm('Are you sure you want to delete this product?');
+		console.log(isDelete);
+		setLoading(true); // Set loading to true before fetching data
+		try {
+			if (isDelete) {
+				await deleteProductAsync(id);
+				await fetchData();
+			}
+		} catch (error) {
+			console.log(error);
+		}
+		setLoading(false);
+	};
+
 	// HANDLE TOGGLE FORM
 	const [openForm, setOpenForm] = useState(false);
 	const [openFormUpdate, setopenFormUpdate] = useState(false);
@@ -72,6 +89,7 @@ export const Product = () => {
 		setLoading(true); // Set loading to true before fetching data
 		try {
 			await dispatch(fetchProductDetailAsync(id));
+			await fetchData();
 		} catch (error) {
 			console.log(error);
 		}
@@ -134,6 +152,7 @@ export const Product = () => {
 				<ProductTable
 					productList={productList}
 					handleToggleFormUpdate={handleToggleFormUpdate}
+					handleDelete={handleDelete}
 				/>
 			)}
 			<Pagination
