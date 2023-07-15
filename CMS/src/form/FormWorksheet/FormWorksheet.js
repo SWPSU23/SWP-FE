@@ -1,9 +1,13 @@
+import PropTypes from 'prop-types';
 import React, {useEffect, useState} from 'react';
 import styles from './FormWorksheet.module.css';
 import {createNewWorksheetAsync, fetchListNameByRoleAsync} from '../../redux/worksheet/action';
 import {useDispatch, useSelector} from 'react-redux';
 
-const FormWorksheetAddGuard = () => {
+const FormWorksheetAddGuard = ({handleGetWorkSheet}) => {
+	FormWorksheetAddGuard.propTypes = {
+		handleGetWorkSheet: PropTypes.func.isRequired,
+	};
 	const dispatch = useDispatch();
 	const calenderDay = useSelector((state) => state.worksheet.calenderDay);
 
@@ -51,6 +55,8 @@ const FormWorksheetAddGuard = () => {
 		setWorksheet('');
 		setSheet('');
 		setError('');
+		// REFRESH WORKSHEET
+		handleGetWorkSheet('2023-07-10,2023-07-16');
 	};
 
 	if (!listName) {

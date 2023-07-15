@@ -4,13 +4,14 @@ import {GuardWorksheet} from '../GuardWorksheet/GuardWorksheet';
 import styles from './HeaderWorksheet.module.css';
 import FormWorksheet from '../../form/FormWorksheet/FormWorksheet';
 import {DropDown} from '../DropDown/DropDown';
-import {fetchCalenderDayAsync} from '../../redux/worksheet/action';
+import {featchAllWorksheetByDate, fetchCalenderDayAsync} from '../../redux/worksheet/action';
 import {useDispatch} from 'react-redux';
 
 const HeaderWorksheet = () => {
 	const dispatch = useDispatch();
 	const [isGuard, setIsGuard] = useState(true);
 	const [isAdd, setIsAdd] = useState(false);
+	const [worksheet, setWorksheet] = useState();
 
 	const handleGuardClick = () => {
 		setIsGuard(true);
@@ -27,13 +28,20 @@ const HeaderWorksheet = () => {
 	useEffect(() => {
 		const defaultWorkSheet = '2023-07-10,2023-07-16';
 		handleGetWorkSheet(defaultWorkSheet);
-	}, []);
+	}, [isGuard]);
 
 	const handleGetWorkSheet = (date) => {
+		console.log('vao day');
+
 		const daySelect = date.split(',');
 		const startDate = daySelect[0];
 		const endDate = daySelect[1];
 		dispatch(fetchCalenderDayAsync(startDate, endDate));
+		const employee = isGuard ? 'guard' : 'cashier';
+		dispatch(featchAllWorksheetByDate(startDate, endDate, employee)).then((response) => {
+			// setWorksheet(response.data.data);
+			setWorksheet(response.data.data);
+		});
 	};
 
 	return (
@@ -62,9 +70,17 @@ const HeaderWorksheet = () => {
 			</div>
 			<div>
 				{isGuard ? (
-					<GuardWorksheet handleGetWorkSheet={handleGetWorkSheet} add={isAdd} />
+					<GuardWorksheet
+						handleGetWorkSheet={handleGetWorkSheet}
+						worksheet={worksheet}
+						add={isAdd}
+					/>
 				) : (
-					<CashierWorksheet handleGetWorkSheet={handleGetWorkSheet} add={isAdd} />
+					<CashierWorksheet
+						worksheet={worksheet}
+						handleGetWorkSheet={handleGetWorkSheet}
+						add={isAdd}
+					/>
 				)}
 			</div>
 			{/* <div>{isAdd ? <FormWorksheet /> : <div></div>}</div> */}
