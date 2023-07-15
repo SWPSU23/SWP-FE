@@ -19,13 +19,13 @@ export const DropDown = ({handleGetWorkSheet}) => {
 
 	// DISPLAY DATE
 	useEffect(() => {
-		console.log('vao day');
-
 		dispatch(fetchListToSelectAsync());
 	}, []);
 
 	useEffect(() => {
-		setListDay(listDayToRender);
+		setListDay(listDayToRender.list_week);
+
+		// handleGetWorkSheet(listDayToRender.current_week);
 	}, [listDayToRender]);
 
 	// HANDLE SELECT DAY
@@ -33,13 +33,13 @@ export const DropDown = ({handleGetWorkSheet}) => {
 		setSelectedDate(e.target.value);
 		// Get start and end date
 		handleGetWorkSheet(e.target.value);
-		dispatch(actChange(true));
 	};
 
 	if (!listDay) {
 		<Loading />;
 		return;
 	}
+
 	return (
 		<div className="dropdown-container">
 			<select className="dropdown-select" value={selectedDate} onChange={handleChange}>

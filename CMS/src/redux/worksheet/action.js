@@ -36,8 +36,6 @@ export const fetchListToSelect = (payload) => {
 
 // GET CALENDER DAY
 export const fetchCalenderDay = (payload) => {
-	console.log('payload' + payload);
-
 	return {
 		type: FETCH_CALENDER_DAY,
 		payload: payload,
@@ -60,9 +58,6 @@ export const fetchListToSelectAsync = () => {
 
 // GET CALENDER DAY ASYNC
 export const fetchCalenderDayAsync = (start, end) => {
-	console.log('start: ' + start);
-	console.log('end: ' + end);
-
 	return async (dispatch) => {
 		try {
 			const response = await axios.get(`${server}/v1/calendar`, {
@@ -81,8 +76,6 @@ export const fetchCalenderDayAsync = (start, end) => {
 
 // GET LIST NAME BY ROLE ASYNC
 export const fetchListNameByRoleAsync = (role) => {
-	console.log('role: ' + role);
-
 	return async (dispatch) => {
 		try {
 			const response = await axios.get(`${server}/v1/employee/search`, {
@@ -101,7 +94,6 @@ export const fetchListNameByRoleAsync = (role) => {
 
 // GET LIST NAME BY ROLE ASYNC
 export const createNewWorksheetAsync = (formdata, role) => {
-	console.log('role: ' + role);
 	const {name, worksheet, sheet} = formdata;
 
 	console.log('formdata: ' + JSON.stringify(formdata));
@@ -129,10 +121,6 @@ export const createNewWorksheetAsync = (formdata, role) => {
 
 // GET LIST NAME BY ROLE ASYNC
 export const featchAllWorksheetByDate = (startDate, endDate, role) => {
-	console.log('role: ' + startDate);
-	console.log('role: ' + endDate);
-	console.log('role: ' + role);
-
 	return async (dispatch) => {
 		try {
 			const response = await axios.get(`${server}/v1/worksheet`, {
