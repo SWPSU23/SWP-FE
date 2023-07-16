@@ -50,3 +50,12 @@ export const fetchOrderDetailAsync = (id) => {
 		}
 	};
 };
+// DELETE AN ORDER
+export const deleteOrderAsync = async (id) => {
+	try {
+		const response = await axios.delete(`${server}/v1/order/${id}`);
+		console.log('response', response);
+	} catch (error) {
+		console.log(error);
+	}
+};

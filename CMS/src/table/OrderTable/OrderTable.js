@@ -5,9 +5,10 @@ import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
 import style from './OrderTable.module.css';
 import {formatDate} from '../../helper';
 
-const OrderTable = ({handleToggleFormUpdate, orderList}) => {
+const OrderTable = ({handleToggleFormDelete, handleToggleFormUpdate, orderList}) => {
 	OrderTable.propTypes = {
 		handleToggleFormUpdate: PropTypes.func.isRequired,
+		handleToggleFormDelete: PropTypes.func.isRequired,
 		orderList: PropTypes.array.isRequired,
 	};
 
@@ -40,7 +41,10 @@ const OrderTable = ({handleToggleFormUpdate, orderList}) => {
 									>
 										<EditOutlined />
 									</button>
-									<button className={style.btn}>
+									<button
+										className={style.btn}
+										onClick={() => handleToggleFormDelete(order.id)}
+									>
 										<DeleteOutlined />
 									</button>
 								</div>
