@@ -2,31 +2,33 @@ import PropTypes from 'prop-types';
 import React, {useEffect, useState} from 'react';
 import styles from './FormEmployee.module.css';
 import {useDispatch} from 'react-redux';
-import {updateEmployeeDetailAsync} from '../../redux/employee/action';
+import {addEmployeeDetailAsync, updateEmployeeDetailAsync} from '../../redux/employee/action';
+import {generatePassword} from '../../helper';
+// var generator = require('generate-password');
 
 export const FormEmployee = ({handleToggleForm, employeeDetail}) => {
 	FormEmployee.propTypes = {
 		handleToggleForm: PropTypes.func.isRequired,
 		employeeDetail: PropTypes.array.isRequired,
 	};
-	console.log(employeeDetail);
 	const dispatch = useDispatch();
 
 	const [id, setId] = useState('');
 	const [name, setName] = useState('');
 	const [role, setRole] = useState('manager');
-	const [password, setPassword] = useState('');
+	const [password, setPassword] = useState(generatePassword(10));
 	const [age, setAge] = useState('');
 	const [email, setEmail] = useState('');
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [baseSalary, setBaseSalary] = useState('');
+	const [status, setStatus] = useState('');
 
 	useEffect(() => {
 		if (employeeDetail) {
 			setId(employeeDetail.id || '');
 			setName(employeeDetail.name || '');
 			setRole(employeeDetail.role || 'manager');
-			setPassword(employeeDetail.password ? employeeDetail.password.toString() : '');
+			// setPassword(employeeDetail.password ? employeeDetail.password.toString() : '');
 			setAge(employeeDetail.age ? employeeDetail.age.toString() : '');
 			setPhoneNumber(employeeDetail.phone ? employeeDetail.phone.toString() : '');
 			setEmail(employeeDetail.email_address || '');
@@ -36,8 +38,10 @@ export const FormEmployee = ({handleToggleForm, employeeDetail}) => {
 
 	// HANDLE SUBMIT FORM
 	const handleSubmitForm = () => {
+		setPassword(generatePassword(10));
+		console.log(password);
+
 		const formData = {
-			id,
 			name,
 			role,
 			password,
@@ -47,7 +51,7 @@ export const FormEmployee = ({handleToggleForm, employeeDetail}) => {
 			baseSalary,
 		};
 		console.log(formData);
-		dispatch(updateEmployeeDetailAsync(formData));
+		dispatch(addEmployeeDetailAsync(formData));
 
 		// Clear the form fields after submit
 		setId('');
@@ -72,7 +76,7 @@ export const FormEmployee = ({handleToggleForm, employeeDetail}) => {
 			phoneNumber,
 			baseSalary,
 		};
-		console.log(formData);
+		console.log('formData' + formData);
 		dispatch(updateEmployeeDetailAsync(formData));
 
 		// Clear the form fields after submit
@@ -84,7 +88,6 @@ export const FormEmployee = ({handleToggleForm, employeeDetail}) => {
 		setPhoneNumber('');
 		setEmail('');
 		setBaseSalary('');
-
 		handleToggleForm();
 	};
 
@@ -93,14 +96,6 @@ export const FormEmployee = ({handleToggleForm, employeeDetail}) => {
 			<div className={styles.formContainer}>
 				<h1>Employee details</h1>
 				<div className={styles.formContainerCenter}>
-					<div className={styles.formInput}>
-						<h2 className={styles.labelInput}>Id: </h2>
-						<input
-							placeholder="id ..."
-							value={id}
-							onChange={(e) => setId(e.target.value)}
-						/>
-					</div>
 					<div className={styles.formInput}>
 						<h2 className={styles.labelInput}>Role: </h2>
 
@@ -147,14 +142,6 @@ export const FormEmployee = ({handleToggleForm, employeeDetail}) => {
 							placeholder="email ..."
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
-						/>
-					</div>
-					<div className={styles.formInput}>
-						<h2 className={styles.labelInput}>Password: </h2>
-						<input
-							placeholder="password ..."
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
 						/>
 					</div>
 

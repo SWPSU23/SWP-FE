@@ -1,4 +1,4 @@
-import {FETCH_EMPLOYEE_DETAILS, INIT_EMPLOYEE_LIST} from './action';
+import {ACT_SEARCH_EMPLOYEE, FETCH_EMPLOYEE_DETAILS, INIT_EMPLOYEE_LIST} from './action';
 
 const initialState = {
 	employeeDetail: null,
@@ -18,6 +18,11 @@ const userReducer = (state = initialState, action) => {
 				...state,
 				totalPages: action.payload.info.total_page,
 				employeeList: action.payload.employee,
+			};
+		case ACT_SEARCH_EMPLOYEE:
+			return {
+				...state,
+				employeeList: action.payload,
 			};
 		case FETCH_EMPLOYEE_DETAILS:
 			console.log(action.payload);

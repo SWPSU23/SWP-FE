@@ -18,6 +18,8 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^9.1.2",
     "chart.js": "^4.3.0",
+    "crypto-browserify": "^3.12.0",
+    "generate-password": "^1.7.0",
     "moment": "^2.29.4",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",

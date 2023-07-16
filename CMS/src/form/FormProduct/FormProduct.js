@@ -226,7 +226,7 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 					</div>
 
 					<div className={styles.formInput}>
-						<h2 className={styles.labelInput}>Status: </h2>
+						<h2 className={styles.labelInput}>Category: </h2>
 						<select
 							name="category"
 							id="category"

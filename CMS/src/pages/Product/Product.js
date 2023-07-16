@@ -57,7 +57,7 @@ export const Product = () => {
 	const handleSearch = async (search) => {
 		setLoading(true); // Set loading to true before fetching data
 		try {
-			await dispatch(dispatch(fetchProductListSearchAsync('name', search)));
+			await dispatch(fetchProductListSearchAsync('name', search));
 		} catch (error) {
 			console.log(error);
 		}

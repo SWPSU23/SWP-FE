@@ -8,7 +8,13 @@ import Pagination from '../../components/Pagination/Pagination';
 import {Header} from '../../components/Header/Header';
 import {useDispatch, useSelector} from 'react-redux';
 import {EmployeeTable} from '../../table/EmployeeTable/EmployeeTable';
-import {fetchEmployeeDetailAsync, fetchEmployeeListAsync} from '../../redux/employee/action';
+import {
+	deleteEmployeeAsync,
+	fetchEmployeeDetailAsync,
+	fetchEmployeeListAsync,
+	fetchSearchListSearchAsync,
+} from '../../redux/employee/action';
+import {deleteProductAsync, fetchProductListSearchAsync} from '../../redux/product/action';
 
 export const Employee = () => {
 	// HANDLE FETCH DATA
@@ -75,11 +81,43 @@ export const Employee = () => {
 			setLoading(false);
 		}, 1000);
 	};
+
+	// HANDLE SEARCH
+	const handleSearch = async (search) => {
+		setLoading(true); // Set loading to true before fetching data
+		try {
+			await dispatch(fetchSearchListSearchAsync('name', search));
+		} catch (error) {
+			console.log(error);
+		}
+		setLoading(false); // Set loading to false after fetching data
+	};
+
+	// HANDLE DELETE
+	const handleDelete = async (id) => {
+		const isDelete = confirm('Are you sure you want to delete this product?');
+		console.log(isDelete);
+		setLoading(true); // Set loading to true before fetching data
+		try {
+			if (isDelete) {
+				await deleteEmployeeAsync(id);
+				await fetchData();
+			}
+		} catch (error) {
+			console.log(error);
+		}
+		setLoading(false);
+	};
+
 	return (
 		<div className={styles.employeePage}>
 			<Menu />
 			<Header img="../assets/image/employee.jpg" h2="Employee" />
-			<ActionBar title="New employee" handleToggleForm={handleToggleForm} />
+			<ActionBar
+				handleSearch={handleSearch}
+				title="New employee"
+				handleToggleForm={handleToggleForm}
+			/>
 
 			{openForm ? <FormEmployee handleToggleForm={handleToggleForm} /> : <div></div>}
 
@@ -97,6 +135,7 @@ export const Employee = () => {
 				<EmployeeTable
 					employeeList={employeeList}
 					handleToggleFormUpdate={handleToggleFormUpdate}
+					handleDelete={handleDelete}
 				/>
 			)}
 			<Pagination

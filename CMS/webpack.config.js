@@ -1,6 +1,6 @@
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
 	// ...other webpack configuration options
 	module: {
 		rules: [
@@ -21,6 +21,11 @@ module.exports = {
 			},
 			// ...other rules for non-module CSS
 		],
+	},
+	resolve: {
+		fallback: {
+			crypto: require.resolve('crypto-browserify'),
+		},
 	},
 	// ...other webpack configuration options
 };
