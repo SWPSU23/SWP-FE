@@ -10,7 +10,6 @@ export const CashierWorksheet = ({add, handleGetWorkSheet, worksheet}) => {
 		handleGetWorkSheet: PropTypes.func.isRequired,
 		worksheet: PropTypes.array.isRequired,
 	};
-	console.log('worksheet: ' + worksheet);
 
 	// useEffect(() => {
 	// 	handleGetWorkSheet('2023-07-10,2023-07-16');
@@ -18,7 +17,7 @@ export const CashierWorksheet = ({add, handleGetWorkSheet, worksheet}) => {
 	return (
 		<div className={styles.CashierWorksheet}>
 			<CashierWorkSheetTable worksheetRender={worksheet} />
-			{add ? <FormWorksheetCashier /> : <div></div>}
+			{add ? <FormWorksheetCashier handleGetWorkSheet={handleGetWorkSheet} /> : <div></div>}
 		</div>
 	);
 };

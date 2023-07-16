@@ -1,9 +1,13 @@
+import PropTypes from 'prop-types';
 import React, {useEffect, useState} from 'react';
 import styles from './FormWorksheet.module.css';
 import {createNewWorksheetAsync, fetchListNameByRoleAsync} from '../../redux/worksheet/action';
 import {useDispatch, useSelector} from 'react-redux';
 
-const FormWorksheetAddCashier = () => {
+const FormWorksheetAddCashier = ({handleGetWorkSheet}) => {
+	FormWorksheetAddCashier.propTypes = {
+		handleGetWorkSheet: PropTypes.func.isRequired,
+	};
 	const dispatch = useDispatch();
 	const calenderDay = useSelector((state) => state.worksheet.calenderDay);
 
@@ -44,7 +48,12 @@ const FormWorksheetAddCashier = () => {
 			return;
 		}
 		console.log(formData);
-		dispatch(createNewWorksheetAsync(formData, 'cashier'));
+		dispatch(createNewWorksheetAsync(formData, 'cashier')).then((response) => {
+			// GET DATE MATCH WITH FORM ADD
+			const startDate = calenderDay[0].date;
+			const endDate = calenderDay[calenderDay.length - 1].date;
+			handleGetWorkSheet(`${startDate},${endDate}`);
+		});
 		// Clear input
 		setName('');
 		setWorksheet('');

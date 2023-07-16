@@ -31,15 +31,16 @@ const HeaderWorksheet = () => {
 	}, [isGuard]);
 
 	const handleGetWorkSheet = (date) => {
-		console.log('vao day');
+		// console.log('vao handleGetWorkSheet');
 
 		const daySelect = date.split(',');
 		const startDate = daySelect[0];
 		const endDate = daySelect[1];
 		dispatch(fetchCalenderDayAsync(startDate, endDate));
 		const employee = isGuard ? 'guard' : 'cashier';
+		console.log('employee: ' + employee);
+
 		dispatch(featchAllWorksheetByDate(startDate, endDate, employee)).then((response) => {
-			// setWorksheet(response.data.data);
 			setWorksheet(response.data.data);
 		});
 	};

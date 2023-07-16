@@ -31,7 +31,6 @@ const FormWorksheetAddGuard = ({handleGetWorkSheet}) => {
 
 	useEffect(() => {
 		dispatch(fetchListNameByRoleAsync('guard')).then((reponse) => {
-			console.log(reponse.data.data);
 			setListName(reponse.data.data);
 		});
 	}, []);
@@ -49,14 +48,18 @@ const FormWorksheetAddGuard = ({handleGetWorkSheet}) => {
 			return;
 		}
 		console.log(formData);
-		dispatch(createNewWorksheetAsync(formData, 'guard'));
+		dispatch(createNewWorksheetAsync(formData, 'guard')).then((response) => {
+			// GET DATE MATCH WITH FORM ADD
+			const startDate = calenderDay[0].date;
+			const endDate = calenderDay[calenderDay.length - 1].date;
+			handleGetWorkSheet(`${startDate},${endDate}`);
+		});
 		// Clear input
 		setName('');
 		setWorksheet('');
 		setSheet('');
 		setError('');
 		// REFRESH WORKSHEET
-		handleGetWorkSheet('2023-07-10,2023-07-16');
 	};
 
 	if (!listName) {
