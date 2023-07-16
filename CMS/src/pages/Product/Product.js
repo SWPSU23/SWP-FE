@@ -15,6 +15,9 @@ import {
 } from '../../redux/product/action';
 import {useDispatch, useSelector} from 'react-redux';
 import {Header} from '../../components/Header/Header';
+import {confirmModal} from '../../components/Notify/Alert';
+import {succesNotify} from '../../components/Notify/Toast';
+import {ToastContainer} from 'react-toastify';
 
 export const Product = () => {
 	// HANDLE LOADING
@@ -63,7 +66,14 @@ export const Product = () => {
 
 	// HANDLE DELETE
 	const handleDelete = async (id) => {
-		const isDelete = confirm('Are you sure you want to delete this product?');
+		let isDelete = await confirmModal('Yes, delete it')
+			.then((isConfirmed) => {
+				return isConfirmed;
+				// console.log('Confirmation result:', isConfirmed); // Output: Confirmation result: true
+			})
+			.catch((error) => {
+				console.error('Confirmation error:', error);
+			});
 		console.log(isDelete);
 		setLoading(true); // Set loading to true before fetching data
 		try {
@@ -121,6 +131,10 @@ export const Product = () => {
 		}, 1000);
 	};
 
+	const showToast = (text) => {
+		succesNotify(text);
+	};
+
 	return (
 		<div className={styles.productPage}>
 			<Menu />
@@ -133,7 +147,11 @@ export const Product = () => {
 				handleToggleForm={handleToggleForm}
 			/>
 			{openForm ? (
-				<FormProduct handleToggleForm={handleToggleForm} categoryList={categoryList} />
+				<FormProduct
+					showToast={showToast}
+					handleToggleForm={handleToggleForm}
+					categoryList={categoryList}
+				/>
 			) : (
 				<div></div>
 			)}
@@ -143,6 +161,7 @@ export const Product = () => {
 					productDetail={productDetail}
 					handleToggleForm={handleToggleFormUpdate}
 					categoryList={categoryList}
+					showToast={showToast}
 				/>
 			) : (
 				<div></div>
@@ -161,6 +180,7 @@ export const Product = () => {
 				totalPages={totalPages}
 				onPageChange={handlePageChange}
 			/>
+			<ToastContainer />
 		</div>
 	);
 };

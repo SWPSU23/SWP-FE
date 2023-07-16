@@ -5,15 +5,22 @@ import style from './LeaveTable.module.css';
 import {data} from '../../shared/ListOfLeave';
 import {PopupSuccess} from '../../form/FormPopup/PopupSuccess/PopupSuccess';
 import {PopupError} from '../../form/FormPopup/Popup/PopupError';
+import Swal from 'sweetalert2';
+import {successAlert, errorAlert} from '../../components/Notify/Alert';
+import {succesNotify} from '../../components/Notify/Toast';
+import {ToastContainer} from 'react-toastify';
 
 export const LeaveTable = () => {
 	const [isShowSuccess, setIsShowSuccess] = useState();
 	const [isShowError, setIsShowError] = useState();
+	const [isConfirm, setIsConfirm] = useState(false);
 	const handleShowSuccess = () => {
-		setIsShowSuccess(!isShowSuccess);
+		// setIsShowSuccess(!isShowSuccess);
+		successAlert('Thank for your message. It has been sent.');
 	};
-	const handleShowError = () => {
-		setIsShowError(!isShowError);
+	const handleShowError = async () => {
+		// setIsShowError(!isShowError);
+		errorAlert('Please check and try again.');
 	};
 	return (
 		<div className={style.tableWrapper}>
