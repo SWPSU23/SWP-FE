@@ -7,9 +7,10 @@ import {useDispatch} from 'react-redux';
 import {handleUploadImageAsync, updateProductDetailAsync} from '../../redux/product/action';
 import {server} from '../../shared/constant';
 
-export const FormProduct = ({handleToggleForm, productDetail, categoryList}) => {
+export const FormProduct = ({handleToggleForm, productDetail, categoryList, showToast}) => {
 	FormProduct.propTypes = {
 		handleToggleForm: PropTypes.func.isRequired,
+		showToast: PropTypes.func.isRequired,
 		productDetail: PropTypes.array.isRequired,
 		categoryList: PropTypes.array.isRequired,
 	};
@@ -95,6 +96,7 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList}) => 
 		setDescription('');
 		setCategory('Drink');
 		handleToggleForm();
+		showToast('Add new product successfully!');
 	};
 
 	function getCurrentTime() {
@@ -126,6 +128,7 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList}) => 
 		setExpiredAt('');
 		setDescription('');
 		handleToggleForm(productDetail.id);
+		showToast('Update product successfully!');
 	};
 
 	return (
