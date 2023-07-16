@@ -7,8 +7,13 @@ import {ActionBar} from '../../components/ActionBar/ActionBar';
 import Pagination from '../../components/Pagination/Pagination';
 import {Header} from '../../components/Header/Header';
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchOrderListAsync, fetchOrderDetailAsync} from '../../redux/order/action';
+import {
+	fetchOrderListAsync,
+	fetchOrderDetailAsync,
+	deleteOrderAsync,
+} from '../../redux/order/action';
 import {FormOrder} from '../../form/FormOrder/FormOrder';
+import {confirmModal} from '../../components/Notify/Alert';
 
 export const Order = () => {
 	// HANDLE LOADING
@@ -24,7 +29,7 @@ export const Order = () => {
 
 	// GET DATA
 	const fetchData = async () => {
-		setLoading(true); //Set loading to true before fetching data
+		setLoading(true); // Set loading to true before fetching data
 		try {
 			console.log('fetching data');
 			await dispatch(fetchOrderListAsync(currentPage));
@@ -40,7 +45,9 @@ export const Order = () => {
 
 	useEffect(() => {
 		console.log('orderList changed', orderList);
-		setOrderList(Object.values(orderData));
+		// Filter orders with status === true
+		const filteredOrderList = Object.values(orderData).filter((order) => order.status === true);
+		setOrderList(filteredOrderList);
 	}, [orderData]);
 
 	// HANDLE SEARCH
@@ -74,6 +81,29 @@ export const Order = () => {
 		setLoading(false);
 	};
 
+	// HANDLE DELETE
+	const handleToggleFormDelete = async (id) => {
+		let isDelete = await confirmModal('Yes, delete it')
+			.then((isConfirmed) => {
+				return isConfirmed;
+			})
+			.catch((error) => {
+				console.error('Confirmation error:', error);
+			});
+
+		setLoading(true); // Set loading to true before fetching data
+
+		try {
+			if (isDelete) {
+				await deleteOrderAsync(id);
+				await fetchData(); // Assuming fetchData() fetches the updated order data
+			}
+		} catch (error) {
+			console.log(error);
+		}
+
+		setLoading(false);
+	};
 	// HANDLE PAGINATION
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -106,7 +136,11 @@ export const Order = () => {
 			{loading ? (
 				<Loading />
 			) : (
-				<OrderTable handleToggleFormUpdate={handleToggleFormUpdate} orderList={orderList} />
+				<OrderTable
+					handleToggleFormUpdate={handleToggleFormUpdate}
+					orderList={orderList}
+					handleToggleFormDelete={handleToggleFormDelete}
+				/>
 			)}
 			<Pagination
 				currentPage={currentPage}
