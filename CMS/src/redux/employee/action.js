@@ -4,6 +4,7 @@ import {server} from '../../shared/constant';
 
 export const INIT_EMPLOYEE_LIST = 'INIT_EMPLOYEE_LIST';
 export const FETCH_EMPLOYEE_DETAILS = 'FETCH_EMPLOYEE_DETAILS';
+export const ACT_SEARCH_EMPLOYEE = 'ACT_SEARCH_EMPLOYEE';
 
 export const fetchEmployeeDataSuccess = (data) => {
 	return {
@@ -11,6 +12,14 @@ export const fetchEmployeeDataSuccess = (data) => {
 		payload: data.data,
 	};
 };
+
+export const fetchEmployeeListSearch = (data) => {
+	return {
+		type: ACT_SEARCH_EMPLOYEE,
+		payload: data,
+	};
+};
+
 export const fetchEmployeeDetail = (data) => {
 	return {
 		type: FETCH_EMPLOYEE_DETAILS,
@@ -30,7 +39,25 @@ export const fetchEmployeeListAsync = (pageIndex) => {
 	};
 };
 
-// GET A PRODUCT DETAILS
+// GET LIST SEARCH BY SEARCH
+export const fetchSearchListSearchAsync = (searchBy, keywords) => {
+	return async (dispatch) => {
+		try {
+			const response = await axios.get(`${server}/v1/employee/search`, {
+				params: {
+					searchBy: searchBy,
+					keywords: keywords,
+				},
+			});
+			// Dispatch action or handle response
+			dispatch(fetchEmployeeListSearch(response.data.data));
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+// GET A EMPLOYEE DETAILS
 export const fetchEmployeeDetailAsync = (id) => {
 	return async (dispatch) => {
 		try {
@@ -41,6 +68,19 @@ export const fetchEmployeeDetailAsync = (id) => {
 			console.log(error);
 		}
 	};
+};
+
+// DELETE AN EMPLOYEE
+export const deleteEmployeeAsync = async (id) => {
+	console.log('delete employee', id);
+	console.log(`${server}/v1/employee/${id}`);
+	console.log('call delete');
+	try {
+		const response = await axios.delete(`${server}/v1/employee/${id}`);
+		console.log('response', response);
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 // HANDLE ADD OR UPDATE FORM
@@ -68,39 +108,37 @@ export const fetchEmployeeDetailAsync = (id) => {
 // 	};
 // };
 
-// export const addEmployeeDetailAsync = (formData) => {
-// 	const body = {
-// 		id: formData.id,
-// 		name: formData.name,
-// 		role: formData.role,
-// 		password: formData.password,
-// 		email: formData.email,
-// 		phoneNumber: formData.phoneNumber,
-// 		age: formData.age,
-// 		baseSalary: formData.baseSalary,
-// 	};
-// 	return async (dispatch) => {
-// 		try {
-// 			const response = await axios.put(`${server}/v1/employee`, body);
-// 			dispatch(fetchEmployeeListAsync());
-// 			return response;
-// 		} catch (error) {
-// 			console.log(error);
-// 			throw error;
-// 		}
-// 	};
-// };
+export const addEmployeeDetailAsync = (formData) => {
+	const body = {
+		name: formData.name,
+		age: formData.age,
+		email_address: formData.email,
+		phone: formData.phoneNumber,
+		password: formData.password,
+		role: formData.role,
+		base_salary: formData.baseSalary,
+	};
+	return async (dispatch) => {
+		try {
+			const response = await axios.post(`${server}/v1/employee`, body);
+			dispatch(fetchEmployeeListAsync());
+			return response;
+		} catch (error) {
+			console.log(error);
+			throw error;
+		}
+	};
+};
 
 // HANDLE UPDATE
 export const updateEmployeeDetailAsync = (formData) => {
 	const body = {
-		id: formData.id,
 		name: formData.name,
-		role: formData.role,
-		password: formData.password,
+		age: formData.age,
 		email_address: formData.email,
 		phone: formData.phoneNumber,
-		age: formData.age,
+		password: formData.password,
+		role: formData.role,
 		base_salary: formData.baseSalary,
 	};
 	return async (dispatch) => {
