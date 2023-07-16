@@ -112,7 +112,7 @@ export const createNewWorksheetAsync = (formdata, role) => {
 	return async (dispatch) => {
 		try {
 			const response = await axios.post(`${server}/v1/worksheet`, body);
-			console.log(response);
+			return response;
 		} catch (error) {
 			console.log(error);
 		}

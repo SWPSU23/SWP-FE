@@ -2,9 +2,7 @@ import PropTypes from 'prop-types';
 import React, {useEffect, useState} from 'react';
 import styles from './GuardWorkSheetTable.module.css';
 import {useDispatch, useSelector} from 'react-redux';
-import Loading from '../../components/Loading/Loading';
 import {featchAllWorksheetByDate} from '../../redux/worksheet/action';
-import {combinedArray} from '../../helper';
 
 export const GuardWorkSheetTable = ({worksheetRender}) => {
 	GuardWorkSheetTable.propTypes = {
@@ -52,7 +50,9 @@ export const GuardWorkSheetTable = ({worksheetRender}) => {
 							{Object.values(sheet)[0].map((item, idx) => (
 								<td style={{height: 200}} key={idx}>
 									{item.detail.map((item, idx) => (
-										<p key={idx}>{item.employee_name}</p>
+										<p key={idx} className={styles.worksheetEmployee}>
+											{item.employee_name}
+										</p>
 									))}
 								</td>
 							))}

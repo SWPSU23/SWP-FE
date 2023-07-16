@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import style from './GuardWorksheet.module.css';
 import {GuardWorkSheetTable} from '../../table/GuardWorkSheetTable/GuardWorkSheetTable';
 import {FormWorksheetGuard} from '../../form/FormWorksheetGuard/FormWorksheetGuard';
+import {useSelector} from 'react-redux';
 
 export const GuardWorksheet = ({add, handleGetWorkSheet, worksheet}) => {
 	GuardWorksheet.propTypes = {
@@ -10,10 +11,13 @@ export const GuardWorksheet = ({add, handleGetWorkSheet, worksheet}) => {
 		handleGetWorkSheet: PropTypes.func.isRequired,
 		worksheet: PropTypes.array.isRequired,
 	};
-
-	console.log(worksheet);
+	// const calenderDay = useSelector((state) => state.worksheet.calenderDay);
 
 	useEffect(() => {
+		// GET WORKSHEET MATCH WITH THIS WEEK
+		// const startDate = calenderDay[0];
+		// const endDate = calenderDay[calenderDay.length - 1];
+		// handleGetWorkSheet(`${startDate},${endDate}`);
 		handleGetWorkSheet('2023-07-10,2023-07-16');
 	}, []);
 	return (

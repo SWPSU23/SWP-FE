@@ -47,7 +47,9 @@ export const CashierWorkSheetTable = ({worksheetRender}) => {
 							{Object.values(sheet)[0].map((item, idx) => (
 								<td style={{height: 200}} key={idx}>
 									{item.detail.map((item, idx) => (
-										<p key={idx}>{item.employee_name}</p>
+										<p key={idx} className={styles.worksheetEmployee}>
+											{item.employee_name}
+										</p>
 									))}
 								</td>
 							))}
