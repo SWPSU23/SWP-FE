@@ -121,7 +121,7 @@ export const addEmployeeDetailAsync = (formData) => {
 	return async (dispatch) => {
 		try {
 			const response = await axios.post(`${server}/v1/employee`, body);
-			dispatch(fetchEmployeeListAsync());
+			dispatch(fetchEmployeeListAsync(1));
 			return response;
 		} catch (error) {
 			console.log(error);
@@ -144,7 +144,7 @@ export const updateEmployeeDetailAsync = (formData) => {
 	return async (dispatch) => {
 		try {
 			const response = await axios.put(`${server}/v1/employee/${formData.id}`, body);
-			dispatch(fetchEmployeeListAsync());
+			dispatch(fetchEmployeeListAsync(1));
 			return response;
 		} catch (error) {
 			console.log(error);

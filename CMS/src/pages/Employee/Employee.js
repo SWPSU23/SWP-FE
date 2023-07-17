@@ -15,6 +15,9 @@ import {
 	fetchSearchListSearchAsync,
 } from '../../redux/employee/action';
 import {deleteProductAsync, fetchProductListSearchAsync} from '../../redux/product/action';
+import {ToastContainer} from 'react-toastify';
+import {confirmModal} from '../../components/Notify/Alert';
+import {succesNotify} from '../../components/Notify/Toast';
 
 export const Employee = () => {
 	// HANDLE FETCH DATA
@@ -23,8 +26,6 @@ export const Employee = () => {
 	const employeeData = useSelector((state) => state.user.employeeList);
 	const employeeDetail = useSelector((state) => state.user.employeeDetail);
 	const totalPages = useSelector((state) => state.product.totalPages);
-
-	console.log(employeeDetail);
 
 	const [employeeList, setEmployeeList] = useState([]);
 	// GET DATA
@@ -67,6 +68,10 @@ export const Employee = () => {
 		setLoading(false);
 	};
 
+	const showToast = (text) => {
+		succesNotify(text);
+	};
+
 	// HANDLE PAGINATION
 	const [currentPage, setCurrentPage] = useState(1);
 	useEffect(() => {
@@ -95,7 +100,14 @@ export const Employee = () => {
 
 	// HANDLE DELETE
 	const handleDelete = async (id) => {
-		const isDelete = confirm('Are you sure you want to delete this product?');
+		let isDelete = await confirmModal('Yes, delete it')
+			.then((isConfirmed) => {
+				return isConfirmed;
+				// console.log('Confirmation result:', isConfirmed); // Output: Confirmation result: true
+			})
+			.catch((error) => {
+				console.error('Confirmation error:', error);
+			});
 		console.log(isDelete);
 		setLoading(true); // Set loading to true before fetching data
 		try {
@@ -119,12 +131,17 @@ export const Employee = () => {
 				handleToggleForm={handleToggleForm}
 			/>
 
-			{openForm ? <FormEmployee handleToggleForm={handleToggleForm} /> : <div></div>}
+			{openForm ? (
+				<FormEmployee showToast={showToast} handleToggleForm={handleToggleForm} />
+			) : (
+				<div></div>
+			)}
 
 			{openFormUpdate ? (
 				<FormEmployee
 					employeeDetail={employeeDetail}
 					handleToggleForm={handleToggleFormUpdate}
+					showToast={showToast}
 				/>
 			) : (
 				<div></div>
@@ -143,6 +160,7 @@ export const Employee = () => {
 				totalPages={totalPages}
 				onPageChange={handlePageChange}
 			/>
+			<ToastContainer />
 		</div>
 	);
 };

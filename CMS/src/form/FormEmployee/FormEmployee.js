@@ -6,9 +6,10 @@ import {addEmployeeDetailAsync, updateEmployeeDetailAsync} from '../../redux/emp
 import {generatePassword} from '../../helper';
 // var generator = require('generate-password');
 
-export const FormEmployee = ({handleToggleForm, employeeDetail}) => {
+export const FormEmployee = ({handleToggleForm, employeeDetail, showToast}) => {
 	FormEmployee.propTypes = {
 		handleToggleForm: PropTypes.func.isRequired,
+		showToast: PropTypes.func.isRequired,
 		employeeDetail: PropTypes.array.isRequired,
 	};
 	const dispatch = useDispatch();
@@ -62,8 +63,8 @@ export const FormEmployee = ({handleToggleForm, employeeDetail}) => {
 		setPhoneNumber('');
 		setEmail('');
 		setBaseSalary('');
-
 		handleToggleForm();
+		showToast('Add new employee successfully!');
 	};
 	const handleSubmitUpdateForm = () => {
 		const formData = {
@@ -88,7 +89,18 @@ export const FormEmployee = ({handleToggleForm, employeeDetail}) => {
 		setPhoneNumber('');
 		setEmail('');
 		setBaseSalary('');
-		handleToggleForm();
+		handleToggleForm(employeeDetail.id);
+		showToast('Update employee successfully!');
+	};
+
+	const handleCloseForm = () => {
+		if (employeeDetail) {
+			console.log('close form update', employeeDetail.id);
+			handleToggleForm(employeeDetail.id);
+		} else {
+			console.log('close form create');
+			handleToggleForm();
+		}
 	};
 
 	return (
@@ -166,7 +178,7 @@ export const FormEmployee = ({handleToggleForm, employeeDetail}) => {
 
 				<div className={styles.formContainerButton}>
 					<button
-						onClick={handleToggleForm}
+						onClick={() => handleCloseForm()}
 						className={`${styles['btn']} ${styles.btnClose}`}
 					>
 						Close
