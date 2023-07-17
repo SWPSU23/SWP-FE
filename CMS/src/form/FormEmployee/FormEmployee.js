@@ -151,7 +151,10 @@ export const FormEmployee = ({handleToggleForm, employeeDetail, showToast}) => {
 					<div className={styles.formInput}>
 						<h2 className={styles.labelInput}>Email: </h2>
 						<input
+							type="text"
+							autoCapitalize="off"
 							placeholder="email ..."
+							spellCheck="false"
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 						/>
