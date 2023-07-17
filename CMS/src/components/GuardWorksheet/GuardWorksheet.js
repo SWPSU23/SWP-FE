@@ -5,10 +5,11 @@ import {GuardWorkSheetTable} from '../../table/GuardWorkSheetTable/GuardWorkShee
 import {FormWorksheetGuard} from '../../form/FormWorksheetGuard/FormWorksheetGuard';
 import {useSelector} from 'react-redux';
 
-export const GuardWorksheet = ({add, handleGetWorkSheet, worksheet}) => {
+export const GuardWorksheet = ({add, handleGetWorkSheet, worksheet, handleAddClick}) => {
 	GuardWorksheet.propTypes = {
 		add: PropTypes.bool.isRequired,
 		handleGetWorkSheet: PropTypes.func.isRequired,
+		handleAddClick: PropTypes.func.isRequired,
 		worksheet: PropTypes.array.isRequired,
 	};
 	// const calenderDay = useSelector((state) => state.worksheet.calenderDay);
@@ -22,8 +23,19 @@ export const GuardWorksheet = ({add, handleGetWorkSheet, worksheet}) => {
 	}, []);
 	return (
 		<div className={style.GuardWorksheet}>
-			<GuardWorkSheetTable worksheetRender={worksheet} />
-			{add ? <FormWorksheetGuard handleGetWorkSheet={handleGetWorkSheet} /> : <div></div>}
+			<GuardWorkSheetTable
+				handleAddClick={handleAddClick}
+				andleGetWorkSheet={handleGetWorkSheet}
+				worksheetRender={worksheet}
+			/>
+			{add ? (
+				<FormWorksheetGuard
+					handleAddClick={handleAddClick}
+					handleGetWorkSheet={handleGetWorkSheet}
+				/>
+			) : (
+				<div></div>
+			)}
 		</div>
 	);
 };

@@ -4,10 +4,11 @@ import styles from './CashierWorksheet.module.css';
 import {CashierWorkSheetTable} from '../../table/CashierWorkSheetTable/CashierWorkSheetTable';
 import {FormWorksheetCashier} from '../../form/FormWorksheetCashier/FormWorksheetCashier';
 
-export const CashierWorksheet = ({add, handleGetWorkSheet, worksheet}) => {
+export const CashierWorksheet = ({add, handleGetWorkSheet, worksheet, handleAddClick}) => {
 	CashierWorksheet.propTypes = {
 		add: PropTypes.bool.isRequired,
 		handleGetWorkSheet: PropTypes.func.isRequired,
+		handleAddClick: PropTypes.func.isRequired,
 		worksheet: PropTypes.array.isRequired,
 	};
 
@@ -16,8 +17,19 @@ export const CashierWorksheet = ({add, handleGetWorkSheet, worksheet}) => {
 	// }, []);
 	return (
 		<div className={styles.CashierWorksheet}>
-			<CashierWorkSheetTable worksheetRender={worksheet} />
-			{add ? <FormWorksheetCashier handleGetWorkSheet={handleGetWorkSheet} /> : <div></div>}
+			<CashierWorkSheetTable
+				handleAddClick={handleAddClick}
+				andleGetWorkSheet={handleGetWorkSheet}
+				worksheetRender={worksheet}
+			/>
+			{add ? (
+				<FormWorksheetCashier
+					handleAddClick={handleAddClick}
+					handleGetWorkSheet={handleGetWorkSheet}
+				/>
+			) : (
+				<div></div>
+			)}
 		</div>
 	);
 };

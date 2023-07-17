@@ -75,12 +75,14 @@ const HeaderWorksheet = () => {
 						handleGetWorkSheet={handleGetWorkSheet}
 						worksheet={worksheet}
 						add={isAdd}
+						handleAddClick={handleAddClick}
 					/>
 				) : (
 					<CashierWorksheet
-						worksheet={worksheet}
 						handleGetWorkSheet={handleGetWorkSheet}
+						worksheet={worksheet}
 						add={isAdd}
+						handleAddClick={handleAddClick}
 					/>
 				)}
 			</div>

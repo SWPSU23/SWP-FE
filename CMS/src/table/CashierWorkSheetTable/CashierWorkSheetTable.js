@@ -2,10 +2,12 @@ import PropTypes from 'prop-types';
 import React, {useEffect, useState} from 'react';
 import styles from './CashierWorkSheetTable.module.css';
 import {useDispatch, useSelector} from 'react-redux';
+import {fetchWorksheetByIDAsync} from '../../redux/worksheet/action';
 
-export const CashierWorkSheetTable = ({worksheetRender}) => {
+export const CashierWorkSheetTable = ({worksheetRender, handleAddClick}) => {
 	CashierWorkSheetTable.propTypes = {
 		worksheetRender: PropTypes.array.isRequired,
+		handleAddClick: PropTypes.func.isRequired,
 	};
 	const dispatch = useDispatch();
 	const tasks = useSelector((state) => state.worksheet.guards);
@@ -22,6 +24,11 @@ export const CashierWorkSheetTable = ({worksheetRender}) => {
 	}
 
 	console.log('worksheet' + worksheet);
+	// Get Worksheet by ID
+	const handleGetWorkSheetByID = (id) => {
+		console.log(id);
+		dispatch(fetchWorksheetByIDAsync(id)).then((reponse) => handleAddClick());
+	};
 
 	return (
 		<div className={styles.tableContainer}>
@@ -47,7 +54,13 @@ export const CashierWorkSheetTable = ({worksheetRender}) => {
 							{Object.values(sheet)[0].map((item, idx) => (
 								<td style={{height: 200}} key={idx}>
 									{item.detail.map((item, idx) => (
-										<p key={idx} className={styles.worksheetEmployee}>
+										<p
+											key={idx}
+											onClick={() =>
+												handleGetWorkSheetByID(item.worksheet_id)
+											}
+											className={styles.worksheetEmployee}
+										>
 											{item.employee_name}
 										</p>
 									))}
