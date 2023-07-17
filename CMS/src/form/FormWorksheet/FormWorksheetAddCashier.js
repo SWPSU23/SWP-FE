@@ -84,7 +84,7 @@ const FormWorksheetAddCashier = ({handleGetWorkSheet, handleAddClick}) => {
 			setError('Please select name');
 			return;
 		}
-		const idToDelete = worksheetDetail[0].id;
+		const idToDelete = worksheetDetail.id;
 		const idEmployee = name;
 
 		dispatch(updateWorksheetByIDAsync(idToDelete, idEmployee)).then((response) => {
@@ -99,7 +99,7 @@ const FormWorksheetAddCashier = ({handleGetWorkSheet, handleAddClick}) => {
 	// HANDLE DELETE WORKSHEET
 	const handleDelete = () => {
 		console.log('vao handleDelete');
-		const idToDelete = worksheetDetail[0].id;
+		const idToDelete = worksheetDetail.id;
 		dispatch(fetchWorksheetByID(0));
 		dispatch(deleteWorksheetByIDAsync(idToDelete)).then((response) => {
 			const startDate = calenderDay[0].date;
@@ -119,8 +119,8 @@ const FormWorksheetAddCashier = ({handleGetWorkSheet, handleAddClick}) => {
 				{worksheetDetail ? (
 					<div>
 						<h1 style={{fontSize: 28}}>Update employee</h1>
-						<h2>Sheet - {worksheetDetail[0].sheet_id}</h2>
-						<h2>Date - {worksheetDetail[0].date}</h2>
+						<h2>Sheet - {worksheetDetail.sheet_id}</h2>
+						<h2>Date - {worksheetDetail.date}</h2>
 					</div>
 				) : (
 					<h1>Assign task </h1>
