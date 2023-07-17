@@ -28,14 +28,18 @@
 }
 
 .productTable td > .imageWrapper {
-	width: 80px;
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
 	margin: 0 auto;
 }
 
 .productTable td > .imageWrapper img {
 	width: 100%;
+	height: 100%;
 	border-radius: 7px;
 	object-position: center;
+	object-fit: cover;
 }
 
 .productTable td > .productDescription {
