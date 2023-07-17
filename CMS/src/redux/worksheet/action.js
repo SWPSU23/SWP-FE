@@ -3,6 +3,7 @@ import {
 	ADD_TASK_GUARD,
 	FETCH_CALENDER_DAY,
 	FETCH_LIST_TO_SELECT,
+	FETCH_WORKSHEET_BY_ID,
 	RECORD_CHANGE,
 } from './actionTypes';
 
@@ -38,6 +39,13 @@ export const fetchListToSelect = (payload) => {
 export const fetchCalenderDay = (payload) => {
 	return {
 		type: FETCH_CALENDER_DAY,
+		payload: payload,
+	};
+};
+
+export const fetchWorksheetByID = (payload) => {
+	return {
+		type: FETCH_WORKSHEET_BY_ID,
 		payload: payload,
 	};
 };
@@ -130,6 +138,48 @@ export const featchAllWorksheetByDate = (startDate, endDate, role) => {
 					role: role,
 				},
 			});
+			return response;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+// GET WORKSHEET BY ID
+export const fetchWorksheetByIDAsync = (id) => {
+	return async (dispatch) => {
+		try {
+			const response = await axios.get(`${server}/v1/worksheet/${id}`);
+			dispatch(fetchWorksheetByID(response.data.data));
+			return response;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+// DELETE WORKSHEET BY ID
+export const deleteWorksheetByIDAsync = (id) => {
+	return async (dispatch) => {
+		try {
+			const response = await axios.delete(`${server}/v1/worksheet/${id}`);
+
+			return response;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+// UPDATE WORKSHEET BY ID
+export const updateWorksheetByIDAsync = (id, name) => {
+	const body = {
+		employee_id: name,
+	};
+	return async (dispatch) => {
+		try {
+			const response = await axios.put(`${server}/v1/worksheet/${id}`, body);
+
 			return response;
 		} catch (error) {
 			console.log(error);

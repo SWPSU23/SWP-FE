@@ -3,6 +3,7 @@ import {
 	ADD_TASK_GUARD,
 	FETCH_CALENDER_DAY,
 	FETCH_LIST_TO_SELECT,
+	FETCH_WORKSHEET_BY_ID,
 	RECORD_CHANGE,
 } from './actionTypes';
 
@@ -12,6 +13,7 @@ const initialState = {
 	cashier: {},
 	listDayToRender: [],
 	calenderDay: [],
+	worksheetDetails: 0,
 };
 
 const worksheetReducer = (state = initialState, action) => {
@@ -68,6 +70,14 @@ const worksheetReducer = (state = initialState, action) => {
 			return {
 				...state,
 				calenderDay: action.payload,
+			};
+		}
+
+		case FETCH_WORKSHEET_BY_ID: {
+			console.log('vao day');
+			return {
+				...state,
+				worksheetDetails: action.payload,
 			};
 		}
 
