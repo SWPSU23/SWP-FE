@@ -137,6 +137,14 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 		showToast('Update product successfully!');
 	};
 
+	const handleCloseForm = () => {
+		if (productDetail) {
+			handleToggleForm(productDetail.id);
+		} else {
+			handleToggleForm();
+		}
+	};
+
 	return (
 		<div className={styles.formProduct}>
 			<div className={styles.formContainer}>
@@ -279,7 +287,7 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 
 				<div className={styles.formContainerButton}>
 					<button
-						onClick={handleToggleForm}
+						onClick={() => handleCloseForm()}
 						className={`${styles['btn']} ${styles.btnClose}`}
 					>
 						Close
