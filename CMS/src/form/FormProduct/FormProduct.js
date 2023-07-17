@@ -116,7 +116,13 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 			status,
 			description,
 		};
-		dispatch(handleUploadImageAsync(imageSend, formData, true));
+		if (!imageSend) {
+			// No upload image
+			dispatch(updateProductDetailAsync(productDetail.image, formData));
+		} else {
+			// Upload image
+			dispatch(handleUploadImageAsync(imageSend, formData, true));
+		}
 		// Clear the form fields after submission
 		setName('');
 		setUnit('');
