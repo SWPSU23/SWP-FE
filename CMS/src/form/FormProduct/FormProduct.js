@@ -6,6 +6,7 @@ import {convertDateFormat, formatDate, convertDateInputFormat} from '../../helpe
 import {useDispatch} from 'react-redux';
 import {handleUploadImageAsync, updateProductDetailAsync} from '../../redux/product/action';
 import {server} from '../../shared/constant';
+import {errorAlert} from '../../components/Notify/Alert';
 
 export const FormProduct = ({handleToggleForm, productDetail, categoryList, showToast}) => {
 	FormProduct.propTypes = {
@@ -83,6 +84,7 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 			expiredAt,
 			description,
 		};
+
 		dispatch(handleUploadImageAsync(imageSend, formData, false));
 
 		// Clear the form fields after submission
@@ -118,7 +120,9 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 		};
 		if (!imageSend) {
 			// No upload image
-			dispatch(updateProductDetailAsync(productDetail.image, formData));
+			dispatch(updateProductDetailAsync(productDetail.image, formData)).then((response) => {
+				console.log(response);
+			});
 		} else {
 			// Upload image
 			dispatch(handleUploadImageAsync(imageSend, formData, true));
@@ -182,6 +186,7 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 							placeholder="name ..."
 							value={name}
 							onChange={(e) => setName(e.target.value)}
+							required
 						/>
 					</div>
 
@@ -191,6 +196,7 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 							placeholder="unit ..."
 							value={unit}
 							onChange={(e) => setUnit(e.target.value)}
+							required
 						/>
 					</div>
 
@@ -200,6 +206,7 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 							placeholder="cost price ..."
 							value={costPrice}
 							onChange={(e) => setCostPrice(e.target.value)}
+							required
 						/>
 					</div>
 
@@ -209,6 +216,7 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 							placeholder="retail price ..."
 							value={retailPrice}
 							onChange={(e) => setRetailPrice(e.target.value)}
+							required
 						/>
 					</div>
 
@@ -218,6 +226,7 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 							placeholder="stock ..."
 							value={stock}
 							onChange={(e) => setStock(e.target.value)}
+							required
 						/>
 					</div>
 
@@ -270,6 +279,7 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 								setExpiredAt(e.target.value);
 								console.log(e.target.value);
 							}}
+							required
 						/>
 					</div>
 				</div>
@@ -281,6 +291,7 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 							placeholder="description ..."
 							value={description}
 							onChange={(e) => setDescription(e.target.value)}
+							required
 						/>
 					</div>
 				</div>

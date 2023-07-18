@@ -228,6 +228,7 @@ export const updateProductDetailAsync = (img, formData) => {
 			console.log(response);
 		} catch (error) {
 			console.log(error);
+			return error.response;
 		}
 	};
 };
