@@ -69,3 +69,10 @@
 .cell {
 	padding: 40px;
 }
+.calendar {
+	margin-bottom: 50px;
+}
+.calendar select {
+	font-size: 20px;
+	padding: 7px;
+}

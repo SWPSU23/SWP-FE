@@ -4,6 +4,7 @@ import {ButtonSmall} from '../../button/ButtonSmall/ButtonSmall';
 import worksheet from '../../assets/worksheet.png';
 import './FormWorksheet.css';
 import saleicon from '../../assets/saleimage.png';
+import {data} from '../../share/listOfCalendar';
 
 export const FormWorksheet = ({handleToggleForm}) => {
 	FormWorksheet.propTypes = {
@@ -22,6 +23,15 @@ export const FormWorksheet = ({handleToggleForm}) => {
 				</div>
 				<div className="tableForm">
 					<div className="tableContainer">
+						<div className="calendar">
+							<select>
+								{data.map((item, index) => (
+									<option key={index} value={index}>
+										{item.startDate} to {item.endDate}
+									</option>
+								))}
+							</select>
+						</div>
 						<table className="worksheetTable">
 							<thead>
 								<tr>

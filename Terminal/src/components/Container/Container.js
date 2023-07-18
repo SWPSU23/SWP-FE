@@ -16,7 +16,7 @@ export const Container = () => {
 		<div className={styles.container}>
 			<ContainerLeft />
 			<ContainerRight handleToggleForm={handleToggleForm} />
-			{toggleForm ? <FormSalary handleToggleForm={handleToggleForm} /> : <div></div>}
+			{toggleForm ? <FormWorksheet handleToggleForm={handleToggleForm} /> : <div></div>}
 		</div>
 	);
 };
