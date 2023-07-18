@@ -46,7 +46,9 @@ export const Order = () => {
 	useEffect(() => {
 		console.log('orderList changed', orderList);
 		// Filter orders with status === true
-		const filteredOrderList = Object.values(orderData).filter((order) => order.status === true);
+		const filteredOrderList = Object.values(orderData).filter(
+			(order) => order.status === 'succeed'
+		);
 		setOrderList(filteredOrderList);
 	}, [orderData]);
 

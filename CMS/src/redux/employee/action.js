@@ -124,7 +124,7 @@ export const addEmployeeDetailAsync = (formData) => {
 			dispatch(fetchEmployeeListAsync(1));
 			return response;
 		} catch (error) {
-			console.log(error);
+			console.log('error message', error.response.data.message);
 			throw error;
 		}
 	};

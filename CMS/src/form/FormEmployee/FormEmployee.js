@@ -4,13 +4,14 @@ import styles from './FormEmployee.module.css';
 import {useDispatch} from 'react-redux';
 import {addEmployeeDetailAsync, updateEmployeeDetailAsync} from '../../redux/employee/action';
 import {generatePassword} from '../../helper';
+import {errorAlert} from '../../components/Notify/Alert';
 // var generator = require('generate-password');
 
 export const FormEmployee = ({handleToggleForm, employeeDetail, showToast}) => {
 	FormEmployee.propTypes = {
 		handleToggleForm: PropTypes.func.isRequired,
 		showToast: PropTypes.func.isRequired,
-		employeeDetail: PropTypes.array.isRequired,
+		employeeDetail: PropTypes.array,
 	};
 	const dispatch = useDispatch();
 
@@ -52,19 +53,66 @@ export const FormEmployee = ({handleToggleForm, employeeDetail, showToast}) => {
 			baseSalary,
 		};
 		console.log(formData);
-		dispatch(addEmployeeDetailAsync(formData));
+		dispatch(
+			addEmployeeDetailAsync(formData) // call api method post
+		)
+			.then((response) => {
+				// Clear the form fields after submit
+				setId('');
+				setName('');
+				setRole('manager');
+				setPassword('');
+				setAge('');
+				setPhoneNumber('');
+				setEmail('');
+				setBaseSalary('');
+				handleToggleForm();
+				showToast('Add new employee successfully!');
+			})
+			.catch((error) => {
+				let errorMessage = error.response.data.message.split(':')[2].trim();
 
-		// Clear the form fields after submit
-		setId('');
-		setName('');
-		setRole('manager');
-		setPassword('');
-		setAge('');
-		setPhoneNumber('');
-		setEmail('');
-		setBaseSalary('');
-		handleToggleForm();
-		showToast('Add new employee successfully!');
+				//handle show exactly error message
+				if (errorMessage.includes('"age" must be a number')) {
+					errorMessage = '"age" is not allowed to be empty';
+				} else if (errorMessage.includes('"base_salary" must be a number')) {
+					errorMessage = '"base_salary" is not allowed to be empty';
+				} else if (
+					errorMessage.includes('"phone" with value') &&
+					errorMessage.includes('fails to match the required pattern')
+				) {
+					errorMessage = '"phone" is required 10 digits';
+				}
+
+				let arrayMessage = errorMessage.split(' ');
+
+				switch (arrayMessage[0]) {
+					case '"name"':
+						arrayMessage[0] = '"Name"';
+						errorMessage = arrayMessage.join(' ');
+						break;
+					case '"age"':
+						arrayMessage[0] = '"Age"';
+						errorMessage = arrayMessage.join(' ');
+						break;
+					case '"email"':
+						arrayMessage[0] = '"Email"';
+						errorMessage = arrayMessage.join(' ');
+						break;
+					case '"phone"':
+						arrayMessage[0] = '"Phone number"';
+						errorMessage = arrayMessage.join(' ');
+						break;
+					case '"base_salary"':
+						arrayMessage[0] = '"Base salary"';
+						errorMessage = arrayMessage.join(' ');
+						break;
+					default:
+						break;
+				}
+
+				errorAlert(errorMessage);
+			});
 	};
 	const handleSubmitUpdateForm = () => {
 		const formData = {
@@ -78,19 +126,66 @@ export const FormEmployee = ({handleToggleForm, employeeDetail, showToast}) => {
 			baseSalary,
 		};
 		console.log('formData' + formData);
-		dispatch(updateEmployeeDetailAsync(formData));
+		dispatch(
+			updateEmployeeDetailAsync(formData) //call api method post
+		)
+			.then((response) => {
+				// Clear the form fields after submit
+				setId('');
+				setName('');
+				setRole('');
+				setPassword('');
+				setAge('');
+				setPhoneNumber('');
+				setEmail('');
+				setBaseSalary('');
+				handleToggleForm(employeeDetail.id);
+				showToast('Update employee successfully!');
+			})
+			.catch((error) => {
+				let errorMessage = error.response.data.message.split(':')[2].trim();
 
-		// Clear the form fields after submit
-		setId('');
-		setName('');
-		setRole('');
-		setPassword('');
-		setAge('');
-		setPhoneNumber('');
-		setEmail('');
-		setBaseSalary('');
-		handleToggleForm(employeeDetail.id);
-		showToast('Update employee successfully!');
+				//handle show exactly error message
+				if (errorMessage.includes('"age" must be a number')) {
+					errorMessage = '"age" is not allowed to be empty';
+				} else if (errorMessage.includes('"base_salary" must be a number')) {
+					errorMessage = '"base_salary" is not allowed to be empty';
+				} else if (
+					errorMessage.includes('"phone" with value') &&
+					errorMessage.includes('fails to match the required pattern')
+				) {
+					errorMessage = '"phone" is required 10 digits';
+				}
+
+				let arrayMessage = errorMessage.split(' ');
+
+				switch (arrayMessage[0]) {
+					case '"name"':
+						arrayMessage[0] = '"Name"';
+						errorMessage = arrayMessage.join(' ');
+						break;
+					case '"age"':
+						arrayMessage[0] = '"Age"';
+						errorMessage = arrayMessage.join(' ');
+						break;
+					case '"email"':
+						arrayMessage[0] = '"Email"';
+						errorMessage = arrayMessage.join(' ');
+						break;
+					case '"phone"':
+						arrayMessage[0] = '"Phone number"';
+						errorMessage = arrayMessage.join(' ');
+						break;
+					case '"base_salary"':
+						arrayMessage[0] = '"Base salary"';
+						errorMessage = arrayMessage.join(' ');
+						break;
+					default:
+						break;
+				}
+
+				errorAlert(errorMessage);
+			});
 	};
 
 	const handleCloseForm = () => {
