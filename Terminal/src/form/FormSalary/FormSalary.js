@@ -142,12 +142,7 @@ export const FormSalary = ({handleToggleForm}) => {
 					</div>
 				</div>
 				<div className="buttonCancelWrap">
-					<div
-						className="buttonCancel"
-						onClick={() => {
-							handleToggleForm();
-						}}
-					>
+					<div className="buttonCancel" onClick={handleToggleForm}>
 						<ButtonSmall
 							style={{
 								backgroundColor: '#d9d9d9',

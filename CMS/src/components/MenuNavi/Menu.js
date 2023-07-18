@@ -62,6 +62,23 @@ export const Menu = () => {
 		localStorage.setItem('activeItem', item);
 	};
 
+	const handleNotifyClick = (item) => {
+		setActiveItem(item);
+		// save item active to redux
+		dispatch(actClick(item));
+
+		// Redirect to respective pages
+		if (item === 'PaySlip') {
+			navigate('/salary');
+		} else if (item === 'Product') {
+			navigate('/products');
+		} else if (item === 'Employee') {
+			navigate('/employees');
+		}
+
+		localStorage.setItem('activeItem', item);
+	};
+
 	const menu = [
 		{title: 'Dashboard', slug: ''},
 		{title: 'Product', slug: 'products'},
@@ -100,7 +117,11 @@ export const Menu = () => {
 						<div className="arrow"></div>
 						<h3>Notification</h3>
 						{data.map((notification, index) => (
-							<div key={index} className="notify">
+							<div
+								key={index}
+								className="notify"
+								onClick={() => handleNotifyClick(notification.title)}
+							>
 								<p>{notification.title}</p>
 								<div>{notification.message}</div>
 							</div>

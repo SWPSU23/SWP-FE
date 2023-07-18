@@ -1,17 +1,14 @@
 export const data = [
 	{
-		title: 'Your salary this month',
-		message:
-			"Google's service. offered free of charge, instantly translates words, phrases, and web pages between English and over 100 other languages.",
+		title: 'Leave',
+		message: 'Employee XXX has sent the application to the Managers .',
 	},
 	{
-		title: 'Your salary this month',
-		message:
-			"Google's service. offered free of charge, instantly translates words, phrases, and web pages between English and over 100 other languages.",
+		title: 'Salary',
+		message: 'Manager XXX has changed the salary.',
 	},
 	{
-		title: 'Your salary this month',
-		message:
-			"Google's service. offered free of charge, instantly translates words, phrases, and web pages between English and over 100 other languages.",
+		title: 'Check in',
+		message: 'You just checked in.',
 	},
 ];

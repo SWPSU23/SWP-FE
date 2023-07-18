@@ -162,7 +162,7 @@
 }
 
 .notify:not(:last-child) {
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 }
 
 .notificationCount {
@@ -180,4 +180,12 @@
 	font-size: 12px;
 	font-weight: bold;
 	border: none;
+}
+
+.notify {
+	cursor: pointer;
+}
+
+.notify:hover {
+	color: #036541;
 }
