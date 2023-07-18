@@ -8,6 +8,7 @@ export const FormCheckIn = ({handleToggleForm}) => {
 	FormCheckIn.propTypes = {
 		handleToggleForm: PropTypes.func.isRequired,
 	};
+
 	return (
 		<div className="formCheckIn">
 			<div className="formContainer">
@@ -23,12 +24,7 @@ export const FormCheckIn = ({handleToggleForm}) => {
 					</div>
 				</div>
 				<div className="buttonCancelWrap">
-					<div
-						className="buttonCancel"
-						onClick={() => {
-							handleToggleForm();
-						}}
-					>
+					<div className="buttonCancel" onClick={handleToggleForm}>
 						<ButtonSmall
 							style={{
 								backgroundColor: '#d9d9d9',
