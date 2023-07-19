@@ -46,7 +46,6 @@ export const FormEmployee = ({handleToggleForm, employeeDetail, showToast}) => {
 		const formData = {
 			name,
 			role,
-			password,
 			age,
 			email,
 			phoneNumber,
@@ -70,30 +69,18 @@ export const FormEmployee = ({handleToggleForm, employeeDetail, showToast}) => {
 				showToast('Add new employee successfully!');
 			})
 			.catch((error) => {
-				let errorMessage = '';
-				if (
-					error.response.data.message.split('-')[1].includes('Email already exists') //catch the email exist error message
-				) {
-					errorMessage = error.response.data.message.split('-')[1].trim();
-				} else if (
-					error.response.data.message.split(':')[1].includes('Phone already exists') //catch the phone exist error message
-				) {
-					errorMessage = error.response.data.message.split(':')[1].trim();
-				} //catch other error message
-				else {
-					errorMessage = error.response.data.message.split(':')[1].trim();
+				let errorMessage = error.response.data.message.split(':')[1].trim();
 
-					//handle show exactly error message
-					if (errorMessage.includes('"age" must be a number')) {
-						errorMessage = '"age" is not allowed to be empty';
-					} else if (errorMessage.includes('"base_salary" must be a number')) {
-						errorMessage = '"base_salary" is not allowed to be empty';
-					} else if (
-						errorMessage.includes('"phone" with value') &&
-						errorMessage.includes('fails to match the required pattern')
-					) {
-						errorMessage = '"phone" is required 10 digits';
-					}
+				//handle show exactly error message
+				if (errorMessage.includes('"age" must be a number')) {
+					errorMessage = '"age" is not allowed to be empty';
+				} else if (errorMessage.includes('"base_salary" must be a number')) {
+					errorMessage = '"base_salary" is not allowed to be empty';
+				} else if (
+					errorMessage.includes('"phone" with value') &&
+					errorMessage.includes('fails to match the required pattern')
+				) {
+					errorMessage = '"phone" is required 10 digits';
 				}
 
 				let arrayMessage = errorMessage.split(' ');
@@ -156,30 +143,16 @@ export const FormEmployee = ({handleToggleForm, employeeDetail, showToast}) => {
 				showToast('Update employee successfully!');
 			})
 			.catch((error) => {
-				let errorMessage = '';
-				if (
-					error.response.data.message.split(':')[0].includes('Email already exists') //catch the email exist error message
-				) {
-					errorMessage = error.response.data.message.split(':')[0].trim();
-				} else if (
-					error.response.data.message.split(':')[0].includes('Phone already exists') //catch the phone exist error message
-				) {
-					errorMessage = error.response.data.message.split(':')[0].trim();
-				} //catch other error message
-				else {
-					errorMessage = error.response.data.message.split(':')[2].trim();
+				let errorMessage = error.response.data.message.split(':')[1].trim();
 
-					//handle show exactly error message
-					if (errorMessage.includes('"age" must be a number')) {
-						errorMessage = '"age" is not allowed to be empty';
-					} else if (errorMessage.includes('"base_salary" must be a number')) {
-						errorMessage = '"base_salary" is not allowed to be empty';
-					} else if (
-						errorMessage.includes('"phone" with value') &&
-						errorMessage.includes('fails to match the required pattern')
-					) {
-						errorMessage = '"phone" is required 10 digits';
-					}
+				//handle show exactly error message
+				if (errorMessage.includes('"base_salary" must be a number')) {
+					errorMessage = '"base_salary" is not allowed to be empty';
+				} else if (
+					errorMessage.includes('"phone" with value') &&
+					errorMessage.includes('fails to match the required pattern')
+				) {
+					errorMessage = '"phone" is required 10 digits';
 				}
 
 				let arrayMessage = errorMessage.split(' ');
@@ -194,7 +167,7 @@ export const FormEmployee = ({handleToggleForm, employeeDetail, showToast}) => {
 						arrayMessage[0] = '"Age"';
 						errorMessage = arrayMessage.join(' ');
 						break;
-					case '"email"':
+					case '"email_address"':
 						arrayMessage[0] = '"Email"';
 						errorMessage = arrayMessage.join(' ');
 						break;
