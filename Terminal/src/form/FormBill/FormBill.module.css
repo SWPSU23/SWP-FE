@@ -1,0 +1,97 @@
+.formBill {
+	font-family: Arial, sans-serif;
+	display: flex;
+	justify-content: center;
+	padding: 20px 0;
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.21);
+}
+
+.formContainer {
+	transform: translateY(30%);
+	width: 1000px;
+	max-height: 600px;
+	background-color: white;
+	padding: 20px;
+	border-radius: 5px;
+	overflow: auto;
+}
+
+.title {
+	display: flex;
+	width: 300px;
+	justify-content: space-between;
+}
+
+.title:not(:last-child) {
+	padding-bottom: 5px;
+}
+
+.formContainer h1 {
+	margin-top: 20px;
+}
+
+.orderTable {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+	border: 2px solid #000000;
+}
+
+.orderTable th,
+.orderTable td {
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 10px;
+}
+.orderTable th {
+	background-color: #f2f2f2;
+	border-bottom: 2px solid #000000;
+}
+
+.orderTable td {
+	padding-bottom: 5px;
+}
+.orderTable td:first-child,
+.orderTable th:first-child {
+	width: 50%;
+	text-align: left;
+}
+
+.orderTable td:nth-child(2),
+.orderTable td:nth-child(3),
+.orderTable td:last-child,
+.orderTable th:nth-child(2),
+.orderTable th:nth-child(3),
+.orderTable th:last-child {
+	width: 16.67%; /* 50% divided by 3 columns */
+}
+
+.orderTable td:last-child,
+.orderTable th:last-child {
+	text-align: right;
+}
+
+.totals {
+	margin-top: 20px;
+	padding-bottom: 5px;
+	border-bottom: 2px solid black;
+}
+.total {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+.total:not(:last-child) {
+	padding-bottom: 10px;
+}
+
+.footer {
+	margin-top: 50px;
+}

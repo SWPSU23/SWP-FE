@@ -9,7 +9,7 @@ export const data = [
 		message: 'Have a product updated.',
 	},
 	{
-		title: 'Employee',
-		message: 'Have an employee created.',
+		title: 'Leave',
+		message: 'An application has been sent to you.',
 	},
 ];
