@@ -13,19 +13,15 @@ export const Container = () => {
 	const handleToggleForm = (form) => {
 		setActiveForm(form);
 	};
-	const handleToggleCloseForm = () => {
-		setActiveForm(null);
-	};
+
 	return (
 		<div className={styles.container}>
 			<ContainerLeft />
 			<ContainerRight handleToggleForm={handleToggleForm} />
-			{activeForm === '/checkin' && <FormCheckIn handleToggleForm={handleToggleCloseForm} />}
-			{activeForm === '/worksheet' && (
-				<FormWorksheet handleToggleForm={handleToggleCloseForm} />
-			)}
-			{activeForm === '/leave' && <FormLeave handleToggleForm={handleToggleCloseForm} />}
-			{activeForm === '/salary' && <FormSalary handleToggleForm={handleToggleCloseForm} />}
+			{activeForm === '/checkin' && <FormCheckIn />}
+			{activeForm === '/worksheet' && <FormWorksheet />}
+			{activeForm === '/leave' && <FormLeave />}
+			{activeForm === '/salary' && <FormSalary />}
 		</div>
 	);
 };

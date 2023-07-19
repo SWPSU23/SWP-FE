@@ -1,14 +1,11 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import './FormCheckIn.css';
 import checkin from '../../assets/checkin.png';
 import {ButtonSmall} from '../../button/ButtonSmall/ButtonSmall';
+import {useNavigate} from 'react-router';
 
-export const FormCheckIn = ({handleToggleForm}) => {
-	FormCheckIn.propTypes = {
-		handleToggleForm: PropTypes.func.isRequired,
-	};
-
+export const FormCheckIn = () => {
+	const navigate = useNavigate();
 	return (
 		<div className="formCheckIn">
 			<div className="formContainer">
@@ -24,7 +21,12 @@ export const FormCheckIn = ({handleToggleForm}) => {
 					</div>
 				</div>
 				<div className="buttonCancelWrap">
-					<div className="buttonCancel" onClick={handleToggleForm}>
+					<div
+						className="buttonCancel"
+						onClick={() => {
+							navigate('/');
+						}}
+					>
 						<ButtonSmall
 							style={{
 								backgroundColor: '#d9d9d9',

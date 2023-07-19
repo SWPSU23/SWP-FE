@@ -1,21 +1,18 @@
-import PropTypes from 'prop-types';
 import React, {useState} from 'react';
 import {ButtonSmall} from '../../button/ButtonSmall/ButtonSmall';
 import leave from '../../assets/leaveform.png';
 import './FormLeave.css';
 import saleicon from '../../assets/saleimage.png';
+import {useNavigate} from 'react-router';
 
-export const FormLeave = ({handleToggleForm}) => {
-	FormLeave.propTypes = {
-		handleToggleForm: PropTypes.func.isRequired,
-	};
-
+export const FormLeave = () => {
 	const [id, setId] = useState('');
 	const [name, setName] = useState('');
 	const [startDate, setStartDate] = useState('');
 	const [endDate, setEndDate] = useState('');
 	const [reason, setReason] = useState('');
 
+	const navigate = useNavigate();
 	return (
 		<div className="formLeave">
 			<div className="formContainer">
@@ -87,7 +84,7 @@ export const FormLeave = ({handleToggleForm}) => {
 					</div>
 				</div>
 				<div className="buttonCancelWrap">
-					<div className="buttonCancel" onClick={handleToggleForm}>
+					<div className="buttonCancel" onClick={() => navigate('/')}>
 						<ButtonSmall
 							style={{
 								backgroundColor: '#d9d9d9',
