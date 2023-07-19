@@ -49,8 +49,9 @@ export const LeaveTable = ({leaveFormList}) => {
 							<td>{leave.start_date_of_leave}</td>
 							<td>{leave.end_date_of_leave}</td>
 							<td>{leave.reason_leave}</td>
-							<td>{leave.status}</td>
 							<td>{leave.manager_replied}</td>
+							<td>{leave.status}</td>
+
 							<td>
 								<div className={style.btnArea}>
 									<button className={style.btn} onClick={handleShowSuccess}>
