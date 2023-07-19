@@ -125,6 +125,7 @@ export const addEmployeeDetailAsync = (formData) => {
 			return response;
 		} catch (error) {
 			console.log('error message', error.response.data.message);
+			console.log('error message', error.response.data.message.split(':')[0].trim());
 			throw error;
 		}
 	};

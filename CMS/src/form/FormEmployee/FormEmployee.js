@@ -70,22 +70,35 @@ export const FormEmployee = ({handleToggleForm, employeeDetail, showToast}) => {
 				showToast('Add new employee successfully!');
 			})
 			.catch((error) => {
-				let errorMessage = error.response.data.message.split(':')[2].trim();
-
-				//handle show exactly error message
-				if (errorMessage.includes('"age" must be a number')) {
-					errorMessage = '"age" is not allowed to be empty';
-				} else if (errorMessage.includes('"base_salary" must be a number')) {
-					errorMessage = '"base_salary" is not allowed to be empty';
-				} else if (
-					errorMessage.includes('"phone" with value') &&
-					errorMessage.includes('fails to match the required pattern')
+				let errorMessage = '';
+				if (
+					error.response.data.message.split(':')[0].includes('Email already exists') //catch the email exist error message
 				) {
-					errorMessage = '"phone" is required 10 digits';
+					errorMessage = error.response.data.message.split(':')[0].trim();
+				} else if (
+					error.response.data.message.split(':')[0].includes('Phone already exists') //catch the phone exist error message
+				) {
+					errorMessage = error.response.data.message.split(':')[0].trim();
+				} //catch other error message
+				else {
+					errorMessage = error.response.data.message.split(':')[2].trim();
+
+					//handle show exactly error message
+					if (errorMessage.includes('"age" must be a number')) {
+						errorMessage = '"age" is not allowed to be empty';
+					} else if (errorMessage.includes('"base_salary" must be a number')) {
+						errorMessage = '"base_salary" is not allowed to be empty';
+					} else if (
+						errorMessage.includes('"phone" with value') &&
+						errorMessage.includes('fails to match the required pattern')
+					) {
+						errorMessage = '"phone" is required 10 digits';
+					}
 				}
 
 				let arrayMessage = errorMessage.split(' ');
 
+				//change the variable name to the field name in form
 				switch (arrayMessage[0]) {
 					case '"name"':
 						arrayMessage[0] = '"Name"';
@@ -143,22 +156,35 @@ export const FormEmployee = ({handleToggleForm, employeeDetail, showToast}) => {
 				showToast('Update employee successfully!');
 			})
 			.catch((error) => {
-				let errorMessage = error.response.data.message.split(':')[2].trim();
-
-				//handle show exactly error message
-				if (errorMessage.includes('"age" must be a number')) {
-					errorMessage = '"age" is not allowed to be empty';
-				} else if (errorMessage.includes('"base_salary" must be a number')) {
-					errorMessage = '"base_salary" is not allowed to be empty';
-				} else if (
-					errorMessage.includes('"phone" with value') &&
-					errorMessage.includes('fails to match the required pattern')
+				let errorMessage = '';
+				if (
+					error.response.data.message.split(':')[0].includes('Email already exists') //catch the email exist error message
 				) {
-					errorMessage = '"phone" is required 10 digits';
+					errorMessage = error.response.data.message.split(':')[0].trim();
+				} else if (
+					error.response.data.message.split(':')[0].includes('Phone already exists') //catch the phone exist error message
+				) {
+					errorMessage = error.response.data.message.split(':')[0].trim();
+				} //catch other error message
+				else {
+					errorMessage = error.response.data.message.split(':')[2].trim();
+
+					//handle show exactly error message
+					if (errorMessage.includes('"age" must be a number')) {
+						errorMessage = '"age" is not allowed to be empty';
+					} else if (errorMessage.includes('"base_salary" must be a number')) {
+						errorMessage = '"base_salary" is not allowed to be empty';
+					} else if (
+						errorMessage.includes('"phone" with value') &&
+						errorMessage.includes('fails to match the required pattern')
+					) {
+						errorMessage = '"phone" is required 10 digits';
+					}
 				}
 
 				let arrayMessage = errorMessage.split(' ');
 
+				//change the variable name to the field name in form
 				switch (arrayMessage[0]) {
 					case '"name"':
 						arrayMessage[0] = '"Name"';
