@@ -72,8 +72,8 @@ export const Menu = () => {
 			navigate('/salary');
 		} else if (item === 'Product') {
 			navigate('/products');
-		} else if (item === 'Employee') {
-			navigate('/employees');
+		} else if (item === 'Leave') {
+			navigate('/leave');
 		}
 
 		localStorage.setItem('activeItem', item);
