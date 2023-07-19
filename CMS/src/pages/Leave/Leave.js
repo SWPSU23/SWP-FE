@@ -7,6 +7,7 @@ import Pagination from '../../components/Pagination/Pagination';
 import Loading from '../../components/Loading/Loading';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchLeaveListAsync} from '../../redux/leave/action';
+import {confirmModal, confirmToggle, rejectToggle} from '../../components/Notify/Alert';
 
 export const Leave = () => {
 	const leaveFormData = useSelector((state) => state.leave.leaveFormList);
@@ -46,7 +47,33 @@ export const Leave = () => {
 	useEffect(() => {
 		fetchData();
 	}, [currentPage]);
+	// HANDLE TOGGLE
+	const handleToggleConfirm = async () => {
+		let isConfirm = await confirmToggle('Yes')
+			.then((isConfirmed) => {
+				return isConfirmed;
+			})
+			.catch((error) => {
+				console.error('Confirmation error:', error);
+			});
 
+		setLoading(true); // Set loading to true before fetching data
+
+		setLoading(false);
+	};
+	const handleToggleReject = async () => {
+		let isConfirm = await rejectToggle('Yes')
+			.then((isConfirmed) => {
+				return isConfirmed;
+			})
+			.catch((error) => {
+				console.error('Confirmation error:', error);
+			});
+
+		setLoading(true); // Set loading to true before fetching data
+
+		setLoading(false);
+	};
 	const handlePageChange = (page) => {
 		setLoading(true);
 		setCurrentPage(page);
@@ -59,7 +86,15 @@ export const Leave = () => {
 		<div className={styles.leavePage}>
 			<Menu />
 			<Header img="../assets/image/leave.jpg" h2="Leave" />
-			{loading ? <Loading /> : <LeaveTable leaveFormList={leaveFormList} />}
+			{loading ? (
+				<Loading />
+			) : (
+				<LeaveTable
+					leaveFormList={leaveFormList}
+					handleToggleConfirm={handleToggleConfirm}
+					handleToggleReject={handleToggleReject}
+				/>
+			)}
 			<Pagination
 				currentPage={currentPage}
 				totalPages={totalPages}
