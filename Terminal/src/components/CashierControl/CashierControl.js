@@ -41,6 +41,7 @@ export const CashierControl = ({handleToggleForm}) => {
 	};
 
 	const handleToggleFormByCashier = (form) => {
+		console.log('form', form);
 		handleToggleForm(form);
 	};
 

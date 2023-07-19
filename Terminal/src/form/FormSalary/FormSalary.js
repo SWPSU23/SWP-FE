@@ -1,13 +1,11 @@
 import React from 'react';
 import './FormSalary.css';
-import PropTypes from 'prop-types';
 import salary from '../../assets/salary.png';
 import {ButtonSmall} from '../../button/ButtonSmall/ButtonSmall';
+import {useNavigate} from 'react-router';
 
-export const FormSalary = ({handleToggleForm}) => {
-	FormSalary.propTypes = {
-		handleToggleForm: PropTypes.func.isRequired,
-	};
+export const FormSalary = () => {
+	const navigate = useNavigate();
 	return (
 		<div className="formSalary">
 			<div className="formContainer">
@@ -142,7 +140,7 @@ export const FormSalary = ({handleToggleForm}) => {
 					</div>
 				</div>
 				<div className="buttonCancelWrap">
-					<div className="buttonCancel" onClick={handleToggleForm}>
+					<div className="buttonCancel" onClick={() => navigate('/')}>
 						<ButtonSmall
 							style={{
 								backgroundColor: '#d9d9d9',

@@ -1,17 +1,15 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import {ButtonSmall} from '../../button/ButtonSmall/ButtonSmall';
 import worksheet from '../../assets/worksheet.png';
 import './FormWorksheet.css';
 import saleicon from '../../assets/saleimage.png';
 import {data} from '../../share/listOfCalendar';
+import {useNavigate} from 'react-router';
 
-export const FormWorksheet = ({handleToggleForm}) => {
-	FormWorksheet.propTypes = {
-		handleToggleForm: PropTypes.func.isRequired,
-	};
+export const FormWorksheet = () => {
 	const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 	const sheets = ['1', '2', '3'];
+	const navigate = useNavigate();
 	return (
 		<div className="formWorksheet">
 			<div className="formContainer">
@@ -57,7 +55,12 @@ export const FormWorksheet = ({handleToggleForm}) => {
 					</div>
 				</div>
 				<div className="buttonCancelWrap">
-					<div className="buttonCancel" onClick={handleToggleForm}>
+					<div
+						className="buttonCancel"
+						onClick={() => {
+							navigate('/');
+						}}
+					>
 						<ButtonSmall
 							style={{
 								backgroundColor: '#d9d9d9',
