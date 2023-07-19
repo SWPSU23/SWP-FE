@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-// import PropTypes from 'prop-types';
 import {CheckOutlined, CloseOutlined} from '@ant-design/icons';
 import style from './LeaveTable.module.css';
 import {data} from '../../shared/ListOfLeave';
@@ -8,9 +7,14 @@ import {PopupError} from '../../form/FormPopup/Popup/PopupError';
 import Swal from 'sweetalert2';
 import {successAlert, errorAlert} from '../../components/Notify/Alert';
 import {succesNotify} from '../../components/Notify/Toast';
+import propTypes from 'prop-types';
 import {ToastContainer} from 'react-toastify';
 
-export const LeaveTable = () => {
+export const LeaveTable = ({leaveFormList}) => {
+	LeaveTable.propTypes = {
+		leaveFormList: propTypes.array.isRequired,
+	};
+	console.log('leave form list:', leaveFormList);
 	const [isShowSuccess, setIsShowSuccess] = useState();
 	const [isShowError, setIsShowError] = useState();
 	const [isConfirm, setIsConfirm] = useState(false);
@@ -28,23 +32,25 @@ export const LeaveTable = () => {
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Name</th>
+						<th>Number Of Leave Days Used</th>
 						<th>Start Date</th>
 						<th>End Date</th>
 						<th>Reason</th>
 						<th>Comment</th>
+						<th>Status</th>
 						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
-					{data.map((leave, index) => (
+					{leaveFormList.map((leave, index) => (
 						<tr key={index}>
-							<td>{leave.id}</td>
-							<td>{leave.name}</td>
-							<td>{leave.startDate}</td>
-							<td>{leave.endDate}</td>
-							<td>{leave.reason}</td>
-							<td>{leave.comment}</td>
+							<td>{leave.employee_id}</td>
+							<td>{leave.number_of_leave_days_used}</td>
+							<td>{leave.start_date_of_leave}</td>
+							<td>{leave.end_date_of_leave}</td>
+							<td>{leave.reason_leave}</td>
+							<td>{leave.status}</td>
+							<td>{leave.manager_replied}</td>
 							<td>
 								<div className={style.btnArea}>
 									<button className={style.btn} onClick={handleShowSuccess}>
