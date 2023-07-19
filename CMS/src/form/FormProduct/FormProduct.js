@@ -287,7 +287,8 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 				<div className={styles.formContainerBottom}>
 					<div className={`${styles['formInput']} ${styles.inputDesc}`}>
 						<h2 className={styles.labelInput}>Description: </h2>
-						<input
+						<textarea
+							className={styles.description}
 							placeholder="description ..."
 							value={description}
 							onChange={(e) => setDescription(e.target.value)}

@@ -36,7 +36,18 @@ export const EmployeeTable = ({handleToggleFormUpdate, employeeList, handleDelet
 							<td>{employee.email_address}</td>
 							<td>{employee.phone}</td>
 							<td>{employee.base_salary}</td>
-							<td>{employee.status}</td>
+							<td>
+								<p
+									className={style.status}
+									style={
+										employee.status === 'working'
+											? {backgroundColor: 'green'}
+											: {backgroundColor: 'red'}
+									}
+								>
+									{employee.status}
+								</p>
+							</td>
 							<td>
 								<div className={style.btnArea}>
 									<button

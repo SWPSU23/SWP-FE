@@ -17,7 +17,7 @@
 	overflow-y: scroll;
 	overflow-x: hidden;
 	background-color: white;
-	padding-bottom: 20px;
+	padding: 20px 0px;
 	border-radius: 5px;
 	text-align: center;
 }
@@ -125,7 +125,8 @@
 	cursor: pointer;
 }
 
-.formInput input {
+.formInput input,
+.formInput textarea {
 	margin-bottom: 20px;
 	border-radius: 5px;
 	padding-left: 20px;
@@ -136,6 +137,12 @@
 	color: #5a616c;
 	font-weight: bold;
 	outline: none;
+}
+
+.formInput textarea {
+	width: 91%;
+	height: 200px;
+	overflow: auto;
 }
 
 .inputDesc {

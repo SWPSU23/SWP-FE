@@ -22,6 +22,18 @@
 	padding: 5px;
 }
 
+.employeeTable td .status {
+	color: white;
+	text-align: center;
+	width: 70%;
+	margin: 0 auto;
+	padding: 10px;
+	text-transform: capitalize;
+	border-radius: 12px;
+	font-weight: bold;
+	font-size: 12px;
+}
+
 .employeeTable th {
 	background-color: #4e4e4e;
 	color: white;

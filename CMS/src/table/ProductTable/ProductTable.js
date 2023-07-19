@@ -47,11 +47,22 @@ const ProductTable = ({handleToggleFormUpdate, productList, handleDelete}) => {
 									/>
 								</div>
 							</td>
-							<td>{product.name}</td>
+							<td className={style.productName}>{product.name}</td>
 							<td>{product.unit}</td>
-							<td>{product.cost_price}</td>
+							<td className={style.productPrice}>{product.cost_price}</td>
 							<td>{product.stock}</td>
-							<td>{product.status}</td>
+							<td>
+								<p
+									className={style.status}
+									style={
+										product.status === 'available'
+											? {backgroundColor: 'green'}
+											: {backgroundColor: 'red'}
+									}
+								>
+									{product.status}
+								</p>
+							</td>
 							<td>{formatDate(product.expired_at)}</td>
 							<td>
 								{product.description.length <= maxDescriptionLength ? (
