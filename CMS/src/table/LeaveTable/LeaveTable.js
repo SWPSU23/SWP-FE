@@ -10,9 +10,11 @@ import {succesNotify} from '../../components/Notify/Toast';
 import propTypes from 'prop-types';
 import {ToastContainer} from 'react-toastify';
 
-export const LeaveTable = ({leaveFormList}) => {
+export const LeaveTable = ({leaveFormList, handleToggleConfirm, handleToggleReject}) => {
 	LeaveTable.propTypes = {
 		leaveFormList: propTypes.array.isRequired,
+		handleToggleConfirm: propTypes.func.isRequired,
+		handleToggleReject: propTypes.func.isRequired,
 	};
 	console.log('leave form list:', leaveFormList);
 	const [isShowSuccess, setIsShowSuccess] = useState();
@@ -26,6 +28,7 @@ export const LeaveTable = ({leaveFormList}) => {
 		// setIsShowError(!isShowError);
 		errorAlert('Please check and try again.');
 	};
+	const handleShowConfirm = () => {};
 	return (
 		<div className={style.tableWrapper}>
 			<table className={style.leaveTable}>
@@ -54,10 +57,10 @@ export const LeaveTable = ({leaveFormList}) => {
 
 							<td>
 								<div className={style.btnArea}>
-									<button className={style.btn} onClick={handleShowSuccess}>
+									<button className={style.btn} onClick={handleToggleConfirm}>
 										<CheckOutlined />
 									</button>
-									<button className={style.btn} onClick={handleShowError}>
+									<button className={style.btn} onClick={handleToggleReject}>
 										<CloseOutlined />
 									</button>
 								</div>
@@ -66,8 +69,6 @@ export const LeaveTable = ({leaveFormList}) => {
 					))}
 				</tbody>
 			</table>
-			{isShowSuccess && <PopupSuccess handleToggleForm={handleShowSuccess} />}
-			{isShowError && <PopupError handleToggleForm={handleShowError} />}
 		</div>
 	);
 };
