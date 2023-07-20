@@ -41,14 +41,13 @@ export const CashierControl = ({handleToggleForm}) => {
 	};
 
 	const handleToggleFormByCashier = (form) => {
-		console.log('form', form);
 		handleToggleForm(form);
 	};
 
 	return (
 		<div className="cashierControl">
 			{cashierFunction.map((item) => (
-				<div key={item.id} onClick={handleToggleFormByCashier}>
+				<div key={item.id} onClick={() => handleToggleFormByCashier(item.content)}>
 					<NavLink to={item.link} activeClassName="active" exact>
 						<ButtonMedium content={item.content} img={item.img} />
 					</NavLink>
