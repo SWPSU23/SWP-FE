@@ -12,7 +12,7 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 	FormProduct.propTypes = {
 		handleToggleForm: PropTypes.func.isRequired,
 		showToast: PropTypes.func.isRequired,
-		productDetail: PropTypes.array.isRequired,
+		productDetail: PropTypes.object.isRequired,
 		categoryList: PropTypes.array.isRequired,
 	};
 
@@ -76,6 +76,7 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 		const formData = {
 			name,
 			unit,
+			image: imageSend,
 			costPrice,
 			retailPrice,
 			stock,
@@ -84,21 +85,71 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 			expiredAt,
 			description,
 		};
+		dispatch(handleUploadImageAsync(imageSend, formData, false, true))
+			.then((response) => {
+				console.log(response);
 
-		dispatch(handleUploadImageAsync(imageSend, formData, false));
+				console.log('Clear form');
+				// Clear the form fields after submission
+				setName('');
+				setUnit('');
+				setCostPrice('');
+				setRetailPrice('');
+				setStock('');
+				setStatus('');
+				setExpiredAt('');
+				setDescription('');
+				setCategory('Drink');
+				handleToggleForm();
+				showToast('Add new product successfully!');
+			})
+			.catch((error) => {
+				console.log('error in form product', error);
+				let errorMessage = '';
+				if (imageSend === '') {
+					errorMessage = 'Please upload your image!';
+				} else if (error.response.data.message) {
+					errorMessage = error.response.data.message.split(':')[1].trim();
+					if (
+						errorMessage.includes('"expired_at" with value') ||
+						errorMessage.includes("for column 'expired_at' at row 1")
+					) {
+						errorMessage = '"expired_at" is invalid';
+					}
+					let arrayMessage = errorMessage.split(' ');
 
-		// Clear the form fields after submission
-		setName('');
-		setUnit('');
-		setCostPrice('');
-		setRetailPrice('');
-		setStock('');
-		setStatus('');
-		setExpiredAt('');
-		setDescription('');
-		setCategory('Drink');
-		handleToggleForm();
-		showToast('Add new product successfully!');
+					//change the variable name to the field name in form
+					switch (arrayMessage[0]) {
+						case '"name"':
+							arrayMessage[0] = '"Name"';
+							break;
+						case '"unit"':
+							arrayMessage[0] = '"Unit"';
+							break;
+						case '"cost_price"':
+							arrayMessage[0] = '"Cost Price"';
+							break;
+						case '"retail_price"':
+							arrayMessage[0] = '"Retail price"';
+							break;
+						case '"stock"':
+							arrayMessage[0] = '"Stock"';
+							break;
+						case '"expired_at"':
+							arrayMessage[0] = '"Expired at"';
+							break;
+						case '"description"':
+							arrayMessage[0] = '"Description"';
+							break;
+						default:
+							break;
+					}
+
+					errorMessage = arrayMessage.join(' ');
+				}
+
+				errorAlert(errorMessage);
+			});
 	};
 
 	function getCurrentTime() {
@@ -117,28 +168,125 @@ export const FormProduct = ({handleToggleForm, productDetail, categoryList, show
 			stock,
 			status,
 			description,
+			expiredAt,
 		};
 		if (!imageSend) {
 			// No upload image
-			dispatch(updateProductDetailAsync(productDetail.image, formData)).then((response) => {
-				console.log(response);
-			});
+			dispatch(handleUploadImageAsync(productDetail.image, formData, true, false))
+				.then((response) => {
+					console.log('run then');
+					// Clear the form fields after submission
+					setName('');
+					setUnit('');
+					setCostPrice('');
+					setRetailPrice('');
+					setStock('');
+					setStatus('available');
+					setCategory('Drink');
+					setExpiredAt('');
+					setDescription('');
+					handleToggleForm(productDetail.id);
+					showToast('Update product successfully!');
+				})
+				.catch((error) => {
+					console.log('run error');
+					let errorMessage = error.response.data.message.split(':')[1].trim();
+					if (
+						errorMessage.includes('"expired_at" with value') ||
+						errorMessage.includes("for column 'expired_at' at row 1")
+					) {
+						errorMessage = '"expired_at" is invalid';
+					}
+					let arrayMessage = errorMessage.split(' ');
+
+					//change the variable name to the field name in form
+					switch (arrayMessage[0]) {
+						case '"name"':
+							arrayMessage[0] = '"Name"';
+							break;
+						case '"unit"':
+							arrayMessage[0] = '"Unit"';
+							break;
+						case '"cost_price"':
+							arrayMessage[0] = '"Cost Price"';
+							break;
+						case '"retail_price"':
+							arrayMessage[0] = '"Retail price"';
+							break;
+						case '"stock"':
+							arrayMessage[0] = '"Stock"';
+							break;
+						case '"expired_at"':
+							arrayMessage[0] = '"Expired at"';
+							break;
+						case '"description"':
+							arrayMessage[0] = '"Description"';
+							break;
+						default:
+							break;
+					}
+
+					errorMessage = arrayMessage.join(' ');
+					errorAlert(errorMessage);
+				});
 		} else {
 			// Upload image
-			dispatch(handleUploadImageAsync(imageSend, formData, true));
+			dispatch(handleUploadImageAsync(imageSend, formData, true, true))
+				.then((response) => {
+					// Clear the form fields after submission
+					setName('');
+					setUnit('');
+					setCostPrice('');
+					setRetailPrice('');
+					setStock('');
+					setStatus('available');
+					setCategory('Drink');
+					setExpiredAt('');
+					setDescription('');
+					handleToggleForm(productDetail.id);
+					showToast('Update product successfully!');
+				})
+				.catch((error) => {
+					let errorMessage = error.response.data.message.split(':')[1].trim();
+					if (
+						errorMessage.includes('"expired_at" with value') ||
+						errorMessage.includes("for column 'expired_at' at row 1")
+					) {
+						errorMessage = '"expired_at" is invalid';
+					}
+					let arrayMessage = errorMessage.split(' ');
+
+					//change the variable name to the field name in form
+					switch (arrayMessage[0]) {
+						case '"name"':
+							arrayMessage[0] = '"Name"';
+							break;
+						case '"unit"':
+							arrayMessage[0] = '"Unit"';
+							break;
+						case '"cost_price"':
+							arrayMessage[0] = '"Cost Price"';
+							break;
+						case '"retail_price"':
+							arrayMessage[0] = '"Retail price"';
+							break;
+						case '"stock"':
+							arrayMessage[0] = '"Stock"';
+							break;
+						case '"expired_at"':
+							arrayMessage[0] = '"Expired at"';
+							break;
+						case '"description"':
+							arrayMessage[0] = '"Description"';
+							break;
+						default:
+							break;
+					}
+
+					errorMessage = arrayMessage.join(' ');
+					errorAlert(errorMessage);
+				});
 		}
-		// Clear the form fields after submission
-		setName('');
-		setUnit('');
-		setCostPrice('');
-		setRetailPrice('');
-		setStock('');
-		setStatus('available');
-		setCategory('Drink');
-		setExpiredAt('');
-		setDescription('');
-		handleToggleForm(productDetail.id);
-		showToast('Update product successfully!');
 	};
 
 	const handleCloseForm = () => {

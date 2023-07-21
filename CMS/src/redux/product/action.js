@@ -128,30 +128,37 @@ export const deleteProductAsync = async (id) => {
 
 // HANDLE UPLOAD IMAGE
 
-export const handleUploadImageAsync = (img, formDataClient, isUpdate) => {
+export const handleUploadImageAsync = (img, formDataClient, isUpdate, isUploadImg) => {
 	console.log(isUpdate);
-
 	const formData = new FormData();
 	formData.append('file', img);
-	return async (dispatch) => {
+	return async () => {
 		try {
-			const response = await axios.post(`${server}/v1/asset/product/images/`, formData, {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-					Accept: '*/*',
-				},
-			});
-			if (isUpdate) {
-				console.log('update request');
-				dispatch(updateProductDetailAsync(response.data.split(':')[1], formDataClient));
+			let response = '';
+			if (isUploadImg) {
+				response = await axios.post(`${server}/v1/asset/product/images/`, formData, {
+					headers: {
+						'Content-Type': 'multipart/form-data',
+						Accept: '*/*',
+					},
+				});
 			} else {
-				console.log('add request');
-				dispatch(addProductDetailAsync(response.data.split(':')[1], formDataClient));
+				response = img;
+			}
+			if (isUpdate) {
+				console.log('update request', response.data);
+				if (isUploadImg) {
+					return updateProductDetailAsync(response.data.split(':')[1], formDataClient);
+				} else {
+					return updateProductDetailAsync(response, formDataClient);
+				}
+			} else {
+				console.log('add request', response);
+				return addProductDetailAsync(response.data.split(':')[1], formDataClient);
 			}
 		} catch (error) {
-			// Handle error
-			console.log(error.response);
-			// You can handle the error here and display an appropriate message
+			console.log(error);
+			throw error;
 		}
 	};
 };
@@ -162,18 +169,12 @@ export const handlePreviewImageAsync = (idImage) => {
 	console.log(idImage);
 
 	return async (dispatch) => {
-		try {
-			const response = await axios.get(
-				'http://localhost:8080/v1/asset/product/images/' + idImage
-			);
-			console.log('vao day');
+		const response = await axios.get(
+			'http://localhost:8080/v1/asset/product/images/' + idImage
+		);
+		console.log('vao day');
 
-			return response;
-		} catch (error) {
-			// Handle error
-			console.log(error.response);
-			// You can handle the error here and display an appropriate message
-		}
+		return response;
 	};
 };
 
@@ -191,25 +192,26 @@ export const addProductDetailAsync = async (img, formData) => {
 		category: formData.category,
 		stock: formData.stock,
 		description: formData.description,
-		expired_at: moment(formData.expiredAt).format('YYYY-MM-DD HH:mm:ss'),
+		expired_at: moment(formData.expiredAt).format('YYYY-MM-DD'),
 	};
 	console.log('formData: ' + JSON.stringify(body));
 
 	try {
 		const response = await axios.post(`${server}/v1/product`, body);
+		return response;
 	} catch (error) {
 		console.log(error);
+		throw error;
 	}
 };
 
 // UPDATE A PRODUCT DETAILS
-export const updateProductDetailAsync = (img, formData) => {
+export const updateProductDetailAsync = async (img, formData) => {
 	console.log('formDataClient', formData);
 	console.log(formData.id);
 	console.log('img', img);
 	const body = {
 		image: img,
-		id: formData.id,
 		name: formData.name,
 		unit: formData.unit,
 		cost_price: formData.costPrice,
@@ -218,19 +220,24 @@ export const updateProductDetailAsync = (img, formData) => {
 		stock: formData.stock,
 		status: formData.status,
 		description: formData.description,
-		expired_at: moment(formData.expiredAt).format('YYYY-MM-DD HH:mm:ss'),
+		expired_at: moment(formData.expiredAt).format('YYYY-MM-DD'),
 	};
 	console.log('body', body);
-	return async (dispatch) => {
-		try {
-			const response = await axios.put(`${server}/v1/product/${formData.id}`, body);
-			dispatch(fetchProductListAsync(1));
-			console.log(response);
-		} catch (error) {
-			console.log(error);
-			return error.response;
-		}
-	};
+	// 	const response = await axios.put(`${server}/v1/product/${formData.id}`, body);
+	// 	dispatch(fetchProductListAsync(1));
+	// 	console.log(response);
+	try {
+		const response = await axios
+			.put(`${server}/v1/product/${formData.id}`, body)
+			.then((response) => {
+				fetchProductListAsync(1);
+			});
+		console.log(response);
+		return response;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
 };
 
 // export const setSearchQuery = (query) => ({

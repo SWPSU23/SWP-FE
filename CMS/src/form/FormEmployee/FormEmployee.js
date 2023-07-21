@@ -89,28 +89,23 @@ export const FormEmployee = ({handleToggleForm, employeeDetail, showToast}) => {
 				switch (arrayMessage[0]) {
 					case '"name"':
 						arrayMessage[0] = '"Name"';
-						errorMessage = arrayMessage.join(' ');
 						break;
 					case '"age"':
 						arrayMessage[0] = '"Age"';
-						errorMessage = arrayMessage.join(' ');
 						break;
 					case '"email_address"':
 						arrayMessage[0] = '"Email"';
-						errorMessage = arrayMessage.join(' ');
 						break;
 					case '"phone"':
 						arrayMessage[0] = '"Phone number"';
-						errorMessage = arrayMessage.join(' ');
 						break;
 					case '"base_salary"':
 						arrayMessage[0] = '"Base salary"';
-						errorMessage = arrayMessage.join(' ');
 						break;
 					default:
 						break;
 				}
-
+				errorMessage = arrayMessage.join(' ');
 				errorAlert(errorMessage);
 			});
 	};
@@ -119,7 +114,6 @@ export const FormEmployee = ({handleToggleForm, employeeDetail, showToast}) => {
 			id: employeeDetail.id,
 			name,
 			role,
-			password,
 			age,
 			email,
 			phoneNumber,
@@ -161,28 +155,23 @@ export const FormEmployee = ({handleToggleForm, employeeDetail, showToast}) => {
 				switch (arrayMessage[0]) {
 					case '"name"':
 						arrayMessage[0] = '"Name"';
-						errorMessage = arrayMessage.join(' ');
 						break;
 					case '"age"':
 						arrayMessage[0] = '"Age"';
-						errorMessage = arrayMessage.join(' ');
 						break;
 					case '"email_address"':
 						arrayMessage[0] = '"Email"';
-						errorMessage = arrayMessage.join(' ');
 						break;
 					case '"phone"':
 						arrayMessage[0] = '"Phone number"';
-						errorMessage = arrayMessage.join(' ');
 						break;
 					case '"base_salary"':
 						arrayMessage[0] = '"Base salary"';
-						errorMessage = arrayMessage.join(' ');
 						break;
 					default:
 						break;
 				}
-
+				errorMessage = arrayMessage.join(' ');
 				errorAlert(errorMessage);
 			});
 	};
