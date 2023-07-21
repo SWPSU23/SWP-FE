@@ -1,0 +1,102 @@
+.formSalary {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.277);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.formContainer {
+	width: 80%;
+	height: 90%;
+	background-color: white;
+}
+
+.formTitleSalary {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 20px;
+}
+.formTitleSalary img {
+	height: 50px;
+	width: 50px;
+}
+
+.formTitleSalary h1 {
+	margin-left: 30px;
+}
+.buttonCancelWrap {
+	width: 95%;
+	display: flex;
+	justify-content: end;
+	margin-top: 40px;
+}
+.buttonCancel {
+	width: 10%;
+}
+
+.tableForm {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-height: 70%;
+	max-width: 100%;
+}
+
+.tableContainer {
+	margin: 20px;
+	width: 80%;
+}
+.salaryTable {
+	border-collapse: collapse;
+	width: 100%;
+	height: 100%;
+	margin-top: 10px;
+}
+.rowStart {
+	padding: 8px;
+	font-weight: bold;
+	border: 1px solid black;
+}
+
+.columnEnd {
+	border: 1px solid black;
+}
+
+.column {
+	padding: 8px;
+	font-weight: bold;
+	border: 1px solid black;
+}
+.infoSalary {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.titleTable {
+	display: flex;
+	justify-content: space-between;
+	width: 300px;
+	font-size: 18px;
+}
+
+.titleTableEnd {
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	flex-direction: column;
+}
+
+.titleTable,
+.titleTableEnd {
+	padding: 10px 0;
+	font-size: 20px;
+}

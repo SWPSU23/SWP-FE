@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {ButtonSmall} from '../../button/ButtonSmall/ButtonSmall';
 import leave from '../../assets/leaveform.png';
-import './FormLeave.css';
+import styles from './FormLeave.module.css'; // Import the CSS module
+
 import PropTypes from 'prop-types';
 import {useNavigate} from 'react-router';
 import {addLeaveFormAsync} from '../../redux/leave/action';
@@ -46,19 +47,19 @@ export const FormLeave = () => {
 
 	const navigate = useNavigate();
 	return (
-		<div className="formLeave">
-			<div className="formContainer">
-				<div className="formTitle">
+		<div className={styles.formLeave}>
+			<div className={styles.formContainer}>
+				<div className={styles.formTitle}>
 					<div>
-						<img src={leave} />
+						<img src={leave} alt="Leave Form" />
 					</div>
 					<h1>Leave Form</h1>
 				</div>
-				<div className="formContainerCenter">
-					<div className="formCenter">
-						<div className="formRow">
-							<div className="formInput">
-								<h2 className="labelInput">Employee ID: </h2>
+				<div className={styles.formContainerCenter}>
+					<div className={styles.formCenter}>
+						<div className={styles.formRow}>
+							<div className={styles.formInput}>
+								<h2 className={styles.labelInput}>Employee ID: </h2>
 								<input
 									type="number"
 									placeholder="id ..."
@@ -67,8 +68,8 @@ export const FormLeave = () => {
 								/>
 							</div>
 
-							<div className="formInput">
-								<h2 className="labelInput">Leave Used: </h2>
+							<div className={styles.formInput}>
+								<h2 className={styles.labelInput}>Leave Used: </h2>
 								<input
 									type="number"
 									placeholder="number ..."
@@ -77,8 +78,8 @@ export const FormLeave = () => {
 								/>
 							</div>
 
-							<div className="formInput">
-								<h2 className="labelInput">Start Date: </h2>
+							<div className={styles.formInput}>
+								<h2 className={styles.labelInput}>Start Date: </h2>
 								<input
 									type="date"
 									placeholder="date ..."
@@ -86,8 +87,8 @@ export const FormLeave = () => {
 									onChange={(e) => setStartDateOfLeave(e.target.value)}
 								/>
 							</div>
-							<div className="formInput">
-								<h2 className="labelInput">End Date: </h2>
+							<div className={styles.formInput}>
+								<h2 className={styles.labelInput}>End Date: </h2>
 								<input
 									type="date"
 									placeholder="date ..."
@@ -97,9 +98,9 @@ export const FormLeave = () => {
 							</div>
 						</div>
 					</div>
-					<div className="formInputReason">
-						<h2 className="labelInputReason">Reason: </h2>
-						<div className="inputReason">
+					<div className={styles.formInputReason}>
+						<h2 className={styles.labelInputReason}>Reason: </h2>
+						<div className={styles.inputReason}>
 							<input
 								placeholder=""
 								value={reasonLeave}
@@ -108,8 +109,8 @@ export const FormLeave = () => {
 						</div>
 					</div>
 				</div>
-				<div className="buttonSendWrap">
-					<div className="buttonSend" onClick={handleSubmitForm}>
+				<div className={styles.buttonSendWrap}>
+					<div className={styles.buttonSend} onClick={handleSubmitForm}>
 						<ButtonSmall
 							style={{
 								backgroundColor: '#036541',
@@ -119,8 +120,8 @@ export const FormLeave = () => {
 						/>
 					</div>
 				</div>
-				<div className="buttonCancelWrap">
-					<div className="buttonCancel" onClick={() => navigate('/')}>
+				<div className={styles.buttonCancelWrap}>
+					<div className={styles.buttonCancel} onClick={() => navigate('/')}>
 						<ButtonSmall
 							style={{
 								backgroundColor: '#d9d9d9',
