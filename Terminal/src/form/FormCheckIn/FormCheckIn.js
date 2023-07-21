@@ -1,5 +1,5 @@
 import React from 'react';
-import './FormCheckIn.css';
+import styles from './FormCheckIn.module.css'; // Import the CSS module
 import checkin from '../../assets/checkin.png';
 import {ButtonSmall} from '../../button/ButtonSmall/ButtonSmall';
 import {useNavigate} from 'react-router';
@@ -7,22 +7,22 @@ import {useNavigate} from 'react-router';
 export const FormCheckIn = () => {
 	const navigate = useNavigate();
 	return (
-		<div className="formCheckIn">
-			<div className="formContainer">
-				<div className="formTitle">
+		<div className={styles.formCheckIn}>
+			<div className={styles.formContainer}>
+				<div className={styles.formTitle}>
 					<div>
-						<img src={checkin} />
+						<img src={checkin} alt="Check in - out" />
 					</div>
 					<h1>Check in - out</h1>
 				</div>
-				<div className="buttonCheckWrap">
-					<div className="buttonCheck">
+				<div className={styles.buttonCheckWrap}>
+					<div className={styles.buttonCheck}>
 						<h1>Check in</h1>
 					</div>
 				</div>
-				<div className="buttonCancelWrap">
+				<div className={styles.buttonCancelWrap}>
 					<div
-						className="buttonCancel"
+						className={styles.buttonCancel}
 						onClick={() => {
 							navigate('/');
 						}}

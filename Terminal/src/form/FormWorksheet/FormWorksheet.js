@@ -1,7 +1,7 @@
 import React from 'react';
 import {ButtonSmall} from '../../button/ButtonSmall/ButtonSmall';
 import worksheet from '../../assets/worksheet.png';
-import './FormWorksheet.css';
+import styles from './FormWorksheet.module.css'; // Import the CSS module with the new name
 import saleicon from '../../assets/saleimage.png';
 import {data} from '../../share/listOfCalendar';
 import {useNavigate} from 'react-router';
@@ -10,18 +10,19 @@ export const FormWorksheet = () => {
 	const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 	const sheets = ['1', '2', '3'];
 	const navigate = useNavigate();
+
 	return (
-		<div className="formWorksheet">
-			<div className="formContainer">
-				<div className="formTitle">
+		<div className={styles.formWorksheet}>
+			<div className={styles.formContainer}>
+				<div className={styles.formTitle}>
 					<div>
-						<img src={worksheet} />
+						<img src={worksheet} alt="Worksheet" />
 					</div>
 					<h1>Worksheet</h1>
 				</div>
-				<div className="tableForm">
-					<div className="tableContainer">
-						<div className="calendar">
+				<div className={styles.tableForm}>
+					<div className={styles.tableContainer}>
+						<div className={styles.calendar}>
 							<select>
 								{data.map((item, index) => (
 									<option key={index} value={index}>
@@ -30,7 +31,7 @@ export const FormWorksheet = () => {
 								))}
 							</select>
 						</div>
-						<table className="worksheetTable">
+						<table className={styles.worksheetTable}>
 							<thead>
 								<tr>
 									<th></th> {/* Ô trống ở góc trên bên trái */}
@@ -44,8 +45,8 @@ export const FormWorksheet = () => {
 									<tr key={index}>
 										<th>Sheet {sheet}</th>
 										{days.map((day, dayIndex) => (
-											<td key={dayIndex} className="cell">
-												<img src={saleicon} />
+											<td key={dayIndex} className={styles.cell}>
+												<img src={saleicon} alt="Sale Icon" />
 											</td>
 										))}
 									</tr>
@@ -54,9 +55,9 @@ export const FormWorksheet = () => {
 						</table>
 					</div>
 				</div>
-				<div className="buttonCancelWrap">
+				<div className={styles.buttonCancelWrap}>
 					<div
-						className="buttonCancel"
+						className={styles.buttonCancel}
 						onClick={() => {
 							navigate('/');
 						}}
