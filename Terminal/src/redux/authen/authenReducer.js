@@ -1,7 +1,7 @@
 import {SET_ROLE} from './action';
 
 const initialState = {
-	isCashier: false,
+	isCashier: true,
 };
 
 const authenReducer = (state = initialState, action) => {

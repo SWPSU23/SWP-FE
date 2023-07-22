@@ -127,9 +127,9 @@ const FormWorksheetAddCashier = ({handleGetWorkSheet, handleAddClick}) => {
 				)}
 				<div className={styles.formContainerCenter}>
 					<div className={styles.formInput}>
-						<h2 className={styles.labelInput}>Guard: </h2>
+						<h2 className={styles.labelInput}>Cashier: </h2>
 						<select value={name} onChange={handleNameChange}>
-							<option value="">Select Guard</option>
+							<option value="">Select Cashier</option>
 							{listName.map((name) => (
 								<option key={name.id} value={name.id}>
 									{name.name} - {name.id}
@@ -163,6 +163,7 @@ const FormWorksheetAddCashier = ({handleGetWorkSheet, handleAddClick}) => {
 										<option value="">Select Sheet</option>
 										<option value="1">Sheet 1</option>
 										<option value="2">Sheet 2</option>
+										<option value="3">Sheet 3</option>
 										{/* Add more options as needed */}
 									</select>
 								</div>
