@@ -1,13 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './PriceTotal.css';
+import {useSelector} from 'react-redux';
 
 export const PriceTotal = () => {
+	const orderDetails = useSelector((state) => state.billOrder.orderDetails);
+	let subTotal = 0;
+	let totalQuantity = 0;
+	let productTax = 0;
+	orderDetails.map((product) => {
+		totalQuantity = totalQuantity + product.quantity;
+		subTotal = subTotal + product.total;
+	});
+
+	const formattedCurrency = (number) => {
+		return number.toLocaleString('vi-VN', {
+			style: 'currency',
+			currency: 'VND',
+			minimumFractionDigits: 0,
+		});
+	};
+
+	console.log(formattedCurrency(subTotal));
 	return (
 		<div className="priceTotal">
 			<div className="inputForm">
 				<div className="inputTotal">
 					<label>Quantity:</label>
-					<input value="15" />
+					<input value={totalQuantity} />
 				</div>
 				<div className="inputTotal">
 					<label>Product tax:</label>
@@ -15,7 +34,7 @@ export const PriceTotal = () => {
 				</div>
 				<div className="inputTotal">
 					<label>Subtotal:</label>
-					<input value="300.000" />
+					<input value={formattedCurrency(subTotal)} />
 				</div>
 				<div className="inputTotal">
 					<label>Surcharge:</label>
@@ -24,7 +43,7 @@ export const PriceTotal = () => {
 			</div>
 			<div className="totalForm">
 				<p>TOTAL</p>
-				<input value="300.000" />
+				<input value={formattedCurrency(subTotal)} />
 			</div>
 		</div>
 	);
