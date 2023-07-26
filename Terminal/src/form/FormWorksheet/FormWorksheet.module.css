@@ -25,6 +25,7 @@
 	justify-content: center;
 	margin-top: 30px;
 }
+
 .formTitle img {
 	height: 60px;
 	width: 40px;
@@ -78,12 +79,25 @@
 }
 
 .cell {
-	padding: 40px;
+	height: 120px;
 }
+
 .calendar {
 	margin-bottom: 30px;
 }
+
 .calendar select {
 	font-size: 20px;
 	padding: 7px;
+}
+
+.worksheetEmployee {
+	height: 100;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.worksheetEmployee img {
+	height: 60%;
 }

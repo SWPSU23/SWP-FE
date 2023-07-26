@@ -46,9 +46,9 @@ export const DropDown = ({handleGetWorkSheet}) => {
 				onChange={handleChange}
 			>
 				{/* Add a conditional check before rendering date options */}
-				<option style={{display: 'flex', textAlign: 'center'}}>
+				{/* <option style={{display: 'flex', textAlign: 'center'}}>
 					---------------------------------
-				</option>
+				</option> */}
 				{listDay &&
 					listDay.map((item, index) => (
 						<option key={index} value={`${item.from_date},${item.to_date}`}>
