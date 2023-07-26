@@ -189,6 +189,7 @@ const FormWorksheetAddGuard = ({handleGetWorkSheet, handleAddClick, handleToggle
 
 						<button
 							onClick={handleDelete}
+							style={{marginLeft: 5, marginRight: 5}}
 							className={`${styles.btn} ${styles.btnDelete}`}
 						>
 							Delete

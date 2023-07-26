@@ -14,6 +14,8 @@ const userReducer = (state = initialState, action) => {
 		// 		searchQuery: action.payload,
 		// 	};
 		case INIT_EMPLOYEE_LIST:
+			console.log('vao day: ', action.payload.info.total_page);
+
 			return {
 				...state,
 				totalPages: action.payload.info.total_page,

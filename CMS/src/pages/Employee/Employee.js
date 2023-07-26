@@ -25,7 +25,8 @@ export const Employee = () => {
 
 	const employeeData = useSelector((state) => state.user.employeeList);
 	const employeeDetail = useSelector((state) => state.user.employeeDetail);
-	const totalPages = useSelector((state) => state.product.totalPages);
+	const totalPages = useSelector((state) => state.user.totalPages);
+	console.log(totalPages);
 
 	const [employeeList, setEmployeeList] = useState([]);
 	// GET DATA
