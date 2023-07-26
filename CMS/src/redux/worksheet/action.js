@@ -170,9 +170,9 @@ export const deleteWorksheetByIDAsync = (id) => {
 };
 
 // UPDATE WORKSHEET BY ID
-export const updateWorksheetByIDAsync = (id, name) => {
+export const updateWorksheetByIDAsync = (id, employee_id) => {
 	const body = {
-		employee_id: name,
+		employee_id: employee_id,
 	};
 	return async (dispatch) => {
 		try {
@@ -181,6 +181,7 @@ export const updateWorksheetByIDAsync = (id, name) => {
 			return response;
 		} catch (error) {
 			console.log(error);
+			throw error;
 		}
 	};
 };
