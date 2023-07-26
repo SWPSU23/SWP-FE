@@ -23,3 +23,21 @@ export const fetchLeaveListAsync = (pageIndex) => {
 		}
 	};
 };
+
+// Response leave form
+export const actResponseLeaveFormAsync = (idForm, status, comment) => {
+	console.log('vao actResponseLeaveFormAsync', status + ' ' + comment);
+	const body = {
+		status: status,
+		manager_replied: comment,
+	};
+
+	return async (dispatch) => {
+		try {
+			const response = await axios.put(`${server}/v1/leaveForm/${idForm}`, body);
+			return response;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};

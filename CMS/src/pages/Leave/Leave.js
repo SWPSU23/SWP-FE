@@ -6,12 +6,13 @@ import {LeaveTable} from '../../table/LeaveTable/LeaveTable';
 import Pagination from '../../components/Pagination/Pagination';
 import Loading from '../../components/Loading/Loading';
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchLeaveListAsync} from '../../redux/leave/action';
+import {actResponseLeaveFormAsync, fetchLeaveListAsync} from '../../redux/leave/action';
 import {confirmModal, confirmToggle, rejectToggle} from '../../components/Notify/Alert';
 
 export const Leave = () => {
-	const leaveFormData = useSelector((state) => state.leave.leaveFormList);
-	const totalPages = useSelector((state) => state.leave.totalPages);
+	const leaveFormData = useSelector((state) => state.leave.leaveFormList.leave_form);
+	const totalPages = useSelector((state) => state.leave.leaveFormList.info.total_page);
+	console.log(totalPages);
 
 	const [leaveFormList, setLeaveFormList] = useState([]);
 	const dispatch = useDispatch();
@@ -21,7 +22,6 @@ export const Leave = () => {
 		setLoading(true);
 		try {
 			const response = await dispatch(fetchLeaveListAsync(currentPage));
-			console.log('Data from API:', response.data);
 		} catch (error) {
 			console.log(error);
 		}
@@ -48,9 +48,12 @@ export const Leave = () => {
 		fetchData();
 	}, [currentPage]);
 	// HANDLE TOGGLE
-	const handleToggleConfirm = async () => {
+	const handleToggleConfirm = async (id, comment) => {
 		let isConfirm = await confirmToggle('Yes')
 			.then((isConfirmed) => {
+				dispatch(actResponseLeaveFormAsync(id, 'approved', comment)).then((response) => {
+					dispatch(fetchLeaveListAsync(1));
+				});
 				return isConfirmed;
 			})
 			.catch((error) => {
@@ -61,9 +64,13 @@ export const Leave = () => {
 
 		setLoading(false);
 	};
-	const handleToggleReject = async () => {
+	const handleToggleReject = async (id, comment) => {
 		let isConfirm = await rejectToggle('Yes')
 			.then((isConfirmed) => {
+				dispatch(actResponseLeaveFormAsync(id, 'rejected', comment)).then((response) => {
+					dispatch(fetchLeaveListAsync(1));
+				});
+
 				return isConfirmed;
 			})
 			.catch((error) => {
