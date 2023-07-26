@@ -1,7 +1,8 @@
-import {ADD_ORDER_DETAIL, DELETE_PRODUCT_IN_ORDER} from './action';
+import {ADD_ORDER_DETAIL, DELETE_PRODUCT_IN_ORDER, UPDATE_SELECTED_PAYMENT_METHOD} from './action';
 
 const initialState = {
 	orderDetails: [],
+	selectedPaymentMethod: null,
 };
 
 let newItem = {};
@@ -54,6 +55,11 @@ const billOrderReducer = (state = initialState, action) => {
 			return {
 				...state,
 				orderDetails: [...newOrderDetails],
+			};
+		case UPDATE_SELECTED_PAYMENT_METHOD:
+			return {
+				...state,
+				selectedPaymentMethod: action.payload,
 			};
 
 		default:
