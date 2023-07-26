@@ -16,7 +16,6 @@ export const LeaveTable = ({leaveFormList, handleToggleConfirm, handleToggleReje
 		handleToggleConfirm: propTypes.func.isRequired,
 		handleToggleReject: propTypes.func.isRequired,
 	};
-	console.log('leave form list:', leaveFormList);
 	const [isShowSuccess, setIsShowSuccess] = useState();
 	const [isShowError, setIsShowError] = useState();
 	const [isConfirm, setIsConfirm] = useState(false);
@@ -28,13 +27,12 @@ export const LeaveTable = ({leaveFormList, handleToggleConfirm, handleToggleReje
 		// setIsShowError(!isShowError);
 		errorAlert('Please check and try again.');
 	};
-	const handleShowConfirm = () => {};
 	return (
 		<div className={style.tableWrapper}>
 			<table className={style.leaveTable}>
 				<thead>
 					<tr>
-						<th>ID</th>
+						<th>ID Form</th>
 						<th>Number Of Leave Days Used</th>
 						<th>Start Date</th>
 						<th>End Date</th>
@@ -47,7 +45,7 @@ export const LeaveTable = ({leaveFormList, handleToggleConfirm, handleToggleReje
 				<tbody>
 					{leaveFormList.map((leave, index) => (
 						<tr key={index}>
-							<td>{leave.employee_id}</td>
+							<td>{leave.id}</td>
 							<td>{leave.number_of_leave_days_used}</td>
 							<td>{leave.start_date_of_leave}</td>
 							<td>{leave.end_date_of_leave}</td>
@@ -57,10 +55,26 @@ export const LeaveTable = ({leaveFormList, handleToggleConfirm, handleToggleReje
 
 							<td>
 								<div className={style.btnArea}>
-									<button className={style.btn} onClick={handleToggleConfirm}>
+									<button
+										className={style.btn}
+										onClick={() =>
+											handleToggleConfirm(
+												leave.id,
+												'You are allowed to take leave'
+											)
+										}
+									>
 										<CheckOutlined />
 									</button>
-									<button className={style.btn} onClick={handleToggleReject}>
+									<button
+										className={style.btn}
+										onClick={() =>
+											handleToggleReject(
+												leave.id,
+												'You are not allowed to take leave'
+											)
+										}
+									>
 										<CloseOutlined />
 									</button>
 								</div>

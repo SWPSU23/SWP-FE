@@ -10,7 +10,7 @@ const leaveReducer = (state = initialState, action) => {
 		case INIT_LEAVE_LIST:
 			return {
 				...state,
-				leaveFormList: action.payload,
+				leaveFormList: action.payload.data,
 			};
 		default:
 			return state;
