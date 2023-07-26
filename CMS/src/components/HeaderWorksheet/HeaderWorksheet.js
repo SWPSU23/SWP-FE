@@ -11,6 +11,7 @@ import {
 } from '../../redux/worksheet/action';
 import {useDispatch} from 'react-redux';
 import {FETCH_WORKSHEET_BY_ID} from '../../redux/worksheet/actionTypes';
+import {ToastContainer} from 'react-toastify';
 
 const HeaderWorksheet = () => {
 	const dispatch = useDispatch();
@@ -54,10 +55,14 @@ const HeaderWorksheet = () => {
 		const employee = isGuard ? 'guard' : 'cashier';
 		console.log('employee: ' + employee);
 
-		dispatch(featchAllWorksheetByDate(startDate, endDate, employee)).then((response) => {
-			console.log(response);
-			setWorksheet(response.data.data);
-		});
+		dispatch(featchAllWorksheetByDate(startDate, endDate, employee))
+			.then((response) => {
+				console.log(response);
+				setWorksheet(response.data.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	};
 
 	return (
@@ -114,6 +119,7 @@ const HeaderWorksheet = () => {
 						handleToggleForm={handleToggleForm}
 					/>
 				)}
+				<ToastContainer />
 			</div>
 			{/* <div>{isAdd ? <FormWorksheet /> : <div></div>}</div> */}
 		</div>

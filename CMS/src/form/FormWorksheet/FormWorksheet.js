@@ -9,6 +9,8 @@ import {
 	updateWorksheetByIDAsync,
 } from '../../redux/worksheet/action';
 import {useDispatch, useSelector} from 'react-redux';
+import {confirmModal, errorAlert} from '../../components/Notify/Alert';
+import {succesNotify} from '../../components/Notify/Toast';
 
 const FormWorksheetAddGuard = ({handleGetWorkSheet, handleAddClick, handleToggleForm, add}) => {
 	FormWorksheetAddGuard.propTypes = {
@@ -41,9 +43,15 @@ const FormWorksheetAddGuard = ({handleGetWorkSheet, handleAddClick, handleToggle
 	};
 
 	useEffect(() => {
-		dispatch(fetchListNameByRoleAsync('guard')).then((reponse) => {
-			setListName(reponse.data.data);
-		});
+		dispatch(fetchListNameByRoleAsync('guard'))
+			.then((reponse) => {
+				if (reponse) {
+					setListName(reponse.data.data);
+				}
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	}, []);
 
 	useEffect(() => {
@@ -53,6 +61,11 @@ const FormWorksheetAddGuard = ({handleGetWorkSheet, handleAddClick, handleToggle
 			setWorksheetDetail(worksheetDetailsFromRedux);
 		}
 	}, [worksheetDetailsFromRedux]);
+
+	//SHOW TOAST
+	const showSuccessToast = (text) => {
+		succesNotify(text);
+	};
 
 	// HANDLE SUBMIT
 	const handleSubmit = () => {
@@ -68,19 +81,27 @@ const FormWorksheetAddGuard = ({handleGetWorkSheet, handleAddClick, handleToggle
 			return;
 		}
 		console.log(formData);
-		dispatch(createNewWorksheetAsync(formData, 'guard')).then((response) => {
-			// GET DATE MATCH WITH FORM ADD
-			const startDate = calenderDay[0].date;
-			const endDate = calenderDay[calenderDay.length - 1].date;
-			handleGetWorkSheet(`${startDate},${endDate}`);
-		});
-		// Clear input
-		setName('');
-		setWorksheet('');
-		setSheet('');
-		setError('');
-		// REFRESH WORKSHEET
-		handleToggleForm();
+		dispatch(createNewWorksheetAsync(formData, 'guard'))
+			.then((response) => {
+				// GET DATE MATCH WITH FORM ADD
+				const startDate = calenderDay[0].date;
+				const endDate = calenderDay[calenderDay.length - 1].date;
+				handleGetWorkSheet(`${startDate},${endDate}`);
+				// Clear input
+				setName('');
+				setWorksheet('');
+				setSheet('');
+				setError('');
+				//Show toast
+				showSuccessToast('Asign employee successfully!');
+				// REFRESH WORKSHEET
+				handleToggleForm();
+			})
+			.catch((error) => {
+				console.log(error);
+				let errorMessage = error.response.data.message.split(':')[1].trim();
+				errorAlert(errorMessage.split('Employee_name')[0]);
+			});
 	};
 
 	// HANDLE UPDATE WORKSHEET
@@ -92,26 +113,48 @@ const FormWorksheetAddGuard = ({handleGetWorkSheet, handleAddClick, handleToggle
 		const idToDelete = worksheetDetail.id;
 		const idEmployee = name;
 
-		dispatch(updateWorksheetByIDAsync(idToDelete, idEmployee)).then((response) => {
-			const startDate = calenderDay[0].date;
-			const endDate = calenderDay[calenderDay.length - 1].date;
-			handleGetWorkSheet(`${startDate},${endDate}`);
-		});
-		dispatch(fetchWorksheetByID(0));
-		handleToggleForm();
+		dispatch(updateWorksheetByIDAsync(idToDelete, idEmployee))
+			.then((response) => {
+				const startDate = calenderDay[0].date;
+				const endDate = calenderDay[calenderDay.length - 1].date;
+				handleGetWorkSheet(`${startDate},${endDate}`);
+				dispatch(fetchWorksheetByID(0));
+				//Show toast
+				showSuccessToast('Update successfully!');
+				handleToggleForm();
+			})
+			.catch((error) => {
+				console.log(error);
+				let errorMessage = error.response.data.message.split('-')[1].trim();
+				errorAlert(errorMessage.split('Employee_name')[0]);
+			});
 	};
 
 	// HANDLE DELETE WORKSHEET
-	const handleDelete = () => {
+	const handleDelete = async () => {
 		console.log('vao handleDelete');
-		const idToDelete = worksheetDetail.id;
-		dispatch(fetchWorksheetByID(0));
-		dispatch(deleteWorksheetByIDAsync(idToDelete)).then((response) => {
-			const startDate = calenderDay[0].date;
-			const endDate = calenderDay[calenderDay.length - 1].date;
-			handleGetWorkSheet(`${startDate},${endDate}`);
-		});
-		handleToggleForm();
+		let isDelete = await confirmModal('Yes, delete it')
+			.then((isConfirmed) => {
+				return isConfirmed;
+				// console.log('Confirmation result:', isConfirmed); // Output: Confirmation result: true
+			})
+			.catch((error) => {
+				console.error('Confirmation error:', error);
+			});
+		try {
+			if (isDelete) {
+				const idToDelete = worksheetDetail.id;
+				dispatch(fetchWorksheetByID(0));
+				dispatch(deleteWorksheetByIDAsync(idToDelete)).then((response) => {
+					const startDate = calenderDay[0].date;
+					const endDate = calenderDay[calenderDay.length - 1].date;
+					handleGetWorkSheet(`${startDate},${endDate}`);
+				});
+				handleToggleForm();
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	if (!listName) {
@@ -144,7 +187,7 @@ const FormWorksheetAddGuard = ({handleGetWorkSheet, handleAddClick, handleToggle
 							{/* Add more options as needed */}
 						</select>
 					</div>
-					{worksheetDetail ? (
+					{!add ? (
 						<div></div>
 					) : (
 						<div>
