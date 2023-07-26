@@ -24,12 +24,17 @@ export const FormWorksheet = () => {
 	const [employee_id, setEmployeeId] = useState('');
 	const [sheet_id, setSheetId] = useState('');
 	const [date, setDate] = useState('');
+	useEffect(() => {
+		const defaultWorkSheet = '2023-07-10,2023-07-16';
+		handleGetWorkSheet(defaultWorkSheet);
+	}, []);
 
 	const handleGetWorkSheet = (date) => {
 		setSelectedDate(date);
 		const daySelect = date.split(',');
 		const startDate = daySelect[0];
 		const endDate = daySelect[1];
+		// get ID account form Redux
 		const employeeId = 7;
 		dispatch(fetchCalenderDayAsync(startDate, endDate));
 		dispatch(fetchAllWorksheetByDate(startDate, endDate, employeeId)).then((response) => {
@@ -57,6 +62,8 @@ export const FormWorksheet = () => {
 	// 			console.log('Error:', error);
 	// 		});
 	// };
+
+	if (!worksheet) return;
 
 	return (
 		<div className={styles.formWorksheet}>
@@ -95,13 +102,19 @@ export const FormWorksheet = () => {
 							</thead>
 
 							<tbody>
-								{sheets.map((sheet, sheetIndex) => (
+								{worksheet.map((sheet, sheetIndex) => (
 									<tr key={sheetIndex}>
-										<th>Sheet {sheet}</th>
-										{days.map((day, dayIndex) => (
+										<th>Sheet {sheetIndex + 1}</th>
+										{Object.values(sheet)[0].map((day, dayIndex) => (
 											<td key={dayIndex} className={styles.cell}>
-												(
-												<img src={saleicon} alt="Sale Icon" />
+												{day.detail.map((item, idx) => (
+													<p
+														key={idx}
+														className={styles.worksheetEmployee}
+													>
+														<img src={saleicon} alt="Sale Icon" />
+													</p>
+												))}
 											</td>
 										))}
 									</tr>
