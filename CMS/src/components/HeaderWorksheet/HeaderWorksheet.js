@@ -4,13 +4,19 @@ import {GuardWorksheet} from '../GuardWorksheet/GuardWorksheet';
 import styles from './HeaderWorksheet.module.css';
 import FormWorksheet from '../../form/FormWorksheet/FormWorksheet';
 import {DropDown} from '../DropDown/DropDown';
-import {featchAllWorksheetByDate, fetchCalenderDayAsync} from '../../redux/worksheet/action';
+import {
+	featchAllWorksheetByDate,
+	fetchCalenderDayAsync,
+	fetchWorksheetByID,
+} from '../../redux/worksheet/action';
 import {useDispatch} from 'react-redux';
+import {FETCH_WORKSHEET_BY_ID} from '../../redux/worksheet/actionTypes';
 
 const HeaderWorksheet = () => {
 	const dispatch = useDispatch();
 	const [isGuard, setIsGuard] = useState(true);
 	const [isAdd, setIsAdd] = useState(false);
+	const [isOpenForm, setIsOpenForm] = useState(false);
 	const [worksheet, setWorksheet] = useState();
 
 	const handleGuardClick = () => {
@@ -20,8 +26,16 @@ const HeaderWorksheet = () => {
 	const handleCashierClick = () => {
 		setIsGuard(false);
 	};
+	const handleToggleForm = () => {
+		setIsOpenForm(!isOpenForm);
+	};
 	const handleAddClick = () => {
+		console.log('run handleAddClick');
 		setIsAdd(!isAdd);
+		if (!isOpenForm) {
+			console.log('Toogle form in add click');
+			handleToggleForm();
+		}
 	};
 
 	// HANDLE GET WORKSHEET
@@ -41,6 +55,7 @@ const HeaderWorksheet = () => {
 		console.log('employee: ' + employee);
 
 		dispatch(featchAllWorksheetByDate(startDate, endDate, employee)).then((response) => {
+			console.log(response);
 			setWorksheet(response.data.data);
 		});
 	};
@@ -60,7 +75,17 @@ const HeaderWorksheet = () => {
 				>
 					Cashier
 				</button>
-				<button className={styles.addButton} onClick={handleAddClick}>
+				<button
+					className={styles.addButton}
+					onClick={() => {
+						if (!isAdd) {
+							handleAddClick();
+						}
+						if (!isOpenForm) {
+							handleToggleForm();
+						}
+					}}
+				>
 					Add Task
 				</button>
 			</div>
@@ -74,15 +99,19 @@ const HeaderWorksheet = () => {
 					<GuardWorksheet
 						handleGetWorkSheet={handleGetWorkSheet}
 						worksheet={worksheet}
+						isOpenForm={isOpenForm}
 						add={isAdd}
 						handleAddClick={handleAddClick}
+						handleToggleForm={handleToggleForm}
 					/>
 				) : (
 					<CashierWorksheet
 						handleGetWorkSheet={handleGetWorkSheet}
 						worksheet={worksheet}
+						isOpenForm={isOpenForm}
 						add={isAdd}
 						handleAddClick={handleAddClick}
+						handleToggleForm={handleToggleForm}
 					/>
 				)}
 			</div>

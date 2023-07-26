@@ -10,10 +10,12 @@ import {
 } from '../../redux/worksheet/action';
 import {useDispatch, useSelector} from 'react-redux';
 
-const FormWorksheetAddCashier = ({handleGetWorkSheet, handleAddClick}) => {
+const FormWorksheetAddCashier = ({handleGetWorkSheet, handleAddClick, handleToggleForm, add}) => {
 	FormWorksheetAddCashier.propTypes = {
 		handleGetWorkSheet: PropTypes.func.isRequired,
 		handleAddClick: PropTypes.func.isRequired,
+		handleToggleForm: PropTypes.func.isRequired,
+		add: PropTypes.bool.isRequired,
 	};
 	const dispatch = useDispatch();
 	const calenderDay = useSelector((state) => state.worksheet.calenderDay);
@@ -52,6 +54,7 @@ const FormWorksheetAddCashier = ({handleGetWorkSheet, handleAddClick}) => {
 		}
 	}, [worksheetDetailsFromRedux]);
 
+	//HADNLE ADD WORKSHEET
 	const handleSubmit = () => {
 		// dispatch(addTaskGuard(name, worksheet, sheet));
 
@@ -65,17 +68,23 @@ const FormWorksheetAddCashier = ({handleGetWorkSheet, handleAddClick}) => {
 			return;
 		}
 		console.log(formData);
-		dispatch(createNewWorksheetAsync(formData, 'cashier')).then((response) => {
-			// GET DATE MATCH WITH FORM ADD
-			const startDate = calenderDay[0].date;
-			const endDate = calenderDay[calenderDay.length - 1].date;
-			handleGetWorkSheet(`${startDate},${endDate}`);
-		});
-		// Clear input
-		setName('');
-		setWorksheet('');
-		setSheet('');
-		setError('');
+		dispatch(createNewWorksheetAsync(formData, 'cashier'))
+			.then((response) => {
+				// GET DATE MATCH WITH FORM ADD
+				const startDate = calenderDay[0].date;
+				const endDate = calenderDay[calenderDay.length - 1].date;
+				handleGetWorkSheet(`${startDate},${endDate}`);
+				// Clear input
+				setName('');
+				setWorksheet('');
+				setSheet('');
+				setError('');
+				// REFRESH WORKSHEET
+				handleToggleForm();
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	};
 
 	// HANDLE UPDATE WORKSHEET
@@ -87,13 +96,19 @@ const FormWorksheetAddCashier = ({handleGetWorkSheet, handleAddClick}) => {
 		const idToDelete = worksheetDetail.id;
 		const idEmployee = name;
 
-		dispatch(updateWorksheetByIDAsync(idToDelete, idEmployee)).then((response) => {
-			const startDate = calenderDay[0].date;
-			const endDate = calenderDay[calenderDay.length - 1].date;
-			handleGetWorkSheet(`${startDate},${endDate}`);
-		});
-		dispatch(fetchWorksheetByID(0));
-		handleAddClick();
+		dispatch(updateWorksheetByIDAsync(idToDelete, idEmployee))
+			.then((response) => {
+				const startDate = calenderDay[0].date;
+				const endDate = calenderDay[calenderDay.length - 1].date;
+				handleGetWorkSheet(`${startDate},${endDate}`);
+			})
+			.then((response) => {
+				dispatch(fetchWorksheetByID(0));
+				handleToggleForm();
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	};
 
 	// HANDLE DELETE WORKSHEET
@@ -106,17 +121,18 @@ const FormWorksheetAddCashier = ({handleGetWorkSheet, handleAddClick}) => {
 			const endDate = calenderDay[calenderDay.length - 1].date;
 			handleGetWorkSheet(`${startDate},${endDate}`);
 		});
-		handleAddClick();
+		handleToggleForm();
 	};
 
 	if (!listName) {
 		return;
 	}
 
+	console.log('worksheetDetail', worksheetDetail);
 	return (
 		<div className={styles.formWorksheet}>
 			<div className={styles.formContainer}>
-				{worksheetDetail ? (
+				{!add ? (
 					<div>
 						<h1 style={{fontSize: 28}}>Update employee</h1>
 						<h2>Sheet - {worksheetDetail.sheet_id}</h2>
@@ -169,19 +185,11 @@ const FormWorksheetAddCashier = ({handleGetWorkSheet, handleAddClick}) => {
 								</div>
 							</div>
 							<h5 style={{color: 'red'}}>{error}</h5>
-							<div>
-								<button
-									className={`${styles.btn} ${styles.btnAdd}`}
-									onClick={handleSubmit}
-								>
-									Add
-								</button>
-							</div>
 						</div>
 					)}
 				</div>
 
-				{worksheetDetail ? (
+				{!add ? (
 					<div className={styles.formContainerButton}>
 						<button
 							onClick={handleUpdate}
@@ -196,9 +204,19 @@ const FormWorksheetAddCashier = ({handleGetWorkSheet, handleAddClick}) => {
 						>
 							Delete
 						</button>
+						<button onClick={() => handleToggleForm()} className={`${styles.btn}`}>
+							Close
+						</button>
 					</div>
 				) : (
-					''
+					<div className={styles.formContainerButton}>
+						<button className={`${styles.btn} ${styles.btnAdd}`} onClick={handleSubmit}>
+							Add
+						</button>
+						<button onClick={() => handleToggleForm()} className={`${styles.btn}`}>
+							Close
+						</button>
+					</div>
 				)}
 			</div>
 		</div>

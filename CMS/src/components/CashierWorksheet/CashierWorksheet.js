@@ -4,11 +4,20 @@ import styles from './CashierWorksheet.module.css';
 import {CashierWorkSheetTable} from '../../table/CashierWorkSheetTable/CashierWorkSheetTable';
 import {FormWorksheetCashier} from '../../form/FormWorksheetCashier/FormWorksheetCashier';
 
-export const CashierWorksheet = ({add, handleGetWorkSheet, worksheet, handleAddClick}) => {
+export const CashierWorksheet = ({
+	add,
+	handleGetWorkSheet,
+	worksheet,
+	handleAddClick,
+	handleToggleForm,
+	isOpenForm,
+}) => {
 	CashierWorksheet.propTypes = {
 		add: PropTypes.bool.isRequired,
+		isOpenForm: PropTypes.bool.isRequired,
 		handleGetWorkSheet: PropTypes.func.isRequired,
 		handleAddClick: PropTypes.func.isRequired,
+		handleToggleForm: PropTypes.func.isRequired,
 		worksheet: PropTypes.array.isRequired,
 	};
 
@@ -18,14 +27,19 @@ export const CashierWorksheet = ({add, handleGetWorkSheet, worksheet, handleAddC
 	return (
 		<div className={styles.CashierWorksheet}>
 			<CashierWorkSheetTable
+				add={add}
+				isOpenForm={isOpenForm}
 				handleAddClick={handleAddClick}
-				andleGetWorkSheet={handleGetWorkSheet}
+				handleToggleForm={handleToggleForm}
+				// andleGetWorkSheet={handleGetWorkSheet}
 				worksheetRender={worksheet}
 			/>
-			{add ? (
+			{isOpenForm ? (
 				<FormWorksheetCashier
+					add={add}
 					handleAddClick={handleAddClick}
 					handleGetWorkSheet={handleGetWorkSheet}
+					handleToggleForm={handleToggleForm}
 				/>
 			) : (
 				<div></div>

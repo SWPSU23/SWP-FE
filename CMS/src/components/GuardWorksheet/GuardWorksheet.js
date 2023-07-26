@@ -5,11 +5,20 @@ import {GuardWorkSheetTable} from '../../table/GuardWorkSheetTable/GuardWorkShee
 import {FormWorksheetGuard} from '../../form/FormWorksheetGuard/FormWorksheetGuard';
 import {useSelector} from 'react-redux';
 
-export const GuardWorksheet = ({add, handleGetWorkSheet, worksheet, handleAddClick}) => {
+export const GuardWorksheet = ({
+	add,
+	handleGetWorkSheet,
+	worksheet,
+	handleAddClick,
+	isOpenForm,
+	handleToggleForm,
+}) => {
 	GuardWorksheet.propTypes = {
 		add: PropTypes.bool.isRequired,
+		isOpenForm: PropTypes.bool.isRequired,
 		handleGetWorkSheet: PropTypes.func.isRequired,
 		handleAddClick: PropTypes.func.isRequired,
+		handleToggleForm: PropTypes.func.isRequired,
 		worksheet: PropTypes.array.isRequired,
 	};
 	// const calenderDay = useSelector((state) => state.worksheet.calenderDay);
@@ -24,13 +33,18 @@ export const GuardWorksheet = ({add, handleGetWorkSheet, worksheet, handleAddCli
 	return (
 		<div className={style.GuardWorksheet}>
 			<GuardWorkSheetTable
+				add={add}
+				isOpenForm={isOpenForm}
+				handleToggleForm={handleToggleForm}
 				handleAddClick={handleAddClick}
-				andleGetWorkSheet={handleGetWorkSheet}
+				// andleGetWorkSheet={handleGetWorkSheet}
 				worksheetRender={worksheet}
 			/>
-			{add ? (
+			{isOpenForm ? (
 				<FormWorksheetGuard
+					add={add}
 					handleAddClick={handleAddClick}
+					handleToggleForm={handleToggleForm}
 					handleGetWorkSheet={handleGetWorkSheet}
 				/>
 			) : (

@@ -86,14 +86,12 @@ export const fetchCalenderDayAsync = (start, end) => {
 export const fetchListNameByRoleAsync = (role) => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.get(`${server}/v1/employee/search`, {
+			return await axios.get(`${server}/v1/employee/search`, {
 				params: {
 					searchBy: 'role',
 					keywords: role,
 				},
 			});
-
-			return response;
 		} catch (error) {
 			console.log(error);
 		}
@@ -123,6 +121,7 @@ export const createNewWorksheetAsync = (formdata, role) => {
 			return response;
 		} catch (error) {
 			console.log(error);
+			throw error;
 		}
 	};
 };
@@ -131,14 +130,13 @@ export const createNewWorksheetAsync = (formdata, role) => {
 export const featchAllWorksheetByDate = (startDate, endDate, role) => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.get(`${server}/v1/worksheet`, {
+			return await axios.get(`${server}/v1/worksheet`, {
 				params: {
 					start_date: startDate,
 					end_date: endDate,
 					role: role,
 				},
 			});
-			return response;
 		} catch (error) {
 			console.log(error);
 		}

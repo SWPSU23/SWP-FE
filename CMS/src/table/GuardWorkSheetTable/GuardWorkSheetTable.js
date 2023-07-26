@@ -8,10 +8,19 @@ import {
 	fetchWorksheetByIDAsync,
 } from '../../redux/worksheet/action';
 
-export const GuardWorkSheetTable = ({worksheetRender, handleAddClick}) => {
+export const GuardWorkSheetTable = ({
+	worksheetRender,
+	handleToggleForm,
+	handleAddClick,
+	add,
+	isOpenForm,
+}) => {
 	GuardWorkSheetTable.propTypes = {
 		worksheetRender: PropTypes.array.isRequired,
+		handleToggleForm: PropTypes.func.isRequired,
 		handleAddClick: PropTypes.func.isRequired,
+		add: PropTypes.bool.isRequired,
+		isOpenForm: PropTypes.bool.isRequired,
 	};
 
 	const dispatch = useDispatch();
@@ -31,7 +40,14 @@ export const GuardWorkSheetTable = ({worksheetRender, handleAddClick}) => {
 	// Get Worksheet by ID
 	const handleGetWorkSheetByID = (id) => {
 		console.log(id);
-		dispatch(fetchWorksheetByIDAsync(id)).then((reponse) => handleAddClick());
+		dispatch(fetchWorksheetByIDAsync(id)).then((reponse) => {
+			if (!isOpenForm) {
+				handleToggleForm();
+			}
+			if (add) {
+				handleAddClick();
+			}
+		});
 	};
 
 	return (
@@ -60,9 +76,9 @@ export const GuardWorkSheetTable = ({worksheetRender, handleAddClick}) => {
 									{item.detail.map((item, idx) => (
 										<p
 											key={idx}
-											onClick={() =>
-												handleGetWorkSheetByID(item.worksheet_id)
-											}
+											onClick={() => {
+												handleGetWorkSheetByID(item.worksheet_id);
+											}}
 											className={styles.worksheetEmployee}
 										>
 											{item.employee_name}

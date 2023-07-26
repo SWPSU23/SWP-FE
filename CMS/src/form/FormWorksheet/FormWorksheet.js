@@ -10,10 +10,12 @@ import {
 } from '../../redux/worksheet/action';
 import {useDispatch, useSelector} from 'react-redux';
 
-const FormWorksheetAddGuard = ({handleGetWorkSheet, handleAddClick}) => {
+const FormWorksheetAddGuard = ({handleGetWorkSheet, handleAddClick, handleToggleForm, add}) => {
 	FormWorksheetAddGuard.propTypes = {
 		handleGetWorkSheet: PropTypes.func.isRequired,
 		handleAddClick: PropTypes.func.isRequired,
+		handleToggleForm: PropTypes.func.isRequired,
+		add: PropTypes.bool.isRequired,
 	};
 	const dispatch = useDispatch();
 	const calenderDay = useSelector((state) => state.worksheet.calenderDay);
@@ -78,7 +80,7 @@ const FormWorksheetAddGuard = ({handleGetWorkSheet, handleAddClick}) => {
 		setSheet('');
 		setError('');
 		// REFRESH WORKSHEET
-		handleAddClick();
+		handleToggleForm();
 	};
 
 	// HANDLE UPDATE WORKSHEET
@@ -96,7 +98,7 @@ const FormWorksheetAddGuard = ({handleGetWorkSheet, handleAddClick}) => {
 			handleGetWorkSheet(`${startDate},${endDate}`);
 		});
 		dispatch(fetchWorksheetByID(0));
-		handleAddClick();
+		handleToggleForm();
 	};
 
 	// HANDLE DELETE WORKSHEET
@@ -109,7 +111,7 @@ const FormWorksheetAddGuard = ({handleGetWorkSheet, handleAddClick}) => {
 			const endDate = calenderDay[calenderDay.length - 1].date;
 			handleGetWorkSheet(`${startDate},${endDate}`);
 		});
-		handleAddClick();
+		handleToggleForm();
 	};
 
 	if (!listName) {
@@ -120,7 +122,7 @@ const FormWorksheetAddGuard = ({handleGetWorkSheet, handleAddClick}) => {
 	return (
 		<div className={styles.formWorksheet}>
 			<div className={styles.formContainer}>
-				{worksheetDetail ? (
+				{!add ? (
 					<div>
 						<h1 style={{fontSize: 28}}>Update employee</h1>
 						<h2>Sheet - {worksheetDetail.sheet_id}</h2>
@@ -172,19 +174,11 @@ const FormWorksheetAddGuard = ({handleGetWorkSheet, handleAddClick}) => {
 								</div>
 							</div>
 							<h5 style={{color: 'red'}}>{error}</h5>
-							<div>
-								<button
-									className={`${styles.btn} ${styles.btnAdd}`}
-									onClick={handleSubmit}
-								>
-									Add
-								</button>
-							</div>
 						</div>
 					)}
 				</div>
 
-				{worksheetDetail ? (
+				{!add ? (
 					<div className={styles.formContainerButton}>
 						<button
 							onClick={handleUpdate}
@@ -199,9 +193,20 @@ const FormWorksheetAddGuard = ({handleGetWorkSheet, handleAddClick}) => {
 						>
 							Delete
 						</button>
+
+						<button onClick={() => handleToggleForm()} className={`${styles.btn}`}>
+							Close
+						</button>
 					</div>
 				) : (
-					''
+					<div className={styles.formContainerButton}>
+						<button className={`${styles.btn} ${styles.btnAdd}`} onClick={handleSubmit}>
+							Add
+						</button>
+						<button onClick={() => handleToggleForm()} className={`${styles.btn}`}>
+							Close
+						</button>
+					</div>
 				)}
 			</div>
 		</div>

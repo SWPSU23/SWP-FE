@@ -4,10 +4,19 @@ import styles from './CashierWorkSheetTable.module.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchWorksheetByIDAsync} from '../../redux/worksheet/action';
 
-export const CashierWorkSheetTable = ({worksheetRender, handleAddClick}) => {
+export const CashierWorkSheetTable = ({
+	worksheetRender,
+	handleAddClick,
+	handleToggleForm,
+	add,
+	isOpenForm,
+}) => {
 	CashierWorkSheetTable.propTypes = {
 		worksheetRender: PropTypes.array.isRequired,
+		handleToggleForm: PropTypes.func.isRequired,
 		handleAddClick: PropTypes.func.isRequired,
+		add: PropTypes.bool.isRequired,
+		isOpenForm: PropTypes.bool.isRequired,
 	};
 	const dispatch = useDispatch();
 	const tasks = useSelector((state) => state.worksheet.guards);
@@ -27,7 +36,14 @@ export const CashierWorkSheetTable = ({worksheetRender, handleAddClick}) => {
 	// Get Worksheet by ID
 	const handleGetWorkSheetByID = (id) => {
 		console.log(id);
-		dispatch(fetchWorksheetByIDAsync(id)).then((reponse) => handleAddClick());
+		dispatch(fetchWorksheetByIDAsync(id)).then((reponse) => {
+			if (!isOpenForm) {
+				handleToggleForm();
+			}
+			if (add) {
+				handleAddClick();
+			}
+		});
 	};
 
 	return (
