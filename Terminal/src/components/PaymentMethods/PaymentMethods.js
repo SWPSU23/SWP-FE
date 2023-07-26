@@ -6,25 +6,39 @@ import Cash from '../../assets/cash.png';
 import {FormQRCode} from '../../form/FormQRCode/FormQRCode';
 
 export const PaymentMethods = () => {
+	const [activeButton, setActiveButton] = useState(null);
 	const [showQRCode, setShowQRCode] = useState(false);
 
 	const qrCodeData = 'https://www.mtc.com';
 
-	const handleMomoClick = () => {
-		setShowQRCode(true);
+	const handleButtonClick = (content) => {
+		setActiveButton(content);
+		if (content === 'Momo') {
+			setShowQRCode(true);
+		}
 	};
 
 	const handleCloseQRCode = () => {
 		setShowQRCode(false);
+		setActiveButton(null); // Remove active state when closing QRCode
 	};
 
 	return (
 		<div className={styles.paymentMethods}>
 			<h2>Payment methods</h2>
 			<div className={styles.paymentMethodsButton}>
-				{/* Pass the handleClick function to ButtonStand */}
-				<ButtonStand img={Momo} content="Momo" onClick={handleMomoClick} />
-				<ButtonStand img={Cash} content="Cash" />
+				<ButtonStand
+					img={Momo}
+					content="Momo"
+					onClick={() => handleButtonClick('Momo')}
+					active={activeButton === 'Momo'}
+				/>
+				<ButtonStand
+					img={Cash}
+					content="Cash"
+					onClick={() => handleButtonClick('Cash')}
+					active={activeButton === 'Cash'}
+				/>
 			</div>
 			{showQRCode && <FormQRCode value={qrCodeData} handleClose={handleCloseQRCode} />}
 		</div>
