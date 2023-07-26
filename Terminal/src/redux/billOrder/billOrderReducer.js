@@ -1,4 +1,4 @@
-import {ADD_ORDER_DETAIL, DELETE_PRODUCT_IN_ORDER} from './action';
+import {ADD_ORDER_DETAIL, CLEAR_PRODUCT_IN_ORDER, DELETE_PRODUCT_IN_ORDER} from './action';
 
 const initialState = {
 	orderDetails: [],
@@ -54,6 +54,11 @@ const billOrderReducer = (state = initialState, action) => {
 			return {
 				...state,
 				orderDetails: [...newOrderDetails],
+			};
+		case CLEAR_PRODUCT_IN_ORDER:
+			return {
+				...state,
+				orderDetails: [],
 			};
 
 		default:

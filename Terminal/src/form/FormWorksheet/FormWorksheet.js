@@ -13,8 +13,6 @@ import {
 } from '../../redux/worksheet/action';
 
 export const FormWorksheet = () => {
-	const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-	const sheets = ['1', '2', '3'];
 	const calenderDay = useSelector((state) => state.worksheet.calenderDay);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
