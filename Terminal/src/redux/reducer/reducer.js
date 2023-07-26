@@ -3,6 +3,7 @@ import billOrderReducer from '../billOrder/billOrderReducer'; // Import the new 
 import {leaveReducer} from '../leave/leaveReducer';
 import authenReducer from '../authen/authenReducer';
 import worksheetReducer from '../worksheet/worksheetReducer';
+import checkInOutReducer from '../checkInOut/checkInOutReducer';
 
 const rootReducer = combineReducers({
 	// Add other reducers here if needed
