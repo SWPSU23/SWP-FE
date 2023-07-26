@@ -11,10 +11,18 @@ import {confirmModal, confirmToggle, rejectToggle} from '../../components/Notify
 
 export const Leave = () => {
 	const leaveFormData = useSelector((state) => state.leave.leaveFormList.leave_form);
-	const totalPages = useSelector((state) => state.leave.leaveFormList.info.total_page);
-	console.log(totalPages);
+	const leave = useSelector((state) => state.leave.leaveFormList);
+	// const totalPages = 10;
 
 	const [leaveFormList, setLeaveFormList] = useState([]);
+	const [totalPages, setTotalPages] = useState(1);
+
+	useEffect(() => {
+		if (leave.info) {
+			setTotalPages(leave.info.total_page);
+		}
+	}, [leave]);
+
 	const dispatch = useDispatch();
 	// GET DATA
 	const fetchData = async () => {
@@ -89,6 +97,7 @@ export const Leave = () => {
 			setLoading(false);
 		}, 1000);
 	};
+
 	return (
 		<div className={styles.leavePage}>
 			<Menu />

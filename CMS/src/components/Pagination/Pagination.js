@@ -9,6 +9,8 @@ function Pagination({currentPage, totalPages, onPageChange}) {
 		onPageChange: PropTypes.func.isRequired,
 	};
 
+	console.log('totalPages' + totalPages);
+
 	const handlePrevClick = () => {
 		if (currentPage === 1) {
 			onPageChange(totalPages);

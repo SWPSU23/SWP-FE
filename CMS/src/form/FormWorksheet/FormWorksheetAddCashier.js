@@ -200,6 +200,7 @@ const FormWorksheetAddCashier = ({handleGetWorkSheet, handleAddClick, handleTogg
 
 						<button
 							onClick={handleDelete}
+							style={{marginLeft: 5, marginRight: 5}}
 							className={`${styles.btn} ${styles.btnDelete}`}
 						>
 							Delete
