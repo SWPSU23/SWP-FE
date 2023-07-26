@@ -1,0 +1,40 @@
+.formQRCode {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.277);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.formContainer {
+	position: relative;
+	width: 30%;
+	height: 60%;
+	background-color: white;
+}
+
+.qrCode {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100%;
+}
+
+.qrTitle {
+	margin-bottom: 40px;
+}
+
+.closeButton {
+	cursor: pointer;
+	position: absolute;
+	right: 30px;
+	top: 20px;
+}
