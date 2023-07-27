@@ -23,7 +23,7 @@ export const PaymentAction = () => {
 		});
 
 		e.stopPropagation(); // Prevent event propagation
-		// setIsShow(!isShow);
+		setIsShow(!isShow);
 	};
 
 	return (
