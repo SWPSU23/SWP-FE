@@ -31,6 +31,7 @@
 	text-transform: capitalize;
 	border-radius: 12px;
 	font-weight: bold;
+	min-width: fit-content;
 	font-size: 12px;
 }
 

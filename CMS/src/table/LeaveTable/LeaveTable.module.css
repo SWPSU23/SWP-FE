@@ -60,6 +60,9 @@
 	margin: 0 auto;
 	border-radius: 12px;
 	text-align: center;
+	font-weight: bold;
+	font-size: 12px;
 	padding: 10px;
+	min-width: fit-content;
 	color: white;
 }

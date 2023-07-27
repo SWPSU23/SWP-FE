@@ -14,7 +14,7 @@ const ProductTable = ({handleToggleFormUpdate, productList, handleDelete}) => {
 		productList: PropTypes.array.isRequired,
 	};
 
-	const maxDescriptionLength = 50;
+	const maxDescriptionLength = 60;
 
 	console.log('list product', productList);
 
@@ -70,13 +70,12 @@ const ProductTable = ({handleToggleFormUpdate, productList, handleDelete}) => {
 										{product.description}
 									</p>
 								) : (
-									<p className={style.productDescription}>
+									<p
+										className={style.productDescription}
+										data-tooltip-id="my-tooltip"
+										data-tooltip-content={product.description}
+									>
 										{product.description.substring(0, maxDescriptionLength)}...
-										<ReactTooltip
-											anchorSelect=".productDescription"
-											place="bottom"
-											content={product.description}
-										/>
 									</p>
 								)}
 							</td>
@@ -100,6 +99,14 @@ const ProductTable = ({handleToggleFormUpdate, productList, handleDelete}) => {
 					))}
 				</tbody>
 			</table>
+			<ReactTooltip
+				id="my-tooltip"
+				style={{
+					borderRadius: '12px',
+					width: '30%',
+					backgroundColor: 'rgba(0, 0, 0, 0.7)',
+				}}
+			/>
 		</div>
 	);
 };
