@@ -3,11 +3,13 @@ import {
 	DELETE_PRODUCT_IN_ORDER,
 	UPDATE_SELECTED_PAYMENT_METHOD,
 	CLEAR_PRODUCT_IN_ORDER,
+	ADD_BARCODE,
 } from './action';
 
 const initialState = {
 	orderDetails: [],
 	selectedPaymentMethod: null,
+	barcodeData: [],
 };
 
 let newItem = {};
@@ -71,6 +73,11 @@ const billOrderReducer = (state = initialState, action) => {
 			return {
 				...state,
 				orderDetails: [],
+			};
+		case ADD_BARCODE:
+			return {
+				...state,
+				barcodeData: [...state.barcodeData, action.payload],
 			};
 
 		default:
