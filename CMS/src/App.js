@@ -12,8 +12,15 @@ import {Login} from './pages/Login/Login';
 import socket from './shared/socket';
 
 function App() {
+	const data = {
+		employee_id: 1,
+	};
 	socket.on('connect', () => {
 		console.log('Connected to Socket.IO server');
+		socket.on('joinRoom', (data) => {
+			console.log(data);
+		});
+		socket.emit('joinRoom', data);
 	});
 	return (
 		<div className="App">

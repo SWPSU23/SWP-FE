@@ -9,22 +9,13 @@ export const NotificationInMenu = ({data, handleNotifyClick}) => {
 		handleNotifyClick: PropTypes.func.isRequired,
 	};
 	const [notifications, setNotifications] = useState([]);
-	let fetchNewNotify = () => {
+	useEffect(() => {
 		socket.emit('notification:fetch', {
 			employee_id: 1,
 		});
-	};
-	useEffect(() => {
-		// socket.emit('notification:fetch', {
-		// 	employee_id: 1,
-		// });
-		setInterval(() => {
-			fetchNewNotify();
-		}, 3000);
 		socket.on('notification:fetch', (data) => {
+			console.log(data);
 			console.log('data', data.data);
-
-			// if (data.data[0]. )
 			let newArr = data.data.map((notification) => {
 				return {
 					type: 'PaySlip',
@@ -36,14 +27,6 @@ export const NotificationInMenu = ({data, handleNotifyClick}) => {
 			setNotifications(newArr);
 		});
 	}, []);
-	// socket.emit('notification:fetch', {
-	// 	employee_id: 1,
-	// });
-	// setInterval(() => {
-	// 	socket.emit('notification:fetch', {
-	// 		employee_id: 1,
-	// 	});
-	// }, 3000);
 
 	return (
 		<div className={style.chatBox}>
