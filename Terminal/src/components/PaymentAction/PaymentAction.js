@@ -18,10 +18,6 @@ export const PaymentAction = () => {
 			quantity: item.quantity,
 		}));
 
-<<<<<<< Updated upstream
-		e.stopPropagation(); // Prevent event propagation
-		setIsShow(!isShow);
-=======
 		let isPayment = await confirmPayment()
 			.then((isConfirmed) => {
 				return isConfirmed;
@@ -39,11 +35,11 @@ export const PaymentAction = () => {
 					dispatch(clearProductInOrder('ninh'));
 				});
 				e.stopPropagation(); // Prevent event propagation
+				setIsShow(!isShow);
 			}
 		} catch (error) {
 			console.log(error);
 		}
->>>>>>> Stashed changes
 	};
 
 	return (
