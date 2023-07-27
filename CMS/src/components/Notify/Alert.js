@@ -40,6 +40,30 @@ export const confirmModal = (confirmButtonText) => {
 			});
 	});
 };
+export const confirmPayment = () => {
+	return new Promise((resolve, reject) => {
+		Swal.fire({
+			title: 'Confirm Payment',
+			text: "Please review the order details and ensure it's correct",
+			icon: 'success',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes',
+		})
+			.then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire('Payment Successful!!', 'Thank you for your purchase.', 'success');
+					resolve(true); // Resolves the promise with the value true
+				} else {
+					resolve(false); // Resolves the promise with the value false
+				}
+			})
+			.catch((error) => {
+				reject(error); // Rejects the promise with the error, if any
+			});
+	});
+};
 export const confirmToggle = (confirmButtonText) => {
 	return new Promise((resolve, reject) => {
 		Swal.fire({
@@ -53,7 +77,7 @@ export const confirmToggle = (confirmButtonText) => {
 		})
 			.then((result) => {
 				if (result.isConfirmed) {
-					Swal.fire('Confirm!', 'You have confirmed the application.', 'success');
+					Swal.fire('Confirm!', 'You have approved the application.', 'success');
 					resolve(true); // Resolves the promise with the value true
 				} else {
 					resolve(false); // Resolves the promise with the value false

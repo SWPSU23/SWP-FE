@@ -51,7 +51,20 @@ export const LeaveTable = ({leaveFormList, handleToggleConfirm, handleToggleReje
 							<td>{leave.end_date_of_leave}</td>
 							<td>{leave.reason_leave}</td>
 							<td>{leave.manager_replied}</td>
-							<td>{leave.status}</td>
+							<td>
+								<p
+									id={style.leaveStatus}
+									style={
+										leave.status === 'waiting'
+											? {backgroundColor: '#ffca2c', color: 'black'}
+											: leave.status === 'approved'
+											? {backgroundColor: 'green'}
+											: {backgroundColor: 'red'}
+									}
+								>
+									{leave.status}
+								</p>
+							</td>
 
 							<td>
 								<div className={style.btnArea}>

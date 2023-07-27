@@ -92,7 +92,9 @@
 .formInputReason {
 	display: flex;
 	justify-content: center;
+	width: 100%;
 }
+
 .labelInputReason {
 	width: 120px;
 	text-align: start;
@@ -100,9 +102,13 @@
 }
 .inputReason {
 	margin-left: 16px;
+	width: 75%;
+	height: 200px;
 }
-.inputReason input {
-	padding: 10px 700px 140px 10px;
+.inputReason textarea {
+	padding: 10px;
+	width: 100%;
+	height: 100%;
 }
 input {
 	border: 2px solid black;

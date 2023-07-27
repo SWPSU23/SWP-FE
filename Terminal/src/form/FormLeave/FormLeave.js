@@ -7,6 +7,7 @@ import styles from './FormLeave.module.css'; // Import the CSS module
 import PropTypes from 'prop-types';
 import {useNavigate} from 'react-router';
 import {addLeaveFormAsync} from '../../redux/leave/action';
+import {confirmLeaveForm} from '../../components/Notify/Alert';
 
 export const FormLeave = () => {
 	const dispatch = useDispatch();
@@ -16,8 +17,17 @@ export const FormLeave = () => {
 	const [endDateOfLeave, setEndDateOfLeave] = useState('');
 	const [reasonLeave, setReasonLeave] = useState('');
 
+	//CALCULATE LEAVE DAY USED
+	const calculateTotalDays = async (start_date, end_date) => {
+		// convert start_date and end_date to timestamp
+		const start_date_timestamp = new Date(start_date).getTime();
+		const end_date_timestamp = new Date(end_date).getTime();
+		const count_date = end_date_timestamp - start_date_timestamp;
+		const total_days = count_date / (1000 * 3600 * 24);
+		setNumberOfLeaveDaysUsed(total_days);
+	};
 	// HANDLE SUBMIT FORM
-	const handleSubmitForm = () => {
+	const handleSubmitForm = async () => {
 		console.log('vao handleSubmitForm');
 
 		const formData = {
@@ -27,22 +37,32 @@ export const FormLeave = () => {
 			endDateOfLeave,
 			reasonLeave,
 		};
-
-		dispatch(addLeaveFormAsync(formData)) // Dispatch the async action
-			.then((response) => {
-				// Handle the response if needed
-				console.log('Response:', response);
-
-				// Clear the form fields after submit
-				setEmployeeId('');
-				setNumberOfLeaveDaysUsed('');
-				setStartDateOfLeave('');
-				setEndDateOfLeave('');
-				setReasonLeave('');
+		let isSendLeaveForm = await confirmLeaveForm()
+			.then((isConfirmed) => {
+				return isConfirmed;
+				// console.log('Confirmation result:', isConfirmed); // Output: Confirmation result: true
 			})
 			.catch((error) => {
-				console.log('Error:', error);
+				console.error('Confirmation error:', error);
 			});
+		console.log(isSendLeaveForm);
+		try {
+			if (isSendLeaveForm) {
+				dispatch(addLeaveFormAsync(formData)) // Dispatch the async action
+					.then((response) => {
+						// Handle the response if needed
+						console.log('Response:', response);
+						// Clear the form fields after submit
+						setEmployeeId('');
+						setNumberOfLeaveDaysUsed('');
+						setStartDateOfLeave('');
+						setEndDateOfLeave('');
+						setReasonLeave('');
+					});
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const navigate = useNavigate();
@@ -71,10 +91,10 @@ export const FormLeave = () => {
 							<div className={styles.formInput}>
 								<h2 className={styles.labelInput}>Leave Used: </h2>
 								<input
+									disabled
 									type="number"
 									placeholder="number ..."
-									value={numberOfLeaveDaysUsed}
-									onChange={(e) => setNumberOfLeaveDaysUsed(e.target.value)}
+									value={isNaN(numberOfLeaveDaysUsed) ? 0 : numberOfLeaveDaysUsed}
 								/>
 							</div>
 
@@ -84,7 +104,10 @@ export const FormLeave = () => {
 									type="date"
 									placeholder="date ..."
 									value={startDateOfLeave}
-									onChange={(e) => setStartDateOfLeave(e.target.value)}
+									onChange={(e) => {
+										calculateTotalDays(e.target.value, endDateOfLeave);
+										setStartDateOfLeave(e.target.value);
+									}}
 								/>
 							</div>
 							<div className={styles.formInput}>
@@ -93,7 +116,10 @@ export const FormLeave = () => {
 									type="date"
 									placeholder="date ..."
 									value={endDateOfLeave}
-									onChange={(e) => setEndDateOfLeave(e.target.value)}
+									onChange={(e) => {
+										calculateTotalDays(startDateOfLeave, e.target.value);
+										setEndDateOfLeave(e.target.value);
+									}}
 								/>
 							</div>
 						</div>
@@ -101,7 +127,7 @@ export const FormLeave = () => {
 					<div className={styles.formInputReason}>
 						<h2 className={styles.labelInputReason}>Reason: </h2>
 						<div className={styles.inputReason}>
-							<input
+							<textarea
 								placeholder=""
 								value={reasonLeave}
 								onChange={(e) => setReasonLeave(e.target.value)}

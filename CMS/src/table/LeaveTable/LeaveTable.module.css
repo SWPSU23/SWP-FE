@@ -54,3 +54,12 @@
 	transition: 0.3s;
 	font-weight: bold;
 }
+
+.leaveTable td #leaveStatus {
+	width: 80%;
+	margin: 0 auto;
+	border-radius: 12px;
+	text-align: center;
+	padding: 10px;
+	color: white;
+}
