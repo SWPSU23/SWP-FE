@@ -14,8 +14,7 @@
 }
 
 .formContainer {
-	position: relative;
-	transform: translateY(10%);
+	transform: translateY(5%);
 	width: 60%;
 	max-height: 600px;
 	background-color: white;
@@ -98,9 +97,9 @@
 }
 
 .btn {
-	position: absolute;
-	right: 40px;
-	bottom: 30px;
+	text-align: end;
+	margin-top: 80px;
+	width: 95%;
 }
 
 .btn button {
