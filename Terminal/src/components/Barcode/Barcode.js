@@ -1,19 +1,27 @@
 import React, {useState} from 'react';
 import style from './Barcode.module.css';
 import {ButtonSmall} from '../../button/ButtonSmall/ButtonSmall';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {addOrderDetailAsync} from '../../redux/billOrder/action';
+import {alertBarCode} from '../Notify/Alert';
 
 export const BarCode = () => {
 	const dispatch = useDispatch();
 	const [barcode, setBarcode] = useState('');
+	const barcodeData = useSelector((state) => state.billOrder.barcodeData);
+
 	const clearBarcode = () => {
 		setBarcode('');
 	};
-	const hadnleAddProduct = () => {
+
+	const hadnleAddProduct = async () => {
 		console.log('add product have barcode', barcode);
 		dispatch(addOrderDetailAsync(barcode));
+		if (barcodeData.length === 0) {
+			await alertBarCode();
+		}
 	};
+
 	return (
 		<div className={style.barcodeWrapper}>
 			<p className={style.title}>Barcode</p>

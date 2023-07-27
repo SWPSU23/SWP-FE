@@ -7,6 +7,7 @@ export const DELETE_PRODUCT_IN_ORDER = 'DELETE_PRODUCT_IN_ORDER';
 
 export const UPDATE_SELECTED_PAYMENT_METHOD = 'UPDATE_SELECTED_PAYMENT_METHOD';
 export const CLEAR_PRODUCT_IN_ORDER = 'CLEAR_PRODUCT_IN_ORDER';
+export const ADD_BARCODE = 'ADD_BARCODE';
 
 //ACTION CREATORS
 
@@ -36,7 +37,10 @@ export const clearProductInOrder = (payload) => {
 		payload: payload,
 	};
 };
-
+export const addBarcode = (barcode) => ({
+	type: ADD_BARCODE,
+	payload: barcode,
+});
 // HANDLE CALL API ASYNC
 
 export const addOrderDetailAsync = (id) => {
