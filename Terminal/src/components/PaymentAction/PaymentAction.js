@@ -32,20 +32,27 @@ export const PaymentAction = () => {
 				// get ID account form Redux
 				const employeeId = 7;
 				dispatch(actCreateOrder(employeeId, orderListToPay)).then((response) => {
-					dispatch(clearProductInOrder('ninh'));
+					// dispatch(clearProductInOrder('ninh'));
+					setIsShow(true);
 				});
 				e.stopPropagation(); // Prevent event propagation
-				setIsShow(!isShow);
 			}
 		} catch (error) {
 			console.log(error);
 		}
 	};
+	const handleCloseToggle = () => {
+		console.log('handleCloseToggle');
+		dispatch(clearProductInOrder('ninh'));
+		setIsShow(false);
+	};
 
 	return (
-		<div className="paymentAction" onClick={handleToggle}>
-			<ButtonLarge content="Pay" />
-			{isShow && <FormBill />}{' '}
+		<div>
+			<div className="paymentAction" onClick={handleToggle}>
+				<ButtonLarge content="Pay" />
+			</div>
+			{isShow && <FormBill handleCloseForm={handleCloseToggle} />}{' '}
 		</div>
 	);
 };

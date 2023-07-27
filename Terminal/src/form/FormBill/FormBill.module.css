@@ -14,6 +14,7 @@
 }
 
 .formContainer {
+	position: relative;
 	transform: translateY(10%);
 	width: 60%;
 	max-height: 600px;
@@ -94,4 +95,23 @@
 
 .footer {
 	margin-top: 50px;
+}
+
+.btn {
+	position: absolute;
+	right: 40px;
+	bottom: 30px;
+}
+
+.btn button {
+	padding: 8px 20px;
+	border-radius: 10px;
+	border: none;
+	background-color: #d9d9d9;
+	color: #000000;
+	cursor: pointer;
+}
+
+.btn button:hover {
+	background-color: #a5a4a4;
 }

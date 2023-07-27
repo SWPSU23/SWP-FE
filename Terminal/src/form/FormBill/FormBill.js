@@ -3,9 +3,9 @@ import React from 'react';
 import styles from './FormBill.module.css';
 import {useSelector} from 'react-redux';
 
-export const FormBill = () => {
+export const FormBill = ({handleCloseForm}) => {
 	FormBill.propTypes = {
-		selectedPaymentMethod: PropTypes.string, // The selectedPaymentMethod prop is optional and of type string
+		handleCloseForm: PropTypes.func.isRequired,
 	};
 	let orderDetails = useSelector((state) => state.billOrder.orderDetails);
 	const selectedPaymentMethod = useSelector((state) => state.billOrder.selectedPaymentMethod);
@@ -90,6 +90,9 @@ export const FormBill = () => {
 				</div>
 				<div className={styles.footer}>
 					<b>Thank you for shopping at Ministore!</b>
+				</div>
+				<div className={styles.btn} onClick={handleCloseForm}>
+					<button>Close</button>
 				</div>
 			</div>
 		</div>
