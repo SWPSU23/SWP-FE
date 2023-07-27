@@ -9,8 +9,12 @@ import {Salary} from './pages/Salary/Salary';
 import {Worksheet} from './pages/Worksheet/Worksheet';
 import {Order} from './pages/Order/Order';
 import {Login} from './pages/Login/Login';
+import socket from './shared/socket';
 
 function App() {
+	socket.on('connect', () => {
+		console.log('Connected to Socket.IO server');
+	});
 	return (
 		<div className="App">
 			<BrowserRouter>

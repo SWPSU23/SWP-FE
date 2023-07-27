@@ -5,6 +5,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {actClick} from '../../redux/product/action';
 import {IoMdNotificationsOutline} from 'react-icons/io';
 import {data} from '../../shared/listOfNotify';
+import {NotificationInMenu} from '../NotificationInMenu/NotificationInMenu';
 
 export const Menu = () => {
 	// get item active from redux
@@ -66,7 +67,7 @@ export const Menu = () => {
 		setActiveItem(item);
 		// save item active to redux
 		dispatch(actClick(item));
-
+		console.log('item', item);
 		// Redirect to respective pages
 		if (item === 'PaySlip') {
 			navigate('/salary');
@@ -113,20 +114,7 @@ export const Menu = () => {
 					{!showChat && <div className="notificationCount">99</div>}
 				</div>
 				{showChat && (
-					<div className="chatBox">
-						<div className="arrow"></div>
-						<h3>Notification</h3>
-						{data.map((notification, index) => (
-							<div
-								key={index}
-								className="notify"
-								onClick={() => handleNotifyClick(notification.title)}
-							>
-								<p>{notification.title}</p>
-								<div>{notification.message}</div>
-							</div>
-						))}
-					</div>
+					<NotificationInMenu handleNotifyClick={handleNotifyClick} data={data} />
 				)}
 				<img
 					className={`menuIcon ${showLoginForm ? 'active' : ''}`}
