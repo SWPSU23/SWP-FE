@@ -30,7 +30,7 @@ export const PaymentAction = () => {
 		try {
 			if (isPayment) {
 				// get ID account form Redux
-				const employeeId = 7;
+				const employeeId = 1;
 				dispatch(actCreateOrder(employeeId, orderListToPay)).then((response) => {
 					// dispatch(clearProductInOrder('ninh'));
 					setIsShow(true);

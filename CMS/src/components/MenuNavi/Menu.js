@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react';
 import './Menu.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom';
-import {actClick} from '../../redux/product/action';
+import {actClick, actLogOut} from '../../redux/product/action';
 import {IoMdNotificationsOutline} from 'react-icons/io';
 import {data} from '../../shared/listOfNotify';
+import {loginPage} from '../../shared/constant';
 import {NotificationInMenu} from '../NotificationInMenu/NotificationInMenu';
 
 export const Menu = () => {
@@ -89,6 +90,12 @@ export const Menu = () => {
 		{title: 'Salary', slug: 'salary'},
 		{title: 'Worksheet', slug: 'worksheet'},
 	];
+
+	const handleLogout = () => {
+		//  REDIRECT URL
+		window.location.href = loginPage;
+		dispatch(actLogOut());
+	};
 	return (
 		<div className="menu">
 			<nav>
@@ -123,7 +130,9 @@ export const Menu = () => {
 					alt="Menu Icon"
 				/>
 				<div className={`loginForm ${showLoginForm ? 'show' : ''}`}>
-					<Link to="/login">Login</Link>
+					<h3 style={{cursor: 'pointer'}} onClick={handleLogout}>
+						Logout
+					</h3>
 				</div>
 			</div>
 		</div>

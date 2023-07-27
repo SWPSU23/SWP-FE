@@ -26,7 +26,6 @@ function App() {
 					<Route path="leave" element={<Leave />} />
 					<Route path="salary" element={<Salary />} />
 					<Route path="worksheet" element={<Worksheet />} />
-					<Route path="login" element={<Login />} />
 				</Routes>
 			</BrowserRouter>
 		</div>

@@ -1,10 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Login.module.css";
+import { actLogin } from "../../server";
 
 export const Login = () => {
-  const [isPhone, setIsPhone] = useState("");
-  const [isPassword, setIsPassword] = useState("");
+  const [isPhone, setIsPhone] = useState("0825999871");
+  const [isPassword, setIsPassword] = useState("gbpMvwTUyG");
+  const [role, setRole] = useState();
+  const [isLogin, setIslogin] = useState(false);
   // const [isRemember, setIsRemember] = useState(false);
+  const route = {
+    manager: "https://ministore.tech/",
+    cashier: "https://www.youtube.com/",
+  };
+
+  const handleSubmit = () => {
+    console.log("isPhone: " + isPhone);
+    console.log("isPassword: " + isPassword);
+
+    actLogin(isPhone, isPassword).then((response) => {
+      if (response.status === 200) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+        handleGetRole();
+      }
+    });
+  };
+
+  const handleGetRole = () => {
+    const userInfo = JSON.parse(localStorage.getItem("user"));
+    console.log("userInfo: " + userInfo);
+
+    if (userInfo) {
+      console.log("role: " + userInfo.employee_detail.role);
+      window.location.href = eval(`route.${userInfo.employee_detail.role}`);
+    }
+  };
+
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("user"));
+    console.log("userInfo: " + userInfo);
+
+    if (userInfo) {
+      console.log("role: " + userInfo.employee_detail.role);
+      window.location.href = eval(`route.${userInfo.employee_detail.role}`);
+    }
+  }, []);
 
   return (
     <div className={styles.loginForm}>
@@ -36,7 +75,7 @@ export const Login = () => {
           />
         </div>
 
-        <div className={styles.btn}>
+        <div className={styles.btn} onClick={handleSubmit}>
           <button className={styles.loginButton}>Login</button>
         </div>
       </div>

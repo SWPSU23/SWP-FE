@@ -9,11 +9,12 @@ import {
 	fetchCalenderDayAsync,
 	fetchWorksheetByID,
 } from '../../redux/worksheet/action';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {FETCH_WORKSHEET_BY_ID} from '../../redux/worksheet/actionTypes';
 import {ToastContainer} from 'react-toastify';
 
 const HeaderWorksheet = () => {
+	const listDayToRender = useSelector((state) => state.worksheet.listDayToRender);
 	const dispatch = useDispatch();
 	const [isGuard, setIsGuard] = useState(true);
 	const [isAdd, setIsAdd] = useState(false);
@@ -41,8 +42,13 @@ const HeaderWorksheet = () => {
 
 	// HANDLE GET WORKSHEET
 	useEffect(() => {
-		const defaultWorkSheet = '2023-07-10,2023-07-16';
-		handleGetWorkSheet(defaultWorkSheet);
+		if (listDayToRender) {
+			const defaultWorkSheet = '2023-07-10,2023-07-16';
+			handleGetWorkSheet(defaultWorkSheet);
+		} else {
+			const defaultWorkSheet = '2023-07-10,2023-07-16';
+			handleGetWorkSheet(defaultWorkSheet);
+		}
 	}, [isGuard]);
 
 	const handleGetWorkSheet = (date) => {
