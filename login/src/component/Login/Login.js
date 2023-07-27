@@ -9,8 +9,8 @@ export const Login = () => {
   const [isLogin, setIslogin] = useState(false);
   // const [isRemember, setIsRemember] = useState(false);
   const route = {
-    manager: "https://ministore.tech/",
-    cashier: "https://www.youtube.com/",
+    manager: "https://cms.ministore.tech/",
+    cashier: "https://sales.ministore.tech/",
   };
 
   const handleSubmit = () => {

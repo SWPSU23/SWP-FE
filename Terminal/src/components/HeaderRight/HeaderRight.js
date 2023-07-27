@@ -5,7 +5,8 @@ import {IoMdNotificationsOutline} from 'react-icons/io';
 import {ButtonSmall} from '../../button/ButtonSmall/ButtonSmall';
 import {data} from '../../share/listOfNotify';
 import {useDispatch, useSelector} from 'react-redux';
-import {setCashierRoleForProject} from '../../redux/authen/action';
+import {actLogOut} from '../../redux/authen/action';
+import {loginPage} from '../../share/constant';
 
 export const HeaderRight = () => {
 	const [showChat, setShowChat] = useState(false);
@@ -13,10 +14,15 @@ export const HeaderRight = () => {
 	const [isCashierSet, setIsCashierSet] = useState(true);
 
 	const handleLogout = () => {
-		setIsCashierSet(!isCashierSet);
-		console.log(isCashierSet);
+		// setIsCashierSet(!isCashierSet);
+		// console.log(isCashierSet);
 
-		dispatch(setCashierRoleForProject(isCashierSet));
+		// dispatch(setCashierRoleForProject(isCashierSet));
+		//  REDIRECT URL
+
+		dispatch(actLogOut()).then((response) => {
+			window.location.href = loginPage;
+		});
 	};
 
 	const toggleChat = () => {
