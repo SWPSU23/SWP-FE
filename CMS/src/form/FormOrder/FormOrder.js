@@ -17,6 +17,7 @@ export const FormOrder = ({handleToggleForm, orderDetail}) => {
 	const [orderProducts, setOrderProducts] = useState([]);
 
 	useEffect(() => {
+		console.log(orderDetail);
 		if (orderDetail) {
 			setOrderId(orderDetail.order.order_id);
 			setEmployeeId(orderDetail.order.employee_id);
@@ -28,7 +29,7 @@ export const FormOrder = ({handleToggleForm, orderDetail}) => {
 	return (
 		<div className={style.formOrder}>
 			<div className={style.formContainer}>
-				<h1>Employee details</h1>
+				<h1>Order details</h1>
 				<div className={style.formInputContainer}>
 					<div className={style.formInput}>
 						<h2 className={style.labelInput}>Order id</h2>

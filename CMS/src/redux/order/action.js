@@ -42,7 +42,7 @@ export const fetchOrderDetailAsync = (id) => {
 	return async (dispatch) => {
 		try {
 			console.log(id);
-			const response = await axios.get(`${server}/v1/orderProduct?order_id=${id}`);
+			const response = await axios.get(`${server}/v1/orderProduct/${id}`);
 			// Dispatch action or handle response
 			dispatch(fetchOrderDetail(response.data.data));
 		} catch (error) {

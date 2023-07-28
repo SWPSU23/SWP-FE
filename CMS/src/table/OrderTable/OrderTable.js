@@ -35,12 +35,12 @@ const OrderTable = ({handleToggleFormDelete, handleToggleFormUpdate, orderList})
 							<td>{formatDate(order.create_at)}</td>
 							<td>
 								<div className={style.btnForm}>
-									{/* <button
+									<button
 										className={style.btn}
 										onClick={() => handleToggleFormUpdate(order.id)}
 									>
 										<EditOutlined />
-									</button> */}
+									</button>
 									<button
 										className={style.btn}
 										onClick={() => handleToggleFormDelete(order.id)}

@@ -59,9 +59,13 @@ export const Leave = () => {
 	const handleToggleConfirm = async (id, comment) => {
 		let isConfirm = await confirmToggle('Yes')
 			.then((isConfirmed) => {
-				dispatch(actResponseLeaveFormAsync(id, 'approved', comment)).then((response) => {
-					dispatch(fetchLeaveListAsync(1));
-				});
+				if (isConfirmed === true) {
+					dispatch(actResponseLeaveFormAsync(id, 'approved', comment)).then(
+						(response) => {
+							dispatch(fetchLeaveListAsync(1));
+						}
+					);
+				}
 				return isConfirmed;
 			})
 			.catch((error) => {
