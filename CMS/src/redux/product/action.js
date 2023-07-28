@@ -169,9 +169,7 @@ export const handlePreviewImageAsync = (idImage) => {
 	console.log(idImage);
 
 	return async (dispatch) => {
-		const response = await axios.get(
-			'http://localhost:8080/v1/asset/product/images/' + idImage
-		);
+		const response = await axios.get(`${server}/v1/asset/product/images/` + idImage);
 		console.log('vao day');
 
 		return response;

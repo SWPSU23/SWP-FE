@@ -1,6 +1,6 @@
 import axios from "axios";
 axios.defaults.withCredentials = true;
-export const server = "http://localhost:8080";
+export const server = "https://api.ministore.tech";
 
 // ADD A PRODUCT DETAILS
 export const actLogin = async (phone, password) => {

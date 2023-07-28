@@ -7,8 +7,8 @@ export const Login = () => {
   const [isPassword, setIsPassword] = useState("");
   // const [isRemember, setIsRemember] = useState(false);
   const route = {
-    manager: "http://localhost:3001/",
-    cashier: "http://localhost:3002/",
+    manager: "https://cms.ministore.tech/",
+    cashier: "https://sales.ministore.tech/",
   };
 
   const handleSubmit = () => {
