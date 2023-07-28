@@ -11,7 +11,7 @@ export const ProgressBar = ({progressData}) => {
 		<div className={style.progressBar}>
 			<div className={style.progressContent}>
 				<p className={style.title}>{progressData.product}</p>
-				<p className={style.quantity}>{progressData.totalSold}</p>
+				<p className={style.quantity}>{progressData.total_sold}</p>
 			</div>
 			<div className={style.progressBarWrapper}>
 				<div className={style.progress} style={{width: `${progressData.percent}%`}}></div>

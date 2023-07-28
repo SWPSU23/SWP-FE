@@ -49,6 +49,7 @@ export const FormLeave = () => {
 		console.log(isSendLeaveForm);
 		try {
 			if (isSendLeaveForm) {
+<<<<<<< Updated upstream
 				if (startDateOfLeave != '' && endDateOfLeave != '' && reasonLeave != '') {
 					dispatch(addLeaveFormAsync(formData)) // Dispatch the async action
 						.then((response) => {
@@ -65,6 +66,23 @@ export const FormLeave = () => {
 				} else {
 					alertLeaveForm('Please fill all of the fields');
 				}
+=======
+				dispatch(addLeaveFormAsync(formData)) // Dispatch the async action
+					.then((response) => {
+						// Handle the response if needed
+						console.log('Response:', response);
+						// Clear the form fields after submit
+						setEmployeeId('');
+						setNumberOfLeaveDaysUsed('');
+						setStartDateOfLeave('');
+						setEndDateOfLeave('');
+						setReasonLeave('');
+					})
+					.catch((error) => {
+						console.log(error);
+						throw error;
+					});
+>>>>>>> Stashed changes
 			}
 		} catch (error) {
 			console.log(error);

@@ -1,4 +1,4 @@
-export const revenueData = [
+export const last_seven_days_revenue = [
 	{
 		id: 1,
 		year: 2014,

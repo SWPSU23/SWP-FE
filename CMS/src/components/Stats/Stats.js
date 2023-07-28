@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ArrowUpOutlined} from '@ant-design/icons';
+import {ArrowDownOutlined, ArrowUpOutlined} from '@ant-design/icons';
 import styles from './Stats.module.css';
 
 export const Stats = (props) => {
@@ -13,10 +13,16 @@ export const Stats = (props) => {
 		<div className={styles.stats}>
 			<p className={styles.statsTitle}>{data.statsTitle}</p>
 			<div className={styles.valueArea}>
-				<span className={styles.statsValue}>${data.statsValue}</span>
-				<span className={styles.compareValue}>
+				<span className={styles.statsValue}>
+					{String(data.statsValue).replace(/(.)(?=(\d{3})+$)/g, '$1,')}
+					{data.statsTitle.includes('REVENUE') ? 'đ' : ''}
+				</span>
+				<span
+					className={styles.compareValue}
+					style={{color: data.compareValue.includes('+') ? 'green' : 'red'}}
+				>
 					<span>{data.compareValue}</span>
-					<ArrowUpOutlined />
+					{data.compareValue.includes('+') ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
 				</span>
 			</div>
 		</div>

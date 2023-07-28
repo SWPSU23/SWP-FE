@@ -1,37 +1,45 @@
 import React from 'react';
 import styles from './TodayReport.module.css';
 import {Stats} from '../Stats/Stats';
+import {data} from '../../shared/DashBoardData';
 
 export const TodayReport = () => {
-	const data = [
-		{
-			//eslint-disable-next-line no-useless-escape
-			statsTitle: `TODAY\'S REVENUE`,
-			statsValue: 12.45,
-			compareValue: '+36%',
-		},
-		{
-			//eslint-disable-next-line no-useless-escape
-			statsTitle: `TODAY\'S REVENUE`,
-			statsValue: 12.45,
-			compareValue: '+36%',
-		},
-		{
-			//eslint-disable-next-line no-useless-escape
-			statsTitle: `TODAY\'S REVENUE`,
-			statsValue: 12.45,
-			compareValue: '+36%',
-		},
-		{
-			//eslint-disable-next-line no-useless-escape
-			statsTitle: `TODAY\'S REVENUE`,
-			statsValue: 12.45,
-			compareValue: '+36%',
-		},
-	];
+	const todayData = data.today_data.map((data) => {
+		let compareValue = '';
+		let percentValue = data.stats_value / data.past_value;
+		let newPercentValue = 0;
+		if (percentValue > 1) {
+			newPercentValue = (percentValue - 1) * 100;
+			if (`${newPercentValue}`.length > 5) {
+				compareValue = newPercentValue.toFixed(2);
+			} else {
+				compareValue = `${newPercentValue}`;
+			}
+			compareValue = `+${compareValue}%`;
+		} else if (percentValue < 1) {
+			newPercentValue = (1 - percentValue) * 100;
+			if (`${newPercentValue}`.length > 5) {
+				compareValue = newPercentValue.toFixed(2);
+			} else {
+				compareValue = `${newPercentValue}`;
+			}
+			compareValue = `-${compareValue}%`;
+		} else {
+			compareValue = `+0%`;
+		}
+
+		return {
+			statsTitle: data.stats_title,
+			statsValue: data.stats_value,
+			compareValue: compareValue,
+		};
+	});
+	console.log(data.today_data);
+	console.log(todayData);
+
 	return (
 		<div className={styles.TodayReport}>
-			{data.map((stats, index) => (
+			{todayData.map((stats, index) => (
 				<Stats key={index} data={stats} />
 			))}
 		</div>

@@ -5,6 +5,7 @@ import orderReducer from '../order/orderReducer';
 import userReducer from '../employee/userReducer';
 import worksheetReducer from '../worksheet/worksheetReducer';
 import leaveReducer from '../leave/leaveReducer';
+import salaryReducer from '../salary/salaryReducer';
 
 const rootReducer = combineReducers({
 	interact: interactReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
 	user: userReducer,
 	worksheet: worksheetReducer,
 	leave: leaveReducer,
+	salary: salaryReducer,
 	// Add more reducers if needed
 });
 
