@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 
 export const HeaderCenter = () => {
 	const userInfo = useSelector((state) => state.authen.cashierInfor);
-	console.log('userInfo: ' + userInfo);
+	console.log('userInfo: ' + userInfo.id);
 
 	return (
 		<div className="headerCenter">

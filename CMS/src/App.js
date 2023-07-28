@@ -10,20 +10,12 @@ import {Worksheet} from './pages/Worksheet/Worksheet';
 import {Order} from './pages/Order/Order';
 import {Login} from './pages/Login/Login';
 import socket from './shared/socket';
-import {actGetUserInfo} from './redux/product/action';
 import {loginPage} from './shared/constant';
+import {actGetUserInfo, setManagerInfor} from './redux/authen/action';
+import {useDispatch} from 'react-redux';
 
 function App() {
-	const data = {
-		employee_id: 1,
-	};
-	socket.on('connect', () => {
-		console.log('Connected to Socket.IO server');
-		socket.on('joinRoom', (data) => {
-			console.log(data);
-		});
-		socket.emit('joinRoom', data);
-	});
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		// const userInfo = JSON.parse(localStorage.getItem("user"));
@@ -37,6 +29,19 @@ function App() {
 				console.log('response: ' + JSON.stringify(response.data.user.role));
 				if (response.data.user.role !== 'manager') {
 					window.location.href = loginPage;
+				} else {
+					console.log(response.data.user.id);
+					dispatch(setManagerInfor(response.data.user.id));
+					const data = {
+						employee_id: response.data.user.id,
+					};
+					socket.on('connect', () => {
+						console.log('Connected to Socket.IO server');
+						socket.on('joinRoom', (data) => {
+							console.log(data);
+						});
+						socket.emit('joinRoom', data);
+					});
 				}
 			})
 			.catch((err) => {

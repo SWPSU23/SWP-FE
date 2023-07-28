@@ -118,3 +118,20 @@
 	cursor: pointer;
 	position: relative;
 }
+
+.notificationCount {
+	position: absolute;
+	top: 15px;
+	right: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	background-color: red;
+	border-radius: 50%;
+	color: white;
+	font-size: 12px;
+	font-weight: bold;
+	border: none;
+}

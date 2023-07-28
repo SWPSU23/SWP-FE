@@ -6,6 +6,7 @@ import userReducer from '../employee/userReducer';
 import worksheetReducer from '../worksheet/worksheetReducer';
 import leaveReducer from '../leave/leaveReducer';
 import salaryReducer from '../salary/salaryReducer';
+import authenReducer from '../authen/authenReducer';
 
 const rootReducer = combineReducers({
 	interact: interactReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
 	worksheet: worksheetReducer,
 	leave: leaveReducer,
 	salary: salaryReducer,
+	authen: authenReducer,
 	// Add more reducers if needed
 });
 

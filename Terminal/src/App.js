@@ -10,9 +10,22 @@ import {FormSalary} from './form/FormSalary/FormSalary';
 import {FormLeave} from './form/FormLeave/FormLeave';
 import {actGetUserInfo, setCashierInfor} from './redux/authen/action';
 import {loginPage} from './share/constant';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import socket from './share/socket';
 
 function App() {
+	const userInfo = useSelector((state) => state.authen.cashierInfor);
+	console.log(userInfo.id);
+	const data = {
+		employee_id: userInfo.id,
+	};
+	socket.on('connect', () => {
+		console.log('Connected to Socket.IO server');
+		socket.on('joinRoom', (data) => {
+			console.log(data);
+		});
+		socket.emit('joinRoom', data);
+	});
 	const dispatch = useDispatch();
 	useEffect(() => {
 		// const userInfo = JSON.parse(localStorage.getItem("user"));

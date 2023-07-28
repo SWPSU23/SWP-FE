@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import style from './NotificationInMenu.module.css';
+import {useSelector} from 'react-redux';
 import socket from '../../shared/socket';
 
 export const NotificationInMenu = ({data, handleNotifyClick}) => {
@@ -9,9 +10,20 @@ export const NotificationInMenu = ({data, handleNotifyClick}) => {
 		handleNotifyClick: PropTypes.func.isRequired,
 	};
 	const [notifications, setNotifications] = useState([]);
+	const managerId = useSelector((state) => state.authen.managerInfor);
+
+	// const delayTime = () => {
+	// 	setTimeout(() => {
+
+	// 	}, 3000);
+	// };
 	useEffect(() => {
 		socket.emit('notification:fetch', {
-			employee_id: 1,
+			employee_id: managerId,
+		});
+		// delayTime();
+		socket.emit('notification:markAllAsRead', {
+			employee_id: managerId,
 		});
 		socket.on('notification:fetch', (data) => {
 			console.log(data);
