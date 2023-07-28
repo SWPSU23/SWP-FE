@@ -47,11 +47,10 @@ export const addOrderDetailAsync = (id) => {
 	return async (dispatch) => {
 		try {
 			const response = await axios.get(`${server}/v1/product/${id}`);
-			console.log('addOrderDetailAsync', id);
 			dispatch(addOrderDetail(response.data.data));
 			return response;
 		} catch (error) {
-			console.log(error);
+			return JSON.stringify(error);
 		}
 	};
 };

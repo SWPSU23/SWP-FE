@@ -8,10 +8,12 @@ import {FormCheckIn} from './form/FormCheckIn/FormCheckIn';
 import {FormWorksheet} from './form/FormWorksheet/FormWorksheet';
 import {FormSalary} from './form/FormSalary/FormSalary';
 import {FormLeave} from './form/FormLeave/FormLeave';
-import {actGetUserInfo} from './redux/authen/action';
+import {actGetUserInfo, setCashierInfor} from './redux/authen/action';
 import {loginPage} from './share/constant';
+import {useDispatch} from 'react-redux';
 
 function App() {
+	const dispatch = useDispatch();
 	useEffect(() => {
 		// const userInfo = JSON.parse(localStorage.getItem("user"));
 		// console.log("userInfo: " + userInfo);
@@ -25,6 +27,7 @@ function App() {
 				if (response.data.user.role !== 'cashier') {
 					window.location.href = loginPage;
 				}
+				dispatch(setCashierInfor(response.data.user));
 			})
 			.catch((err) => {
 				console.log('error: ' + err);

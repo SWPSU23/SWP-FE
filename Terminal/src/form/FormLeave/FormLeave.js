@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {ButtonSmall} from '../../button/ButtonSmall/ButtonSmall';
 import leave from '../../assets/leaveform.png';
 import styles from './FormLeave.module.css'; // Import the CSS module
@@ -10,8 +10,10 @@ import {addLeaveFormAsync} from '../../redux/leave/action';
 import {confirmLeaveForm} from '../../components/Notify/Alert';
 
 export const FormLeave = () => {
+	const userInfo = useSelector((state) => state.authen.cashierInfor);
+	console.log('userInfo: FormLeave: ' + userInfo.id);
 	const dispatch = useDispatch();
-	const [employeeId, setEmployeeId] = useState('');
+	const [employeeId, setEmployeeId] = useState(userInfo.id);
 	const [numberOfLeaveDaysUsed, setNumberOfLeaveDaysUsed] = useState('');
 	const [startDateOfLeave, setStartDateOfLeave] = useState('');
 	const [endDateOfLeave, setEndDateOfLeave] = useState('');
@@ -32,7 +34,6 @@ export const FormLeave = () => {
 
 		const formData = {
 			employeeId,
-			numberOfLeaveDaysUsed,
 			startDateOfLeave,
 			endDateOfLeave,
 			reasonLeave,
@@ -78,7 +79,7 @@ export const FormLeave = () => {
 				<div className={styles.formContainerCenter}>
 					<div className={styles.formCenter}>
 						<div className={styles.formRow}>
-							<div className={styles.formInput}>
+							{/* <div className={styles.formInput}>
 								<h2 className={styles.labelInput}>Employee ID: </h2>
 								<input
 									type="number"
@@ -86,8 +87,8 @@ export const FormLeave = () => {
 									value={employeeId}
 									onChange={(e) => setEmployeeId(e.target.value)}
 								/>
-							</div>
-
+							</div> */}
+							{/* 
 							<div className={styles.formInput}>
 								<h2 className={styles.labelInput}>Leave Used: </h2>
 								<input
@@ -96,7 +97,7 @@ export const FormLeave = () => {
 									placeholder="number ..."
 									value={isNaN(numberOfLeaveDaysUsed) ? 0 : numberOfLeaveDaysUsed}
 								/>
-							</div>
+							</div> */}
 
 							<div className={styles.formInput}>
 								<h2 className={styles.labelInput}>Start Date: </h2>

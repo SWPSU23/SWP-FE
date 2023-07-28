@@ -1,7 +1,8 @@
-import {SET_ROLE} from './action';
+import {CASHIER_INFO, SET_ROLE} from './action';
 
 const initialState = {
 	isCashier: true,
+	cashierInfor: [],
 };
 
 const authenReducer = (state = initialState, action) => {
@@ -10,6 +11,13 @@ const authenReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isCashier: action.payload,
+			};
+		case CASHIER_INFO:
+			console.log('vao CASHIER_INFO: ', action.payload);
+
+			return {
+				...state,
+				cashierInfor: action.payload,
 			};
 		default:
 			return state;

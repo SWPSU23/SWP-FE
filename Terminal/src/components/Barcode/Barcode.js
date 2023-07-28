@@ -14,9 +14,16 @@ export const BarCode = () => {
 		setBarcode('');
 	};
 
-	const hadnleAddProduct = async () => {
-		console.log('add product have barcode', barcode);
-		dispatch(addOrderDetailAsync(barcode));
+	const handleAddProduct = async () => {
+		dispatch(addOrderDetailAsync(barcode))
+			.then((response) => {
+				const result = JSON.parse(response);
+				if (result.status === 400) {
+					alertBarCode();
+				}
+			})
+			.catch((error) => console.log('error: ' + error));
+
 		// if (barcodeData.length === 0) {
 		// 	await alertBarCode();
 		// }
@@ -24,7 +31,7 @@ export const BarCode = () => {
 
 	return (
 		<div className={style.barcodeWrapper}>
-			<p className={style.title}>Barcode</p>
+			<p className={style.title}>ID Product</p>
 			<div className={style.barcode}>
 				<input
 					onChange={(e) => setBarcode(e.target.value)}
@@ -41,7 +48,7 @@ export const BarCode = () => {
 							margin: '0px 20px',
 						}}
 						title="Add product"
-						hadnleAddProduct={hadnleAddProduct}
+						hadnleAddProduct={handleAddProduct}
 					/>
 					<ButtonSmall
 						style={{

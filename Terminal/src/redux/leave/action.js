@@ -8,7 +8,6 @@ export const addLeaveFormAsync = (formData) => {
 
 	const body = {
 		employee_id: Number.parseInt(formData.employeeId),
-		number_of_leave_days_used: Number.parseInt(formData.numberOfLeaveDaysUsed),
 		start_date_of_leave: formData.startDateOfLeave,
 		end_date_of_leave: formData.endDateOfLeave,
 		reason_leave: formData.reasonLeave,

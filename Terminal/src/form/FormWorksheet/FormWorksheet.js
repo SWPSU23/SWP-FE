@@ -14,6 +14,8 @@ import {
 
 export const FormWorksheet = () => {
 	const calenderDay = useSelector((state) => state.worksheet.calenderDay);
+	const userInfo = useSelector((state) => state.authen.cashierInfor);
+	console.log('userInfo: FormWorksheet: ' + userInfo.id);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [worksheet, setWorksheet] = useState();
@@ -33,7 +35,7 @@ export const FormWorksheet = () => {
 		const startDate = daySelect[0];
 		const endDate = daySelect[1];
 		// get ID account form Redux
-		const employeeId = 7;
+		const employeeId = userInfo.id;
 		dispatch(fetchCalenderDayAsync(startDate, endDate));
 		dispatch(fetchAllWorksheetByDate(startDate, endDate, employeeId)).then((response) => {
 			setWorksheet(response.data.data);

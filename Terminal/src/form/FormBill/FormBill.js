@@ -8,6 +8,8 @@ export const FormBill = ({handleCloseForm}) => {
 		handleCloseForm: PropTypes.func.isRequired,
 	};
 	let orderDetails = useSelector((state) => state.billOrder.orderDetails);
+	const userInfo = useSelector((state) => state.authen.cashierInfor);
+	console.log('userInfo: FormBill: ' + userInfo.id);
 	const selectedPaymentMethod = useSelector((state) => state.billOrder.selectedPaymentMethod);
 	console.log('orderDetails in PreOrderTable');
 	console.log(orderDetails);
@@ -33,12 +35,12 @@ export const FormBill = ({handleCloseForm}) => {
 				<h2>Bill</h2>
 
 				<div className={styles.title}>
-					<h4>Day:</h4>
-					<p>19/07/2023</p>
+					<h4>Gmail:</h4>
+					<p>{userInfo.email_address}</p>
 				</div>
 				<div className={styles.title}>
 					<h4>Cashier:</h4>
-					<p>Huỳnh Chí Bảo</p>
+					<p>{userInfo.name}</p>
 				</div>
 				<table className={styles.orderTable}>
 					<thead>
@@ -78,7 +80,7 @@ export const FormBill = ({handleCloseForm}) => {
 						<h4>{formattedCurrency(subTotal)}</h4>
 					</div>
 				</div>
-				<div className={styles.totals}>
+				{/* <div className={styles.totals}>
 					<div className={styles.total}>
 						<p>{selectedPaymentMethod === 'Momo' ? 'Momo' : 'Cash'}:</p>
 						<p>200.000</p>
@@ -87,7 +89,7 @@ export const FormBill = ({handleCloseForm}) => {
 						<h4>Money change:</h4>
 						<h4>70.000</h4>
 					</div>
-				</div>
+				</div> */}
 				<div className={styles.footer}>
 					<b>Thank you for shopping at Ministore!</b>
 				</div>
