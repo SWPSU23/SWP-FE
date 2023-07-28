@@ -1,9 +1,13 @@
-import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
+import propTypes from 'prop-types';
+import {UserOutlined} from '@ant-design/icons';
 import React from 'react';
 import styles from './PayRollTable.module.css';
 import {data} from '../../shared/ListOfPayRoll';
 
-function PayRollTable() {
+function PayRollTable({handleButtonForm}) {
+	PayRollTable.propTypes = {
+		handleButtonForm: propTypes.func.isRequired,
+	};
 	return (
 		<div className={styles.tableWrapper}>
 			<table className={styles.payrollTable}>
@@ -20,7 +24,7 @@ function PayRollTable() {
 						<th>Sheet 3S</th>
 						<th>Violate</th>
 						<th>Total</th>
-						{/* <th>Action</th> */}
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -39,16 +43,16 @@ function PayRollTable() {
 							<td>{payroll.violate}</td>
 							<td>{payroll.total}</td>
 
-							{/* <td>
-								<div className="btnForm">
+							<td>
+								<div className={styles.btnForm} onClick={handleButtonForm}>
 									<button className="btn">
-										<EditOutlined />
+										<UserOutlined />
 									</button>
-									<button className="btn">
+									{/* <button className="btn">
 										<DeleteOutlined />
-									</button>
+									</button> */}
 								</div>
-							</td> */}
+							</td>
 						</tr>
 					))}
 				</tbody>
