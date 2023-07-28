@@ -1,21 +1,22 @@
 .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+	margin-bottom: 40px;
 }
 
 .pagination-button {
-    width: 40px;
-    height: 40px;
-    background-color: black;
-    color: white;
-    border: none;
-    margin: 0 5px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 20px;
+	width: 40px;
+	height: 40px;
+	background-color: black;
+	color: white;
+	border: none;
+	margin: 0 5px;
+	border-radius: 10px;
+	cursor: pointer;
+	font-size: 20px;
 }
 
 .pagination-button.active {
-    background-color: #036541;
+	background-color: #036541;
 }
