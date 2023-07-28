@@ -68,28 +68,34 @@ export const LeaveTable = ({leaveFormList, handleToggleConfirm, handleToggleReje
 
 							<td>
 								<div className={style.btnArea}>
-									<button
-										className={style.btn}
-										onClick={() =>
-											handleToggleConfirm(
-												leave.id,
-												'You are allowed to take leave'
-											)
-										}
-									>
-										<CheckOutlined />
-									</button>
-									<button
-										className={style.btn}
-										onClick={() =>
-											handleToggleReject(
-												leave.id,
-												'You are not allowed to take leave'
-											)
-										}
-									>
-										<CloseOutlined />
-									</button>
+									{leave.status !== 'waiting' ? (
+										<h4>Resolved</h4>
+									) : (
+										<>
+											<button
+												className={style.btn}
+												onClick={() =>
+													handleToggleConfirm(
+														leave.id,
+														'You are allowed to take leave'
+													)
+												}
+											>
+												<CheckOutlined />
+											</button>
+											<button
+												className={style.btn}
+												onClick={() =>
+													handleToggleReject(
+														leave.id,
+														'You are not allowed to take leave'
+													)
+												}
+											>
+												<CloseOutlined />
+											</button>
+										</>
+									)}
 								</div>
 							</td>
 						</tr>
