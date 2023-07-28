@@ -57,7 +57,7 @@ export const Login = () => {
             className={styles.labelInput}
             style={{ top: isPhone || isPhone.length > 0 ? 0 : "50%" }}
           >
-            Email
+            Phone
           </h2>
           <input value={isPhone} onChange={(e) => setIsPhone(e.target.value)} />
         </div>
