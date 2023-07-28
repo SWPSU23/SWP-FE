@@ -19,7 +19,7 @@ export const FormCheckIn = () => {
 	const userInfo = useSelector((state) => state.authen.cashierInfor);
 	console.log('userInfo: FormCheckIn: ' + userInfo.id);
 	const dispatch = useDispatch();
-	const [isCheckIn, setIsCheckIn] = useState(false);
+	const [isCheckIn, setIsCheckIn] = useState(true);
 	const handleCheckout = async () => {
 		console.log('check out');
 
