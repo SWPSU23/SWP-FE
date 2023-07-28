@@ -48,8 +48,8 @@ export const addOrderDetailAsync = (id) => {
 		try {
 			const response = await axios.get(`${server}/v1/product/${id}`);
 			console.log('addOrderDetailAsync', id);
-			console.log(response);
 			dispatch(addOrderDetail(response.data.data));
+			return response;
 		} catch (error) {
 			console.log(error);
 		}

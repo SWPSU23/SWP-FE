@@ -5,11 +5,9 @@ import { actLogin } from "../../server";
 export const Login = () => {
   const [isPhone, setIsPhone] = useState("0825999871");
   const [isPassword, setIsPassword] = useState("gbpMvwTUyG");
-  const [role, setRole] = useState();
-  const [isLogin, setIslogin] = useState(false);
   // const [isRemember, setIsRemember] = useState(false);
   const route = {
-    manager: "https://cms.ministore.tech/",
+    manager: "http://localhost:3001/",
     cashier: "https://sales.ministore.tech/",
   };
 

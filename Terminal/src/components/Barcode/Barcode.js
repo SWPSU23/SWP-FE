@@ -17,9 +17,9 @@ export const BarCode = () => {
 	const hadnleAddProduct = async () => {
 		console.log('add product have barcode', barcode);
 		dispatch(addOrderDetailAsync(barcode));
-		if (barcodeData.length === 0) {
-			await alertBarCode();
-		}
+		// if (barcodeData.length === 0) {
+		// 	await alertBarCode();
+		// }
 	};
 
 	return (
