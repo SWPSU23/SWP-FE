@@ -40,16 +40,16 @@ export const FormCheckIn = () => {
 					if (result.response.data.success === false) {
 						console.log(result.response.data.message.split(':')[1].trim());
 						alertCheckInOut(result.response.data.message.split(':')[1].trim());
-					} else {
-						// CHECK OUT SUCCESS
-						// CLOSE CHECK-IN BUTTON
-						alertCheckInOutSuccess('Check - Out');
-						setIsCheckIn(true);
+						return;
 					}
 				})
 				.catch((error) => {
 					console.log('error: ' + error);
 				});
+			// CHECK OUT SUCCESS
+			// CLOSE CHECK-IN BUTTON
+			alertCheckInOutSuccess('Check - Out');
+			setIsCheckIn(true);
 		}
 	};
 	const handleCheckIn = async () => {
@@ -72,15 +72,16 @@ export const FormCheckIn = () => {
 					if (result.response.data.success === false) {
 						console.log(result.response.data.message.split(':')[1].trim());
 						alertCheckInOut(result.response.data.message.split(':')[1].trim());
-					} else {
-						// CLOSE CHECK-IN BUTTON
-						alertCheckInOutSuccess('Check - in');
-						setIsCheckIn(false);
 					}
+					return;
 				})
+
 				.catch((error) => {
 					console.log('error: ' + error);
 				});
+			// CLOSE CHECK-IN BUTTON
+			alertCheckInOutSuccess('Check - in');
+			setIsCheckIn(false);
 		}
 	};
 

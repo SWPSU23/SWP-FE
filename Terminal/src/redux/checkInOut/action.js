@@ -14,8 +14,8 @@ export const actHandleCheckIn = (id) => {
 	return async (dispatch) => {
 		try {
 			await axios.put(`${server}/v1/checkInOut/checkin`, body).then((response) => {
-				const result = JSON.stringify(response.response);
-				console.log('result: ' + result);
+				const result = JSON.stringify(response);
+				console.log('response: actHandleCheckIn ' + JSON.stringify(response));
 				return result;
 			});
 		} catch (error) {
