@@ -249,7 +249,7 @@ export const updateProductDetailAsync = async (img, formData) => {
 export const actLogOut = () => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.get(`${server}/v1/auth/getUserInfo`);
+			const response = await axios.get(`${server}/v1/auth/logout`);
 			return response;
 		} catch (error) {
 			console.log(error);
