@@ -20,13 +20,8 @@ export const addLeaveFormAsync = (formData) => {
 			return response;
 		} catch (error) {
 			console.log('error message', error.response.data.message);
-<<<<<<< Updated upstream
 			console.log('error message', error.response.data.message.split(':')[1].trim());
 			return error;
-=======
-			console.log('error message', error.response.data.message.split('(')[0].trim());
-			throw error;
->>>>>>> Stashed changes
 		}
 	};
 };

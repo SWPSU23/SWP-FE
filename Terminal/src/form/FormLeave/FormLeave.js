@@ -6,8 +6,8 @@ import styles from './FormLeave.module.css'; // Import the CSS module
 
 import PropTypes from 'prop-types';
 import {useNavigate} from 'react-router';
-import {addLeaveFormAsync} from '../../redux/leave/action';
 import {alertLeaveForm, confirmLeaveForm} from '../../components/Notify/Alert';
+import {addLeaveFormAsync} from '../../redux/leave/action';
 
 export const FormLeave = () => {
 	const userInfo = useSelector((state) => state.authen.cashierInfor);
@@ -49,7 +49,6 @@ export const FormLeave = () => {
 		console.log(isSendLeaveForm);
 		try {
 			if (isSendLeaveForm) {
-<<<<<<< Updated upstream
 				if (startDateOfLeave != '' && endDateOfLeave != '' && reasonLeave != '') {
 					dispatch(addLeaveFormAsync(formData)) // Dispatch the async action
 						.then((response) => {
@@ -66,23 +65,6 @@ export const FormLeave = () => {
 				} else {
 					alertLeaveForm('Please fill all of the fields');
 				}
-=======
-				dispatch(addLeaveFormAsync(formData)) // Dispatch the async action
-					.then((response) => {
-						// Handle the response if needed
-						console.log('Response:', response);
-						// Clear the form fields after submit
-						setEmployeeId('');
-						setNumberOfLeaveDaysUsed('');
-						setStartDateOfLeave('');
-						setEndDateOfLeave('');
-						setReasonLeave('');
-					})
-					.catch((error) => {
-						console.log(error);
-						throw error;
-					});
->>>>>>> Stashed changes
 			}
 		} catch (error) {
 			console.log(error);

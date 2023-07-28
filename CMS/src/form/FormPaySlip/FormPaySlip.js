@@ -2,12 +2,13 @@ import propTypes from 'prop-types';
 import React, {useEffect, useState} from 'react';
 import styles from './FormPaySlip.module.css';
 import {data} from '../../shared/ListOfEmployee';
-import {fetchPayslipDetailsAsync} from '../../redux/salary/action';
 import {useDispatch} from 'react-redux';
+import {fetchPayslipDetailsAsync} from '../../redux/salary/action';
 
-export const FormPaySlip = ({handleCloseForm}) => {
+export const FormPaySlip = ({handleCloseForm, paySlipDetail}) => {
 	FormPaySlip.propTypes = {
 		handleCloseForm: propTypes.func.isRequired,
+		paySlipDetail: propTypes.object.isRequired,
 	};
 	const dispatch = useDispatch();
 	// CHANGE DATA
@@ -18,10 +19,13 @@ export const FormPaySlip = ({handleCloseForm}) => {
 	const [listDetails, setListDetails] = useState();
 
 	useEffect(() => {
-		dispatch(fetchPayslipDetailsAsync(employeeId, monthOfYear)).then((response) =>
-			setListDetails(response.data.data)
+		dispatch(fetchPayslipDetailsAsync(paySlipDetail.employeeId, paySlipDetail.month)).then(
+			(response) => {
+				console.log('response');
+				setListDetails(response.data.data);
+			}
 		);
-	}, []);
+	}, [paySlipDetail]);
 
 	console.log(listDetails);
 	if (!listDetails) return;
@@ -65,7 +69,7 @@ export const FormPaySlip = ({handleCloseForm}) => {
 					</table>
 				</div>
 				<div className={styles.formContainerButton}>
-					<h2 style={{marginRight: '10%'}}>Total Salary: {total}</h2>
+					<h2>Total Salary: {paySlipDetail.totalSalary}</h2>
 				</div>
 				<div className={styles.formContainerButton}>
 					<button

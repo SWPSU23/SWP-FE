@@ -18,7 +18,11 @@ export const Salary = () => {
 
 	// HANDLE FORM
 	const [isShow, setIsShow] = useState(false);
-	const handleButtonForm = () => {
+	const [paySlipDetail, setPaySlipDetail] = useState();
+	const handleButtonForm = (detail) => {
+		if (!isShow) {
+			setPaySlipDetail(detail);
+		}
 		setIsShow(!isShow);
 	};
 
@@ -36,14 +40,18 @@ export const Salary = () => {
 			<Menu />
 			<Header img="../assets/image/salary.jpg" h2="PayRoll" />
 
-			{isShow ? <FormPaySlip handleCloseForm={handleButtonForm} /> : <div></div>}
+			{isShow ? (
+				<FormPaySlip paySlipDetail={paySlipDetail} handleCloseForm={handleButtonForm} />
+			) : (
+				<div></div>
+			)}
 			{loading ? <Loading /> : <PayRollTable handleButtonForm={handleButtonForm} />}
 
-			<Pagination
+			{/* <Pagination
 				currentPage={currentPage}
 				totalPages={totalPages}
 				onPageChange={handlePageChange}
-			/>
+			/> */}
 		</div>
 	);
 };
