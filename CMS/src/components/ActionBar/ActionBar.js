@@ -35,10 +35,14 @@ export const ActionBar = ({title, handleToggleForm, handleSearch}) => {
 		<div>
 			<div className={styles.actionBar}>
 				<div className={styles.actionWrapper}>
-					<button onClick={handleAdd} className={styles.NewProductBtn}>
+					<button
+						style={{display: title.includes('New order') ? 'none' : 'block'}}
+						onClick={handleAdd}
+						className={styles.NewProductBtn}
+					>
 						{title}
 					</button>
-					<div className={styles.filterWrapper} onClick={toogleFilterOption}>
+					{/* <div className={styles.filterWrapper} onClick={toogleFilterOption}>
 						<span>Filter by</span>
 						<CaretDownOutlined />
 						{isOpenFilterOption && (
@@ -47,7 +51,7 @@ export const ActionBar = ({title, handleToggleForm, handleSearch}) => {
 								<p>Filter by id</p>
 							</div>
 						)}
-					</div>
+					</div> */}
 					<div className={styles.searchWrapper}>
 						<input
 							className={styles.input}

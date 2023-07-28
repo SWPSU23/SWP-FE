@@ -1,7 +1,8 @@
 /* worksheet.css */
 .tableContainer {
-	margin: 20px;
+	/* margin: 20px; */
 	width: 80%;
+	margin-bottom: 40px;
 }
 
 .worksheetTable {

@@ -74,7 +74,7 @@ function PayRollTable({handleButtonForm}) {
 												})
 											}
 										>
-											<button className="btn">
+											<button className={styles.btn}>
 												<UserOutlined />
 											</button>
 											{/* <button className="btn">
