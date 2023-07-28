@@ -41,7 +41,6 @@ export const FormLeave = () => {
 		let isSendLeaveForm = await confirmLeaveForm()
 			.then((isConfirmed) => {
 				return isConfirmed;
-				// console.log('Confirmation result:', isConfirmed); // Output: Confirmation result: true
 			})
 			.catch((error) => {
 				console.error('Confirmation error:', error);

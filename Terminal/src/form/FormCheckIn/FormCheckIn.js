@@ -5,31 +5,83 @@ import {ButtonSmall} from '../../button/ButtonSmall/ButtonSmall';
 import {useNavigate} from 'react-router';
 import {useDispatch, useSelector} from 'react-redux';
 import {actHandleCheckIn, actHandleCheckOut} from '../../redux/checkInOut/action';
+import {
+	alertBarCode,
+	alertCheckInOut,
+	alertCheckInOutSuccess,
+	alertLeaveForm,
+	confirmCheckIn,
+	confirmCheckOut,
+	confirmLeaveForm,
+} from '../../components/Notify/Alert';
 
 export const FormCheckIn = () => {
 	const userInfo = useSelector((state) => state.authen.cashierInfor);
 	console.log('userInfo: FormCheckIn: ' + userInfo.id);
 	const dispatch = useDispatch();
-	const [isCheckIn, setIsCheckIn] = useState(true);
-	const handleCheckout = () => {
+	const [isCheckIn, setIsCheckIn] = useState(false);
+	const handleCheckout = async () => {
 		console.log('check out');
 
 		// GET Employee ID from redux
 		const employeeID = userInfo.id;
-		// OPEN CHECK-IN BUTTON
-		setIsCheckIn(true);
 
-		dispatch(actHandleCheckOut(employeeID));
+		let isCheckOut = await confirmCheckOut()
+			.then((isConfirmedOut) => {
+				return isConfirmedOut;
+			})
+			.catch((error) => {
+				console.error('Confirmation error:', error);
+			});
+		if (isCheckOut) {
+			dispatch(actHandleCheckOut(employeeID))
+				.then((result) => {
+					console.log('result: ' + JSON.stringify(result.response.data));
+					if (result.response.data.success === false) {
+						console.log(result.response.data.message.split(':')[1].trim());
+						alertCheckInOut(result.response.data.message.split(':')[1].trim());
+					} else {
+						// CHECK OUT SUCCESS
+						// CLOSE CHECK-IN BUTTON
+						alertCheckInOutSuccess('Check - Out');
+						setIsCheckIn(true);
+					}
+				})
+				.catch((error) => {
+					console.log('error: ' + error);
+				});
+		}
 	};
-	const handleCheckIn = () => {
+	const handleCheckIn = async () => {
 		console.log('check in');
 
 		// GET Employee ID from redux
 		const employeeID = userInfo.id;
-		// CLOSE CHECK-IN BUTTON
-		setIsCheckIn(false);
 
-		dispatch(actHandleCheckIn(employeeID));
+		let isCheckIn = await confirmCheckIn('Check - in')
+			.then((isConfirmed) => {
+				return isConfirmed;
+			})
+			.catch((error) => {
+				console.error('Confirmation error:', error);
+			});
+		if (isCheckIn) {
+			dispatch(actHandleCheckIn(employeeID))
+				.then((result) => {
+					console.log('result: ' + JSON.stringify(result.response.data));
+					if (result.response.data.success === false) {
+						console.log(result.response.data.message.split(':')[1].trim());
+						alertCheckInOut(result.response.data.message.split(':')[1].trim());
+					} else {
+						// CLOSE CHECK-IN BUTTON
+						alertCheckInOutSuccess('Check - in');
+						setIsCheckIn(false);
+					}
+				})
+				.catch((error) => {
+					console.log('error: ' + error);
+				});
+		}
 	};
 
 	const navigate = useNavigate();

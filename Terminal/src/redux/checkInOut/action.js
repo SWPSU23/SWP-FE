@@ -13,10 +13,14 @@ export const actHandleCheckIn = (id) => {
 	};
 	return async (dispatch) => {
 		try {
-			const response = await axios.put(`${server}/v1/checkInOut/checkin`, body);
-			console.log(response);
+			await axios.put(`${server}/v1/checkInOut/checkin`, body).then((response) => {
+				const result = JSON.stringify(response.response);
+				console.log('result: ' + result);
+				return result;
+			});
 		} catch (error) {
-			console.log(error);
+			console.log('error here: ' + error);
+			return error;
 		}
 	};
 };
@@ -28,10 +32,14 @@ export const actHandleCheckOut = (id) => {
 	};
 	return async (dispatch) => {
 		try {
-			const response = await axios.put(`${server}/v1/checkInOut/checkout`, body);
-			console.log(response);
+			await axios.put(`${server}/v1/checkInOut/checkOut`, body).then((response) => {
+				const result = JSON.stringify(response.response);
+				console.log('result: ' + result);
+				return result;
+			});
 		} catch (error) {
-			console.log(error);
+			console.log('error here: ' + error);
+			return error;
 		}
 	};
 };
