@@ -7,7 +7,7 @@ import styles from './FormLeave.module.css'; // Import the CSS module
 import PropTypes from 'prop-types';
 import {useNavigate} from 'react-router';
 import {addLeaveFormAsync} from '../../redux/leave/action';
-import {confirmLeaveForm} from '../../components/Notify/Alert';
+import {alertLeaveForm, confirmLeaveForm} from '../../components/Notify/Alert';
 
 export const FormLeave = () => {
 	const userInfo = useSelector((state) => state.authen.cashierInfor);
@@ -49,17 +49,22 @@ export const FormLeave = () => {
 		console.log(isSendLeaveForm);
 		try {
 			if (isSendLeaveForm) {
-				dispatch(addLeaveFormAsync(formData)) // Dispatch the async action
-					.then((response) => {
-						// Handle the response if needed
-						console.log('Response:', response);
-						// Clear the form fields after submit
-						setEmployeeId('');
-						setNumberOfLeaveDaysUsed('');
-						setStartDateOfLeave('');
-						setEndDateOfLeave('');
-						setReasonLeave('');
-					});
+				if (startDateOfLeave != '' && endDateOfLeave != '' && reasonLeave != '') {
+					dispatch(addLeaveFormAsync(formData)) // Dispatch the async action
+						.then((response) => {
+							// Handle the response if needed
+							console.log('Response:', JSON.stringify(response));
+							if (response.code == 'ERR_BAD_REQUEST') {
+								alertLeaveForm('Invalid leave form or You are out of days off');
+								return;
+							}
+							setStartDateOfLeave('');
+							setEndDateOfLeave('');
+							setReasonLeave('');
+						});
+				} else {
+					alertLeaveForm('Please fill all of the fields');
+				}
 			}
 		} catch (error) {
 			console.log(error);

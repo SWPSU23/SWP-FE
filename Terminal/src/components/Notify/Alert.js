@@ -57,3 +57,9 @@ export const alertBarCode = () => {
 		Swal.fire('No Order!!', 'Please enter the barcode.', 'warning');
 	});
 };
+
+export const alertLeaveForm = (msg) => {
+	return new Promise(() => {
+		Swal.fire('No Send!!', msg, 'warning');
+	});
+};

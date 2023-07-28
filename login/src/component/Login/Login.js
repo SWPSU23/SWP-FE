@@ -83,6 +83,7 @@ export const Login = () => {
             Password
           </h2>
           <input
+            type="password"
             value={isPassword}
             onChange={(e) => setIsPassword(e.target.value)}
           />
