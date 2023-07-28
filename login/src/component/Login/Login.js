@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Login.module.css";
-import { actLogin } from "../../server";
+import { actGetUserInfo, actLogin } from "../../server";
 
 export const Login = () => {
-  const [isPhone, setIsPhone] = useState("0825999871");
-  const [isPassword, setIsPassword] = useState("gbpMvwTUyG");
+  const [isPhone, setIsPhone] = useState("");
+  const [isPassword, setIsPassword] = useState("");
   // const [isRemember, setIsRemember] = useState(false);
   const route = {
     manager: "http://localhost:3001/",
-    cashier: "https://sales.ministore.tech/",
+    cashier: "http://localhost:3002/",
   };
 
   const handleSubmit = () => {
@@ -17,30 +17,45 @@ export const Login = () => {
 
     actLogin(isPhone, isPassword).then((response) => {
       if (response.status === 200) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-        handleGetRole();
+        actGetUserInfo()
+          .then((response) => {
+            console.log("response:actGetUserInfo " + response);
+            handleGetRole(response);
+          })
+          .catch((err) => {
+            console.log("error:actGetUserInfo " + err);
+          });
       }
     });
   };
 
-  const handleGetRole = () => {
-    const userInfo = JSON.parse(localStorage.getItem("user"));
-    console.log("userInfo: " + userInfo);
+  const handleGetRole = (response) => {
+    // const userInfo = JSON.parse(localStorage.getItem("user"));
+    // console.log("userInfo: " + userInfo);
+    // if (userInfo) {
+    //   console.log("role: " + userInfo.employee_detail.role);
+    //   window.location.href = eval(`route.${userInfo.employee_detail.role}`);
+    // }
+    console.log(" response.data.user.role: " + response.data.user.role);
 
-    if (userInfo) {
-      console.log("role: " + userInfo.employee_detail.role);
-      window.location.href = eval(`route.${userInfo.employee_detail.role}`);
-    }
+    window.location.href = eval(`route.${response.data.user.role}`);
   };
 
   useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("user"));
-    console.log("userInfo: " + userInfo);
-
-    if (userInfo) {
-      console.log("role: " + userInfo.employee_detail.role);
-      window.location.href = eval(`route.${userInfo.employee_detail.role}`);
-    }
+    // const userInfo = JSON.parse(localStorage.getItem("user"));
+    // console.log("userInfo: " + userInfo);
+    // if (userInfo) {
+    //   console.log("role: " + userInfo.employee_detail.role);
+    //   window.location.href = eval(`route.${userInfo.employee_detail.role}`);
+    // }
+    actGetUserInfo()
+      .then((response) => {
+        console.log("response: " + response);
+        handleGetRole(response);
+      })
+      .catch((err) => {
+        console.log("error: " + err);
+      });
   }, []);
 
   return (

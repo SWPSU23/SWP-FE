@@ -256,3 +256,14 @@ export const actLogOut = () => {
 		}
 	};
 };
+
+//  GET USER INFO
+export const actGetUserInfo = async () => {
+	try {
+		const response = await axios.get(`${server}/v1/auth/getUserInfo`);
+		return response;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};

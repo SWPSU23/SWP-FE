@@ -14,10 +14,21 @@ export const setCashierRoleForProject = (role) => {
 export const actLogOut = () => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.get(`${server}/v1/auth/getUserInfo`);
+			const response = await axios.get(`${server}/v1/auth/logout`);
 			return response;
 		} catch (error) {
 			console.log(error);
 		}
 	};
+};
+
+//  GET USER INFO
+export const actGetUserInfo = async () => {
+	try {
+		const response = await axios.get(`${server}/v1/auth/getUserInfo`);
+		return response;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
 };

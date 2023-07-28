@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css';
 import {Home} from './pages/Home/Home';
@@ -10,6 +10,8 @@ import {Worksheet} from './pages/Worksheet/Worksheet';
 import {Order} from './pages/Order/Order';
 import {Login} from './pages/Login/Login';
 import socket from './shared/socket';
+import {actGetUserInfo} from './redux/product/action';
+import {loginPage} from './shared/constant';
 
 function App() {
 	const data = {
@@ -22,6 +24,27 @@ function App() {
 		});
 		socket.emit('joinRoom', data);
 	});
+
+	useEffect(() => {
+		// const userInfo = JSON.parse(localStorage.getItem("user"));
+		// console.log("userInfo: " + userInfo);
+		// if (userInfo) {
+		//   console.log("role: " + userInfo.employee_detail.role);
+		//   window.location.href = eval(`route.${userInfo.employee_detail.role}`);
+		// }
+		actGetUserInfo()
+			.then((response) => {
+				console.log('response: ' + JSON.stringify(response.data.user.role));
+				if (response.data.user.role !== 'manager') {
+					window.location.href = loginPage;
+				}
+			})
+			.catch((err) => {
+				console.log('error: ' + err);
+				window.location.href = loginPage;
+			});
+	}, []);
+
 	return (
 		<div className="App">
 			<BrowserRouter>
