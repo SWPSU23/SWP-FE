@@ -35,7 +35,7 @@ export const Salary = () => {
 		<div className={styles.salaryPage}>
 			<Menu />
 			<Header img="../assets/image/salary.jpg" h2="PayRoll" />
-			<ActionBar title="Calculate salary" />
+
 			{isShow ? <FormPaySlip handleCloseForm={handleButtonForm} /> : <div></div>}
 			{loading ? <Loading /> : <PayRollTable handleButtonForm={handleButtonForm} />}
 
