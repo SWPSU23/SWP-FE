@@ -1,144 +1,98 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './FormSalary.module.css';
-import salary from '../../assets/salary.png';
+import salaryimg from '../../assets/salary.png';
 import {ButtonSmall} from '../../button/ButtonSmall/ButtonSmall';
 import {useNavigate} from 'react-router';
+import {DropDownSalary} from '../../components/DropDownSalary/DropDownSalary';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchSalary} from '../../redux/salary/action';
 
 export const FormSalary = () => {
 	const navigate = useNavigate();
+	const [selectedMonth, setSelectedMonth] = useState('');
+
+	const dispatch = useDispatch();
+	const userInfo = useSelector((state) => state.authen.cashierInfor);
+	const salaryData = useSelector((state) => state.salary.paySlip);
+	console.log('salaryData: ' + JSON.stringify(salaryData));
+	console.log('userInfo: FormSalary: ' + userInfo.id);
+	const [paySlip, setPaySlip] = useState();
+
+	useEffect(() => {
+		setPaySlip(salaryData);
+	}, []);
+
+	useEffect(() => {
+		const defaultWorkSheet = '2023-07';
+		handleGetSalary(defaultWorkSheet);
+	}, []);
+
+	const handleGetSalary = (month) => {
+		setSelectedMonth(month);
+		const monthSelect = month.split(',');
+		const monthYear = monthSelect[0];
+		const employeeId = userInfo.id;
+		dispatch(fetchSalary(employeeId, monthYear));
+	};
+
+	if (!salaryData) return;
 	return (
 		<div className={styles.formSalary}>
 			<div className={styles.formContainer}>
 				<div className={styles.formTitleSalary}>
 					<div>
-						<img src={salary} />
+						<img src={salaryimg} />
 					</div>
 					<h1>Salary</h1>
 				</div>
-				<div className={styles.tableForm}>
-					<div className={styles.tableContainer}>
-						<table className={styles.salaryTable}>
-							<thead>
-								<tr className={styles.column}>
-									<th className={styles.rowStart}>
-										<div className={styles.infoSalary}>
-											<div className={styles.titleTable}>
-												<div>Create at:</div>
-												<p>06/08/2023</p>
-											</div>
-										</div>
-										<div className={styles.infoSalary}>
-											<div className={styles.titleTable}>
-												<div>Name:</div>
-												<p>Chí Bảo</p>
-											</div>
-										</div>
-									</th>
-									<th className={styles.rowStart}>
-										<div className={styles.infoSalary}>
-											<div className={styles.titleTable}>
-												<div>Employee ID:</div>
-												<p>1234</p>
-											</div>
-										</div>
-										<div className={styles.infoSalary}>
-											<div className={styles.titleTable}>
-												<div>Role:</div>
-												<p>Cashier</p>
-											</div>
-										</div>
-									</th>
-								</tr>
-								<tr className={styles.column}>
-									<th className={styles.rowStart}>
-										<div className={styles.infoSalary}>
-											<div className={styles.titleTable}>
-												<div>Base Salary:</div>
-												<p>30.000đ</p>
-											</div>
-										</div>
-										<div className={styles.infoSalary}>
-											<div className={styles.titleTable}>
-												<div>Sheet 1:</div>
-												<p>20h</p>
-											</div>
-										</div>
-										<div className={styles.infoSalary}>
-											<div className={styles.titleTable}>
-												<div>Sheet 2:</div>
-												<p>20h</p>
-											</div>
-										</div>
-										<div className={styles.infoSalary}>
-											<div className={styles.titleTable}>
-												<div>Sheet 3:</div>
-												<p>20h</p>
-											</div>
-										</div>
-									</th>
-									<th className={styles.rowStart}>
-										<div className={styles.infoSalary}>
-											<div className={styles.titleTable}>
-												<div>Sheet 3S:</div>
-												<p>30.000đ</p>
-											</div>
-										</div>
-										<div className={styles.infoSalary}>
-											<div className={styles.titleTable}>
-												<div>Sheet 3H:</div>
-												<p>20h</p>
-											</div>
-										</div>
-										<div className={styles.infoSalary}>
-											<div className={styles.titleTable}>
-												<div>Violate:</div>
-												<p>10h</p>
-											</div>
-										</div>
-									</th>
-								</tr>
-								<tr className={styles.column}>
-									<th className={styles.rowStart}>
-										<div className={styles.infoSalary}>
-											<div className={styles.titleTable}>
-												<div>Insurance:</div>
-												<p>800.000đ</p>
-											</div>
-										</div>
-									</th>
-									<th className={styles.rowStart}>
-										<div className={styles.infoSalary}>
-											<div className={styles.titleTable}>
-												<div>Tax:</div>
-												<p>200.000đ</p>
-											</div>
-										</div>
-									</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr className={styles.columnEnd}>
-									<th className={styles.rowEnd}>
-										<div className={styles.infoSalaryEnd}>
-											<div className={styles.titleTableEnd}>
-												<div>Gross pay:</div>
-												<p>Net pay:</p>
-											</div>
-										</div>
-									</th>
-									<th className={styles.rowEnd}>
-										<div className={styles.infoSalaryEnd}>
-											<div className={styles.titleTableEnd}>
-												<div>5.000.000đ</div>
-												<p>4.000.000đ</p>
-											</div>
-										</div>
-									</th>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+				<div>
+					<DropDownSalary handleGetSalary={handleGetSalary} />
 				</div>
+				{salaryData.employee_id === '' ? (
+					<h2>Data not available at this time.</h2>
+				) : (
+					<table className={styles.salaryTable}>
+						<thead>
+							<tr>
+								<th>Employee ID</th>
+								<th>Name</th>
+								<th>Role</th>
+								<th>Base Salary</th>
+								<th>Tax</th>
+								<th>Sheet</th>
+								<th>Total hours</th>
+								<th>Total Salary</th>
+								<th>Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							{/* {salaryData.map((payslip, index) => (
+							<tr key={index}>
+								<td>{payslip.employee_id}</td>
+								<td>{payslip.employee_name}</td>
+								<td>{payslip.employee_role}</td>
+								<td>{payslip.base_salary}</td>
+								<td>{payslip.tax}</td>
+								<td>{payslip.total_coefficient}</td>
+								<td>{payslip.total_hours}</td>
+								<td>{payslip.total_salary}</td>
+								<td>{payslip.month_year}</td>
+							</tr>
+						))} */}
+							<tr>
+								<td>{salaryData.employee_id}</td>
+								<td>{salaryData.employee_name}</td>
+								<td>{salaryData.employee_role}</td>
+								<td>{salaryData.base_salary}</td>
+								<td>{salaryData.tax}</td>
+								<td>{salaryData.total_coefficient}</td>
+								<td>{salaryData.total_hours}</td>
+								<td>{salaryData.total_salary}</td>
+								<td>{salaryData.month_year}</td>
+							</tr>
+						</tbody>
+					</table>
+				)}
 				<div className={styles.buttonCancelWrap}>
 					<div className={styles.buttonCancel} onClick={() => navigate('/')}>
 						<ButtonSmall

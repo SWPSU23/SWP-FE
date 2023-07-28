@@ -14,6 +14,7 @@
 }
 
 .formContainer {
+	position: relative;
 	width: 80%;
 	height: 80%;
 	background-color: white;
@@ -62,5 +63,8 @@
 }
 
 .buttonCancel {
+	position: absolute;
+	bottom: 10%;
+	right: 5%;
 	width: 10%;
 }

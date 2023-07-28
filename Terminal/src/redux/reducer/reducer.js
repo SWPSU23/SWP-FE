@@ -4,6 +4,7 @@ import {leaveReducer} from '../leave/leaveReducer';
 import authenReducer from '../authen/authenReducer';
 import worksheetReducer from '../worksheet/worksheetReducer';
 import checkInOutReducer from '../checkInOut/checkInOutReducer';
+import salaryReducer from '../salary/salaryReducer';
 
 const rootReducer = combineReducers({
 	// Add other reducers here if needed
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
 	leave: leaveReducer,
 	authen: authenReducer,
 	worksheet: worksheetReducer,
+	salary: salaryReducer,
 });
 
 export default rootReducer;
