@@ -1,2 +1,2 @@
 export const server = 'http://localhost:8080';
-export const loginPage = 'https://www.youtube.com/';
+export const loginPage = 'http://localhost:3000';
