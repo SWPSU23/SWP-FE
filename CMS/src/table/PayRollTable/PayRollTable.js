@@ -24,10 +24,8 @@ function PayRollTable({handleButtonForm}) {
 							<th>Name</th>
 							<th>Role</th>
 							<th>Base Salary</th>
-							<th>Sheet</th>
-							<th>Total hours</th>
-							<th>Date</th>
 							<th>Tax</th>
+							<th>Total hours</th>
 							<th>Total Salary</th>
 							<th>Action</th>
 						</tr>
@@ -39,10 +37,8 @@ function PayRollTable({handleButtonForm}) {
 								<td>{payroll.name}</td>
 								<td>{payroll.role}</td>
 								<td>{payroll.baseSalary}</td>
-								<td>{payroll.sheet}</td>
-								<td>{payroll.totalHours}</td>
-								<td>{payroll.date}</td>
 								<td>{payroll.tax}</td>
+								<td>{payroll.totalHours}</td>
 								<td>{payroll.totalSalary}</td>
 								<td>
 									<div className={styles.btnForm} onClick={handleButtonForm}>
