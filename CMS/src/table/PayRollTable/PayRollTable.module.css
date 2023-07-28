@@ -11,7 +11,7 @@
 .payrollTable {
 	border-collapse: collapse;
 	width: 100%;
-	min-width: 1000px;
+	min-width: 100%;
 	margin-top: 40px;
 	margin-bottom: 40px;
 }
@@ -38,4 +38,24 @@
 	border: 1px solid black;
 	margin: 0;
 	width: 30px;
+}
+.btnForm {
+	text-align: center;
+}
+
+.dropdown input {
+	border: none;
+}
+.header {
+	position: relative;
+	display: flex;
+	justify-content: end;
+	margin-bottom: 80px;
+}
+.dropdown {
+	position: absolute;
+	top: 100%;
+	left: 70%;
+	width: 100%;
+	z-index: 10;
 }
